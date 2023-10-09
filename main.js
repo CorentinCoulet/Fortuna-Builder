@@ -1,25 +1,22 @@
-import { I18n } from "i18n-js";
-import fr from "./lang/fr.json";
-import en from "./lang/en.json";
-import es from "./lang/es.json";
-import pt from "./lang/pt.json";
+const url = 'https://wakfu.cdn.ankama.com/gamedata/1.81.1.13/items.json';
 
-const i18n = new I18n({
-  fr,
-  en,
-  es,
-  pt
-});
+async function telechargerFichierJSON() {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Erreur lors de la récupération du fichier JSON');
+    }
+    const jsonData = await response.json();  
 
-load();
-
-const bouton = document.getElementById("lang-content");
-bouton.addEventListener("click", function(){
-  i18n.locale = "fr";
-  load();  
-});
-
-function load(){
-  document.getElementById("armor").innerHTML = i18n.t("armor");
+    for(const data of jsonData) {
+      const a = document.createElement("a")
+      a.src = data.jsp
+      a.innerText = data.jsp2
+      document.body.appendChild(a)
+    }
+  } catch (error) {
+    console.error('Erreur :', error);
+  }
 }
 
+await telechargerFichierJSON();

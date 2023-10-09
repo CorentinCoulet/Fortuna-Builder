@@ -11,7 +11,7 @@
 	    <header>
             <nav>
                 <ul>
-                    <li><a href="./index/accueil.html"><img src="../public/logoBague.png" alt="bague en or"><p>&ensp;Fortuna</p></a></li>
+                    <li><a href="../index.html"><img src="../public/logoBague.png" alt="bague en or"><p>&ensp;Fortuna</p></a></li>
                 </ul>
                 <ul>
                     <li><a href="#"><img src="../public/menuHeader/reset.png" alt="bouton reset"></a></li>
@@ -28,10 +28,10 @@
                             <img src="../public/menuHeader/fr.png" alt="Drapeau français">
                         </div>
                         <div class="dropdown-content">
-                            <a href="#"><img src="../public/menuHeader/fr.png" alt="Drapeau français" data-lang="fr"></a>
-                            <a href="#"><img src="../public//menuHeader/es.png" alt="Drapeau espagnol" data-lang="es"></a>
-                            <a href="#"><img src="../public//menuHeader/en.png" alt="Drapeau anglais" data-lang="en"></a>
-                            <a href="#"><img src="../public//menuHeader/pt.png" alt="Drapeau portugais" data-lang="pt"></a>
+                            <a href="#" data-lang="fr-FR"><img src="../public/menuHeader/fr.png" alt="Drapeau français"></a>
+                            <a href="#" data-lang="es-ES"><img src="../public//menuHeader/es.png" alt="Drapeau espagnol"></a>
+                            <a href="#" data-lang="en-EN"><img src="../public//menuHeader/en.png" alt="Drapeau anglais"></a>
+                            <a href="#" data-lang="pt-BR"><img src="../public//menuHeader/pt.png" alt="Drapeau portugais"></a>
                         </div>
                     </li>
                 </ul>
@@ -91,7 +91,7 @@
                             <div class="sectionAbility">
                                 <div>
                                     <img src="../public/capacites/pw.webp">
-                                    <p class="wp"> &ensp;PW</p>
+                                    <p id="wp"> &ensp;PW</p>
                                 </div>
                                 <div>
                                     <p>6&ensp;</p>
@@ -150,7 +150,7 @@
                             <div class="armorR">
                                 <div class="receivedA">
                                     <img src="../public/elements/received_armor.webp">
-                                    <p> &ensp;Armure reçue</p>
+                                    <p id="armorReceived"> &ensp;Armure reçue</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
@@ -185,7 +185,7 @@
                             <div class="armorG">
                                 <div class="givenA">
                                     <img src="../public/elements/given_armor.webp">
-                                    <p> &ensp;Armure donnée</p>
+                                    <p id="armorGiven"> &ensp;Armure donnée</p>
                                 </div>
                                 <p>0&ensp;</p>   
                             </div>
@@ -196,42 +196,42 @@
                             <div class="statsP">
                                 <div>
                                     <img src="../public/maitrises/damage_dealt.png">
-                                    <p> &ensp;% Domm. inf.</p>
+                                    <p id="damageDealt"> &ensp;% Domm. inf.</p>
                                 </div>
                                 <p>8&ensp;</p>
                             </div>
                             <div class="statsP">
                                 <div>
                                     <img src="../public/maitrises/ch.png">
-                                    <p> &ensp;% Coup Crit.</p>
+                                    <p id="critical"> &ensp;% Coup Crit.</p>
                                 </div>    
                                 <p>30&ensp;</p>
                             </div>
                             <div class="statsP">
                                 <div>
                                     <img src="../public/maitrises/initiative.png">
-                                    <p>&ensp;Initiative</p>
+                                    <p id="initiative">&ensp;Initiative</p>
                                 </div>    
                                 <p>8&ensp;</p>
                             </div>
                             <div class="statsP">
                                 <div>
                                     <img src="../public/maitrises/dodge.png">
-                                    <p>&ensp;Esquive</p>
+                                    <p id="dodge">&ensp;Esquive</p>
                                 </div> 
                                 <p>0&ensp;</p>   
                             </div>
                             <div class="statsP">
                                 <div>
                                     <img src="../public/maitrises/wisdom.png">
-                                    <p>&ensp;Sagesse</p>
+                                    <p id="wisdom">&ensp;Sagesse</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
                             <div class="statsP">
                                 <div>
                                     <img src="../public/maitrises/control.png">
-                                    <p>&ensp;Contrôle</p>
+                                    <p id="control">&ensp;Contrôle</p>
                                 </div>  
                                 <p>0&ensp;</p>  
                             </div>
@@ -240,42 +240,42 @@
                             <div class="statsP">
                                 <div>
                                     <img src="../public/maitrises/heals.png">
-                                    <p>&ensp;% Soins réal.</p>
+                                    <p id="heals">&ensp;% Soins réal.</p>
                                 </div>
                                 <p>8&ensp;</p>
                             </div>
                             <div class="statsP">
                                 <div>
                                     <img src="../public/maitrises/block.png">
-                                    <p>&ensp;% Parade</p>
+                                    <p id="block">&ensp;% Parade</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
                             <div class="statsP">
                                 <div>
                                     <img src="../public/maitrises/range.png">
-                                    <p>&ensp;Portée</p>
+                                    <p id="range">&ensp;Portée</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
                             <div class="statsP">
                                 <div>
                                     <img src="../public/maitrises/lock.png">
-                                    <p>&ensp;Tacle</p>
+                                    <p id="lock">&ensp;Tacle</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
                             <div class="statsP">
                                 <div>
                                     <img src="../public/maitrises/prospecting.png">
-                                    <p>&ensp;Prospection</p>
+                                    <p id="prospecting">&ensp;Prospection</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
                             <div class="statsP">
                                 <div>
                                     <img src="../public/maitrises/will.webp">
-                                    <p>&ensp;Volonté</p>
+                                    <p id="will">&ensp;Volonté</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
@@ -286,28 +286,28 @@
                             <div class="statsS">
                                 <div>
                                     <img src="../public/maitrises/crit_mastery.png">
-                                    <p>&ensp;Maîtrise Critique</p>
+                                    <p id="critMastery">&ensp;Maîtrise Critique</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
                             <div class="statsS">
                                 <div>
                                     <img src="../public/maitrises/rear_mastery.png">
-                                    <p>&ensp;Maîtrise Dos</p>
+                                    <p id="rearMastery">&ensp;Maîtrise Dos</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
                             <div class="statsS">
                                 <div>
                                     <img src="../public/maitrises/melee_mastery.png">
-                                    <p>&ensp;Maîtrise Mêlée</p>
+                                    <p id="meleeMastery">&ensp;Maîtrise Mêlée</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
                             <div class="statsS">
                                 <div>
                                     <img src="../public/maitrises/heals.png">
-                                    <p>&ensp;Maîtrise Soin</p>
+                                    <p id="healMastery">&ensp;Maîtrise Soin</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
@@ -316,28 +316,28 @@
                             <div class="statsS">
                                 <div>
                                     <img src="../public/maitrises/crit_resist.png">
-                                    <p>&ensp;Résistance Critique</p>
+                                    <p id="critResist">&ensp;Résistance Critique</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
                             <div class="statsS">
                                 <div>
                                     <img src="../public/maitrises/rear_resist.png">
-                                    <p>&ensp;Résistance Dos</p>
+                                    <p id="rearResist">&ensp;Résistance Dos</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
                             <div class="statsS">
                                 <div>
                                     <img src="../public/maitrises/distance_mastery.png">
-                                    <p>&ensp;Maîtrise Distance</p>
+                                    <p id="distanceMastery">&ensp;Maîtrise Distance</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
                             <div class="statsS">
                                 <div>
                                     <img src="../public/maitrises/berserk_mastery.png">
-                                    <p>&ensp;Maîtrise Berserk</p>
+                                    <p id="berserkMastery">&ensp;Maîtrise Berserk</p>
                                 </div>
                                 <p>0&ensp;</p>
                             </div>
@@ -422,6 +422,6 @@
                 </section>
             </div>
         </div>
-        <script src="../js/builder.js"></script>
+        <script src="../js/builder.js" type="module"></script>
 	</body>
 </html>
