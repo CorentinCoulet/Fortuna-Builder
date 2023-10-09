@@ -1,0 +1,347 @@
+body {
+	display: flex;
+	flex-direction: row;
+    margin-top: 80px;
+}
+
+
+.statsGlobales > div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-content: space-evenly;
+	align-items: center;
+}
+
+/*-------------------------------------------------------------------
+----															 ----
+----						Header							     ----
+----															 ----
+-------------------------------------------------------------------*/
+
+header {
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+header nav {
+    width: 100%;
+}
+
+header img {
+    width: 40px;
+    height: 40px;
+}
+
+.dropdown-content {
+    display: none;
+}
+
+header nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;  
+}
+
+header nav ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+header ul:last-child {
+   padding: 0 5%; 
+}
+
+header ul li {
+    padding-left: 20px;  
+}
+
+header nav ul:first-child a {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    color: #fff; 
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.lang-dropdown .flag {
+    cursor: pointer;
+}
+
+.lang-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    z-index: 1;
+}
+
+.lang-dropdown:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.lang-dropdown .dropdown-content a {
+    padding: 0;
+    margin: 0;
+}
+
+.lang-dropdown .dropdown-content a:hover {
+    background-color: #555;
+} 
+
+/*-------------------------------------------------------------------
+----															 ----
+----						Section 1							 ----
+----															 ----
+-------------------------------------------------------------------*/
+
+.sect1 {
+	border: 1px solid gray;
+	border-radius: 15%;
+	padding: 10px;
+	margin: 10px;
+}
+
+/*-------------------------------------------------------------------
+----															 ----
+----						Section 2							 ----
+----															 ----
+-------------------------------------------------------------------*/
+
+.bonusGN {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+
+}
+
+.sect2 form {
+	display: flex;
+	flex-direction: column;
+}
+
+.slider-container1, .slider-container2 {
+    position: relative;
+    width: 150px; 
+    background-color: #242c387a;
+    height: 30px;
+    border-radius: 15px;
+    margin-top: 20px;
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; 
+}
+
+.guild-text, .nation-text {
+    position: absolute;
+    font-weight: bold;
+    font-size: 14px;
+    color: #FFF; 
+    z-index: 2; 
+    pointer-events: none; 
+	-webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.sliderG, .sliderN {
+    position: absolute;
+    width: 30px;
+    height: 30px; 
+    background-color: #2196F3; 
+    border-radius: 50%; 
+    transition: 0.3s;
+    left: 0;
+    z-index: 1;
+}
+
+.sliderG.active, .sliderN.active {
+    left: 80%; 
+}
+
+.slider-container1.active, .slider-container2.active {
+    background-color: #5d8f1cc4;
+}
+
+/*-------------------------------------------------------------------
+----															 ----
+----						Section 3							 ----
+----															 ----
+-------------------------------------------------------------------*/
+
+.sect3 > div {
+	padding: 5px;
+	margin: 5px 1px;
+}
+
+.sect3 img {
+	width: 20px;
+	height: 20px;
+}
+
+.sect3 .elementsAd div:first-child img {
+	width: 25px;
+	height: 25px;
+}
+
+.abilities {
+	display: flex;
+	flex-direction: row;
+}
+
+.abilities div div {
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	align-items: center;
+}
+
+.editable-element-hp {
+	display: inline-block;
+	cursor: pointer;
+	user-select: none;
+}
+
+.valueHp {
+	display: inline-block;
+}
+
+.inputHp {
+	display: none;
+	width: 80px;
+}
+
+.elementsAd {
+	margin: 2px 10px;
+}
+.elementsAd div {
+	width: 120px;
+	height: 20px;
+}
+
+.elementsAd > div {
+	width: 120px;
+	height: 20px;
+	border: 1px solid gray;
+	border-radius: 15px;
+}
+
+.elements, .armorR, .armorG, .receivedA, .givenA, .masteryPrimal, 
+.masterySecondary, .masteryPrimal div div, .masterySecondary div div, 
+.sectionAbility, .elementsAd div, .elementsAd {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+	
+}
+
+.armorR, .armorG, .masteryPrimal div div, .masterySecondary div div, 
+.sectionAbility {
+	margin: 2px 10px;
+}
+
+.armorG, .armorR, .statsP, .statsS, .sectionAbility{
+	width: 250px;
+	height: 20px;
+	border: 1px solid gray;
+	border-radius: 15px;
+}
+
+/*-------------------------------------------------------------------
+----															 ----
+----						Section 4							 ----
+----															 ----
+-------------------------------------------------------------------*/
+
+.sect4 {
+	display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 315px;
+}
+
+.equipment-table {
+    align-self: center;
+}
+
+.equipment-table {
+    display: inline-block;
+    background-color: #F5F5F5;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    table-layout: fixed;
+    margin: 0;
+    width: unset;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+table {
+    background-color: rgba(0, 0, 0, 0.02);
+    margin: 0 0 1.6em;
+    width: 100%;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 2px;
+    border-color: gray;
+}
+
+.npc {
+	display: flex;
+    position: relative;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: #EEEEEE;
+    border: 1px solid #CFCFCF;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.1);
+    padding: 4px;
+    margin: 2px;
+}
+
+.canvas-cell {
+    position: relative;
+    text-align: center;
+    width: 120px;
+    height: 160px;
+}
+
+.arrow-rotate-left {
+    left: 12px;
+    -webkit-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+}
+.arrow-rotate-right, .arrow-rotate-left {
+    position: absolute;
+    bottom: 8px;
+    width: 24px;
+    height: 24px;
+}
