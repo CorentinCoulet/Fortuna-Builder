@@ -1,0 +1,635 @@
+<!Doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+        <link rel="stylesheet" href="../styles/style.css" />
+        <script src="../js/builder.js" type="module"></script>
+        <script src="../js/onglets.js"></script>
+        <script src="../js/searchSlide.js" type="module"></script>
+        <title>Fortuna - Builder</title>
+        <link rel="icon" href="../public/logoBague.png" type="image"> 
+	</head>
+
+	<body>
+	    <header>
+            <nav>
+                <ul>
+                    <li><a href="../index.html"><img src="../public/logoBague.png" alt="bague en or"><p>&ensp;Fortuna</p></a></li>
+                </ul>
+                <ul>
+                    <li><a href="#"><img src="../public/menuHeader/reset.png" alt="bouton reset"></a></li>
+                    <li><a href="../html/parametres.html"><img src="../public/menuHeader/settings.svg" alt="bouton settings"></a></li>
+                    <li>
+                        <a href="../html/compte.html">
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" width="40px" height="40px">
+                                <path d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="lang-dropdown">
+                        <div class="flag">
+                            <img src="../public/menuHeader/fr.png" alt="Drapeau français">
+                        </div>
+                        <div class="dropdown-content">
+                            <a href="#" data-lang="fr-FR"><img src="../public/menuHeader/fr.png" alt="Drapeau français"></a>
+                            <a href="#" data-lang="en-EN"><img src="../public//menuHeader/en.png" alt="Drapeau anglais"></a>
+                            <a href="#" data-lang="es-ES"><img src="../public//menuHeader/es.png" alt="Drapeau espagnol"></a>
+                            <a href="#" data-lang="pt-BR"><img src="../public//menuHeader/pt.png" alt="Drapeau portugais"></a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <div>
+            <div class="statsGlobales">
+                <div>
+                    <section class="sect1">
+                        <div>
+                            <img src="../public/cratteWakfu.jpg" alt="image d'une cratte" width="200px" height="200px">
+                        </div>
+                    </section>
+                    <section class="sect2">
+                        <form action="traitement.php" method="post">
+
+                            <label for="nom" id="buildName"><strong>Nom du Build : </strong></label>
+                            <input type="text" name="nom" id="nom" value="Cratte 200">
+
+                            <label for="lvl" id="lvlLang"><strong>Niveau : </strong></label>
+                            <input type="number" name="lvl" id="lvl" value="200" min="1" max="230">
+                        </form>
+                        <div class="bonusGN">
+                            <div class="slider-container1">
+                                <p class="guild-text" id="guild">Guilde</p>
+                                <div id="sliderG" class="sliderG"></div>
+                            </div>
+                            <div class="slider-container2">
+                                <p class="nation-text" id="nation">Nation</p>
+                                <div id="sliderN" class="sliderN"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <section class="sect3">
+                    <div class="abilities">
+                        <div>
+                            <div class="sectionAbility">
+                                <div>
+                                    <img src="../public/capacites/hp.webp">
+                                    <p id="hp"> &ensp;PdV</p>
+                                </div>   
+                                <div class="editable-element-hp" onclick="editElement(this)">
+                                    <span class="valueHp" id="valueHp">70&ensp;</span>
+                                    <input class="inputHp" type="number">
+                                </div>
+                            </div>  
+                            <div class="sectionAbility">
+                                <div>
+                                    <img src="../public/capacites/pa.webp">
+                                    <p id="ap"> &ensp;PA</p>
+                                </div>
+                                <div>
+                                    <p>6&ensp;</p>
+                                </div>
+                            </div>
+                            <div class="sectionAbility">
+                                <div>
+                                    <img src="../public/capacites/pw.webp">
+                                    <p id="wp"> &ensp;PW</p>
+                                </div>
+                                <div>
+                                    <p>6&ensp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sectionAbility">
+                                <div>
+                                    <img src="../public/capacites/armor.webp">
+                                    <p id="armor"> &ensp;Armure</p>
+                                </div>
+                                <div>
+                                    <p>0&ensp;</p>
+                                </div>
+                            </div> 
+                            <div class="sectionAbility">
+                                <div>
+                                    <img src="../public/capacites/pm.webp">
+                                    <p id="mp"> &ensp;PM</p>
+                                </div>
+                                <div>
+                                    <p>3&ensp;</p>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="elements">
+                        <div>
+                            <div class="elementsAd">
+                                <div>
+                                    <img src="../public/elements/water.png">
+                                    <p> &ensp;0&ensp;</p>
+                                </div>
+                                <div>
+                                    <img src="../public/elements/aqua_resistance.webp">
+                                    <div>
+                                        <p>0%&ensp;</p>
+                                        <p>(0)&ensp;</p>   
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="elementsAd">
+                                <div>
+                                    <img src="../public/elements/wind.png">
+                                    <p> &ensp;0&ensp;</p>
+                                </div>
+                                <div>
+                                    <img src="../public/elements/wind_resistance.webp">
+                                    <div>
+                                        <p>0%&ensp;</p>
+                                        <p>(0)&ensp;</p>   
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="armorR">
+                                <div class="receivedA">
+                                    <img src="../public/elements/received_armor.webp">
+                                    <p id="armorReceived"> &ensp;Armure reçue</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="elementsAd">
+                                <div>
+                                    <img src="../public/elements/earth.png">
+                                    <p> &ensp;0&ensp;</p>
+                                </div>
+                                <div>
+                                    <img src="../public/elements/earth_resistance.webp">
+                                    <div>
+                                        <p>0%&ensp;</p>
+                                        <p>(0)&ensp;</p>   
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="elementsAd">
+                                <div>
+                                    <img src="../public/elements/fire.png">
+                                    <p> &ensp;0&ensp;</p>
+                                </div>
+                                <div>
+                                    <img src="../public/elements/fire_resistance.webp">
+                                    <div>
+                                        <p>0%&ensp;</p>
+                                        <p>(0)&ensp;</p>   
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="armorG">
+                                <div class="givenA">
+                                    <img src="../public/elements/given_armor.webp">
+                                    <p id="armorGiven"> &ensp;Armure donnée</p>
+                                </div>
+                                <p>0&ensp;</p>   
+                            </div>
+                        </div>                       
+                    </div>
+                    <div class="masteryPrimal">
+                        <div>
+                            <div class="statsP">
+                                <div>
+                                    <img src="../public/maitrises/damage_dealt.png">
+                                    <p id="damageDealt"> &ensp;% Domm. inf.</p>
+                                </div>
+                                <p>8&ensp;</p>
+                            </div>
+                            <div class="statsP">
+                                <div>
+                                    <img src="../public/maitrises/ch.png">
+                                    <p id="critical"> &ensp;% Coup Crit.</p>
+                                </div>    
+                                <p>30&ensp;</p>
+                            </div>
+                            <div class="statsP">
+                                <div>
+                                    <img src="../public/maitrises/initiative.png">
+                                    <p id="initiative">&ensp;Initiative</p>
+                                </div>    
+                                <p>8&ensp;</p>
+                            </div>
+                            <div class="statsP">
+                                <div>
+                                    <img src="../public/maitrises/dodge.png">
+                                    <p id="dodge">&ensp;Esquive</p>
+                                </div> 
+                                <p>0&ensp;</p>   
+                            </div>
+                            <div class="statsP">
+                                <div>
+                                    <img src="../public/maitrises/wisdom.png">
+                                    <p id="wisdom">&ensp;Sagesse</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                            <div class="statsP">
+                                <div>
+                                    <img src="../public/maitrises/control.png">
+                                    <p id="control">&ensp;Contrôle</p>
+                                </div>  
+                                <p>0&ensp;</p>  
+                            </div>
+                        </div>
+                        <div>
+                            <div class="statsP">
+                                <div>
+                                    <img src="../public/maitrises/heals.png">
+                                    <p id="heals">&ensp;% Soins réal.</p>
+                                </div>
+                                <p>8&ensp;</p>
+                            </div>
+                            <div class="statsP">
+                                <div>
+                                    <img src="../public/maitrises/block.png">
+                                    <p id="block">&ensp;% Parade</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                            <div class="statsP">
+                                <div>
+                                    <img src="../public/maitrises/range.png">
+                                    <p id="range">&ensp;Portée</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                            <div class="statsP">
+                                <div>
+                                    <img src="../public/maitrises/lock.png">
+                                    <p id="lock">&ensp;Tacle</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                            <div class="statsP">
+                                <div>
+                                    <img src="../public/maitrises/prospecting.png">
+                                    <p id="prospecting">&ensp;Prospection</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                            <div class="statsP">
+                                <div>
+                                    <img src="../public/maitrises/will.webp">
+                                    <p id="will">&ensp;Volonté</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                        </div>             
+                    </div>
+                    <div class="masterySecondary">
+                        <div>
+                            <div class="statsS">
+                                <div>
+                                    <img src="../public/maitrises/crit_mastery.png">
+                                    <p id="critMastery">&ensp;Maîtrise Critique</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                            <div class="statsS">
+                                <div>
+                                    <img src="../public/maitrises/rear_mastery.png">
+                                    <p id="rearMastery">&ensp;Maîtrise Dos</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                            <div class="statsS">
+                                <div>
+                                    <img src="../public/maitrises/melee_mastery.png">
+                                    <p id="meleeMastery">&ensp;Maîtrise Mêlée</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                            <div class="statsS">
+                                <div>
+                                    <img src="../public/maitrises/heals.png">
+                                    <p id="healMastery">&ensp;Maîtrise Soin</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="statsS">
+                                <div>
+                                    <img src="../public/maitrises/crit_resist.png">
+                                    <p id="critResist">&ensp;Résistance Critique</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                            <div class="statsS">
+                                <div>
+                                    <img src="../public/maitrises/rear_resist.png">
+                                    <p id="rearResist">&ensp;Résistance Dos</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                            <div class="statsS">
+                                <div>
+                                    <img src="../public/maitrises/distance_mastery.png">
+                                    <p id="distanceMastery">&ensp;Maîtrise Distance</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                            <div class="statsS">
+                                <div>
+                                    <img src="../public/maitrises/berserk_mastery.png">
+                                    <p id="berserkMastery">&ensp;Maîtrise Berserk</p>
+                                </div>
+                                <p>0&ensp;</p>
+                            </div>
+                        </div>                   
+                    </div>
+                </section>
+            </div>
+            <div> 
+                <section class="sect5">
+                    <div id="tabs"> 
+                        <a class="tab-link" onclick="showTab('tab1')">Recherche</a>
+                        <a class="tab-link" onclick="showTab('tab2')">Aptitudes</a>
+                        <a class="tab-link" onclick="showTab('tab3')">Sorts</a>
+                        <a class="tab-link" onclick="showTab('tab4')">Enchantement</a>
+                        <a class="tab-link" onclick="showTab('tab5')">Apparence</a>
+                    </div>
+                    <div id="tab1" class="tab active-tab"> <!-- Recherche -->
+                        <label for="searchItem">Nom de l'item</label>
+                        <input id="searchItem">
+                        <label>Niveau 
+                            (<input type="number" id="fromInput" value="10" min="1" max="230"/>
+                            -
+                            <input type="number" id="toInput" value="40" min="1" max="230"/>)
+                        </label>
+                        <div class="range_container">
+                            <div class="sliders_control">
+                                <input id="fromSlider" type="range" value="10" min="1" max="230"/>
+                                <input id="toSlider" type="range" value="40" min="1" max="230"/>
+                            </div>
+                        </div>
+                        <div class="listItems">
+
+                        </div>
+                    </div>
+                    <div id="tab2" class="tab"> <!-- Aptitudes -->
+                        <h2>Onglet 2</h2>
+                        <p>Contenu de l'onglet 2...</p>
+                        
+                    </div>
+                    <div id="tab3" class="tab"> <!-- Sorts -->
+                        <div class="listSpells"></div>
+                        <div class="deck">
+                            <div class="lienSpells">
+                                <p>DECK</p>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                            </div>
+                            <div class="actif">
+                                <div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                </div>
+                                <div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                </div>
+                            </div>
+                            <div class="passif">
+                                <div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                    <div><img src="../public/sorts/deck.webp" alt="emplacement de sort"></img></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sortsClasses"></div>
+                    </div>
+                    <div id="tab4" class="tab"> <!-- Enchantement -->
+                        <div class="runes">
+                            <div class="titreRunes"><p>MES RUNES</p></div>
+                            <div class="pageVide">
+                                <div>
+                                    <div>
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                    </div>
+                                    <div><img src="../public/enchant/sublimation.webp" alt="sublimation"></div>
+                                    <div><img src="../public/emplacementEquipements/helmet.png" alt="casque"></div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                    </div>
+                                    <div><img src="../public/enchant/sublimation.webp" alt="sublimation"></div>
+                                    <div><img src="../public/emplacementEquipements/necklace.png" alt="amulette"></div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                    </div>
+                                    <div><img src="../public/enchant/sublimation.webp" alt="sublimation"></div>
+                                    <div><img src="../public/emplacementEquipements/breastplate.png" alt="plastron"></div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                    </div>
+                                    <div><img src="../public/enchant/sublimation.webp" alt="sublimation"></div>
+                                    <div><img src="../public/emplacementEquipements/ring.png" alt="anneau"></div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                    </div>
+                                    <div><img src="../public/enchant/sublimation.webp" alt="sublimation"></div>
+                                    <div><img src="../public/emplacementEquipements/ring.png" alt="anneau"></div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                    </div>
+                                    <div><img src="../public/enchant/sublimation.webp" alt="sublimation"></div>
+                                    <div><img src="../public/emplacementEquipements/boots.png" alt="bottes"></div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                    </div>
+                                    <div><img src="../public/enchant/sublimation.webp" alt="sublimation"></div>
+                                    <div><img src="../public/emplacementEquipements/cape.png" alt="cape"></div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                    </div>
+                                    <div><img src="../public/enchant/sublimation.webp" alt="sublimation"></div>
+                                    <div><img src="../public/emplacementEquipements/epaulettes.png" alt="epaulettes"></div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                    </div>
+                                    <div><img src="../public/enchant/sublimation.webp" alt="sublimation"></div>
+                                    <div><img src="../public/emplacementEquipements/belt.png" alt="ceinture"></div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                        <img src="../public/enchant/shard_white_empty.webp" alt="icone de rune vide">
+                                    </div>
+                                    <div><img src="../public/enchant/sublimation.webp" alt="sublimation"></div>
+                                    <div><img src="../public/emplacementEquipements/two_handed_weapon.png" alt="arme à 2 mains"></div>
+                                </div>
+                                <nav class="enchantSpe">
+                                    <div>
+                                        <img src="../public/enchant/epic.webp" alt="enchantement épique">
+                                        <img src="../public/enchant/relic.webp" alt="enchantement relique">
+                                    </div>
+                                    <svg width="50px" height="50px">
+                                        <path 
+                                            d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z">
+                                        </path>
+                                    </svg>   
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="enchantement">
+                            <div><p>ENCHANTEMENTS</p></div>
+                            <div class="range_container">
+                                <div class="slideEnchant">
+                                    <input type="range" min="1" max="11" value="1" class="sliderEnchant" id="sliderEnchant">
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="searchEnchant"></div>
+                    </div>
+                    <div id="tab5" class="tab"> <!-- Design -->
+                        <section class="sect4">
+                            <table class="equipment-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="equipment-slot">
+                                        <img class="equipment-slot-icon" src="../public/equipements/headgear.png">
+                                        </td>
+                                            <td colspan="4" rowspan="5" class="canvas-cell">
+                                            <canvas id="canvasGL" width="120" height="160" style="display: initial;"></canvas>
+                                            <img id="loader" src="https://web.archive.org/web/20170608183930im_/http://methodwakfu.com/wp-content/icons/ring.svg" alt="Loading" style="display: none;">
+                                            <img src="../public/animations/arrow-rotate.svg" class="arrow-rotate-left">
+                                            <img src="../public/animations/arrow-rotate.svg" class="arrow-rotate-right">
+                                            </td>
+                                            <td class="equipment-slot">
+                                            <img class="equipment-slot-icon" src="../public/equipements/cape.png">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="equipment-slot">
+                                            <img class="equipment-slot-icon" src="../public/equipements/amulet.png">
+                                        </td>
+                                        <td class="equipment-slot">
+                                            <img class="equipment-slot-icon" src="../public/equipements/epaulettes.png">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="equipment-slot">
+                                        <img class="equipment-slot-icon" src="../public/equipements/breastplate.png">
+                                        </td>
+                                            <td class="equipment-slot">
+                                            <img class="equipment-slot-icon" src="../public/equipements/belt.png">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="equipment-slot">
+                                        <img class="equipment-slot-icon" src="../public/equipements/right_ring.png">
+                                        </td>
+                                            <td class="equipment-slot">
+                                            <img class="equipment-slot-icon" src="../public/equipements/left_ring.png">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="equipment-slot">
+                                        <img class="equipment-slot-icon" src="../public/equipements/boots.png">
+                                        </td>
+                                            <td class="equipment-slot">
+                                            <img class="equipment-slot-icon" src="../public/equipements/pet.png">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="equipment-slot">
+                                        <img class="equipment-slot-icon" src="../public/equipements/costume.png">
+                                        </td>
+                                            <td class="equipment-slot">
+                                            <img class="equipment-slot-icon" src="../public/equipements/left_hand.png">
+                                        </td>
+                                            <td class="equipment-slot">
+                                            <img class="equipment-slot-icon" src="../public/equipements/right_hand.png">
+                                        </td>
+                                            <td class="equipment-slot">
+                                            <img class="equipment-slot-icon" src="../public/equipements/emblem.png">
+                                        </td>
+                                            <td class="equipment-slot">
+                                            <img class="equipment-slot-icon" src="../public/equipements/pet.png">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="npc"></div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <footer>
+            <div class="divFooter">
+                <p class="messageFooter"> 
+                    WAKFU est un MMORPG édité par Ankama. 
+                    "Fortuna" est un site non-officiel sans 
+                    aucun lien avec Ankama.
+                </p>
+            </div> 
+        </footer>  
+	</body>
+</html>
