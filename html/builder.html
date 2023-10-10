@@ -3,8 +3,10 @@
 	<head>
 		<meta charset="UTF-8" />
         <link rel="stylesheet" href="../styles/style.css" />
+        <script src="../js/builder.js" type="module"></script>
+        <script src="../js/onglets.js"></script>
         <title>Fortuna - Builder</title>
-        <link rel="icon" href="../public/logoBague.png" type="image">
+        <link rel="icon" href="../public/logoBague.png" type="image"> 
 	</head>
 
 	<body>
@@ -29,8 +31,8 @@
                         </div>
                         <div class="dropdown-content">
                             <a href="#" data-lang="fr-FR"><img src="../public/menuHeader/fr.png" alt="Drapeau français"></a>
-                            <a href="#" data-lang="es-ES"><img src="../public//menuHeader/es.png" alt="Drapeau espagnol"></a>
                             <a href="#" data-lang="en-EN"><img src="../public//menuHeader/en.png" alt="Drapeau anglais"></a>
+                            <a href="#" data-lang="es-ES"><img src="../public//menuHeader/es.png" alt="Drapeau espagnol"></a>
                             <a href="#" data-lang="pt-BR"><img src="../public//menuHeader/pt.png" alt="Drapeau portugais"></a>
                         </div>
                     </li>
@@ -346,7 +348,7 @@
                 </section>
             </div>
             <div>
-                <section class="sect4">
+                <!-- <section class="sect4">
                     <table class="equipment-table">
                         <tbody>
                             <tr>
@@ -415,13 +417,28 @@
                         </tbody>
                     </table>
                     <div class="npc"></div>
-                </section>
+                </section> -->
                 
                 <section class="sect5">
-
+                    <div id="tabs">
+                        <a class="tab-link" onclick="showTab('tab1')">Onglet 1</a>
+                        <a class="tab-link" onclick="showTab('tab2')">Onglet 2</a>
+                        <a class="tab-link" onclick="showTab('tab3')">Onglet 3</a>
+                    </div>
+                    <div id="tab1" class="tab active-tab">
+                        <h2>Onglet 1</h2>
+                        <p>Contenu de l'onglet 1...</p>
+                    </div>
+                    <div id="tab2" class="tab">
+                        <h2>Onglet 2</h2>
+                        <p>Contenu de l'onglet 2...</p>
+                    </div>
+                    <div id="tab3" class="tab">
+                        <h2>Onglet 3</h2>
+                        <p>Contenu de l'onglet 3...</p>
+                    </div>
                 </section>
             </div>
         </div>
-        <script src="../js/builder.js" type="module"></script>
 	</body>
 </html>

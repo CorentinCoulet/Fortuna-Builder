@@ -26,6 +26,7 @@ header {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 999;
 }
 
 header nav {
@@ -145,7 +146,6 @@ header nav ul:first-child a {
     font-weight: bold;
     font-size: 14px;
     color: #FFF; 
-    z-index: 2; 
     pointer-events: none; 
 	-webkit-user-select: none;
     -webkit-touch-callout: none;
@@ -344,4 +344,31 @@ table {
     bottom: 8px;
     width: 24px;
     height: 24px;
+}
+
+/*-------------------------------------------------------------------
+----															 ----
+----						Section 5							 ----
+----															 ----
+-------------------------------------------------------------------*/
+
+.tab {
+    display: none;
+}
+.active-tab {
+    display: block;
+}
+
+.tab-link {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    display: inline-block;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #333;
+}
+.tab-link:hover {
+    background-color: #ddd;
 }

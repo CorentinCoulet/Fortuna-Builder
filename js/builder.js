@@ -92,6 +92,9 @@ const i18n = new I18n({
     ...pt
 });
 
+i18n.defaultLocale = "fr-FR";
+i18n.locale = "fr-FR";
+
 load();
 
 function load(){
@@ -138,7 +141,6 @@ document.addEventListener("DOMContentLoaded", function () {
         dropdown.addEventListener("click", function(){
             flag.querySelector("img").src=dropdown.querySelector("img").src;
             i18n.locale = dropdown.getAttribute("data-lang");
-            console.log(i18n.locale);
             load();
         });
     };
