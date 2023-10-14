@@ -4,8 +4,10 @@
 		<meta charset="UTF-8" />
         <link rel="stylesheet" href="../styles/style.css" />
         <script src="../js/builder.js" type="module"></script>
+        <script src="../js/trad.js" type="module"></script>
         <script src="../js/onglets.js"></script>
         <script src="../js/searchSlide.js" type="module"></script>
+        <script src="../js/SearchMenuItem.js"></script>
         <title>Fortuna - Builder</title>
         <link rel="icon" href="../public/logoBague.png" type="image"> 
 	</head>
@@ -426,16 +428,60 @@
                             </div>
                             <div class="listStats">
                                 <div><p>Statistiques</p></div>
-                                <div>
-                                    <div>Statistiques</div>
-                                    <div>
-                                        <div>
-                                            <input>
-                                            <div>
-
-                                            </div>
-                                        </div>
+                                <div class="dropdownSearchItem">
+                                    <div class="triggerSearchItem">
+                                        <input id="inputSearchItem" type="text" placeholder="Statistiques" readonly>
                                     </div>
+                                    <ul class="optionsSearchItem">
+                                        <li class="sectionSearchItem">Principales</li>
+                                        <li class="parametresSelect">PdV</li>
+                                        <li class="parametresSelect">PA</li>
+                                        <li class="parametresSelect">PM</li>
+                                        <li class="parametresSelect">PW</li>
+
+                                        <li class="sectionSearchItem">Secondaires</li>
+                                        <li>Coup Critique</li>
+                                        <li>Parade</li>
+                                        <li>Initiative</li>
+                                        <li>PO</li>
+                                        <li>Esquive</li>
+                                        <li>Tacle</li>
+                                        <li>Sagesse</li>
+                                        <li>Contrôle</li>
+                                        <li>Volonté</li>
+
+                                        <li class="sectionSearchItem">Maîtrises Elem</li>
+                                        <li>Maîtrise Feu</li>
+                                        <li>Maîtrise Eau</li>
+                                        <li>Maîtrise Air</li>
+                                        <li>Maîtrise Terre</li>
+
+                                        <li class="sectionSearchItem">Résistance Elem</li>
+                                        <li>Résistance Feu</li>
+                                        <li>Résistance Eau</li>
+                                        <li>Résistance Air</li>
+                                        <li>Résistance Terre</li>
+
+                                        <li class="sectionSearchItem">Maîtrises Spé</li>
+                                        <li>Maîtrise Distance</li>
+                                        <li>Maîtrise Mêlée</li>
+                                        <li>Maîtrise Critique</li>
+                                        <li>Maîtrise Dos</li>
+                                        <li>Maîtrise Soin</li>
+                                        <li>Maîtrise Berserk</li>
+
+                                        <li class="sectionSearchItem">Résistance Spé</li>
+                                        <li>Résistance Critique</li>
+                                        <li>Résistance Dos</li>
+
+                                        <li class="sectionSearchItem">Armures</li>
+                                        <li>Armure donnée</li>
+                                        <li>Armure reçue</li>
+
+                                        <li class="sectionSearchItem">Stats Générales</li>
+                                        <li>Maîtrise Elémentaire</li>
+                                        <li>Résistance Elémentaire</li>
+                                    </ul>
                                 </div>
                                 <div>
                                     <div><p>Vider les filtres</p></div>

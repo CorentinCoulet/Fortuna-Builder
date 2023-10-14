@@ -354,7 +354,7 @@ header nav ul:first-child a {
 .sect4 {
 	display: flex;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     width: 315px;
 }
 
@@ -397,6 +397,8 @@ table {
 }
 
 .npc {
+    width: 600px;
+    height: 300px;
 	display: flex;
     position: relative;
     flex-direction: column;
@@ -476,7 +478,7 @@ table {
   
 .sliders_control {
     position: relative;
-    min-height: 50px;
+    min-height: 20px;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -586,8 +588,69 @@ input[type="range"] {
 }
 
 .listStats > div:nth-child(2) {
-    margin: 5% 0;
+    margin: 8% 0;
 }
+
+.dropdownSearchItem, .triggerSearchItem {
+    position: relative;
+    display: inline-block;
+}
+
+#inputSearchItem {
+    width: 300px;
+    padding: 5px;
+}
+
+.optionsSearchItem {
+    position: absolute;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    max-height: 100px;
+    overflow-y: auto; 
+    width: 100%;
+}
+
+.optionsSearchItem .sectionSearchItem {
+    font-weight: bold;
+    background-color: #f0f0f0;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.optionsSearchItem li {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.optionsSearchItem li:hover {
+    background-color: #f0f0f0;
+}
+
+.parametresSelect {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.selected-param {
+    display: flex;
+    align-items: center;
+    padding: 2px 5px;
+    margin: 2px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f2f2f2;
+}
+
+.remove-param {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
 /*-------------------------------------------------------------------
 ----															 ----
 ----						Section 5 - Sorts					 ----

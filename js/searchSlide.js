@@ -2,6 +2,9 @@ const fromSlider = document.querySelector('#fromSlider');
 const toSlider = document.querySelector('#toSlider');
 const fromInput = document.querySelector('#fromInput');
 const toInput = document.querySelector('#toInput');
+const inputSearchItem = document.getElementById("inputSearchItem");
+const optionsSearchItem = document.querySelector(".optionsSearchItem");
+
 fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
 setToggleAccessible(toSlider);
 
@@ -85,3 +88,20 @@ function setToggleAccessible(currentTarget) {
     toSlider.style.zIndex = 0;
   }
 }
+
+inputSearchItem.addEventListener("click", function () {
+  optionsSearchItem.style.display = "block";
+});
+
+optionsSearchItem.addEventListener("click", function (e) {
+  if (e.target && e.target.nodeName === "LI") {
+      inputSearchItem.value = e.target.textContent;
+      optionsSearchItem.style.display = "none";
+  }
+});
+
+document.addEventListener("click", function (e) {
+  if (e.target !== inputSearchItem) {
+      optionsSearchItem.style.display = "none";
+  }
+});
