@@ -18,12 +18,13 @@
                 </ul>
                 <ul>
                     <li><a href="#"><img src="../public/menuHeader/reset.png" alt="bouton reset"></a></li>
-                    <li><a href="../html/parametres.html"><img src="../public/menuHeader/settings.svg" alt="bouton settings"></a></li>
+                    <li><a href="../html/parametres.html"><img src="../public/menuHeader/setting.png" alt="bouton settings"></a></li>
                     <li>
                         <a href="../html/compte.html">
-                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" width="40px" height="40px">
+                            <!-- <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" width="40px" height="40px">
                                 <path d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"></path>
-                            </svg>
+                            </svg> -->
+                            <img src="../public/menuHeader/user.png" alt="utilisateur">
                         </a>
                     </li>
                     <li class="lang-dropdown">
@@ -40,7 +41,7 @@
                 </ul>
             </nav>
         </header>
-        <div>
+        <main>
             <div class="statsGlobales">
                 <div>
                     <section class="sect1">
@@ -75,29 +76,29 @@
                             <div class="sectionAbility">
                                 <div>
                                     <img src="../public/capacites/hp.webp">
-                                    <p id="hp"> &ensp;PdV</p>
+                                    <p id="hp">PdV</p>
                                 </div>   
                                 <div class="editable-element-hp" onclick="editElement(this)">
-                                    <span class="valueHp" id="valueHp">70&ensp;</span>
+                                    <span class="valueHp" id="valueHp">70</span>
                                     <input class="inputHp" type="number">
                                 </div>
                             </div>  
                             <div class="sectionAbility">
                                 <div>
                                     <img src="../public/capacites/pa.webp">
-                                    <p id="ap"> &ensp;PA</p>
+                                    <p id="ap">PA</p>
                                 </div>
                                 <div>
-                                    <p>6&ensp;</p>
+                                    <p>6</p>
                                 </div>
                             </div>
                             <div class="sectionAbility">
                                 <div>
                                     <img src="../public/capacites/pw.webp">
-                                    <p id="wp"> &ensp;PW</p>
+                                    <p id="wp">PW</p>
                                 </div>
                                 <div>
-                                    <p>6&ensp;</p>
+                                    <p>6</p>
                                 </div>
                             </div>
                         </div>
@@ -105,19 +106,19 @@
                             <div class="sectionAbility">
                                 <div>
                                     <img src="../public/capacites/armor.webp">
-                                    <p id="armor"> &ensp;Armure</p>
+                                    <p id="armor">Armure</p>
                                 </div>
                                 <div>
-                                    <p>0&ensp;</p>
+                                    <p>0</p>
                                 </div>
                             </div> 
                             <div class="sectionAbility">
                                 <div>
                                     <img src="../public/capacites/pm.webp">
-                                    <p id="mp"> &ensp;PM</p>
+                                    <p id="mp">PM</p>
                                 </div>
                                 <div>
-                                    <p>3&ensp;</p>
+                                    <p>3</p>
                                 </div>
                             </div>
                         </div>  
@@ -348,6 +349,19 @@
                     </div>
                 </section>
             </div>
+            <div class="barreEquipement">
+                <div><img src="../public/equipements/headgear.png" alt="casque"></div>
+                <div><img src="../public/equipements/amulet.png" alt="amulette"></div>
+                <div><img src="../public/equipements/breastplate.png" alt="plastron"></div>
+                <div><img src="../public/equipements/belt.png" alt="ceinture"></div>
+                <div><img src="../public/equipements/left_ring.png" alt="anneau gauche"></div>
+                <div><img src="../public/equipements/right_ring.png" alt="anneau droit"></div> 
+                <div><img src="../public/equipements/boots.png" alt="bottes"></div>
+                <div><img src="../public/equipements/right_hand.png" alt="casque"></div>
+                <div><img src="../public/equipements/left_hand.png" alt="casque"></div>
+                <div><img src="../public/equipements/pet.png" alt="casque"></div>
+                <div><img src="../public/equipements/pet.png" alt="casque"></div>
+            </div>
             <div> 
                 <section class="sect5">
                     <div id="tabs"> 
@@ -528,21 +542,177 @@
                                         <img src="../public/enchant/epic.webp" alt="enchantement épique">
                                         <img src="../public/enchant/relic.webp" alt="enchantement relique">
                                     </div>
-                                    <svg width="50px" height="50px">
-                                        <path 
-                                            d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z">
-                                        </path>
-                                    </svg>   
+                                    <div>
+                                        <svg width="50px" height="50px">
+                                            <path 
+                                                d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z">
+                                            </path>
+                                        </svg>
+                                    </div>  
                                 </nav>
                             </div>
                         </div>
                         <div class="enchantement">
-                            <div><p>ENCHANTEMENTS</p></div>
+                            <div class="titreEnchantement"><p>ENCHANTEMENTS</p></div>
                             <div class="range_container">
                                 <div class="slideEnchant">
-                                    <input type="range" min="1" max="11" value="1" class="sliderEnchant" id="sliderEnchant">
+                                    <!-- <input type="range" min="1" max="11" value="1" class="sliderEnchant" id="sliderEnchant"> -->
                                 </div>
-                                <div></div>
+                            </div>
+                            <div class="lesEnchants">
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_red_full.webp" alt="rune rouge">
+                                        <p>Maîtrise Mêlée</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/helmet.png" alt="casque">
+                                        <img src="../public/emplacementEquipements/cape.png" alt="cape">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_red_full.webp" alt="rune rouge">
+                                        <p>Maîtrise Distance</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/belt.png" alt="ceinture">
+                                        <img src="../public/emplacementEquipements/one_handed_weapon.png" alt="arme à 1 main">
+                                        <img src="../public/emplacementEquipements/two_handed_weapon.png" alt="arme à 2 mains">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_red_full.webp" alt="rune rouge">
+                                        <p>Maîtrises Berserk</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/necklace.png" alt="amulette">
+                                        <img src="../public/emplacementEquipements/cape.png" alt="cape">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_red_full.webp" alt="rune rouge">
+                                        <p>Résistance Terre</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/breastplate.png" alt="plastron">
+                                        <img src="../public/emplacementEquipements/boots.png" alt="bottes">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_green_full.webp" alt="rune verte">
+                                        <p>Maîtrise Critique</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/epaulettes.png" alt="epaulettes">
+                                        <img src="../public/emplacementEquipements/one_handed_weapon.png" alt="arme à 1 main">
+                                        <img src="../public/emplacementEquipements/two_handed_weapon.png" alt="arme à 2 mains">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_green_full.webp" alt="rune verte">
+                                        <p>Maîtrise Dos</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/belt.png" alt="ceinture">
+                                        <img src="../public/emplacementEquipements/boots.png" alt="bottes">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_green_full.webp" alt="rune verte">
+                                        <p>Esquive</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/ring.png" alt="anneau">
+                                        <img src="../public/emplacementEquipements/ring.png" alt="anneau">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_green_full.webp" alt="rune verte">
+                                        <p>Initiative</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/necklace.png" alt="amulette">
+                                        <img src="../public/emplacementEquipements/cape.png" alt="cape">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_green_full.webp" alt="rune verte">
+                                        <p>Résistance Feu</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/breastplate.png" alt="plastron">
+                                        <img src="../public/emplacementEquipements/belt.png" alt="ceinture">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_blue_full.webp" alt="rune bleu">
+                                        <p>Maîtrise Elémentaire</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/breastplate.png" alt="plastron">
+                                        <img src="../public/emplacementEquipements/cape.png" alt="cape">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_blue_full.webp" alt="rune bleu">
+                                        <p>Tacle</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/ring.png" alt="anneau">
+                                        <img src="../public/emplacementEquipements/ring.png" alt="anneau">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_blue_full.webp" alt="rune bleu">
+                                        <p>Résistance Eau</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/epaulettes.png" alt="epaulettes">
+                                        <img src="../public/emplacementEquipements/breastplate.png" alt="plastron">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_blue_full.webp" alt="rune bleu">
+                                        <p>Résistance Air</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/breastplate.png" alt="plastron">
+                                        <img src="../public/emplacementEquipements/cape.png" alt="cape">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_blue_full.webp" alt="rune bleu">
+                                        <p>Vie</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/one_handed_weapon.png" alt="arme à 1 main">
+                                        <img src="../public/emplacementEquipements/two_handed_weapon.png" alt="arme à 2 mains">
+                                        <img src="../public/emplacementEquipements/helmet.png" alt="casque">
+                                    </div>
+                                </div>
+                                <div class="listeEnchantLiaison">
+                                    <div>
+                                        <img src="../public/enchant/shard_blue_full.webp" alt="rune bleu">
+                                        <p>Maîtrise Soin</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/emplacementEquipements/epaulettes.png" alt="epaulettes">
+                                        <img src="../public/emplacementEquipements/necklace.png" alt="amulette">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="searchEnchant"></div>
@@ -557,7 +727,7 @@
                                         </td>
                                             <td colspan="4" rowspan="5" class="canvas-cell">
                                             <canvas id="canvasGL" width="120" height="160" style="display: initial;"></canvas>
-                                            <img id="loader" src="https://web.archive.org/web/20170608183930im_/http://methodwakfu.com/wp-content/icons/ring.svg" alt="Loading" style="display: none;">
+                                            <img id="loader" src="../public/animations/ringLoading.svg" alt="Loading" style="display: none;">
                                             <img src="../public/animations/arrow-rotate.svg" class="arrow-rotate-left">
                                             <img src="../public/animations/arrow-rotate.svg" class="arrow-rotate-right">
                                             </td>
@@ -621,7 +791,7 @@
                     </div>
                 </section>
             </div>
-        </div>
+        </main>
         <footer>
             <div class="divFooter">
                 <p class="messageFooter"> 
