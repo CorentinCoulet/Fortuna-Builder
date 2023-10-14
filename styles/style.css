@@ -35,7 +35,7 @@ main {
     display: flex;
     flex-direction: row;
     min-height: 80%;
-    margin: 4vh 0;
+    margin: 2vh 0;
     background-color: white;
     opacity: 0.9;
     padding: 20px 0;
@@ -43,15 +43,12 @@ main {
 }
 
 main > div:first-child {
-    margin-left: 5%;
+    margin-left: 2%;
 }
 
 main > div:last-child {
-    margin-left: 10%;
-}
-
-.barreEquipement {
-    margin: 0 20px 0 5px;
+    width: 53%;
+    margin-left: 2%;
 }
 
 .barreEquipement div {
@@ -77,8 +74,7 @@ footer {
     background-color: #404040;
     border-top: solid;    
     margin-bottom: 0;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-radius: 15px;
 }
 
 .divFooter {
@@ -104,6 +100,7 @@ header {
     color: #fff;
     width: 90%;
     margin-top: 2vh;
+    border-radius: 15px;
 }
 
 header nav {
@@ -545,6 +542,52 @@ input[type="range"] {
     background-color: grey;
 }
 
+#tab1 {
+    width: 100%;
+    flex-direction: row;
+    border: 1px solid grey;
+}
+
+#tab1 > div {
+    display: flex;
+    flex-direction: column;  
+}
+
+.searchListItems {
+    width: 55%;
+    height: 600px;
+    background-color: green;
+}
+
+.filters {
+    width: 45%;
+    padding: 5px 10px;
+}
+
+.filterRarity, .filterItem, .listStats {
+    align-items: center; 
+    padding: 5px; 
+}
+
+.filterRarity > div:nth-child(1), .filterItem > div:nth-child(1), .listStats > div:nth-child(1) {
+    margin: 0 10px;
+}
+
+.listStats > div:nth-child(3) {
+    display: flex;
+    flex-direction: row;
+}
+
+.listStats > div:nth-child(3) div {
+    border: 1px solid grey;
+    border-radius: 15px;
+    padding: 5px;
+    margin: 0 10%;
+}
+
+.listStats > div:nth-child(2) {
+    margin: 5% 0;
+}
 /*-------------------------------------------------------------------
 ----															 ----
 ----						Section 5 - Sorts					 ----
