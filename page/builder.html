@@ -8,6 +8,8 @@
         <script src="../js/onglets.js"></script>
         <script src="../js/searchSlide.js" type="module"></script>
         <script src="../js/SearchMenuItem.js"></script>
+        <script src="../js/searchBarSublis.js" type="module"></script>
+        <script src="../js/aptitudes.js" type="module"></script>
         <title>Fortuna - Builder</title>
         <link rel="icon" href="../public/logoBague.png" type="image"> 
 	</head>
@@ -381,6 +383,7 @@
                         <div class="filters">
                             <label for="searchItem">Nom de l'item</label>
                             <input id="searchItem">
+                            <!-- changer input pour faire un simple texte avec du js ? -->
                             <label>Niveau 
                                 (<input type="number" id="fromInput" value="10" min="1" max="230"/>
                                 -
@@ -491,9 +494,29 @@
                         </div>
                     </div>
                     <div id="tab2" class="tab"> <!-- Aptitudes -->
-                        <h2>Onglet 2</h2>
-                        <p>Contenu de l'onglet 2...</p>
-                        
+                        <div class="accordion">
+                            <div class="item">
+                                <div class="header">Intelligence</div>
+                                <div class="content">Contenu de la section 1</div>
+                            </div>
+                            <div class="item">
+                                <div class="header">Force</div>
+                                <div class="content">Contenu de la section 2</div>
+                            </div>
+                            <div class="item">
+                                <div class="header">Agilité</div>
+                                <div class="content">Contenu de la section 3</div>
+                            </div>
+                            <div class="item">
+                                <div class="header">Chance</div>
+                                <div class="content">Contenu de la section 4</div>
+                            </div>
+                            <div class="item">
+                                <div class="header">Majeur</div>
+                                <div class="content">Contenu de la section 5</div>
+                            </div>
+                            
+                        </div>
                     </div>
                     <div id="tab3" class="tab"> <!-- Sorts -->
                         <div class="listSpells"></div>
@@ -816,7 +839,34 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="searchEnchant"></div>
+                        <div class="searchEnchant">
+                            <div>
+                                <div>
+                                    <div><p>Rare - Légendaire</p></div> 
+                                    <div>Search</div>
+                                </div>
+                                <div></div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div><p></p>Epique - Relique</div> 
+                                    <div>
+                                        <div class="search-subli-container">
+                                            <div class="input-subli-container">
+                                                <input type="text" id="search-bar-subli" placeholder="Rechercher...">
+                                                <div class="search-button-subli-container">
+                                                    <button id="search-button-subli"><img src="../public/statistics.png" alt="loupe de recherche"></button>
+                                                </div>    
+                                            </div>
+                                        </div>
+                                        <div id="search-results-subli">
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
                     </div>
                     <div id="tab5" class="tab"> <!-- Design -->
                         <section class="sect4">

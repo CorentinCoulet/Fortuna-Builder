@@ -48,11 +48,11 @@ main > div:first-child {
 
 main > div:last-child {
     width: 53%;
-    margin-left: 2%;
+    margin-left: 1%;
 }
 
 .barreEquipement div {
-    margin: 2px 0;
+    margin: 1px 0;
 }
 
 .statsGlobales > div {
@@ -440,6 +440,10 @@ table {
 ----															 ----
 -------------------------------------------------------------------*/
 
+.sect5 {
+    width: 100%;
+}
+
 .tab {
     display: none;
 }
@@ -464,6 +468,7 @@ table {
     border: 1px solid #ccc;
     text-decoration: none;
     color: #333;
+    user-select: none;
 }
 .tab-link:hover {
     background-color: #ddd;
@@ -558,21 +563,23 @@ input[type="range"] {
 .searchListItems {
     width: 55%;
     height: 600px;
-    background-color: green;
+    background-color: grey;
 }
 
 .filters {
     width: 45%;
+    align-items: center;
     padding: 5px 10px;
 }
+
 
 .filterRarity, .filterItem, .listStats {
     align-items: center; 
     padding: 5px; 
 }
 
-.filterRarity > div:nth-child(1), .filterItem > div:nth-child(1), .listStats > div:nth-child(1) {
-    margin: 0 10px;
+.filterRarity {
+    align-items: center;
 }
 
 .listStats > div:nth-child(3) {
@@ -596,8 +603,12 @@ input[type="range"] {
     display: inline-block;
 }
 
+#searchItem {
+    width: 50%;
+}
+
 #inputSearchItem {
-    width: 300px;
+    width: 100%;
     padding: 5px;
 }
 
@@ -653,6 +664,27 @@ input[type="range"] {
 
 /*-------------------------------------------------------------------
 ----															 ----
+----						Section 5 - Aptitudes				 ----
+----															 ----
+-------------------------------------------------------------------*/
+
+.accordion .content {
+    display: none;
+}
+
+.accordion .item.open .content {
+    display: block;
+}
+
+.accordion .header {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #eee;
+    border: 1px solid #ddd;
+}
+
+/*-------------------------------------------------------------------
+----															 ----
 ----						Section 5 - Sorts					 ----
 ----															 ----
 -------------------------------------------------------------------*/
@@ -694,24 +726,15 @@ input[type="range"] {
     align-content: center;
 }
 
-.runes, .enchantement {
+.runes, .enchantement, .searchEnchant {
     border: 1px solid grey;
     box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.75); 
 }
 
-.runes {
+.runes, .enchantement, .searchEnchant {
     width: 40%; 
-    height: auto;
-    margin-right: 10px;
-}
-
-.enchantement {
-    width: 60%;
-}
-
-.pageVide > div {
-    display: flex;
-    flex-direction: row;
+    height: 550px;
+    margin-right: 5px;
 }
 
 .pageVide div div:first-child img {
@@ -730,8 +753,11 @@ input[type="range"] {
 }
 
 .pageVide > div {  
-    padding: 1px 10px;
-    margin: 5px 10px;;  
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    padding: 0 10px;
+    margin: 5px 5%;
     box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.75); 
 }
 
@@ -810,3 +836,63 @@ input[type="range"] {
     width: 32px;
     height: 32px;
 }
+
+.searchEnchant  {
+    display: flex;
+    flex-direction: column;
+}
+
+.searchEnchant div > div:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    margin: 0 5px;
+}
+
+.searchEnchant > div:nth-child(1), .searchEnchant > div:nth-child(2) {
+    height: 50%;
+}
+
+.search-subli-container {
+    display: flex;
+    align-items: center;
+}
+
+#search-bar-subli {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-button-subli-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.input-subli-container {
+    display: flex;
+    flex-direction: center;
+}
+
+#search-button-subli {
+    width: 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#search-button-subli img {
+    width: 15px;
+    height: 15px;
+}
+
+#search-results-subli {
+    margin-top: 20px;
+}
+
+
