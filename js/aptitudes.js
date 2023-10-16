@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const items = document.querySelectorAll(".accordion .item");
-
+    items[0].classList.add("open");
     items.forEach((item) => {
         item.addEventListener("click", () => {
             items.forEach((otherItem) => {

@@ -1,6 +1,6 @@
-const searchBar = document.getElementById('search-bar-subli');
-const searchButton = document.getElementById('search-button-subli');
-const searchResults = document.getElementById('search-results-subli');
+const searchBar = document.querySelector('.search-bar-subli');
+const searchButton = document.querySelector('.search-button-subli');
+const searchResults = document.querySelector('.search-results-subli');
 
 searchButton.addEventListener('click', () => {
     const query = searchBar.value;

@@ -18,16 +18,17 @@
 	    <header>
             <nav>
                 <ul>
-                    <li><a href="../index.html"><img src="../public/logoBague.png" alt="bague en or"><p>&ensp;Fortuna</p></a></li>
+                    <li>
+                        <a href="../index.html"><img src="../public/logoBague.png" alt="bague en or">
+                            <p>&ensp;Fortuna</p>
+                        </a>
+                    </li>
                 </ul>
                 <ul>
                     <li><a href="#"><img src="../public/menuHeader/reset.png" alt="bouton reset"></a></li>
                     <li><a href="../html/parametres.html"><img src="../public/menuHeader/setting.png" alt="bouton settings"></a></li>
                     <li>
                         <a href="../html/compte.html">
-                            <!-- <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" width="40px" height="40px">
-                                <path d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"></path>
-                            </svg> -->
                             <img src="../public/menuHeader/user.png" alt="utilisateur">
                         </a>
                     </li>
@@ -54,22 +55,48 @@
                         </div>
                     </section>
                     <section class="sect2">
-                        <form action="traitement.php" method="post">
+                        <div>
+                            <form action="traitement.php" method="post">
 
-                            <label for="nom" id="buildName"><strong>Nom du Build : </strong></label>
-                            <input type="text" name="nom" id="nom" value="Cratte 200">
+                                <label for="nom" id="buildName"><strong>Nom du Build : </strong></label>
+                                <input type="text" name="nom" id="nom" value="Cratte 200">
 
-                            <label for="lvl" id="lvlLang"><strong>Niveau : </strong></label>
-                            <input type="number" name="lvl" id="lvl" value="200" min="1" max="230">
-                        </form>
-                        <div class="bonusGN">
-                            <div class="slider-container1">
-                                <p class="guild-text" id="guild">Guilde</p>
-                                <div id="sliderG" class="sliderG"></div>
+                                <label for="lvl" id="lvlLang"><strong>Niveau : </strong></label>
+                                <input type="number" name="lvl" id="lvl" value="200" min="1" max="230">
+                            </form>
+                            <div class="bonusGN">
+                                <div class="slider-container1">
+                                    <p class="guild-text" id="guild">Guilde</p>
+                                    <div id="sliderG" class="sliderG"></div>
+                                </div>
+                                <div class="slider-container2">
+                                    <p class="nation-text" id="nation">Nation</p>
+                                    <div id="sliderN" class="sliderN"></div>
+                                </div>
                             </div>
-                            <div class="slider-container2">
-                                <p class="nation-text" id="nation">Nation</p>
-                                <div id="sliderN" class="sliderN"></div>
+                        </div>
+                        <div class="prioElem">
+                            <div class="prioElemAA">
+                                <div>
+                                    <img src="../public/animations/arrow-rotate.svg" alt="">
+                                </div>
+                                <div>
+                                    <img src="../public/selectElem/fire.png" alt="feu">
+                                    <img src="../public/selectElem/water.png" alt="eau">
+                                    <img src="../public/selectElem/earth.png" alt="terre">
+                                    <img src="../public/selectElem/wind.png" alt="air">
+                                </div>
+                            </div>
+                            <div class="prioElemAA">
+                                <div>
+                                    <img src="../public/animations/arrow-rotate.svg" alt="">
+                                </div>
+                                <div>
+                                    <img src="../public/selectElem/fire.png" alt="feu">
+                                    <img src="../public/selectElem/water.png" alt="eau">
+                                    <img src="../public/selectElem/earth.png" alt="terre">
+                                    <img src="../public/selectElem/wind.png" alt="air">
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -384,11 +411,12 @@
                             <label for="searchItem">Nom de l'item</label>
                             <input id="searchItem">
                             <!-- changer input pour faire un simple texte avec du js ? -->
-                            <label>Niveau 
+                            <!-- <div class="lvlBarRecherche">Niveau 
                                 (<input type="number" id="fromInput" value="10" min="1" max="230"/>
                                 -
                                 <input type="number" id="toInput" value="40" min="1" max="230"/>)
-                            </label>
+                            </div> -->
+                            <div class="lvlBarRecherche">Niveau (0 - 230)</div>
                             <div class="range_container">
                                 <div class="sliders_control">
                                     <input id="fromSlider" type="range" value="10" min="1" max="230"/>
@@ -486,7 +514,7 @@
                                         <li>Résistance Elémentaire</li>
                                     </ul>
                                 </div>
-                                <div>
+                                <div class="boutonsRecherche">
                                     <div><p>Vider les filtres</p></div>
                                     <div><p>Rechercher</p></div>
                                 </div>
@@ -496,24 +524,214 @@
                     <div id="tab2" class="tab"> <!-- Aptitudes -->
                         <div class="accordion">
                             <div class="item">
-                                <div class="header">Intelligence</div>
-                                <div class="content">Contenu de la section 1</div>
+                                <div class="header">
+                                    <div>
+                                        Intelligence
+                                        <div class="ptRestants">50</div> 
+                                    </div>
+                                    <div>
+                                        <img src="../public/iconsAptitudes/intelligence.webp" alt="icon intelligence">
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div>
+                                       <div><img src="../public/aptitudes/apt_hp.webp" alt="icon points de vie"></div>
+                                        <div>% Points de vie</div> 
+                                    </div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_reselem.webp" alt="icon résistances élémentaires"></div>
+                                    <div>Résistance élémentaire</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_bareer.webp" alt="icon barrière"></div>
+                                    <div>Barrière</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_healthreceived.webp" alt="icon soins reçus"></div>
+                                    <div>% Soins reçus</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_hpasarmor.webp" alt="icon pdv en armure"></div>
+                                    <div>% PdV en armure</div>
+                                    <div></div>  
+                                </div>
                             </div>
                             <div class="item">
-                                <div class="header">Force</div>
-                                <div class="content">Contenu de la section 2</div>
+                                <div class="header">
+                                    <div>
+                                        Force
+                                        <div class="ptRestants">50</div> 
+                                    </div>
+                                    <div>
+                                        <img src="../public/iconsAptitudes/strength.webp" alt="icon force">
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div>
+                                       <div><img src="../public/aptitudes/apt_elemmastery.webp" alt="icon maitrise élémentaire"></div>
+                                        <div>Maîtrise Elémentaire</div> 
+                                    </div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_masterymelee.webp" alt="icon maitrise mêlée"></div>
+                                    <div>Maîtrise Mêlée</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_masteryrange.webp" alt="icon maitrise distance"></div>
+                                    <div>Maîtrise Distance</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_rawhp.webp" alt="icon points de vie"></div>
+                                    <div>Points de Vie</div>
+                                    <div></div>
+                                </div>
                             </div>
                             <div class="item">
-                                <div class="header">Agilité</div>
-                                <div class="content">Contenu de la section 3</div>
+                                <div class="header">
+                                    <div>
+                                        Agilité
+                                        <div class="ptRestants">50</div> 
+                                    </div>
+                                    <div>
+                                        <img src="../public/iconsAptitudes/agility.webp" alt="icon agilité">
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div>
+                                       <div><img src="../public/aptitudes/apt_tackle.webp" alt="icon tacle"></div>
+                                        <div>Tacle</div> 
+                                    </div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_dodge.webp" alt="icon esquive"></div>
+                                    <div>Esquive</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_init.webp" alt="icon initiative"></div>
+                                    <div>Initiative</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_tackledodge.webp" alt="icon tacle et esquive"></div>
+                                    <div>Tacle et Esquive</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_will.webp" alt="icon volonté"></div>
+                                    <div>Volonté</div>
+                                    <div></div> 
+                                </div>
                             </div>
                             <div class="item">
-                                <div class="header">Chance</div>
-                                <div class="content">Contenu de la section 4</div>
+                                <div class="header">
+                                    <div>
+                                        Chance
+                                        <div class="ptRestants">50</div> 
+                                    </div>
+                                    <div>
+                                        <img src="../public/iconsAptitudes/chance.webp" alt="icon chance">
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div>
+                                       <div><img src="../public/aptitudes/apt_criticalhit.webp" alt="icon coup critique"></div>
+                                        <div>% Coup Critique</div> 
+                                    </div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_block.webp" alt="icon parade"></div>
+                                    <div>% Parade</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_masterycritical.webp" alt="icon maîtrise critique"></div>
+                                    <div>Maîtrise Critique</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_rearmastery.webp" alt="icon maîtrise dos"></div>
+                                    <div>Maîtrise Dos</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_berserkmastery.webp" alt="icon maîtrise berserk"></div>
+                                    <div>Maîtrise Berserk</div>
+                                    <div></div> 
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_masteryhealth.webp" alt="icon maîtrise soin"></div>
+                                    <div>Maîtrise Soin</div>
+                                    <div></div> 
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_rearresist.webp" alt="icon résistance dos"></div>
+                                    <div>Résistance Dos</div>
+                                    <div></div> 
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_resistcritical.webp" alt="icon résistance critique"></div>
+                                    <div>Résistance Critique</div>
+                                    <div></div> 
+                                </div>
                             </div>
                             <div class="item">
-                                <div class="header">Majeur</div>
-                                <div class="content">Contenu de la section 5</div>
+                                <div class="header">
+                                    <div>
+                                        Majeur
+                                        <div class="ptRestants">50</div> 
+                                    </div>
+                                    <div>
+                                        <img src="../public/iconsAptitudes/major.webp" alt="icon majeur">
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div>
+                                       <div><img src="../public/aptitudes/apt_pa.webp" alt="icon point d'action"></div>
+                                        <div>Point d'Action</div> 
+                                    </div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_pm.webp" alt="icon point de mouvement"></div>
+                                    <div>Point de Mouvement + Maîtrises</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_range.webp" alt="icon portée"></div>
+                                    <div>Portée + Maîtrises</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_wakfupoint.webp" alt="icon point de wakfu"></div>
+                                    <div>Point de Wakfu</div>
+                                    <div></div>
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_control.webp" alt="icon contrôle"></div>
+                                    <div>Contrôle + Maîtrises</div>
+                                    <div></div> 
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_rawdamages.webp" alt="icon % dommage infligé"></div>
+                                    <div>% Dommages Infligés</div>
+                                    <div></div> 
+                                </div>
+                                <div class="content">
+                                    <div><img src="../public/aptitudes/apt_resistanceelem.webp" alt="icon résistance élémentaire"></div>
+                                    <div>Résistance Elémentaire</div>
+                                    <div></div> 
+                                </div>
                             </div>
                             
                         </div>
@@ -842,24 +1060,40 @@
                         <div class="searchEnchant">
                             <div>
                                 <div>
-                                    <div><p>Rare - Légendaire</p></div> 
-                                    <div>Search</div>
+                                    <div><p>RARE - LEGENDAIRE</p></div> 
+                                    <div>
+                                        <div class="search-subli-container">
+                                            <div class="input-subli-container">
+                                                <input type="text" class="search-bar-subli" placeholder="Rechercher...">
+                                                <div class="search-button-subli-container">
+                                                    <button class="search-button-subli">
+                                                        <img src="../public/statistics.png" alt="loupe de recherche"> 
+                                                    </button>
+                                                </div>    
+                                            </div>
+                                        </div>
+                                        <div class="search-results-subli">
+                                        
+                                        </div>
+                                    </div>
                                 </div>
                                 <div></div>
                             </div>
                             <div>
                                 <div>
-                                    <div><p></p>Epique - Relique</div> 
+                                    <div><p></p>EPIQUE - RELIQUE</div> 
                                     <div>
                                         <div class="search-subli-container">
                                             <div class="input-subli-container">
-                                                <input type="text" id="search-bar-subli" placeholder="Rechercher...">
+                                                <input type="text" class="search-bar-subli" placeholder="Rechercher...">
                                                 <div class="search-button-subli-container">
-                                                    <button id="search-button-subli"><img src="../public/statistics.png" alt="loupe de recherche"></button>
+                                                    <button class="search-button-subli">
+                                                        <img src="../public/statistics.png" alt="loupe de recherche">   
+                                                    </button>
                                                 </div>    
                                             </div>
                                         </div>
-                                        <div id="search-results-subli">
+                                        <div class="search-results-subli">
                                         
                                         </div>
                                     </div>

@@ -48,7 +48,7 @@ main > div:first-child {
 
 main > div:last-child {
     width: 53%;
-    margin-left: 1%;
+    margin-left: 2%;
 }
 
 .barreEquipement div {
@@ -104,7 +104,11 @@ header {
 }
 
 header nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
     width: 100%;
+    align-items: center;
 }
 
 header img {
@@ -114,12 +118,6 @@ header img {
 
 .dropdown-content {
     display: none;
-}
-
-header nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;  
 }
 
 header nav ul {
@@ -143,6 +141,7 @@ header nav ul:first-child a {
     color: #fff; 
     font-weight: bold;
     font-size: 18px;
+    align-items: center;
 }
 
 .lang-dropdown .flag {
@@ -192,27 +191,40 @@ header nav ul:first-child a {
 .bonusGN {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: space-evenly;
+}
 
+.sect2 > div {
+    display: flex;
+    flex-direction: row;
 }
 
 .sect2 form {
 	display: flex;
 	flex-direction: column;
+    width: 50%;
+    margin: 15px 0;
+}
+
+.sect2 form > label:first-child {
+    margin: 10px 0;
 }
 
 .sect2 form input {
-    width: 60%;
+    width: 70%;
+    height: 20%;
+    border: 1px solid grey;
+
 }
 
 .slider-container1, .slider-container2 {
     position: relative;
-    width: 150px; 
+    width: 100px; 
     background-color: #242c387a;
-    height: 30px;
+    height: 20px;
     border-radius: 15px;
     margin-top: 20px;
-    overflow: hidden; 
+     
     display: flex;
     justify-content: center;
     align-items: center;
@@ -250,6 +262,22 @@ header nav ul:first-child a {
 .slider-container1.active, .slider-container2.active {
     background-color: #5d8f1cc4;
 }
+
+.prioElem {
+    display: flex;
+    flex-direction: column;
+}
+
+.prioElem img {
+    width: 28px;
+    height: 28px;
+}
+
+.prioElemAA, .prioElemAA > div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+}
+
 
 /*-------------------------------------------------------------------
 ----															 ----
@@ -318,8 +346,7 @@ header nav ul:first-child a {
 	border-radius: 15px;
 }
 
-.elements, .armorR, .armorG, .receivedA, .givenA, .masteryPrimal, 
-.masterySecondary, .masteryPrimal div div, .masterySecondary div div, 
+.elements, .armorR, .armorG, .receivedA, .givenA, .masteryPrimal div div, .masterySecondary div div, 
 .sectionAbility, .elementsAd div, .elementsAd {
 	display: flex;
 	flex-direction: row;
@@ -327,6 +354,14 @@ header nav ul:first-child a {
 	align-items: center;
 	align-content: center;
 	
+}
+
+.elements, .masteryPrimal, .masterySecondary {
+    display: flex;
+	flex-direction: row;
+	justify-content: left;
+	align-items: center;
+	align-content: center; 
 }
 
 .masteryPrimal p, .masterySecondary p {
@@ -456,7 +491,7 @@ table {
     display: flex;
     flex-direction: row;
     margin-bottom: 50px;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .tab-link {
@@ -662,25 +697,77 @@ input[type="range"] {
     margin-left: 5px;
 }
 
+.boutonsRecherche {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.boutonsRecherche p {
+    width: 100px;
+    height: 15%;
+}
+
 /*-------------------------------------------------------------------
 ----															 ----
 ----						Section 5 - Aptitudes				 ----
 ----															 ----
 -------------------------------------------------------------------*/
 
+.accordion {
+    width: 80%;
+}
+
 .accordion .content {
     display: none;
 }
 
-.accordion .item.open .content {
-    display: block;
+.accordion .item.open .content, .accordion .item.open .ptRestants {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.accordion .item.open .content div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+     
+}
+
+.accordion .item.open .content img {
+    width: 26px;
+    height: 30px;
+    margin-right: 10px;
 }
 
 .accordion .header {
     cursor: pointer;
-    padding: 10px;
     background-color: #eee;
     border: 1px solid #ddd;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header > div:first-child {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px;
+}
+
+.header > div:nth-child(2) {
+    padding: 5px 10px 0 0;
+}
+
+.item, .content {
+    border: 1px solid grey;
 }
 
 /*-------------------------------------------------------------------
@@ -855,14 +942,16 @@ input[type="range"] {
     height: 50%;
 }
 
-.search-subli-container {
+.search-subli-container, .input-subli-container {
     display: flex;
     align-items: center;
 }
 
-#search-bar-subli {
-    width: 300px;
-    padding: 10px;
+.input-subli-container {
+    position: relative;
+}
+
+.search-bar-subli {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -873,25 +962,19 @@ input[type="range"] {
     right: 0;
 }
 
-.input-subli-container {
-    display: flex;
-    flex-direction: center;
-}
-
-#search-button-subli {
-    width: 20px;
+.search-button-subli {
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 0 5px 5px 0;
     cursor: pointer;
 }
 
-#search-button-subli img {
+.search-button-subli img {
     width: 15px;
     height: 15px;
 }
 
-#search-results-subli {
+.search-results-subli {
     margin-top: 20px;
 }
 
