@@ -11,7 +11,7 @@
         <script src="../js/searchBarSublis.js" type="module"></script>
         <script src="../js/aptitudes.js" type="module"></script>
         <title>Fortuna - Builder</title>
-        <link rel="icon" href="../public/logoBague.png" type="image"> 
+        <link rel="icon" href="../public/fortuna_whiteicon.png" type="image"> 
 	</head>
 
 	<body>
@@ -19,7 +19,7 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="../index.html"><img src="../public/logoBague.png" alt="bague en or">
+                        <a href="../index.html"><img src="../public/fortuna_xl.png" alt="bague en or">
                             <p>&ensp;Fortuna</p>
                         </a>
                     </li>
@@ -58,10 +58,10 @@
                         <div>
                             <form action="traitement.php" method="post">
 
-                                <label for="nom" id="buildName"><strong>Nom du Build : </strong></label>
+                                <label for="nom" id="buildName">Nom du Build : </label>
                                 <input type="text" name="nom" id="nom" value="Cratte 200">
 
-                                <label for="lvl" id="lvlLang"><strong>Niveau : </strong></label>
+                                <label for="lvl" id="lvlLang">Niveau : </label>
                                 <input type="number" name="lvl" id="lvl" value="200" min="1" max="230">
                             </form>
                             <div class="bonusGN">
@@ -399,16 +399,17 @@
             <div> 
                 <section class="sect5">
                     <div id="tabs"> 
-                        <a class="tab-link" onclick="showTab('tab1')">Recherche</a>
-                        <a class="tab-link" onclick="showTab('tab2')">Aptitudes</a>
-                        <a class="tab-link" onclick="showTab('tab3')">Sorts</a>
-                        <a class="tab-link" onclick="showTab('tab4')">Enchantement</a>
-                        <a class="tab-link" onclick="showTab('tab5')">Apparence</a>
+                        <a class="tab-link majuscules" onclick="showTab('tab1')">Recherche</a>
+                        <a class="tab-link majuscules" onclick="showTab('tab2')">Aptitudes</a>
+                        <a class="tab-link majuscules" onclick="showTab('tab3')">Sorts</a>
+                        <a class="tab-link majuscules" onclick="showTab('tab4')">Enchantement</a>
+                        <a class="tab-link majuscules" onclick="showTab('tab5')">Récapitulatif</a>
+                        <!-- <a class="tab-link" onclick="showTab('tab6')">Apparence</a> -->
                     </div>
                     <div id="tab1" class="tab active-tab"> <!-- Recherche -->
                         <div class="searchListItems"></div>
                         <div class="filters">
-                            <label for="searchItem">Nom de l'item</label>
+                            <label for="searchItem" class="majuscules">Nom de l'item</label>
                             <input id="searchItem">
                             <!-- changer input pour faire un simple texte avec du js ? -->
                             <!-- <div class="lvlBarRecherche">Niveau 
@@ -416,7 +417,7 @@
                                 -
                                 <input type="number" id="toInput" value="40" min="1" max="230"/>)
                             </div> -->
-                            <div class="lvlBarRecherche">Niveau (0 - 230)</div>
+                            <div class="lvlBarRecherche majuscules">Niveau (0 - 230)</div>
                             <div class="range_container">
                                 <div class="sliders_control">
                                     <input id="fromSlider" type="range" value="10" min="1" max="230"/>
@@ -424,7 +425,7 @@
                                 </div>
                             </div>
                             <div class="filterRarity">
-                                <div><p>Rareté</p></div>
+                                <div class="majuscules">Rareté</div>
                                 <div>
                                     <button><img src="../public/rarity/common.png" alt="rareté commune"></button>
                                     <button><img src="../public/rarity/rare.png" alt="rareté rare"></button>
@@ -436,7 +437,7 @@
                                 </div>
                             </div>
                             <div class="filterItem">
-                                <div><p>Type d'Equipement</p></div>
+                                <div><p class="majuscules">Type d'Equipement</p></div>
                                 <div>
                                     <button><img src="../public/emplacementEquipements/helmet.png" alt="casque"></button>
                                     <button><img src="../public/emplacementEquipements/necklace.png" alt="amulette"></button>
@@ -458,7 +459,7 @@
                                 </div>
                             </div>
                             <div class="listStats">
-                                <div><p>Statistiques</p></div>
+                                <div><p class="majuscules">Statistiques</p></div>
                                 <div class="dropdownSearchItem">
                                     <div class="triggerSearchItem">
                                         <input id="inputSearchItem" type="text" placeholder="Statistiques" readonly>
@@ -515,8 +516,8 @@
                                     </ul>
                                 </div>
                                 <div class="boutonsRecherche">
-                                    <div><p>Vider les filtres</p></div>
-                                    <div><p>Rechercher</p></div>
+                                    <div class="majuscules">Vider les filtres</div>
+                                    <div class="majuscules">Rechercher</div>
                                 </div>
                             </div>
                         </div>
@@ -1102,7 +1103,10 @@
                             </div>
                         </div>
                     </div>
-                    <div id="tab5" class="tab"> <!-- Design -->
+                    <div id="tab5" class="tab"> <!-- Récapitulatif-->
+
+                    </div> 
+                    <!-- <div id="tab6" class="tab"> Design
                         <section class="sect4">
                             <table class="equipment-table">
                                 <tbody>
@@ -1173,7 +1177,7 @@
                             </table>
                             <div class="npc"></div>
                         </section>
-                    </div>
+                    </div> -->
                 </section>
             </div>
         </main>

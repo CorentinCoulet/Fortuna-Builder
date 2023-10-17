@@ -63,6 +63,10 @@ main > div:last-child {
 	align-items: center;
 }
 
+.majuscules {
+    text-transform: uppercase;
+}
+
 /*-------------------------------------------------------------------
 ----															 ----
 ----						Footer							     ----
@@ -109,6 +113,11 @@ header nav {
     justify-content: space-between; 
     width: 100%;
     align-items: center;
+}
+
+header nav > ul:first-child img {
+    width: 60px;
+    height: 60px;;
 }
 
 header img {
@@ -603,18 +612,17 @@ input[type="range"] {
 
 .filters {
     width: 45%;
+    height: auto;
     align-items: center;
     padding: 5px 10px;
 }
 
-
-.filterRarity, .filterItem, .listStats {
-    align-items: center; 
-    padding: 5px; 
+.filters > label:first-child {
+    margin: 10px 0;
 }
 
-.filterRarity {
-    align-items: center;
+.filterRarity, .filterItem, .listStats {
+    padding: 5px; 
 }
 
 .listStats > div:nth-child(3) {
@@ -640,6 +648,7 @@ input[type="range"] {
 
 #searchItem {
     width: 50%;
+    margin-bottom: 15px;
 }
 
 #inputSearchItem {
@@ -684,7 +693,6 @@ input[type="range"] {
 
 .selected-param {
     display: flex;
-    align-items: center;
     padding: 2px 5px;
     margin: 2px;
     border: 1px solid #ccc;
@@ -698,14 +706,7 @@ input[type="range"] {
 }
 
 .boutonsRecherche {
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-}
-
-.boutonsRecherche p {
-    width: 100px;
-    height: 15%;
+    margin-top: 10%;
 }
 
 /*-------------------------------------------------------------------
