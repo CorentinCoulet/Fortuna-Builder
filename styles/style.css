@@ -105,6 +105,7 @@ header {
     width: 90%;
     margin-top: 2vh;
     border-radius: 15px;
+    
 }
 
 header nav {
@@ -228,12 +229,11 @@ header nav ul:first-child a {
 
 .slider-container1, .slider-container2 {
     position: relative;
-    width: 100px; 
+    width: 120px; 
     background-color: #242c387a;
     height: 20px;
     border-radius: 15px;
     margin-top: 20px;
-     
     display: flex;
     justify-content: center;
     align-items: center;
@@ -484,10 +484,6 @@ table {
 ----															 ----
 -------------------------------------------------------------------*/
 
-.sect5 {
-    width: 100%;
-}
-
 .tab {
     display: none;
 }
@@ -499,7 +495,7 @@ table {
 #tabs {
     display: flex;
     flex-direction: row;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     justify-content: space-around;
 }
 
@@ -587,12 +583,6 @@ input[type="range"] {
     z-index: 1;
 }
 
-.listItems {
-    width: 100%;
-    height: 100%;
-    background-color: grey;
-}
-
 #tab1 {
     width: 100%;
     flex-direction: row;
@@ -601,7 +591,8 @@ input[type="range"] {
 
 #tab1 > div {
     display: flex;
-    flex-direction: column;  
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .searchListItems {
@@ -615,49 +606,14 @@ input[type="range"] {
     height: auto;
     align-items: center;
     padding: 5px 10px;
-}
-
-.filters > label:first-child {
-    margin: 10px 0;
-}
-
-.filterRarity, .filterItem, .listStats {
-    padding: 5px; 
-}
-
-.listStats > div:nth-child(3) {
-    display: flex;
-    flex-direction: row;
-}
-
-.listStats > div:nth-child(3) div {
-    border: 1px solid grey;
-    border-radius: 15px;
-    padding: 5px;
-    margin: 0 10%;
-}
-
-.listStats > div:nth-child(2) {
-    margin: 8% 0;
-}
-
-.dropdownSearchItem, .triggerSearchItem {
     position: relative;
-    display: inline-block;
 }
 
-#searchItem {
-    width: 50%;
-    margin-bottom: 15px;
-}
-
-#inputSearchItem {
+.listStats {
     width: 100%;
-    padding: 5px;
 }
 
 .optionsSearchItem {
-    position: absolute;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -670,43 +626,17 @@ input[type="range"] {
     width: 100%;
 }
 
-.optionsSearchItem .sectionSearchItem {
-    font-weight: bold;
-    background-color: #f0f0f0;
-    margin-top: 10px;
-    padding: 5px;
-}
-
-.optionsSearchItem li {
-    padding: 5px;
-    cursor: pointer;
-}
-
-.optionsSearchItem li:hover {
-    background-color: #f0f0f0;
-}
-
-.parametresSelect {
-    cursor: pointer;
-    padding: 5px;
-}
-
-.selected-param {
-    display: flex;
-    padding: 2px 5px;
-    margin: 2px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f2f2f2;
-}
-
-.remove-param {
-    cursor: pointer;
-    margin-left: 5px;
-}
-
 .boutonsRecherche {
+    width: 50%;
     margin-top: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.boutonsRecherche div {
+    width: 300px;
+    border: 1px solid grey;
 }
 
 /*-------------------------------------------------------------------
