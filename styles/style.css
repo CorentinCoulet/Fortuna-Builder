@@ -76,7 +76,7 @@ main > div:last-child {
 footer {
     width: 90%;
     background-color: #404040;
-    border-top: solid;    
+    border-top: solid 1px yellow;    
     margin-bottom: 0;
     border-radius: 15px;
 }
@@ -105,7 +105,10 @@ header {
     width: 90%;
     margin-top: 2vh;
     border-radius: 15px;
-    
+    border-top: solid 1px blue;
+    border-left: solid 1px blue;
+    border-bottom: solid 2px green;
+    border-right: solid 2px green;
 }
 
 header nav {
@@ -487,6 +490,7 @@ table {
 .tab {
     display: none;
 }
+
 .active-tab {
     display: flex;
     flex-direction: column;
@@ -497,6 +501,10 @@ table {
     flex-direction: row;
     margin-bottom: 40px;
     justify-content: space-around;
+}
+
+#tab1 {
+    flex-direction: row;
 }
 
 .tab-link {
@@ -519,11 +527,7 @@ table {
     flex-direction: column;
     width: 80%;
     margin-top: 20px;
-}
-  
-.sliders_control {
     position: relative;
-    min-height: 20px;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -571,16 +575,10 @@ input[type=number]::-webkit-outer-spin-button {
 input[type="range"] {
     -webkit-appearance: none; 
     appearance: none;
-    height: 2px;
+    height: 3px;
     width: 100%;
-    position: absolute;
     background-color: #C6C6C6;
     pointer-events: none;
-}
-  
-#fromSlider {
-    height: 0;
-    z-index: 1;
 }
 
 #tab1 {
@@ -605,8 +603,8 @@ input[type="range"] {
     width: 45%;
     height: auto;
     align-items: center;
-    padding: 5px 10px;
-    position: relative;
+    text-align: center;
+    padding: 5px;
 }
 
 .listStats {
@@ -627,16 +625,28 @@ input[type="range"] {
 }
 
 .boutonsRecherche {
-    width: 50%;
+    width: 100%;
     margin-top: 10%;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     align-items: center;
 }
 
-.boutonsRecherche div {
-    width: 300px;
-    border: 1px solid grey;
+.boutonsRecherche button {
+    padding: 10px;
+    color: red;
+}
+
+.sliders_control {
+    min-height: 20px;
+    position: relative;
+}
+
+#fromSlider {
+    height: 0;
+    z-index: 1;
+    position: absolute;
 }
 
 /*-------------------------------------------------------------------

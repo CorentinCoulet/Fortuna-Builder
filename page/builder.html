@@ -10,6 +10,8 @@
         <script src="../js/SearchMenuItem.js"></script>
         <script src="../js/searchBarSublis.js" type="module"></script>
         <script src="../js/aptitudes.js" type="module"></script>
+        <script src="../requetes/api.js" type="module"></script>
+        <script src="../requetes/proxy.js" type="module"></script>
         <title>Fortuna - Builder</title>
         <link rel="icon" href="../public/fortuna_whiteicon.png" type="image"> 
 	</head>
@@ -407,17 +409,17 @@
                         <!-- <a class="tab-link" onclick="showTab('tab6')">Apparence</a> -->
                     </div>
                     <div id="tab1" class="tab active-tab"> <!-- Recherche -->
-                        <div class="searchListItems"></div>
+                        <div class="searchListItems">
+                        </div>
                         <div class="filters">
                             <label for="searchItem" class="majuscules">Nom de l'item</label>
                             <input id="searchItem">
                             <!-- changer input pour faire un simple texte avec du js ? -->
-                            <!-- <div class="lvlBarRecherche">Niveau 
+                            <div class="lvlBarRecherche">Niveau 
                                 (<input type="number" id="fromInput" value="10" min="1" max="230"/>
                                 -
                                 <input type="number" id="toInput" value="40" min="1" max="230"/>)
-                            </div> -->
-                            <div class="lvlBarRecherche majuscules">Niveau (0 - 230)</div>
+                            </div>
                             <div class="range_container">
                                 <div class="sliders_control">
                                     <input id="fromSlider" type="range" value="10" min="1" max="230"/>
@@ -516,8 +518,8 @@
                                     </ul>
                                 </div>
                                 <div class="boutonsRecherche">
-                                    <div class="majuscules">Vider les filtres</div>
-                                    <div class="majuscules">Rechercher</div>
+                                    <button class="majuscules">Vider les filtres</button>
+                                    <button class="majuscules">Rechercher</button>
                                 </div>
                             </div>
                         </div>

@@ -12,6 +12,22 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
-    "i18n-js": "^4.3.2"
-  }
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6",
+    "i18n-js": "^4.3.2",
+    "ts-node": "^10.9.1"
+  },
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CorentinCoulet/Fortuna-Builder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CorentinCoulet/Fortuna-Builder/issues"
+  },
+  "homepage": "https://github.com/CorentinCoulet/Fortuna-Builder#readme",
+  "description": ""
 }
