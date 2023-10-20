@@ -207,7 +207,7 @@ header nav ul:first-child a {
 	justify-content: space-evenly;
 }
 
-.sect2 > div {
+.sect2 > div:nth-child(1) {
     display: flex;
     flex-direction: row;
 }
@@ -278,6 +278,8 @@ header nav ul:first-child a {
 .prioElem {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding-top: 5px;
 }
 
 .prioElem img {
@@ -285,11 +287,15 @@ header nav ul:first-child a {
     height: 28px;
 }
 
-.prioElemAA, .prioElemAA {
-    display: flex;
-    flex-direction: row;
+.prioElem div {
+    padding-right: 10px;
 }
 
+.prioElemAA {
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
+}
 
 /*-------------------------------------------------------------------
 ----															 ----
