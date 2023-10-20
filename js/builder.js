@@ -13,7 +13,6 @@ document.querySelector(".slider-container1").addEventListener("click", function(
     document.querySelector(".slider-container1 ").classList.toggle("active");
 });
 
-
 document.querySelector(".slider-container2").addEventListener("click", function() {
     if (sliderN.style.left === "0px" || sliderN.style.left === "") {
         sliderN.style.left = "80%";
@@ -22,7 +21,6 @@ document.querySelector(".slider-container2").addEventListener("click", function(
     }
     document.querySelector(".slider-container2 ").classList.toggle("active");
 });
-
 
 function editElement(element) {
     const inputElement = element.querySelector('.inputHp');

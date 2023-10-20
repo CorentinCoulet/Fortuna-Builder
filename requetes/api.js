@@ -1,6 +1,11 @@
-// const baseUrl = 'https://wakfu.cdn.ankama.com/gamedata';
-const baseUrl = 'http://localhost:3000/api';
-const versionUrl = `${baseUrl}/config.json`;
+const baseUrl = 'https://wakfu.cdn.ankama.com/gamedata';
+const versionUrl = `config.json`;
+const listItems = document.querySelector(".searchListItems");
+let versionWakfu;
+
+listItems.addEventListener('DOMContentLoader', () => {
+    fetch()
+});
 
 // fetch(versionUrl)
 //   .then(response => response.json())

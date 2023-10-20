@@ -49,354 +49,356 @@
             </nav>
         </header>
         <main>
-            <div class="statsGlobales">
-                <div>
-                    <section class="sect1">
-                        <div>
-                            <img src="../public/cratteWakfu.jpg" alt="image d'une cratte" width="200px" height="200px">
-                        </div>
-                    </section>
-                    <section class="sect2">
-                        <div>
-                            <form action="traitement.php" method="post">
+            <div>
+                <div class="statsGlobales adaptationScreen">
+                    <div>
+                        <section class="sect1">
+                            <div>
+                                <img src="../public/cratteWakfu.jpg" alt="image d'une cratte" width="200px" height="200px">
+                            </div>
+                        </section>
+                        <section class="sect2">
+                            <div>
+                                <form>
 
-                                <label for="nom" id="buildName">Nom du Build : </label>
-                                <input type="text" name="nom" id="nom" value="Cratte 200">
+                                    <label for="nom" id="buildName">Nom du Build : </label>
+                                    <input type="text" name="nom" id="nom" value="Cratte 200">
 
-                                <label for="lvl" id="lvlLang">Niveau : </label>
-                                <input type="number" name="lvl" id="lvl" value="200" min="1" max="230">
-                            </form>
-                            <div class="bonusGN">
-                                <div class="slider-container1">
-                                    <p class="guild-text" id="guild">Guilde</p>
-                                    <div id="sliderG" class="sliderG"></div>
-                                </div>
-                                <div class="slider-container2">
-                                    <p class="nation-text" id="nation">Nation</p>
-                                    <div id="sliderN" class="sliderN"></div>
+                                    <label for="lvl" id="lvlLang">Niveau : </label>
+                                    <input type="number" name="lvl" id="lvl" value="200" min="1" max="230">
+                                </form>
+                                <div class="bonusGN">
+                                    <div class="slider-container1">
+                                        <p class="guild-text" id="guild">Guilde</p>
+                                        <div id="sliderG" class="sliderG"></div>
+                                    </div>
+                                    <div class="slider-container2">
+                                        <p class="nation-text" id="nation">Nation</p>
+                                        <div id="sliderN" class="sliderN"></div>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="prioElem">
+                                <div class="prioElemAA">
+                                    <div>
+                                        <img src="../public/animations/arrow-rotate.svg" alt="">
+                                    </div>
+                                    <div>
+                                        <img src="../public/selectElem/fire.png" alt="feu">
+                                        <img src="../public/selectElem/water.png" alt="eau">
+                                        <img src="../public/selectElem/earth.png" alt="terre">
+                                        <img src="../public/selectElem/wind.png" alt="air">
+                                    </div>
+                                </div>
+                                <div class="prioElemAA">
+                                    <div>
+                                        <img src="../public/animations/arrow-rotate.svg" alt="">
+                                    </div>
+                                    <div>
+                                        <img src="../public/selectElem/fire.png" alt="feu">
+                                        <img src="../public/selectElem/water.png" alt="eau">
+                                        <img src="../public/selectElem/earth.png" alt="terre">
+                                        <img src="../public/selectElem/wind.png" alt="air">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <section class="sect3">
+                        <div class="abilities">
+                            <div>
+                                <div class="sectionAbility">
+                                    <div>
+                                        <img src="../public/capacites/hp.webp">
+                                        <p id="hp">PdV</p>
+                                    </div>   
+                                    <div class="editable-element-hp" onclick="editElement(this)">
+                                        <span class="valueHp" id="valueHp">70</span>
+                                        <input class="inputHp" type="number">
+                                    </div>
+                                </div>  
+                                <div class="sectionAbility">
+                                    <div>
+                                        <img src="../public/capacites/pa.webp">
+                                        <p id="ap">PA</p>
+                                    </div>
+                                    <div>
+                                        <p>6</p>
+                                    </div>
+                                </div>
+                                <div class="sectionAbility">
+                                    <div>
+                                        <img src="../public/capacites/pw.webp">
+                                        <p id="wp">PW</p>
+                                    </div>
+                                    <div>
+                                        <p>6</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="sectionAbility">
+                                    <div>
+                                        <img src="../public/capacites/armor.webp">
+                                        <p id="armor">Armure</p>
+                                    </div>
+                                    <div>
+                                        <p>0</p>
+                                    </div>
+                                </div> 
+                                <div class="sectionAbility">
+                                    <div>
+                                        <img src="../public/capacites/pm.webp">
+                                        <p id="mp">PM</p>
+                                    </div>
+                                    <div>
+                                        <p>3</p>
+                                    </div>
+                                </div>
+                            </div>  
                         </div>
-                        <div class="prioElem">
-                            <div class="prioElemAA">
-                                <div>
-                                    <img src="../public/animations/arrow-rotate.svg" alt="">
+                        <div class="elements">
+                            <div>
+                                <div class="elementsAd">
+                                    <div>
+                                        <img src="../public/elements/water.png">
+                                        <p> &ensp;0&ensp;</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/elements/aqua_resistance.webp">
+                                        <div>
+                                            <p>0%&ensp;</p>
+                                            <p>(0)&ensp;</p>   
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="elementsAd">
+                                    <div>
+                                        <img src="../public/elements/wind.png">
+                                        <p> &ensp;0&ensp;</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/elements/wind_resistance.webp">
+                                        <div>
+                                            <p>0%&ensp;</p>
+                                            <p>(0)&ensp;</p>   
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <img src="../public/selectElem/fire.png" alt="feu">
-                                    <img src="../public/selectElem/water.png" alt="eau">
-                                    <img src="../public/selectElem/earth.png" alt="terre">
-                                    <img src="../public/selectElem/wind.png" alt="air">
+                                <div class="armorR">
+                                    <div class="receivedA">
+                                        <img src="../public/elements/received_armor.webp">
+                                        <p id="armorReceived"> &ensp;Armure reçue</p>
+                                    </div>
+                                    <p>0&ensp;</p>
                                 </div>
                             </div>
-                            <div class="prioElemAA">
-                                <div>
-                                    <img src="../public/animations/arrow-rotate.svg" alt="">
+                            <div>
+                                <div class="elementsAd">
+                                    <div>
+                                        <img src="../public/elements/earth.png">
+                                        <p> &ensp;0&ensp;</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/elements/earth_resistance.webp">
+                                        <div>
+                                            <p>0%&ensp;</p>
+                                            <p>(0)&ensp;</p>   
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <img src="../public/selectElem/fire.png" alt="feu">
-                                    <img src="../public/selectElem/water.png" alt="eau">
-                                    <img src="../public/selectElem/earth.png" alt="terre">
-                                    <img src="../public/selectElem/wind.png" alt="air">
+                                <div class="elementsAd">
+                                    <div>
+                                        <img src="../public/elements/fire.png">
+                                        <p> &ensp;0&ensp;</p>
+                                    </div>
+                                    <div>
+                                        <img src="../public/elements/fire_resistance.webp">
+                                        <div>
+                                            <p>0%&ensp;</p>
+                                            <p>(0)&ensp;</p>   
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="armorG">
+                                    <div class="givenA">
+                                        <img src="../public/elements/given_armor.webp">
+                                        <p id="armorGiven"> &ensp;Armure donnée</p>
+                                    </div>
+                                    <p>0&ensp;</p>   
+                                </div>
+                            </div>                       
+                        </div>
+                        <div class="masteryPrimal">
+                            <div>
+                                <div class="statsP">
+                                    <div>
+                                        <img src="../public/maitrises/damage_dealt.png">
+                                        <p id="damageDealt"> &ensp;% Domm. inf.</p>
+                                    </div>
+                                    <p>8&ensp;</p>
+                                </div>
+                                <div class="statsP">
+                                    <div>
+                                        <img src="../public/maitrises/ch.png">
+                                        <p id="critical"> &ensp;% Coup Crit.</p>
+                                    </div>    
+                                    <p>30&ensp;</p>
+                                </div>
+                                <div class="statsP">
+                                    <div>
+                                        <img src="../public/maitrises/initiative.png">
+                                        <p id="initiative">&ensp;Initiative</p>
+                                    </div>    
+                                    <p>8&ensp;</p>
+                                </div>
+                                <div class="statsP">
+                                    <div>
+                                        <img src="../public/maitrises/dodge.png">
+                                        <p id="dodge">&ensp;Esquive</p>
+                                    </div> 
+                                    <p>0&ensp;</p>   
+                                </div>
+                                <div class="statsP">
+                                    <div>
+                                        <img src="../public/maitrises/wisdom.png">
+                                        <p id="wisdom">&ensp;Sagesse</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                                <div class="statsP">
+                                    <div>
+                                        <img src="../public/maitrises/control.png">
+                                        <p id="control">&ensp;Contrôle</p>
+                                    </div>  
+                                    <p>0&ensp;</p>  
                                 </div>
                             </div>
+                            <div>
+                                <div class="statsP">
+                                    <div>
+                                        <img src="../public/maitrises/heals.png">
+                                        <p id="heals">&ensp;% Soins réal.</p>
+                                    </div>
+                                    <p>8&ensp;</p>
+                                </div>
+                                <div class="statsP">
+                                    <div>
+                                        <img src="../public/maitrises/block.png">
+                                        <p id="block">&ensp;% Parade</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                                <div class="statsP">
+                                    <div>
+                                        <img src="../public/maitrises/range.png">
+                                        <p id="range">&ensp;Portée</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                                <div class="statsP">
+                                    <div>
+                                        <img src="../public/maitrises/lock.png">
+                                        <p id="lock">&ensp;Tacle</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                                <div class="statsP">
+                                    <div>
+                                        <img src="../public/maitrises/prospecting.png">
+                                        <p id="prospecting">&ensp;Prospection</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                                <div class="statsP">
+                                    <div>
+                                        <img src="../public/maitrises/will.webp">
+                                        <p id="will">&ensp;Volonté</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                            </div>             
+                        </div>
+                        <div class="masterySecondary">
+                            <div>
+                                <div class="statsS">
+                                    <div>
+                                        <img src="../public/maitrises/crit_mastery.png">
+                                        <p id="critMastery">&ensp;Maîtrise Critique</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                                <div class="statsS">
+                                    <div>
+                                        <img src="../public/maitrises/rear_mastery.png">
+                                        <p id="rearMastery">&ensp;Maîtrise Dos</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                                <div class="statsS">
+                                    <div>
+                                        <img src="../public/maitrises/melee_mastery.png">
+                                        <p id="meleeMastery">&ensp;Maîtrise Mêlée</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                                <div class="statsS">
+                                    <div>
+                                        <img src="../public/maitrises/heals.png">
+                                        <p id="healMastery">&ensp;Maîtrise Soin</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="statsS">
+                                    <div>
+                                        <img src="../public/maitrises/crit_resist.png">
+                                        <p id="critResist">&ensp;Résistance Critique</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                                <div class="statsS">
+                                    <div>
+                                        <img src="../public/maitrises/rear_resist.png">
+                                        <p id="rearResist">&ensp;Résistance Dos</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                                <div class="statsS">
+                                    <div>
+                                        <img src="../public/maitrises/distance_mastery.png">
+                                        <p id="distanceMastery">&ensp;Maîtrise Distance</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                                <div class="statsS">
+                                    <div>
+                                        <img src="../public/maitrises/berserk_mastery.png">
+                                        <p id="berserkMastery">&ensp;Maîtrise Berserk</p>
+                                    </div>
+                                    <p>0&ensp;</p>
+                                </div>
+                            </div>                   
                         </div>
                     </section>
                 </div>
-                <section class="sect3">
-                    <div class="abilities">
-                        <div>
-                            <div class="sectionAbility">
-                                <div>
-                                    <img src="../public/capacites/hp.webp">
-                                    <p id="hp">PdV</p>
-                                </div>   
-                                <div class="editable-element-hp" onclick="editElement(this)">
-                                    <span class="valueHp" id="valueHp">70</span>
-                                    <input class="inputHp" type="number">
-                                </div>
-                            </div>  
-                            <div class="sectionAbility">
-                                <div>
-                                    <img src="../public/capacites/pa.webp">
-                                    <p id="ap">PA</p>
-                                </div>
-                                <div>
-                                    <p>6</p>
-                                </div>
-                            </div>
-                            <div class="sectionAbility">
-                                <div>
-                                    <img src="../public/capacites/pw.webp">
-                                    <p id="wp">PW</p>
-                                </div>
-                                <div>
-                                    <p>6</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="sectionAbility">
-                                <div>
-                                    <img src="../public/capacites/armor.webp">
-                                    <p id="armor">Armure</p>
-                                </div>
-                                <div>
-                                    <p>0</p>
-                                </div>
-                            </div> 
-                            <div class="sectionAbility">
-                                <div>
-                                    <img src="../public/capacites/pm.webp">
-                                    <p id="mp">PM</p>
-                                </div>
-                                <div>
-                                    <p>3</p>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="elements">
-                        <div>
-                            <div class="elementsAd">
-                                <div>
-                                    <img src="../public/elements/water.png">
-                                    <p> &ensp;0&ensp;</p>
-                                </div>
-                                <div>
-                                    <img src="../public/elements/aqua_resistance.webp">
-                                    <div>
-                                        <p>0%&ensp;</p>
-                                        <p>(0)&ensp;</p>   
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="elementsAd">
-                                <div>
-                                    <img src="../public/elements/wind.png">
-                                    <p> &ensp;0&ensp;</p>
-                                </div>
-                                <div>
-                                    <img src="../public/elements/wind_resistance.webp">
-                                    <div>
-                                        <p>0%&ensp;</p>
-                                        <p>(0)&ensp;</p>   
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="armorR">
-                                <div class="receivedA">
-                                    <img src="../public/elements/received_armor.webp">
-                                    <p id="armorReceived"> &ensp;Armure reçue</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="elementsAd">
-                                <div>
-                                    <img src="../public/elements/earth.png">
-                                    <p> &ensp;0&ensp;</p>
-                                </div>
-                                <div>
-                                    <img src="../public/elements/earth_resistance.webp">
-                                    <div>
-                                        <p>0%&ensp;</p>
-                                        <p>(0)&ensp;</p>   
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="elementsAd">
-                                <div>
-                                    <img src="../public/elements/fire.png">
-                                    <p> &ensp;0&ensp;</p>
-                                </div>
-                                <div>
-                                    <img src="../public/elements/fire_resistance.webp">
-                                    <div>
-                                        <p>0%&ensp;</p>
-                                        <p>(0)&ensp;</p>   
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="armorG">
-                                <div class="givenA">
-                                    <img src="../public/elements/given_armor.webp">
-                                    <p id="armorGiven"> &ensp;Armure donnée</p>
-                                </div>
-                                <p>0&ensp;</p>   
-                            </div>
-                        </div>                       
-                    </div>
-                    <div class="masteryPrimal">
-                        <div>
-                            <div class="statsP">
-                                <div>
-                                    <img src="../public/maitrises/damage_dealt.png">
-                                    <p id="damageDealt"> &ensp;% Domm. inf.</p>
-                                </div>
-                                <p>8&ensp;</p>
-                            </div>
-                            <div class="statsP">
-                                <div>
-                                    <img src="../public/maitrises/ch.png">
-                                    <p id="critical"> &ensp;% Coup Crit.</p>
-                                </div>    
-                                <p>30&ensp;</p>
-                            </div>
-                            <div class="statsP">
-                                <div>
-                                    <img src="../public/maitrises/initiative.png">
-                                    <p id="initiative">&ensp;Initiative</p>
-                                </div>    
-                                <p>8&ensp;</p>
-                            </div>
-                            <div class="statsP">
-                                <div>
-                                    <img src="../public/maitrises/dodge.png">
-                                    <p id="dodge">&ensp;Esquive</p>
-                                </div> 
-                                <p>0&ensp;</p>   
-                            </div>
-                            <div class="statsP">
-                                <div>
-                                    <img src="../public/maitrises/wisdom.png">
-                                    <p id="wisdom">&ensp;Sagesse</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                            <div class="statsP">
-                                <div>
-                                    <img src="../public/maitrises/control.png">
-                                    <p id="control">&ensp;Contrôle</p>
-                                </div>  
-                                <p>0&ensp;</p>  
-                            </div>
-                        </div>
-                        <div>
-                            <div class="statsP">
-                                <div>
-                                    <img src="../public/maitrises/heals.png">
-                                    <p id="heals">&ensp;% Soins réal.</p>
-                                </div>
-                                <p>8&ensp;</p>
-                            </div>
-                            <div class="statsP">
-                                <div>
-                                    <img src="../public/maitrises/block.png">
-                                    <p id="block">&ensp;% Parade</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                            <div class="statsP">
-                                <div>
-                                    <img src="../public/maitrises/range.png">
-                                    <p id="range">&ensp;Portée</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                            <div class="statsP">
-                                <div>
-                                    <img src="../public/maitrises/lock.png">
-                                    <p id="lock">&ensp;Tacle</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                            <div class="statsP">
-                                <div>
-                                    <img src="../public/maitrises/prospecting.png">
-                                    <p id="prospecting">&ensp;Prospection</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                            <div class="statsP">
-                                <div>
-                                    <img src="../public/maitrises/will.webp">
-                                    <p id="will">&ensp;Volonté</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                        </div>             
-                    </div>
-                    <div class="masterySecondary">
-                        <div>
-                            <div class="statsS">
-                                <div>
-                                    <img src="../public/maitrises/crit_mastery.png">
-                                    <p id="critMastery">&ensp;Maîtrise Critique</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                            <div class="statsS">
-                                <div>
-                                    <img src="../public/maitrises/rear_mastery.png">
-                                    <p id="rearMastery">&ensp;Maîtrise Dos</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                            <div class="statsS">
-                                <div>
-                                    <img src="../public/maitrises/melee_mastery.png">
-                                    <p id="meleeMastery">&ensp;Maîtrise Mêlée</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                            <div class="statsS">
-                                <div>
-                                    <img src="../public/maitrises/heals.png">
-                                    <p id="healMastery">&ensp;Maîtrise Soin</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="statsS">
-                                <div>
-                                    <img src="../public/maitrises/crit_resist.png">
-                                    <p id="critResist">&ensp;Résistance Critique</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                            <div class="statsS">
-                                <div>
-                                    <img src="../public/maitrises/rear_resist.png">
-                                    <p id="rearResist">&ensp;Résistance Dos</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                            <div class="statsS">
-                                <div>
-                                    <img src="../public/maitrises/distance_mastery.png">
-                                    <p id="distanceMastery">&ensp;Maîtrise Distance</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                            <div class="statsS">
-                                <div>
-                                    <img src="../public/maitrises/berserk_mastery.png">
-                                    <p id="berserkMastery">&ensp;Maîtrise Berserk</p>
-                                </div>
-                                <p>0&ensp;</p>
-                            </div>
-                        </div>                   
-                    </div>
-                </section>
-            </div>
-            <div class="barreEquipement">
-                <div><img src="../public/equipements/headgear.png" alt="casque"></div>
-                <div><img src="../public/equipements/amulet.png" alt="amulette"></div>
-                <div><img src="../public/equipements/cape.png" alt="cape"></div>
-                <div><img src="../public/equipements/epaulettes.png" alt="epaulettes"></div>
-                <div><img src="../public/equipements/breastplate.png" alt="plastron"></div>
-                <div><img src="../public/equipements/belt.png" alt="ceinture"></div>
-                <div><img src="../public/equipements/left_ring.png" alt="anneau gauche"></div>
-                <div><img src="../public/equipements/right_ring.png" alt="anneau droit"></div> 
-                <div><img src="../public/equipements/boots.png" alt="bottes"></div>
-                <div><img src="../public/equipements/right_hand.png" alt="casque"></div>
-                <div><img src="../public/equipements/left_hand.png" alt="casque"></div>
-                <div><img src="../public/equipements/emblem.png" alt="embleme"></div>
-                <div><img src="../public/equipements/pet.png" alt="casque"></div>
-                <div><img src="../public/equipements/pet.png" alt="casque"></div>
+                <div class="barreEquipement adaptationScreen">
+                    <div><img src="../public/equipements/headgear.png" alt="casque"></div>
+                    <div><img src="../public/equipements/amulet.png" alt="amulette"></div>
+                    <div><img src="../public/equipements/cape.png" alt="cape"></div>
+                    <div><img src="../public/equipements/epaulettes.png" alt="epaulettes"></div>
+                    <div><img src="../public/equipements/breastplate.png" alt="plastron"></div>
+                    <div><img src="../public/equipements/belt.png" alt="ceinture"></div>
+                    <div><img src="../public/equipements/left_ring.png" alt="anneau gauche"></div>
+                    <div><img src="../public/equipements/right_ring.png" alt="anneau droit"></div> 
+                    <div><img src="../public/equipements/boots.png" alt="bottes"></div>
+                    <div><img src="../public/equipements/right_hand.png" alt="casque"></div>
+                    <div><img src="../public/equipements/left_hand.png" alt="casque"></div>
+                    <div><img src="../public/equipements/emblem.png" alt="embleme"></div>
+                    <div><img src="../public/equipements/pet.png" alt="casque"></div>
+                    <div><img src="../public/equipements/pet.png" alt="casque"></div>
+                </div>
             </div>
             <div> 
                 <section class="sect5">
