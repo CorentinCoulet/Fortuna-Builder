@@ -10,8 +10,7 @@
         <script src="../js/SearchMenuItem.js"></script>
         <script src="../js/searchBarSublis.js" type="module"></script>
         <script src="../js/aptitudes.js" type="module"></script>
-        <script src="../requetes/api.js" type="module"></script>
-        <script src="../requetes/proxy.js" type="module"></script>
+        <script src="../js/gnPrio.js" type="module"></script>
         <title>Fortuna - Builder</title>
         <link rel="icon" href="../public/fortuna_whiteicon.png" type="image"> 
 	</head>
@@ -70,10 +69,10 @@
                                 <div class="bonusGN">
                                     <div class="slider-container1">
                                         <p class="guild-text" id="guild">Guilde</p>
-                                        <div id="sliderG" class="sliderG"></div>
+                                        <div type="range" id="sliderG" class="sliderG"></div>
                                     </div>
                                     <div class="slider-container2">
-                                        <p class="nation-text" id="nation">Nation</p>
+                                        <p class="nation-text" id="nation">HM</p>
                                         <div id="sliderN" class="sliderN"></div>
                                     </div>
                                 </div>
@@ -81,18 +80,19 @@
                             <div class="prioElem">
                                 <div class="prioElemAA">
                                     <div>
-                                        <img src="../public/animations/arrow-rotate.svg" alt="">
+                                        <img src="../public/elements/h-mastery.png" alt="épée">
                                     </div>
                                     <div>
-                                        <img src="../public/selectElem/fire.png" alt="feu">
-                                        <img src="../public/selectElem/water.png" alt="eau">
-                                        <img src="../public/selectElem/earth.png" alt="terre">
-                                        <img src="../public/selectElem/wind.png" alt="air">
+                                        <img src="../public/selectElem/fire.png" alt="feu" draggable="true" ondragstart="dragStart(event)">
+                                        <img src="../public/selectElem/water.png" alt="eau" draggable="true" ondragstart="dragStart(event)">
+                                        <img src="../public/selectElem/earth.png" alt="terre" draggable="true" ondragstart="dragStart(event)">
+                                        <img src="../public/selectElem/wind.png" alt="air" draggable="true" ondragstart="dragStart(event)">
                                     </div>
+                                    <div class="dropContainer" ondrop="dropElement(event)" ondragover="allowDrop(event)"></div>
                                 </div>
                                 <div class="prioElemAA">
                                     <div>
-                                        <img src="../public/animations/arrow-rotate.svg" alt="">
+                                        <img src="../public/elements/h-resistance.png" alt="bouclier">
                                     </div>
                                     <div>
                                         <img src="../public/selectElem/fire.png" alt="feu">
@@ -112,8 +112,8 @@
                                         <img src="../public/capacites/hp.webp">
                                         <p id="hp">PdV</p>
                                     </div>   
-                                    <div class="editable-element-hp" onclick="editElement(this)">
-                                        <span class="valueHp" id="valueHp">70</span>
+                                    <div class="editable-element-hp" onclick="increaseHp()">
+                                        <span class="valueHp" id="valueHp">0</span>
                                         <input class="inputHp" type="number">
                                     </div>
                                 </div>  
@@ -167,8 +167,8 @@
                                     <div>
                                         <img src="../public/elements/aqua_resistance.webp">
                                         <div>
-                                            <p>0%&ensp;</p>
-                                            <p>(0)&ensp;</p>   
+                                            <p class="resEauPercent">0%&ensp;</p>
+                                            <p>(<span class="resEau">0</span>)&ensp;</p>   
                                         </div>
                                     </div>
                                 </div> 
@@ -180,8 +180,8 @@
                                     <div>
                                         <img src="../public/elements/wind_resistance.webp">
                                         <div>
-                                            <p>0%&ensp;</p>
-                                            <p>(0)&ensp;</p>   
+                                            <p class="resAirPercent">0%&ensp;</p>
+                                            <p>(<span class="resAir">0</span>)&ensp;</p>   
                                         </div>
                                     </div>
                                 </div>
@@ -202,8 +202,8 @@
                                     <div>
                                         <img src="../public/elements/earth_resistance.webp">
                                         <div>
-                                            <p>0%&ensp;</p>
-                                            <p>(0)&ensp;</p>   
+                                            <p class="resTerrePercent">0%&ensp;</p>
+                                            <p>(<span class="resTerre">0</span>)&ensp;</p>   
                                         </div>
                                     </div>
                                 </div>
@@ -215,8 +215,8 @@
                                     <div>
                                         <img src="../public/elements/fire_resistance.webp">
                                         <div>
-                                            <p>0%&ensp;</p>
-                                            <p>(0)&ensp;</p>   
+                                            <p class="resFeuPercent">0%&ensp;</p>
+                                            <p>(<span class="resFeu">0</span>)&ensp;</p>   
                                         </div>
                                     </div>
                                 </div>
@@ -236,35 +236,35 @@
                                         <img src="../public/maitrises/damage_dealt.png">
                                         <p id="damageDealt"> &ensp;% Domm. inf.</p>
                                     </div>
-                                    <p>8&ensp;</p>
+                                    <p><span class="damagePercent">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/ch.png">
                                         <p id="critical"> &ensp;% Coup Crit.</p>
                                     </div>    
-                                    <p>30&ensp;</p>
+                                    <p>0&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/initiative.png">
                                         <p id="initiative">&ensp;Initiative</p>
                                     </div>    
-                                    <p>8&ensp;</p>
+                                    <p><span class="initiativeValue">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/dodge.png">
                                         <p id="dodge">&ensp;Esquive</p>
                                     </div> 
-                                    <p>0&ensp;</p>   
+                                    <p><span class="dodgeValue">0</span>&ensp;</p>   
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/wisdom.png">
                                         <p id="wisdom">&ensp;Sagesse</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span class="wisdomValue">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
@@ -280,7 +280,7 @@
                                         <img src="../public/maitrises/heals.png">
                                         <p id="heals">&ensp;% Soins réal.</p>
                                     </div>
-                                    <p>8&ensp;</p>
+                                    <p><span class="healsPercent">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
@@ -301,14 +301,14 @@
                                         <img src="../public/maitrises/lock.png">
                                         <p id="lock">&ensp;Tacle</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span class="lockValue">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/prospecting.png">
                                         <p id="prospecting">&ensp;Prospection</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span class="prospectingValue">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
@@ -543,27 +543,85 @@
                                        <div><img src="../public/aptitudes/apt_hp.webp" alt="icon points de vie"></div>
                                         <div>% Points de vie</div> 
                                     </div>
-                                    <div></div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/∞"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_reselem.webp" alt="icon résistances élémentaires"></div>
-                                    <div>Résistance élémentaire</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_reselem.webp" alt="icon résistances élémentaires"></div>
+                                        <div>Résistance élémentaire</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/10"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_bareer.webp" alt="icon barrière"></div>
-                                    <div>Barrière</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_bareer.webp" alt="icon barrière"></div>
+                                        <div>Barrière</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/10"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_healthreceived.webp" alt="icon soins reçus"></div>
-                                    <div>% Soins reçus</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_healthreceived.webp" alt="icon soins reçus"></div>
+                                        <div>% Soins reçus</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/5"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_hpasarmor.webp" alt="icon pdv en armure"></div>
-                                    <div>% PdV en armure</div>
-                                    <div></div>  
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_hpasarmor.webp" alt="icon pdv en armure"></div>
+                                        <div>% PdV en armure</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/10"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>  
                                 </div>
                             </div>
                             <div class="item">
@@ -581,22 +639,68 @@
                                        <div><img src="../public/aptitudes/apt_elemmastery.webp" alt="icon maitrise élémentaire"></div>
                                         <div>Maîtrise Elémentaire</div> 
                                     </div>
-                                    <div></div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/∞"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_masterymelee.webp" alt="icon maitrise mêlée"></div>
-                                    <div>Maîtrise Mêlée</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_masterymelee.webp" alt="icon maitrise mêlée"></div>
+                                        <div>Maîtrise Mêlée</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/40"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_masteryrange.webp" alt="icon maitrise distance"></div>
-                                    <div>Maîtrise Distance</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_masteryrange.webp" alt="icon maitrise distance"></div>
+                                        <div>Maîtrise Distance</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/40"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_rawhp.webp" alt="icon points de vie"></div>
-                                    <div>Points de Vie</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_rawhp.webp" alt="icon points de vie"></div>
+                                        <div>Points de Vie</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/∞"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="item">
@@ -614,27 +718,85 @@
                                        <div><img src="../public/aptitudes/apt_tackle.webp" alt="icon tacle"></div>
                                         <div>Tacle</div> 
                                     </div>
-                                    <div></div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/∞"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_dodge.webp" alt="icon esquive"></div>
-                                    <div>Esquive</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_dodge.webp" alt="icon esquive"></div>
+                                        <div>Esquive</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/∞"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_init.webp" alt="icon initiative"></div>
-                                    <div>Initiative</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_init.webp" alt="icon initiative"></div>
+                                        <div>Initiative</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/20"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_tackledodge.webp" alt="icon tacle et esquive"></div>
-                                    <div>Tacle et Esquive</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_tackledodge.webp" alt="icon tacle et esquive"></div>
+                                        <div>Tacle et Esquive</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/∞"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_will.webp" alt="icon volonté"></div>
-                                    <div>Volonté</div>
-                                    <div></div> 
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_will.webp" alt="icon volonté"></div>
+                                        <div>Volonté</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/20"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div> 
                                 </div>
                             </div>
                             <div class="item">
@@ -652,42 +814,136 @@
                                        <div><img src="../public/aptitudes/apt_criticalhit.webp" alt="icon coup critique"></div>
                                         <div>% Coup Critique</div> 
                                     </div>
-                                    <div></div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/20"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_block.webp" alt="icon parade"></div>
-                                    <div>% Parade</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_block.webp" alt="icon parade"></div>
+                                        <div>% Parade</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/20"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_masterycritical.webp" alt="icon maîtrise critique"></div>
-                                    <div>Maîtrise Critique</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_masterycritical.webp" alt="icon maîtrise critique"></div>
+                                        <div>Maîtrise Critique</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/∞"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_rearmastery.webp" alt="icon maîtrise dos"></div>
-                                    <div>Maîtrise Dos</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_rearmastery.webp" alt="icon maîtrise dos"></div>
+                                        <div>Maîtrise Dos</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/∞"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_berserkmastery.webp" alt="icon maîtrise berserk"></div>
-                                    <div>Maîtrise Berserk</div>
-                                    <div></div> 
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_berserkmastery.webp" alt="icon maîtrise berserk"></div>
+                                        <div>Maîtrise Berserk</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/∞"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div> 
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_masteryhealth.webp" alt="icon maîtrise soin"></div>
-                                    <div>Maîtrise Soin</div>
-                                    <div></div> 
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_masteryhealth.webp" alt="icon maîtrise soin"></div>
+                                        <div>Maîtrise Soin</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/∞"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div> 
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_rearresist.webp" alt="icon résistance dos"></div>
-                                    <div>Résistance Dos</div>
-                                    <div></div> 
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_rearresist.webp" alt="icon résistance dos"></div>
+                                        <div>Résistance Dos</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/20"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div> 
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_resistcritical.webp" alt="icon résistance critique"></div>
-                                    <div>Résistance Critique</div>
-                                    <div></div> 
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_resistcritical.webp" alt="icon résistance critique"></div>
+                                        <div>Résistance Critique</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/20"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div> 
                                 </div>
                             </div>
                             <div class="item">
@@ -705,37 +961,119 @@
                                        <div><img src="../public/aptitudes/apt_pa.webp" alt="icon point d'action"></div>
                                         <div>Point d'Action</div> 
                                     </div>
-                                    <div></div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/1"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_pm.webp" alt="icon point de mouvement"></div>
-                                    <div>Point de Mouvement + Maîtrises</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_pm.webp" alt="icon point de mouvement"></div>
+                                        <div>Point de Mouvement + Maîtrises</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/1"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_range.webp" alt="icon portée"></div>
-                                    <div>Portée + Maîtrises</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_range.webp" alt="icon portée"></div>
+                                        <div>Portée + Maîtrises</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/1"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_wakfupoint.webp" alt="icon point de wakfu"></div>
-                                    <div>Point de Wakfu</div>
-                                    <div></div>
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_wakfupoint.webp" alt="icon point de wakfu"></div>
+                                        <div>Point de Wakfu</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/1"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_control.webp" alt="icon contrôle"></div>
-                                    <div>Contrôle + Maîtrises</div>
-                                    <div></div> 
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_control.webp" alt="icon contrôle"></div>
+                                        <div>Contrôle + Maîtrises</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/1"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div> 
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_rawdamages.webp" alt="icon % dommage infligé"></div>
-                                    <div>% Dommages Infligés</div>
-                                    <div></div> 
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_rawdamages.webp" alt="icon % dommage infligé"></div>
+                                        <div>% Dommages Infligés</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/1"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div> 
                                 </div>
                                 <div class="content">
-                                    <div><img src="../public/aptitudes/apt_resistanceelem.webp" alt="icon résistance élémentaire"></div>
-                                    <div>Résistance Elémentaire</div>
-                                    <div></div> 
+                                    <div>
+                                        <div><img src="../public/aptitudes/apt_resistanceelem.webp" alt="icon résistance élémentaire"></div>
+                                        <div>Résistance Elémentaire</div>
+                                    </div>
+                                    <div>
+                                        <span class="valueAptitude">
+                                            "0"
+                                            "/1"  
+                                        </span>
+                                        <div class="upAndDown">
+                                            <img src="../public/aptitudes/minus.png" alt="minus">
+                                            <img src="../public/aptitudes/plus.png" alt="plus">
+                                            <img src="../public/aptitudes/zero.png" alt="zero">
+                                        </div>
+                                    </div> 
                                 </div>
                             </div>
                             
