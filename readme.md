@@ -14,4 +14,4 @@ C'est un projet qui me tient à coeur depuis un moment. Avant, par faute de conn
 
 ## Code
 
-Je laisse le code en Open-Source si d'autres fans veulent s'essayer à la création d'un builder, je trouve ça important d'offrir des bases plutôt que de garder inutilement caché un code qui a pour but d'aider la communauté. Ce n'est peut-être pas le code le plus optimisé qu'un développeur, libre à d'autres de faire mieux, mais j'en reste tout de même très fier !
+Je laisse le code en Open-Source si d'autres fans veulent s'essayer à la création d'un builder, je trouve ça important d'offrir des bases plutôt que de garder inutilement caché un code qui a pour but d'aider la communauté. Ce n'est peut-être pas le code le plus optimisé qu'un développeur pourrait réaliser, libre à d'autres de faire mieux, mais j'en reste tout de même très fier !
