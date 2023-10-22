@@ -2,7 +2,7 @@
 
 ## Objectif
 
-Fournir une application web ergonomique et fonctionnel pour pouvoir theorycraft sur les équipements du jeu wakfu.
+Fournir une application web ergonomique et fonctionnelle pour pouvoir theorycraft sur les équipements du jeu wakfu.
 
 ## Description
 
