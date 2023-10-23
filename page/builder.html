@@ -10,7 +10,8 @@
         <script src="../js/SearchMenuItem.js"></script>
         <script src="../js/searchBarSublis.js" type="module"></script>
         <script src="../js/aptitudes.js" type="module"></script>
-        <script src="../js/gnPrio.js" type="module"></script>
+        <script src="../js/gn.js" type="module"></script>
+        <script src="../js/prioElem.js"></script>
         <title>Fortuna - Builder</title>
         <link rel="icon" href="../public/fortuna_whiteicon.png" type="image"> 
 	</head>
@@ -82,23 +83,22 @@
                                     <div>
                                         <img src="../public/elements/h-mastery.png" alt="épée">
                                     </div>
-                                    <div>
-                                        <img src="../public/selectElem/fire.png" alt="feu" draggable="true" ondragstart="dragStart(event)">
-                                        <img src="../public/selectElem/water.png" alt="eau" draggable="true" ondragstart="dragStart(event)">
-                                        <img src="../public/selectElem/earth.png" alt="terre" draggable="true" ondragstart="dragStart(event)">
-                                        <img src="../public/selectElem/wind.png" alt="air" draggable="true" ondragstart="dragStart(event)">
+                                    <div class="dropContainer" ondrop="dropElement(event, 'group1')" ondragover="allowDrop(event)">
+                                        <img src="../public/selectElem/fire.png" alt="feu" class="group1" draggable="true" ondragstart="dragStart(event)" data-div="prioElemAA">
+                                        <img src="../public/selectElem/water.png" alt="eau" class="group1" draggable="true" ondragstart="dragStart(event)" data-div="prioElemAA">
+                                        <img src="../public/selectElem/earth.png" alt="terre" class="group1" draggable="true" ondragstart="dragStart(event)" data-div="prioElemAA">
+                                        <img src="../public/selectElem/wind.png" alt="air" class="group1" draggable="true" ondragstart="dragStart(event)" data-div="prioElemAA">
                                     </div>
-                                    <div class="dropContainer" ondrop="dropElement(event)" ondragover="allowDrop(event)"></div>
                                 </div>
-                                <div class="prioElemAA">
+                                <div class="prioElemBB">
                                     <div>
                                         <img src="../public/elements/h-resistance.png" alt="bouclier">
                                     </div>
-                                    <div>
-                                        <img src="../public/selectElem/fire.png" alt="feu">
-                                        <img src="../public/selectElem/water.png" alt="eau">
-                                        <img src="../public/selectElem/earth.png" alt="terre">
-                                        <img src="../public/selectElem/wind.png" alt="air">
+                                    <div class="dropContainer" ondrop="dropElement(event, 'group2')" ondragover="allowDrop(event)">
+                                        <img src="../public/selectElem/fire.png" alt="feu" class="group2" draggable="true" ondragstart="dragStart(event)" data-div="prioElemBB">
+                                        <img src="../public/selectElem/water.png" alt="eau" class="group2" draggable="true" ondragstart="dragStart(event)" data-div="prioElemBB">
+                                        <img src="../public/selectElem/earth.png" alt="terre" class="group2" draggable="true" ondragstart="dragStart(event)" data-div="prioElemBB">
+                                        <img src="../public/selectElem/wind.png" alt="air" class="group2" draggable="true" ondragstart="dragStart(event)" data-div="prioElemBB">
                                     </div>
                                 </div>
                             </div>

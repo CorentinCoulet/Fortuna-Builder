@@ -212,6 +212,7 @@ header nav ul:first-child a {
 .sect2 > div:nth-child(1) {
     display: flex;
     flex-direction: row;
+    margin-bottom: 10px;
 }
 
 .sect2 form {
@@ -285,18 +286,22 @@ header nav ul:first-child a {
 }
 
 .prioElem img {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
 }
 
 .prioElem div {
     padding-right: 10px;
 }
 
-.prioElemAA {
+.prioElemAA, .prioElemBB {
     display: flex;
     flex-direction: row;
     padding-top: 5px;
+}
+
+.prioElem img {
+    margin-right: 0.1px;
 }
 
 /*-------------------------------------------------------------------

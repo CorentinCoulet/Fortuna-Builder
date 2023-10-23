@@ -144,28 +144,3 @@ function increaseHM(){
 
 document.querySelector(".slider-container1").addEventListener("click", increaseGuilde);
 document.querySelector(".slider-container2").addEventListener("click", increaseHM);
-
-// Fonction de démarrage de glisser-déposer
-function dragStart(event) {
-    event.dataTransfer.setData("text/plain", event.target.alt);
-}
-
-// Fonction pour gérer la fin du glisser-déposer
-function dropElement(event) {
-    event.preventDefault();
-    const elementAlt = event.dataTransfer.getData("text/plain");
-    const dropContainer = event.target;
-
-    // Créez un nouvel élément image dans le conteneur de dépôt
-    const newElement = document.createElement("img");
-    newElement.src = `../public/selectElem/${elementAlt}.png`;
-    newElement.alt = elementAlt;
-
-    // Ajoutez le nouvel élément au conteneur de dépôt
-    dropContainer.appendChild(newElement);
-}
-
-// Empêche le comportement par défaut de l'élément cible
-function allowDrop(event) {
-    event.preventDefault();
-}
