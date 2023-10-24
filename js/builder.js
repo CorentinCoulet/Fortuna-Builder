@@ -22,6 +22,30 @@ document.querySelector(".slider-container2").addEventListener("click", function(
     document.querySelector(".slider-container2 ").classList.toggle("active");
 });
 
+window.editValue = function(element) {
+    const inputElement = document.createElement("input");
+    inputElement.type = "number";
+    inputElement.classList.add("statsGlobalesAjout");
+    inputElement.value = parseInt(element.textContent) || 0;
+    element.textContent = "";
+    element.appendChild(inputElement);
+    inputElement.focus();
+
+    inputElement.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            const newValue = parseInt(inputElement.value) || 0;
+            element.textContent = newValue;
+            inputElement.remove();
+        }
+    });
+
+    inputElement.addEventListener("blur", function() {
+        const newValue = parseInt(inputElement.value) || 0;
+        element.textContent = newValue;
+        inputElement.remove();
+    });
+};
+
 function editElement(element) {
     const inputElement = element.querySelector('.inputHp');
     
@@ -61,18 +85,26 @@ function validateEdit(element, baseValue) {
     valueElement.style.display = 'inline-block';
 }
 
-lvlInput.addEventListener("keyup", function(){
+document.addEventListener("DOMContentLoaded", function () {
+    updateHpValue();
+});
+
+lvlInput.addEventListener("keyup", function () {
+    updateHpValue();
+});
+
+function updateHpValue() {
     let value = parseInt(lvlInput.value);
-    if(value < 1 || isNaN(value)){
+    if (value < 1 || isNaN(value)) {
         value = 1;
     }
-    if(value > 230){
+    if (value > 230) {
         value = 230;
     }
     lvlInput.value = value;
 
-    const newLvlValue = parseInt(inputBaseValue.value);
+    const newLvlValue = value;
     const newHpValue = 50 + (10 * newLvlValue);
 
     valueElement.textContent = newHpValue;
-});
+}

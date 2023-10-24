@@ -11,6 +11,9 @@
         <script src="../js/searchBarSublis.js" type="module"></script>
         <script src="../js/aptitudes.js" type="module"></script>
         <script src="../js/gn.js" type="module"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="../js/prioElem.js"></script>
         <title>Fortuna - Builder</title>
         <link rel="icon" href="../public/fortuna_whiteicon.png" type="image"> 
@@ -83,23 +86,23 @@
                                     <div>
                                         <img src="../public/elements/h-mastery.png" alt="épée">
                                     </div>
-                                    <div class="dropContainer" ondrop="dropElement(event, 'group1')" ondragover="allowDrop(event)">
-                                        <img src="../public/selectElem/fire.png" alt="feu" class="group1" draggable="true" ondragstart="dragStart(event)" data-div="prioElemAA">
-                                        <img src="../public/selectElem/water.png" alt="eau" class="group1" draggable="true" ondragstart="dragStart(event)" data-div="prioElemAA">
-                                        <img src="../public/selectElem/earth.png" alt="terre" class="group1" draggable="true" ondragstart="dragStart(event)" data-div="prioElemAA">
-                                        <img src="../public/selectElem/wind.png" alt="air" class="group1" draggable="true" ondragstart="dragStart(event)" data-div="prioElemAA">
-                                    </div>
+                                    <ul class="sortable">
+                                        <li class="ui-state-default"><img src="../public/selectElem/fire.png" alt="feu"></li>
+                                        <li class="ui-state-default"><img src="../public/selectElem/water.png" alt="eau"></li>
+                                        <li class="ui-state-default"><img src="../public/selectElem/earth.png" alt="terre"></li>
+                                        <li class="ui-state-default"><img src="../public/selectElem/wind.png" alt="air"></li>
+                                    </ul>
                                 </div>
                                 <div class="prioElemBB">
                                     <div>
                                         <img src="../public/elements/h-resistance.png" alt="bouclier">
                                     </div>
-                                    <div class="dropContainer" ondrop="dropElement(event, 'group2')" ondragover="allowDrop(event)">
-                                        <img src="../public/selectElem/fire.png" alt="feu" class="group2" draggable="true" ondragstart="dragStart(event)" data-div="prioElemBB">
-                                        <img src="../public/selectElem/water.png" alt="eau" class="group2" draggable="true" ondragstart="dragStart(event)" data-div="prioElemBB">
-                                        <img src="../public/selectElem/earth.png" alt="terre" class="group2" draggable="true" ondragstart="dragStart(event)" data-div="prioElemBB">
-                                        <img src="../public/selectElem/wind.png" alt="air" class="group2" draggable="true" ondragstart="dragStart(event)" data-div="prioElemBB">
-                                    </div>
+                                    <ul class="sortable">
+                                        <li class="ui-state-default"><img src="../public/selectElem/fire.png" alt="feu"></li>
+                                        <li class="ui-state-default"><img src="../public/selectElem/water.png" alt="eau"></li>
+                                        <li class="ui-state-default"><img src="../public/selectElem/earth.png" alt="terre"></li>
+                                        <li class="ui-state-default"><img src="../public/selectElem/wind.png" alt="air"></li>
+                                    </ul>
                                 </div>
                             </div>
                         </section>
@@ -236,42 +239,42 @@
                                         <img src="../public/maitrises/damage_dealt.png">
                                         <p id="damageDealt"> &ensp;% Domm. inf.</p>
                                     </div>
-                                    <p><span class="damagePercent">0</span>&ensp;</p>
+                                    <p><span class="damagePercent" onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/ch.png">
                                         <p id="critical"> &ensp;% Coup Crit.</p>
                                     </div>    
-                                    <p>0&ensp;</p>
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/initiative.png">
                                         <p id="initiative">&ensp;Initiative</p>
                                     </div>    
-                                    <p><span class="initiativeValue">0</span>&ensp;</p>
+                                    <p><span class="initiativeValue" onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/dodge.png">
                                         <p id="dodge">&ensp;Esquive</p>
                                     </div> 
-                                    <p><span class="dodgeValue">0</span>&ensp;</p>   
+                                    <p><span class="dodgeValue" onclick="editValue(this)">0</span>&ensp;</p>   
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/wisdom.png">
                                         <p id="wisdom">&ensp;Sagesse</p>
                                     </div>
-                                    <p><span class="wisdomValue">0</span>&ensp;</p>
+                                    <p><span class="wisdomValue" onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/control.png">
                                         <p id="control">&ensp;Contrôle</p>
                                     </div>  
-                                    <p>0&ensp;</p>  
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>  
                                 </div>
                             </div>
                             <div>
@@ -280,42 +283,42 @@
                                         <img src="../public/maitrises/heals.png">
                                         <p id="heals">&ensp;% Soins réal.</p>
                                     </div>
-                                    <p><span class="healsPercent">0</span>&ensp;</p>
+                                    <p><span class="healsPercent" onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/block.png">
                                         <p id="block">&ensp;% Parade</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/range.png">
                                         <p id="range">&ensp;Portée</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/lock.png">
                                         <p id="lock">&ensp;Tacle</p>
                                     </div>
-                                    <p><span class="lockValue">0</span>&ensp;</p>
+                                    <p><span class="lockValue" onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/prospecting.png">
                                         <p id="prospecting">&ensp;Prospection</p>
                                     </div>
-                                    <p><span class="prospectingValue">0</span>&ensp;</p>
+                                    <p><span class="prospectingValue" onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsP">
                                     <div>
                                         <img src="../public/maitrises/will.webp">
                                         <p id="will">&ensp;Volonté</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                             </div>             
                         </div>
@@ -326,28 +329,28 @@
                                         <img src="../public/maitrises/crit_mastery.png">
                                         <p id="critMastery">&ensp;Maîtrise Critique</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsS">
                                     <div>
                                         <img src="../public/maitrises/rear_mastery.png">
                                         <p id="rearMastery">&ensp;Maîtrise Dos</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsS">
                                     <div>
                                         <img src="../public/maitrises/melee_mastery.png">
                                         <p id="meleeMastery">&ensp;Maîtrise Mêlée</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsS">
                                     <div>
                                         <img src="../public/maitrises/heals.png">
                                         <p id="healMastery">&ensp;Maîtrise Soin</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                             </div>
                             <div>
@@ -356,28 +359,28 @@
                                         <img src="../public/maitrises/crit_resist.png">
                                         <p id="critResist">&ensp;Résistance Critique</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsS">
                                     <div>
                                         <img src="../public/maitrises/rear_resist.png">
                                         <p id="rearResist">&ensp;Résistance Dos</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsS">
                                     <div>
                                         <img src="../public/maitrises/distance_mastery.png">
                                         <p id="distanceMastery">&ensp;Maîtrise Distance</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                                 <div class="statsS">
                                     <div>
                                         <img src="../public/maitrises/berserk_mastery.png">
                                         <p id="berserkMastery">&ensp;Maîtrise Berserk</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                             </div>                   
                         </div>
