@@ -15,6 +15,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="../js/prioElem.js"></script>
+        <script src="../js/resis.js" type="module"></script>
         <title>Fortuna - Builder</title>
         <link rel="icon" href="../public/fortuna_whiteicon.png" type="image"> 
 	</head>
@@ -115,8 +116,8 @@
                                         <img src="../public/capacites/hp.webp">
                                         <p id="hp">PdV</p>
                                     </div>   
-                                    <div class="editable-element-hp" onclick="increaseHp()">
-                                        <span class="valueHp" id="valueHp">0</span>
+                                    <div class="editable-element-hp">
+                                        <span class="valueHp" id="valueHp" onclick="editValue(this)">0</span>
                                         <input class="inputHp" type="number">
                                     </div>
                                 </div>  
@@ -126,7 +127,7 @@
                                         <p id="ap">PA</p>
                                     </div>
                                     <div>
-                                        <p>6</p>
+                                        <p onclick="editValue(this)">6</p>
                                     </div>
                                 </div>
                                 <div class="sectionAbility">
@@ -135,7 +136,7 @@
                                         <p id="wp">PW</p>
                                     </div>
                                     <div>
-                                        <p>6</p>
+                                        <p onclick="editValue(this)">6</p>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +147,7 @@
                                         <p id="armor">Armure</p>
                                     </div>
                                     <div>
-                                        <p>0</p>
+                                        <p onclick="editValue(this)">0</p>
                                     </div>
                                 </div> 
                                 <div class="sectionAbility">
@@ -155,7 +156,7 @@
                                         <p id="mp">PM</p>
                                     </div>
                                     <div>
-                                        <p>3</p>
+                                        <p onclick="editValue(this)">3</p>
                                     </div>
                                 </div>
                             </div>  
@@ -165,26 +166,26 @@
                                 <div class="elementsAd">
                                     <div>
                                         <img src="../public/elements/water.png">
-                                        <p> &ensp;0&ensp;</p>
+                                        <p> &ensp;<span onclick="editValue(this)">0</span>&ensp;</p>
                                     </div>
                                     <div>
                                         <img src="../public/elements/aqua_resistance.webp">
                                         <div>
-                                            <p class="resEauPercent">0%&ensp;</p>
-                                            <p>(<span class="resEau">0</span>)&ensp;</p>   
+                                            <p><span class="resEauPercent">0</span>%&ensp;</p>
+                                            <p>(<span class="resEau" onclick="editValue(this)">0</span>)&ensp;</p>   
                                         </div>
                                     </div>
                                 </div> 
                                 <div class="elementsAd">
                                     <div>
                                         <img src="../public/elements/wind.png">
-                                        <p> &ensp;0&ensp;</p>
+                                        <p> &ensp;<span onclick="editValue(this)">0</span>&ensp;</p>
                                     </div>
                                     <div>
                                         <img src="../public/elements/wind_resistance.webp">
                                         <div>
-                                            <p class="resAirPercent">0%&ensp;</p>
-                                            <p>(<span class="resAir">0</span>)&ensp;</p>   
+                                            <p><span class="resAirPercent">0</span>%&ensp;</p>
+                                            <p>(<span class="resAir" onclick="editValue(this)">0</span>)&ensp;</p>   
                                         </div>
                                     </div>
                                 </div>
@@ -193,33 +194,33 @@
                                         <img src="../public/elements/received_armor.webp">
                                         <p id="armorReceived"> &ensp;Armure reçue</p>
                                     </div>
-                                    <p>0&ensp;</p>
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>
                                 </div>
                             </div>
                             <div>
                                 <div class="elementsAd">
                                     <div>
                                         <img src="../public/elements/earth.png">
-                                        <p> &ensp;0&ensp;</p>
+                                        <p> &ensp;<span onclick="editValue(this)">0</span>&ensp;</p>
                                     </div>
                                     <div>
                                         <img src="../public/elements/earth_resistance.webp">
                                         <div>
-                                            <p class="resTerrePercent">0%&ensp;</p>
-                                            <p>(<span class="resTerre">0</span>)&ensp;</p>   
+                                            <p><span class="resTerrePercent">0</span>%&ensp;</p>
+                                            <p>(<span class="resTerre" onclick="editValue(this)">0</span>)&ensp;</p>   
                                         </div>
                                     </div>
                                 </div>
                                 <div class="elementsAd">
                                     <div>
                                         <img src="../public/elements/fire.png">
-                                        <p> &ensp;0&ensp;</p>
+                                        <p> &ensp;<span onclick="editValue(this)">0</span>&ensp;</p>
                                     </div>
                                     <div>
                                         <img src="../public/elements/fire_resistance.webp">
                                         <div>
-                                            <p class="resFeuPercent">0%&ensp;</p>
-                                            <p>(<span class="resFeu">0</span>)&ensp;</p>   
+                                            <p><span class="resFeuPercent">0</span>%&ensp;</p>
+                                            <p>(<span class="resFeu" onclick="editValue(this)">0</span>)&ensp;</p>   
                                         </div>
                                     </div>
                                 </div>
@@ -228,7 +229,7 @@
                                         <img src="../public/elements/given_armor.webp">
                                         <p id="armorGiven"> &ensp;Armure donnée</p>
                                     </div>
-                                    <p>0&ensp;</p>   
+                                    <p><span onclick="editValue(this)">0</span>&ensp;</p>   
                                 </div>
                             </div>                       
                         </div>

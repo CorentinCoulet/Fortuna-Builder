@@ -22,26 +22,59 @@ document.querySelector(".slider-container2").addEventListener("click", function(
     document.querySelector(".slider-container2 ").classList.toggle("active");
 });
 
+// window.editValue = function(element) {
+//     const inputElement = document.createElement("input");
+//     inputElement.type = "number";
+//     inputElement.classList.add("statsGlobalesAjout");
+//     let saisieUser;
+//     inputElement.value = parseInt(element.textContent) || 0;
+//     element.textContent = "";
+//     element.appendChild(inputElement);
+//     inputElement.focus();
+
+//     inputElement.addEventListener("keydown", function(event) {
+//         if (event.key === "Enter") {
+//             const newValue = parseInt(inputElement.value) || 0;
+//             saisieUser = newValue;
+//             element.textContent = newValue;
+//             console.log(saisieUser);
+//             inputElement.remove();
+//         }
+//     });
+
+//     inputElement.addEventListener("blur", function() {
+//         const newValue = parseInt(inputElement.value) || 0;
+//         element.textContent = newValue;
+//         inputElement.remove();
+//     });
+// };
+
+let userEnteredValue = 0;
+let previousValue = 0;
+
 window.editValue = function(element) {
     const inputElement = document.createElement("input");
     inputElement.type = "number";
     inputElement.classList.add("statsGlobalesAjout");
-    inputElement.value = parseInt(element.textContent) || 0;
-    element.textContent = "";
+
+    previousValue = element.textContent - userEnteredValue;
+    inputElement.value = userEnteredValue;
+    element.textContent = ""; 
+
     element.appendChild(inputElement);
     inputElement.focus();
 
     inputElement.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
-            const newValue = parseInt(inputElement.value) || 0;
-            element.textContent = newValue;
+            userEnteredValue = parseInt(inputElement.value) || 0;
+            element.textContent = previousValue + userEnteredValue; 
             inputElement.remove();
         }
     });
 
     inputElement.addEventListener("blur", function() {
-        const newValue = parseInt(inputElement.value) || 0;
-        element.textContent = newValue;
+        userEnteredValue = parseInt(inputElement.value) || 0;
+        element.textContent = previousValue + userEnteredValue; 
         inputElement.remove();
     });
 };
