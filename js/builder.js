@@ -49,18 +49,18 @@ document.querySelector(".slider-container2").addEventListener("click", function(
 //     });
 // };
 
-let userEnteredValue = 0;
-let previousValue = 0;
+
 
 window.editValue = function(element) {
     const inputElement = document.createElement("input");
     inputElement.type = "number";
     inputElement.classList.add("statsGlobalesAjout");
 
-    previousValue = element.textContent - userEnteredValue;
+    let userEnteredValue = parseInt(element.textContent) || 0;
+    let previousValue = element.textContent - userEnteredValue;
+
     inputElement.value = userEnteredValue;
     element.textContent = ""; 
-
     element.appendChild(inputElement);
     inputElement.focus();
 
