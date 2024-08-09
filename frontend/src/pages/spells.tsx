@@ -1,9 +1,10 @@
 import React from 'react';
+import Deck from '../components/Deck';
 
 const Spells: React.FC = () => {
   return (
     <div>
-      <h1>Salut depuis Sorts</h1>
+      <Deck />
     </div>
   );
 };
