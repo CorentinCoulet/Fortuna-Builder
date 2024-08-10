@@ -10,6 +10,11 @@ interface ImageSelectorProps {
   images: string[];
 }
 
+const getFileName = (path: string) => {
+  const fileName = path.split('/').pop()?.split('.')[0] || '';
+  return fileName.charAt(0).toUpperCase() + fileName.slice(1);
+};
+
 const ImageSelector: React.FC<ImageSelectorProps> = ({ images }) => {
   const dispatch = useDispatch<AppDispatch>();
   const selectedImage = useSelector(
@@ -33,7 +38,7 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({ images }) => {
       <section className="sect1" onClick={handleImageClick}>
         <img
           src={selectedImage || Cra}
-          alt="Selected"
+          alt={getFileName(selectedImage || Cra)}
         />
       </section>
 

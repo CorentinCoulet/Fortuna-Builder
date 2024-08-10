@@ -154,4 +154,3 @@ export const PrimaryStats: { [key: number]: {src: string; alt: string } } = {
     34: { src : HealMastery, alt: 'heal mastery'},
     35: { src : BerserkMastery, alt: 'berserk mastery'},
 };
-
