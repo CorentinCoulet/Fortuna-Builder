@@ -6,7 +6,7 @@ interface ImageState {
 }
 
 const initialState: ImageState = {
-  selectedImage: null,
+  selectedImage: localStorage.getItem('selectedImage') || null,
   modalIsOpen: false,
 };
 
@@ -16,6 +16,7 @@ const imageSlice = createSlice({
   reducers: {
     setSelectedImage(state, action: PayloadAction<string>) {
       state.selectedImage = action.payload;
+      localStorage.setItem('selectedImage', action.payload)
     },
     openModal(state) {
       state.modalIsOpen = true;

@@ -39,6 +39,7 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({ images }) => {
         <img
           src={selectedImage || Cra}
           alt={getFileName(selectedImage || Cra)}
+          className="imgClasses"
         />
       </section>
 

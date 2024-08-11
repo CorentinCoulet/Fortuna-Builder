@@ -1,0 +1,74 @@
+.spellsClasses {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+
+    .selected {
+        opacity: 0.5;
+    }
+
+    > div:first-child {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 10px 0;
+        margin-bottom: 15px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background-color: #1c1c1c;
+
+        p {
+            margin: 0;
+            padding-left: 10px;
+            color: #e6e6e6;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    }
+
+    > div:last-child {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+
+        > div:first-child {
+            display: flex;
+            flex-direction: column;
+
+            section {
+                display: flex;
+                flex-direction: row;
+            }
+        }
+
+        .spells-active, .spells-passive {
+            display: flex;
+            justify-content: center;
+            section {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0; 
+                width: 80%;
+                justify-content: center;
+            }
+        }
+
+        .spells-active {
+            margin: 10px 0;
+        }
+             
+        img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+    }
+}

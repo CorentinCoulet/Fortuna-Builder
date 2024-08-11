@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/components/SpellsClasses.scss';
 
 interface Spell {
     src: string;
@@ -8,42 +9,71 @@ interface Spell {
 interface SpellsClassesProps {
     spells: {
         [key: string]: { [key: string]: Spell };
-    };
+    },
+    commonSpells: {
+        [key: string]: { [key: string]: Spell };
+    },
+    onSpellSelect: (spell: Spell, type: 'active' | 'passive') => void;
 }
 
-const SpellsClasses: React.FC<SpellsClassesProps> = ({ spells }) => {
-    const renderSpellsSection = (title: string, spellsSection: { [key: string]: Spell }) => {
+const SpellsClasses: React.FC<SpellsClassesProps> = ({
+    spells,
+    commonSpells,
+    onSpellSelect,
+}) => {
+    const handleSpellDoubleClick = (spell: Spell, type: 'active' | 'passive') => {
+        onSpellSelect(spell, type);
+    };
+
+    const renderSpellsSection = (sectionKey: string, spellsSection: { [key: string]: Spell }, type: 'active' | 'passive') => {
         if (Object.keys(spellsSection).length === 0) return null;
 
         return (
             <section>
-                <h2>{title}</h2>
                 {Object.entries(spellsSection).map(([key, spell]) => (
-                    <div key={key}>
-                        <img src={spell.src} alt={spell.alt} />
+                    <div
+                        key={`${sectionKey}-${key}`}
+                        onDoubleClick={() => handleSpellDoubleClick(spell, type)}
+                    >
+                        <img
+                            src={spell.src}
+                            alt={spell.alt}
+                        />
                     </div>
                 ))}
             </section>
         );
     };
 
+    const renderCombinedSpellsSection = (key: string, type: 'active' | 'passive') => {
+        const classSpellsSection = spells[key] || {};
+        const commonSpellsSection = commonSpells[key] || {};
+
+        return (
+            <section>
+                {renderSpellsSection(key, classSpellsSection, type)}
+                {renderSpellsSection(`common-${key}`, commonSpellsSection, type)}
+            </section>
+        );
+    };
+
     return (
-        <div>
+        <div className='spellsClasses'>
             <div>
                 <p>Sorts</p>
             </div>
             <div>
-                <section>
-                    {Object.keys(spells).filter(key => key !== 'active' && key !== 'passive').map(key => 
-                        renderSpellsSection('', spells[key])
+                <div>
+                    {Object.keys(spells).filter(key => key !== 'active' && key !== 'passive').map(key =>
+                        renderSpellsSection(key, spells[key], 'active')
                     )}
-                </section>
-                <section>
-                    {renderSpellsSection('', spells.active || {})}
-                </section>
-                <section>
-                    {renderSpellsSection('', spells.passive || {})}
-                </section>    
+                </div>
+                <div className='spells-active'>
+                    {renderCombinedSpellsSection('active', 'active')}
+                </div>
+                <div className='spells-passive'>
+                    {renderCombinedSpellsSection('passive', 'passive')}
+                </div>
             </div>
         </div>
     );

@@ -1,9 +1,10 @@
 import React from 'react';
+import Intel from '../components/Intel';
 
 const Aptitudes: React.FC = () => {
   return (
     <div>
-      <h1>Salut depuis Aptitudes</h1>
+      <Intel />
     </div>
   );
 };
