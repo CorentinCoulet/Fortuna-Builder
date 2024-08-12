@@ -186,6 +186,11 @@ import BareerApt from './assets/aptitudes/apt_bareer.webp';
 import PercentHealthReceivedApt from './assets/aptitudes/apt_healthreceived.webp';
 import PercentHpAsArmorApt from './assets/aptitudes/apt_hpasarmor.webp';
 
+import PercentHpAptHover from './assets/capacites/hp.webp';
+import ElementalResistanceAptHover from './assets/capacites/shield-solid.svg';
+import PercentHealthReceivedAptHover from './assets/capacites/notes-medical-solid.svg';
+import PercentHpAsArmorAptHover from './assets/capacites/armor.webp';
+
 // Branche Force
 import ElementalMasteryApt from './assets/aptitudes/apt_elemmastery.webp';
 import MeleeMasteryApt from './assets/aptitudes/apt_masterymelee.webp';
@@ -219,11 +224,11 @@ import PercentDamageApt from './assets/aptitudes/apt_rawdamages.webp';
 import ElementalResistanceMajorApt from './assets/aptitudes/apt_resistanceelem.webp';
 export const aptLogos = {
     1: {
-        1: { src : PercentHpApt, alt: 'Percent hp'},
-        2: { src : ElementalResistanceApt, alt: 'Elemental resistance'},
-        3: { src : BareerApt, alt: 'bareer'},
-        4: { src : PercentHealthReceivedApt, alt: 'Percent healt received'},
-        5: { src : PercentHpAsArmorApt, alt: 'Percent hp as armor'},
+        1: { src : PercentHpApt, alt: '% Points de Vie'},
+        2: { src : ElementalResistanceApt, alt: 'Résistance élémentaire'},
+        3: { src : BareerApt, alt: 'Barrière'},
+        4: { src : PercentHealthReceivedApt, alt: '% Soins reçus'},
+        5: { src : PercentHpAsArmorApt, alt: '% Points de Vie en Armure'},
     },
     2: {
         1: { src : ElementalMasteryApt, alt: 'Elemental mastery'},
@@ -259,6 +264,16 @@ export const aptLogos = {
     },
 }
 
+export const aptLogosHover = {
+    1: {
+        1: { src : PercentHpAptHover, alt: '% Points de Vie'},
+        2: { src : ElementalResistanceAptHover, alt: 'Résistance élémentaire'},
+        3: '',
+        4: { src : PercentHealthReceivedAptHover, alt: '% Soins reçus'},
+        5: { src : PercentHpAsArmorAptHover, alt: '% Points de Vie en Armure'},
+    },
+}
+
 // Importation minus plus 0
 import Minus from './assets/aptitudes/minus.png';
 import Plus from './assets/aptitudes/plus.png';
@@ -268,3 +283,4 @@ export const selectors = {
     2: { src : Plus, alt: 'Plus'},
     3: { src : Zero, alt: 'Zero'},
 }
+
