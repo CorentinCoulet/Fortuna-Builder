@@ -7,14 +7,24 @@ import {
   selectors,
 } from "../asset";
 import "../styles/components/Intel.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShieldHalved } from '@fortawesome/free-solid-svg-icons';
 
 const intel: number[] = [];
-for (let i = 2; i < 231; i += 4) {
+for (let i = 3; i < 231; i += 4) {
   intel.push(i);
 }
 
-const Intel: React.FC = () => {
-  const maxPoints = [Infinity, 10, 10, 5, 10];
+const Strength: React.FC = () => {
+  /*
+        2 6 10 14 18 22 26 30 34 38 42 46 INTEL
+        3 7 11 15 19 23 27 31 35 39 43 47 FORCE
+        4 8 12 16 20 24 28 32 36 40 44 48 AGILITE
+        5 9 13 17 21 25
+        25 75 125 175 MAJEUR
+    */
+
+  const maxPoints = [Infinity, 40, 40, Infinity];
 
   const [valueCount, setValueCount] = useState<number>(0);
   const [hovered, setHovered] = useState<boolean>(false);
@@ -39,14 +49,12 @@ const Intel: React.FC = () => {
     handleInputChange();
 
     const observer = new MutationObserver(() => {
+
       handleInputChange();
     });
 
-    observer.observe(lvlClass, {
-      attributes: true,
-      attributeFilter: ["value"],
-    });
-
+    observer.observe(lvlClass, { attributes: true, attributeFilter: ['value'] });
+    
     return () => {
       observer.disconnect();
     };
@@ -83,11 +91,10 @@ const Intel: React.FC = () => {
   };
 
   const intelHover = {
-    1: "+4% PdV",
-    2: "+10 Rés. Elem",
-    3: "50% niveau / coup",
-    4: "+6% Soins reçus",
-    5: "+4% PdV en armure",
+    1: "+5 Maitrises Elem",
+    2: "+8 Maitrises Mêlée",
+    3: "8 Maitrises Distance",
+    4: "+20 PdV",
   };
 
   return (
@@ -98,18 +105,18 @@ const Intel: React.FC = () => {
     >
       <div>
         <div>
-          <p>INTELLIGENCE</p>
+          <p>FORCE</p>
           <span>{valueCount}</span>
         </div>
         <div>
           <img
-            src={hovered ? nameCategoriesHover[1].src : nameCategories[1].src}
-            alt={hovered ? nameCategoriesHover[1].alt : nameCategories[1].alt}
+            src={hovered ? nameCategoriesHover[2].src : nameCategories[2].src}
+            alt={hovered ? nameCategoriesHover[2].alt : nameCategories[2].alt}
           />
         </div>
       </div>
       <div>
-        {Object.values(aptLogos[1]).map((logo, index) => (
+        {Object.values(aptLogos[2]).map((logo, index) => (
           <div
             key={index}
             onMouseEnter={() => handleElementMouseEnter(index)}
@@ -125,10 +132,10 @@ const Intel: React.FC = () => {
               style={{ display: hoveredElement === index ? "block" : "none" }}
             >
               <div className="popup-content">
-                <img
-                  src={aptLogosHover[1][index + 1]?.src}
-                  alt={aptLogosHover[1][index + 1]?.alt}
-                />
+                  <img
+                    src={aptLogosHover[2][index + 1]?.src}
+                    alt={aptLogosHover[2][index + 1]?.alt}
+                  />
                 <p>{intelHover[index + 1]}</p>
               </div>
             </div>
@@ -186,4 +193,4 @@ const Intel: React.FC = () => {
   );
 };
 
-export default Intel;
+export default Strength;

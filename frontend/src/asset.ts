@@ -129,7 +129,7 @@ export const PrimaryStats: { [key: number]: {src: string; alt: string } } = {
     14: { src : ArmorReceived, alt: 'Armor received'},
     15: { src : ArmorGiven, alt: 'Armor given'},
 
-    16: { src : PercentDamage, alt: 'Percent damaga'},
+    16: { src : PercentDamage, alt: 'Percent damage'},
     17: { src : PercentHeal, alt: 'Percent heal'},
     18: { src : PercentCrit, alt: 'Percent crit'},
     19: { src : Block, alt: 'Block'},
@@ -187,8 +187,9 @@ import PercentHealthReceivedApt from './assets/aptitudes/apt_healthreceived.webp
 import PercentHpAsArmorApt from './assets/aptitudes/apt_hpasarmor.webp';
 
 import PercentHpAptHover from './assets/capacites/hp.webp';
-import ElementalResistanceAptHover from './assets/capacites/shield-solid.svg';
-import PercentHealthReceivedAptHover from './assets/capacites/notes-medical-solid.svg';
+import ElementalResistanceAptHover from './assets/capacites/elementalShield.webp';
+import BareerAptHover from './assets/capacites/bareer-removebg.png';
+import PercentHealthReceivedAptHover from './assets/capacites/healReceivedIcon-remove.png';
 import PercentHpAsArmorAptHover from './assets/capacites/armor.webp';
 
 // Branche Force
@@ -231,10 +232,10 @@ export const aptLogos = {
         5: { src : PercentHpAsArmorApt, alt: '% Points de Vie en Armure'},
     },
     2: {
-        1: { src : ElementalMasteryApt, alt: 'Elemental mastery'},
-        2: { src : MeleeMasteryApt, alt: 'Melee mastery'},
-        3: { src : DistanceMasteryApt, alt: 'Distance mastery'},
-        4: { src : RawHpApt, alt: 'Raw hp'},
+        1: { src : ElementalMasteryApt, alt: 'Maîtrise Elementaire'},
+        2: { src : MeleeMasteryApt, alt: 'Maîtrise Mêlée'},
+        3: { src : DistanceMasteryApt, alt: 'Maîtrise Distance'},
+        4: { src : RawHpApt, alt: 'Points de Vie'},
     },
     3: {
         1: { src : LockApt, alt: 'Lock'},
@@ -267,11 +268,55 @@ export const aptLogos = {
 export const aptLogosHover = {
     1: {
         1: { src : PercentHpAptHover, alt: '% Points de Vie'},
-        2: { src : ElementalResistanceAptHover, alt: 'Résistance élémentaire'},
-        3: '',
+        2: { src : ElementalResistanceAptHover, alt: 'Resistance élémentaire'},
+        3: { src : BareerAptHover, alt: 'Barrière'},
         4: { src : PercentHealthReceivedAptHover, alt: '% Soins reçus'},
         5: { src : PercentHpAsArmorAptHover, alt: '% Points de Vie en Armure'},
     },
+    2: {
+        1: { src : PercentDamage, alt: 'Percent damage'},
+        2: { src : MeleeMastery, alt: 'melee mastery'},
+        3: { src : DistanceMastery, alt: 'distance mastery'},
+        4: { src : PercentHpAptHover, alt: '% Points de Vie'},
+    },
+    3: {
+        1: { src : Dodge, alt:  'Esquive'},
+        2: { src : Lock, alt: 'Tacle'},
+        3: { src: Initiative, alt: 'Initiative'},
+        4: {
+            1: { src : Dodge, alt:  'Esquive'},
+            2: { src : Lock, alt: 'Tacle'},
+        },
+        5: { src : Will, alt: 'Volonté'},
+    },
+    4: {
+        1: { src : PercentCrit, alt:  '% Coup Critique'},
+        2: { src : Block, alt: '% Parade'},
+        3: { src: CritMastery, alt: 'Maîtrise Critique'},
+        4: { src : RearMastery, alt: 'Maîtrise Dos'},
+        5: { src: BerserkMastery, alt: 'Maîtrise Berserk'},
+        6: { src : HealMastery, alt: 'Maîtrise Soin'},
+        7: { src: RearResist, alt: 'Résistance Dos'},
+        8: { src: CritResist, alt: 'Résistance Critique'},
+    },
+    5: {
+        1: { src : Pa, alt:  'Point d\'Action'},
+        2: { 
+            1: { src : PercentDamage, alt: 'Point de Dommage'},
+            2: { src : Pm, alt: 'Point de Mouvement'},
+        },
+        3: {
+            1: { src : PercentDamage, alt: 'Point de Dommage'},
+            2: { src: Po, alt: 'Portée'},
+        },
+        4: { src : Pw, alt: 'Point de Wakfu'},
+        5: { 
+            1: { src : PercentDamage, alt: 'Point de Dommage'},
+            2: { src: Control, alt: 'Contrôle'},
+        },
+        6: { src : PercentDamage, alt: '% Dommages Infligés'},
+        7: { src: ElementalResistanceAptHover, alt: 'Résistance Elémentaire'},
+    }
 }
 
 // Importation minus plus 0
