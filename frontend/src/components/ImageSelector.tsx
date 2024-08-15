@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import { RootState, AppDispatch } from "../store";
 import { setSelectedImage, openModal, closeModal } from "../features/components/imageSlice";
 import '../styles/components/ImageSelector.scss';
-import Cra from "../assets/class/cra.jpg";
+import { Images } from "../asset";
 
 interface ImageSelectorProps {
   images: string[];
@@ -37,8 +37,9 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({ images }) => {
     <div>
       <section className="sect1" onClick={handleImageClick}>
         <img
-          src={selectedImage || Cra}
-          alt={getFileName(selectedImage || Cra)}
+          loading="lazy"
+          src={selectedImage || Images[1]}
+          alt={getFileName(selectedImage || Images[1])}
           className="imgClasses"
         />
       </section>
@@ -53,6 +54,7 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({ images }) => {
           <div className="image-gallery">
             {images.map((image, index) => (
               <img
+                loading="lazy"
                 key={index}
                 src={image}
                 alt={`Thumbnail ${index}`}

@@ -59,7 +59,7 @@ const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChang
 
   return (
     <div ref={containerRef} className="editable-value">
-      {image && <img src={image.src} alt={image.alt} className="stat-icon" />}
+      {image && <img loading="lazy" src={image.src} alt={image.alt} className="stat-icon" />}
       {label && (
         <span className="label">{label}</span>
       )}

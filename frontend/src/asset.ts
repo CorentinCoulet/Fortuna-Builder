@@ -1,22 +1,22 @@
 // Importation des classes
-import Cra from "./assets/class/cra.jpg";
-import Ecaflip from "./assets/class/ecaflip.jpg";
-import Eliotrope from "./assets/class/eliotrope.jpg";
-import Eniripsa from "./assets/class/eniripsa.jpg";
-import Enutrof from "./assets/class/enutrof.jpg";
-import Feca from "./assets/class/feca.jpg";
-import Huppermage from "./assets/class/huppermage.jpg";
-import Iop from "./assets/class/iop.jpg";
-import Osamodas from "./assets/class/osamodas.jpg";
-import Ouginak from "./assets/class/ouginak.jpg";
-import Pandawa from "./assets/class/pandawa.jpg";
-import Roublard from "./assets/class/roublard.jpg";
-import Sacrieur from "./assets/class/sacrieur.jpg";
-import Sadida from"./assets/class/sadida.jpg";
-import Sram from "./assets/class/sram.jpg";
-import Steameur from "./assets/class/steameur.jpg";
-import Xelor from "./assets/class/xelor.jpg";
-import Zobal from "./assets/class/zobal.jpg";
+import Cra from "./assets/class/cra.webp";
+import Ecaflip from "./assets/class/ecaflip.webp";
+import Eliotrope from "./assets/class/eliotrope.webp";
+import Eniripsa from "./assets/class/eniripsa.webp";
+import Enutrof from "./assets/class/enutrof.webp";
+import Feca from "./assets/class/feca.webp";
+import Huppermage from "./assets/class/huppermage.webp";
+import Iop from "./assets/class/iop.webp";
+import Osamodas from "./assets/class/osamodas.webp";
+import Ouginak from "./assets/class/ouginak.webp";
+import Pandawa from "./assets/class/pandawa.webp";
+import Roublard from "./assets/class/roublard.webp";
+import Sacrieur from "./assets/class/sacrieur.webp";
+import Sadida from"./assets/class/sadida.webp";
+import Sram from "./assets/class/sram.webp";
+import Steameur from "./assets/class/steameur.webp";
+import Xelor from "./assets/class/xelor.webp";
+import Zobal from "./assets/class/zobal.webp";
 export const Images = [
     Cra,
     Ecaflip,
@@ -39,19 +39,19 @@ export const Images = [
   ];
 
 // Importation des emplacements d'équipements
-import Headgear from './assets/equipements/headgear.png';
-import Amulet from './assets/equipements/amulet.png';
-import Cape from './assets/equipements/cape.png';
-import Epaulettes from './assets/equipements/epaulettes.png';
-import Breastplate from './assets/equipements/breastplate.png';
-import Belt from './assets/equipements/belt.png';
-import RightRing from './assets/equipements/right_ring.png';
-import LeftRing from './assets/equipements/left_ring.png';
-import Boots from './assets/equipements/boots.png';
-import RightHand from './assets/equipements/right_hand.png';
-import LeftHand from './assets/equipements/left_hand.png';
-import Emblem from './assets/equipements/emblem.png';
-import Pet from './assets/equipements/pet.png';
+import Headgear from './assets/equipements/headgear.webp';
+import Amulet from './assets/equipements/amulet.webp';
+import Cape from './assets/equipements/cape.webp';
+import Epaulettes from './assets/equipements/epaulettes.webp';
+import Breastplate from './assets/equipements/breastplate.webp';
+import Belt from './assets/equipements/belt.webp';
+import RightRing from './assets/equipements/right_ring.webp';
+import LeftRing from './assets/equipements/left_ring.webp';
+import Boots from './assets/equipements/boots.webp';
+import RightHand from './assets/equipements/right_hand.webp';
+import LeftHand from './assets/equipements/left_hand.webp';
+import Emblem from './assets/equipements/emblem.webp';
+import Pet from './assets/equipements/pet.webp';
 export const Equipments = [
     { src: Headgear, alt: 'Headgear' },
     { src: Amulet, alt: 'Amulet' },
@@ -78,39 +78,39 @@ import Pw from './assets/capacites/pw.webp';
 
 // Importation des maitrises/résistances élémentaires
 import WaterResistance from './assets/elements/aqua_resistance.webp';
-import WaterMastery from './assets/elements/water.png';
+import WaterMastery from './assets/elements/water.webp';
 import EarthResistance from './assets/elements/earth_resistance.webp';
-import EarthMastery from './assets/elements/earth.png';
+import EarthMastery from './assets/elements/earth.webp';
 import WindResistance from './assets/elements/wind_resistance.webp';
-import WindMastery from './assets/elements/wind.png';
+import WindMastery from './assets/elements/wind.webp';
 import FireResistance from './assets/elements/fire_resistance.webp';
-import FireMastery from './assets/elements/fire.png';
+import FireMastery from './assets/elements/fire.webp';
 import ArmorReceived from './assets/elements/received_armor.webp';
 import ArmorGiven from './assets/elements/given_armor.webp';
 
 // Importation des stats spécifiques
-import PercentDamage from './assets/maitrises/damage_dealt.png';
-import PercentHeal from './assets/maitrises/heals.png';
-import PercentCrit from './assets/maitrises/ch.png';
-import Block from './assets/maitrises/block.png';
-import Initiative from './assets/maitrises/initiative.png';
-import Po from './assets/maitrises/range.png';
-import Dodge from './assets/maitrises/dodge.png';
-import Lock from './assets/maitrises/lock.png';
-import Wisdom from './assets/maitrises/wisdom.png';
-import Prospecting from './assets/maitrises/prospecting.png';
-import Control from './assets/maitrises/control.png';
+import PercentDamage from './assets/maitrises/damage_dealt.webp';
+import PercentHeal from './assets/maitrises/heals.webp';
+import PercentCrit from './assets/maitrises/ch.webp';
+import Block from './assets/maitrises/block.webp';
+import Initiative from './assets/maitrises/initiative.webp';
+import Po from './assets/maitrises/range.webp';
+import Dodge from './assets/maitrises/dodge.webp';
+import Lock from './assets/maitrises/lock.webp';
+import Wisdom from './assets/maitrises/wisdom.webp';
+import Prospecting from './assets/maitrises/prospecting.webp';
+import Control from './assets/maitrises/control.webp';
 import Will from './assets/maitrises/will.webp';
 
 // Importations des maitrises secondaires
-import CritMastery from './assets/maitrises/crit_mastery.png';
-import CritResist from './assets/maitrises/rear_resist.png';
-import RearMastery from './assets/maitrises/rear_mastery.png';
-import RearResist from './assets/maitrises/rear_resist.png';
-import MeleeMastery from './assets/maitrises/melee_mastery.png';
-import DistanceMastery from './assets/maitrises/distance_mastery.png';
-import HealMastery from './assets/maitrises/heals.png';
-import BerserkMastery from './assets/maitrises/berserk_mastery.png';
+import CritMastery from './assets/maitrises/crit_mastery.webp';
+import CritResist from './assets/maitrises/rear_resist.webp';
+import RearMastery from './assets/maitrises/rear_mastery.webp';
+import RearResist from './assets/maitrises/rear_resist.webp';
+import MeleeMastery from './assets/maitrises/melee_mastery.webp';
+import DistanceMastery from './assets/maitrises/distance_mastery.webp';
+import HealMastery from './assets/maitrises/heals.webp';
+import BerserkMastery from './assets/maitrises/berserk_mastery.webp';
 export const PrimaryStats: { [key: number]: {src: string; alt: string } } = {
     1: { src : Hp, alt: 'Hp'},
     2: { src : Shield, alt: 'Shield'},
@@ -188,8 +188,8 @@ import PercentHpAsArmorApt from './assets/aptitudes/apt_hpasarmor.webp';
 
 import PercentHpAptHover from './assets/capacites/hp.webp';
 import ElementalResistanceAptHover from './assets/capacites/elementalShield.webp';
-import BareerAptHover from './assets/capacites/bareer-removebg.png';
-import PercentHealthReceivedAptHover from './assets/capacites/healReceivedIcon-remove.png';
+import BareerAptHover from './assets/capacites/bareer-removebg.webp';
+import PercentHealthReceivedAptHover from './assets/capacites/healReceivedIcon-remove.webp';
 import PercentHpAsArmorAptHover from './assets/capacites/armor.webp';
 
 // Branche Force
@@ -226,42 +226,42 @@ import ElementalResistanceMajorApt from './assets/aptitudes/apt_resistanceelem.w
 export const aptLogos = {
     1: {
         1: { src : PercentHpApt, alt: '% Points de Vie'},
-        2: { src : ElementalResistanceApt, alt: 'Résistance élémentaire'},
+        2: { src : ElementalResistanceApt, alt: 'Résistance Elémentaire'},
         3: { src : BareerApt, alt: 'Barrière'},
-        4: { src : PercentHealthReceivedApt, alt: '% Soins reçus'},
+        4: { src : PercentHealthReceivedApt, alt: '% Soins Reçus'},
         5: { src : PercentHpAsArmorApt, alt: '% Points de Vie en Armure'},
     },
     2: {
-        1: { src : ElementalMasteryApt, alt: 'Maîtrise Elementaire'},
+        1: { src : ElementalMasteryApt, alt: 'Maîtrise Elémentaire'},
         2: { src : MeleeMasteryApt, alt: 'Maîtrise Mêlée'},
         3: { src : DistanceMasteryApt, alt: 'Maîtrise Distance'},
         4: { src : RawHpApt, alt: 'Points de Vie'},
     },
     3: {
-        1: { src : LockApt, alt: 'Lock'},
-        2: { src : DodgeApt, alt: 'Dodge'},
+        1: { src : LockApt, alt: 'Tacle'},
+        2: { src : DodgeApt, alt: 'Esquive'},
         3: { src : InitiativeApt, alt: 'Initiative'},
-        4: { src : LockAndDodgeApt, alt: 'Lock and dodge'},
-        5: { src : WillApt, alt: 'Will'},
+        4: { src : LockAndDodgeApt, alt: 'Tacle et Esquive'},
+        5: { src : WillApt, alt: 'Volonté'},
     },
     4: {
-        1: { src : CriticalApt, alt: 'Critical'},
-        2: { src : BlockApt, alt: 'Block'},
-        3: { src : CriticalMasteryApt, alt: 'Critical mastery'},
-        4: { src : RearMasterypApt, alt: 'Rear mastery'},
-        5: { src : BerserkMasteryApt, alt: 'Berserk mastery'}, 
-        6: { src : HealthMasteryApt, alt: 'Healt mastery'}, 
-        7: { src : RearResistanceApt, alt: 'Rear resistance'}, 
-        8: { src : CriticalResistanceApt, alt: 'Critical resistance'},
+        1: { src : CriticalApt, alt: 'Critique'},
+        2: { src : BlockApt, alt: 'Parade'},
+        3: { src : CriticalMasteryApt, alt: 'Maîtrise Critique'},
+        4: { src : RearMasterypApt, alt: 'Maîtrise Dos'},
+        5: { src : BerserkMasteryApt, alt: 'Maîtrise Berserk'}, 
+        6: { src : HealthMasteryApt, alt: 'Maîtrise Soin'}, 
+        7: { src : RearResistanceApt, alt: 'Résistance Dos'}, 
+        8: { src : CriticalResistanceApt, alt: 'Résistance Critique'},
     },
     5: {
-        1: { src : PaApt, alt: 'Action point'},
-        2: { src : PmApt, alt: 'Movement point'},
-        3: { src : PoApt, alt: 'Range'},
-        4: { src : WpApt, alt: 'Wakfu point'},
-        5: { src : ControlApt, alt: 'Control'}, 
-        6: { src : PercentDamageApt, alt: 'Percent damage'}, 
-        7: { src : ElementalResistanceMajorApt, alt: 'Elemental resistance'}, 
+        1: { src : PaApt, alt: 'Point d\'Action'},
+        2: { src : PmApt, alt: 'Point de Mouvement'},
+        3: { src : PoApt, alt: 'Portée'},
+        4: { src : WpApt, alt: 'Point de Wakfu'},
+        5: { src : ControlApt, alt: 'Contrôle'}, 
+        6: { src : PercentDamageApt, alt: '% Dommages Infligés'}, 
+        7: { src : ElementalResistanceMajorApt, alt: 'Résistance Elementaire'}, 
     },
 }
 
@@ -320,9 +320,9 @@ export const aptLogosHover = {
 }
 
 // Importation minus plus 0
-import Minus from './assets/aptitudes/minus.png';
-import Plus from './assets/aptitudes/plus.png';
-import Zero from './assets/aptitudes/zero.png';
+import Minus from './assets/aptitudes/minus.webp';
+import Plus from './assets/aptitudes/plus.webp';
+import Zero from './assets/aptitudes/zero.webp';
 export const selectors = {
     1: { src : Minus, alt: 'Minus'},
     2: { src : Plus, alt: 'Plus'},

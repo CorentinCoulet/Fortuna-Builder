@@ -37,6 +37,7 @@ const Deck: React.FC<DeckProps> = ({ activeSpells, passiveSpells, onClearAllSpel
 
     const renderSpellImage = (spell: Spell, index: number) => (
         <img
+            loading="lazy"
             key={`${spell.src}-${spell.alt}-${index}`}
             src={spell.src}
             alt={spell.alt}
@@ -56,13 +57,13 @@ const Deck: React.FC<DeckProps> = ({ activeSpells, passiveSpells, onClearAllSpel
                 <div className="active">
                     {Array.from({ length: 12 }).map((_, index) => {
                         const spell = activeSpells[index];
-                        return spell ? renderSpellImage(spell, index) : <img key={`empty-active-${index}`} src={EmptyCase} alt="Case vide" />;
+                        return spell ? renderSpellImage(spell, index) : <img loading="lazy" key={`empty-active-${index}`} src={EmptyCase} alt="Case vide" />;
                     })}
                 </div>
                 <div className="passive">
                     {Array.from({ length: 6 }).map((_, index) => {
                         const spell = passiveSpells[index];
-                        return spell ? renderSpellImage(spell, index) : <img key={`empty-passive-${index}`} src={EmptyCase} alt="Case vide" />;
+                        return spell ? renderSpellImage(spell, index) : <img loading="lazy" key={`empty-passive-${index}`} src={EmptyCase} alt="Case vide" />;
                     })}
                 </div>
             </div>

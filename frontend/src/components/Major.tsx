@@ -6,27 +6,36 @@ import {
   aptLogosHover,
   selectors,
 } from "../asset";
-import "../styles/components/Strength.scss";
+import "../styles/components/Major.scss";
 
-const strength: number[] = [];
-for (let i = 3; i < 231; i += 4) {
-  strength.push(i);
-}
+const major: number[] = [25, 75, 125, 175];
 
-const strengthHover = {
-  1: "+5 Maitrise Elem",
-  2: "+8 Maitrise Mêlée",
-  3: "8 Maitrise Distance",
-  4: "+20 PdV",
+const majorHover = {
+  1: "+1 PA",
+  2: {
+    1: "+20 Maîtrise Elémentaire",
+    2: "+1 PM",
+  },
+  3: {
+    1: "+40 Maîtrise Elémentaire",
+    2: "+1 PO",
+  },
+  4: "+2 PW (ou 150 BQ)",
+  5: {
+    1: "+40 Maîtrises Elémentaire",
+    2: "+2 Contrôle",
+  },
+  6: "+10% Dommages Infligés",
+  7: "+50 Résistance Elémentaire",
 };
 
-const maxPoints = [Infinity, 40, 40, Infinity];
+const maxPoints = [1, 1, 1, 1, 1, 1, 1];
 
-const Strength: React.FC = () => {
+const Major: React.FC = () => {
   const [valueCount, setValueCount] = useState<number>(0);
   const [hovered, setHovered] = useState<boolean>(false);
   const [hoveredElement, setHoveredElement] = useState<number | null>(null);
-  const [points, setPoints] = useState<number[]>([0, 0, 0, 0]);
+  const [points, setPoints] = useState<number[]>([0, 0, 0, 0, 0, 0, 0]);
 
   useEffect(() => {
     const lvlClass = document.querySelector("#lvl") as HTMLInputElement | null;
@@ -35,23 +44,22 @@ const Strength: React.FC = () => {
 
     const handleInputChange = () => {
       const lvlValue = parseInt(lvlClass.value, 10);
-      const index = strength.findIndex((value) => value > lvlValue);
+      const index = major.findIndex((value) => value > lvlValue);
       const closestIndex =
-        index === -1 ? strength.length - 1 : index === 0 ? 0 : index - 1;
+        index === -1 ? major.length - 1 : index === 0 ? 0 : index - 1;
       const newValueCount = closestIndex + 1;
       setValueCount(newValueCount);
-      setPoints([0, 0, 0, 0]);
+      setPoints([0, 0, 0, 0, 0, 0, 0]);
     };
 
     handleInputChange();
 
     const observer = new MutationObserver(() => {
-
       handleInputChange();
     });
 
-    observer.observe(lvlClass, { attributes: true, attributeFilter: ['value'] });
-    
+    observer.observe(lvlClass, { attributes: true, attributeFilter: ["value"] });
+
     return () => {
       observer.disconnect();
     };
@@ -87,27 +95,66 @@ const Strength: React.FC = () => {
     setPoints(newPoints);
   };
 
+  const getHoverText = (index: number, subIndex: number | null = null) => {
+    const hoverInfo = majorHover[index + 1];
+    
+    if (typeof hoverInfo === "string") {
+      return hoverInfo;
+    } else if (typeof hoverInfo === "object" && subIndex !== null) {
+      return hoverInfo[subIndex + 1];
+    }
+  
+    return "";
+  };
+
+  const getHoverImages = (index: number) => {
+    const hoverInfo = majorHover[index + 1];
+    if (typeof hoverInfo === "object") {
+      return Object.keys(hoverInfo).map((key) => (
+        <div key={key} className="multiple-informations">
+          <img
+            loading="lazy"
+            src={aptLogosHover[5][index + 1][parseInt(key)].src}
+            alt={aptLogosHover[5][index + 1][parseInt(key)].alt}
+          />
+          <p>{getHoverText(index, parseInt(key) - 1)}</p>
+        </div>
+      ));
+    } else {
+      return (
+        <div>
+          <img
+            loading="lazy"
+            src={aptLogosHover[5][index + 1]?.src}
+            alt={aptLogosHover[5][index + 1]?.alt}
+          />
+          <p>{getHoverText(index)}</p>
+        </div>
+      );
+    }
+  };  
+
   return (
     <div
-      className="strength"
+      className="major"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div>
         <div>
-          <p>FORCE</p>
+          <p>MAJEUR</p>
           <span>{valueCount}</span>
         </div>
         <div>
           <img
             loading="lazy"
-            src={hovered ? nameCategoriesHover[2].src : nameCategories[2].src}
-            alt={hovered ? nameCategoriesHover[2].alt : nameCategories[2].alt}
+            src={hovered ? nameCategoriesHover[5].src : nameCategories[5].src}
+            alt={hovered ? nameCategoriesHover[5].alt : nameCategories[5].alt}
           />
         </div>
       </div>
       <div>
-        {Object.values(aptLogos[2]).map((logo, index) => (
+        {Object.keys(aptLogos[5]).map((key, index) => (
           <div
             key={index}
             onMouseEnter={() => handleElementMouseEnter(index)}
@@ -115,20 +162,19 @@ const Strength: React.FC = () => {
             className="element-container"
           >
             <div className="element-content">
-              <img loading="lazy" src={logo.src} alt={logo.alt} />
-              <p>{logo.alt}</p>
+              <img
+                loading="lazy"
+                src={aptLogos[5][key].src}
+                alt={aptLogos[5][key].alt}
+              />
+              <p>{aptLogos[5][key].alt}</p>
             </div>
             <div
               className="popup"
               style={{ display: hoveredElement === index ? "block" : "none" }}
             >
               <div className="popup-content">
-                  <img
-                    loading="lazy"
-                    src={aptLogosHover[2][index + 1]?.src}
-                    alt={aptLogosHover[2][index + 1]?.alt}
-                  />
-                <p>{strengthHover[index + 1]}</p>
+                {getHoverImages(index)}
               </div>
             </div>
             <div>
@@ -188,4 +234,4 @@ const Strength: React.FC = () => {
   );
 };
 
-export default Strength;
+export default Major;

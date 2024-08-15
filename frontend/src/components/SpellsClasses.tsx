@@ -36,6 +36,7 @@ const SpellsClasses: React.FC<SpellsClassesProps> = ({
                         onDoubleClick={() => handleSpellDoubleClick(spell, type)}
                     >
                         <img
+                            loading="lazy"
                             src={spell.src}
                             alt={spell.alt}
                         />

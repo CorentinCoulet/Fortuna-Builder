@@ -13,8 +13,17 @@ for (let i = 2; i < 231; i += 4) {
   intel.push(i);
 }
 
+const intelHover = {
+  1: "+4% PdV",
+  2: "+10 Rés. Elem",
+  3: "50% niveau / coup",
+  4: "+6% Soins eçus",
+  5: "+4% PdV en Armure",
+};
+
+const maxPoints = [Infinity, 10, 10, 5, 10];
+
 const Intel: React.FC = () => {
-  const maxPoints = [Infinity, 10, 10, 5, 10];
 
   const [valueCount, setValueCount] = useState<number>(0);
   const [hovered, setHovered] = useState<boolean>(false);
@@ -28,7 +37,7 @@ const Intel: React.FC = () => {
 
     const handleInputChange = () => {
       const lvlValue = parseInt(lvlClass.value, 10);
-      const index = intel.findIndex((value) => value >= lvlValue);
+      const index = intel.findIndex((value) => value > lvlValue);
       const closestIndex =
         index === -1 ? intel.length - 1 : index === 0 ? 0 : index - 1;
       const newValueCount = closestIndex + 1;
@@ -82,14 +91,6 @@ const Intel: React.FC = () => {
     setPoints(newPoints);
   };
 
-  const intelHover = {
-    1: "+4% PdV",
-    2: "+10 Rés. Elem",
-    3: "50% niveau / coup",
-    4: "+6% Soins reçus",
-    5: "+4% PdV en armure",
-  };
-
   return (
     <div
       className="intel"
@@ -103,6 +104,7 @@ const Intel: React.FC = () => {
         </div>
         <div>
           <img
+            loading="lazy"
             src={hovered ? nameCategoriesHover[1].src : nameCategories[1].src}
             alt={hovered ? nameCategoriesHover[1].alt : nameCategories[1].alt}
           />
@@ -117,7 +119,7 @@ const Intel: React.FC = () => {
             className="element-container"
           >
             <div className="element-content">
-              <img src={logo.src} alt={logo.alt} />
+              <img loading="lazy" src={logo.src} alt={logo.alt} />
               <p>{logo.alt}</p>
             </div>
             <div
@@ -126,6 +128,7 @@ const Intel: React.FC = () => {
             >
               <div className="popup-content">
                 <img
+                  loading="lazy"
                   src={aptLogosHover[1][index + 1]?.src}
                   alt={aptLogosHover[1][index + 1]?.alt}
                 />
@@ -141,6 +144,7 @@ const Intel: React.FC = () => {
               </div>
               <div className="selector-item">
                 <img
+                  loading="lazy"  
                   src={selectors[1].src}
                   alt={selectors[1].alt}
                   onClick={() => handleDecrement(index)}
@@ -152,6 +156,7 @@ const Intel: React.FC = () => {
               </div>
               <div className="selector-item">
                 <img
+                  loading="lazy"
                   src={selectors[2].src}
                   alt={selectors[2].alt}
                   onClick={() => handleIncrement(index)}
@@ -169,6 +174,7 @@ const Intel: React.FC = () => {
               </div>
               <div className="selector-item">
                 <img
+                  loading="lazy"
                   src={selectors[3].src}
                   alt={selectors[3].alt}
                   onClick={() => handleReset(index)}
