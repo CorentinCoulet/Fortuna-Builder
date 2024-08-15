@@ -24,7 +24,6 @@ const intelHover = {
 const maxPoints = [Infinity, 10, 10, 5, 10];
 
 const Intel: React.FC = () => {
-
   const [valueCount, setValueCount] = useState<number>(0);
   const [hovered, setHovered] = useState<boolean>(false);
   const [hoveredElement, setHoveredElement] = useState<number | null>(null);
@@ -66,21 +65,30 @@ const Intel: React.FC = () => {
   const handleElementMouseEnter = (index: number) => setHoveredElement(index);
   const handleElementMouseLeave = () => setHoveredElement(null);
 
-  const handleIncrement = (index: number) => {
+  const handleIncrement = (index: number, event: React.MouseEvent) => {
+    const isCtrlClick = event.ctrlKey;
+    const incrementValue = isCtrlClick ? Math.min(10, valueCount) : 1;
+
     if (points[index] < maxPoints[index] && valueCount > 0) {
       const newPoints = [...points];
-      newPoints[index]++;
+      newPoints[index] = Math.min(
+        points[index] + incrementValue,
+        maxPoints[index]
+      );
       setPoints(newPoints);
-      setValueCount(valueCount - 1);
+      setValueCount(valueCount - incrementValue);
     }
   };
 
-  const handleDecrement = (index: number) => {
+  const handleDecrement = (index: number, event: React.MouseEvent) => {
+    const isCtrlClick = event.ctrlKey;
+    const decrementValue = isCtrlClick ? Math.min(10, points[index]) : 1;
+
     if (points[index] > 0) {
       const newPoints = [...points];
-      newPoints[index]--;
+      newPoints[index] = Math.max(points[index] - decrementValue, 0);
       setPoints(newPoints);
-      setValueCount(valueCount + 1);
+      setValueCount(valueCount + decrementValue);
     }
   };
 
@@ -144,10 +152,10 @@ const Intel: React.FC = () => {
               </div>
               <div className="selector-item">
                 <img
-                  loading="lazy"  
+                  loading="lazy"
                   src={selectors[1].src}
                   alt={selectors[1].alt}
-                  onClick={() => handleDecrement(index)}
+                  onClick={(event) => handleDecrement(index, event)}
                   style={{
                     opacity: points[index] === 0 ? 0.5 : 1,
                     cursor: points[index] === 0 ? "not-allowed" : "pointer",
@@ -159,7 +167,7 @@ const Intel: React.FC = () => {
                   loading="lazy"
                   src={selectors[2].src}
                   alt={selectors[2].alt}
-                  onClick={() => handleIncrement(index)}
+                  onClick={(event) => handleIncrement(index, event)}
                   style={{
                     opacity:
                       points[index] === maxPoints[index] || valueCount === 0

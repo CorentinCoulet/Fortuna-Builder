@@ -46,12 +46,14 @@ const Strength: React.FC = () => {
     handleInputChange();
 
     const observer = new MutationObserver(() => {
-
       handleInputChange();
     });
 
-    observer.observe(lvlClass, { attributes: true, attributeFilter: ['value'] });
-    
+    observer.observe(lvlClass, {
+      attributes: true,
+      attributeFilter: ["value"],
+    });
+
     return () => {
       observer.disconnect();
     };
@@ -62,21 +64,30 @@ const Strength: React.FC = () => {
   const handleElementMouseEnter = (index: number) => setHoveredElement(index);
   const handleElementMouseLeave = () => setHoveredElement(null);
 
-  const handleIncrement = (index: number) => {
+  const handleIncrement = (index: number, event: React.MouseEvent) => {
+    const isCtrlClick = event.ctrlKey;
+    const incrementValue = isCtrlClick ? Math.min(10, valueCount) : 1;
+
     if (points[index] < maxPoints[index] && valueCount > 0) {
       const newPoints = [...points];
-      newPoints[index]++;
+      newPoints[index] = Math.min(
+        points[index] + incrementValue,
+        maxPoints[index]
+      );
       setPoints(newPoints);
-      setValueCount(valueCount - 1);
+      setValueCount(valueCount - incrementValue);
     }
   };
 
-  const handleDecrement = (index: number) => {
+  const handleDecrement = (index: number, event: React.MouseEvent) => {
+    const isCtrlClick = event.ctrlKey;
+    const decrementValue = isCtrlClick ? Math.min(10, points[index]) : 1;
+
     if (points[index] > 0) {
       const newPoints = [...points];
-      newPoints[index]--;
+      newPoints[index] = Math.max(points[index] - decrementValue, 0);
       setPoints(newPoints);
-      setValueCount(valueCount + 1);
+      setValueCount(valueCount + decrementValue);
     }
   };
 
@@ -123,11 +134,11 @@ const Strength: React.FC = () => {
               style={{ display: hoveredElement === index ? "block" : "none" }}
             >
               <div className="popup-content">
-                  <img
-                    loading="lazy"
-                    src={aptLogosHover[2][index + 1]?.src}
-                    alt={aptLogosHover[2][index + 1]?.alt}
-                  />
+                <img
+                  loading="lazy"
+                  src={aptLogosHover[2][index + 1]?.src}
+                  alt={aptLogosHover[2][index + 1]?.alt}
+                />
                 <p>{strengthHover[index + 1]}</p>
               </div>
             </div>
@@ -143,7 +154,7 @@ const Strength: React.FC = () => {
                   loading="lazy"
                   src={selectors[1].src}
                   alt={selectors[1].alt}
-                  onClick={() => handleDecrement(index)}
+                  onClick={(event) => handleDecrement(index, event)}
                   style={{
                     opacity: points[index] === 0 ? 0.5 : 1,
                     cursor: points[index] === 0 ? "not-allowed" : "pointer",
@@ -155,7 +166,7 @@ const Strength: React.FC = () => {
                   loading="lazy"
                   src={selectors[2].src}
                   alt={selectors[2].alt}
-                  onClick={() => handleIncrement(index)}
+                  onClick={(event) => handleIncrement(index, event)}
                   style={{
                     opacity:
                       points[index] === maxPoints[index] || valueCount === 0
