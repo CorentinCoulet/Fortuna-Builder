@@ -1,4 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, AppDispatch } from "../store";
+import {
+  setLevelPoints,
+  incrementPoint,
+  decrementPoint,
+  resetPoint,
+  setPointsFromStorage,
+} from "../features/components/aptitudeMajorSlice";
 import {
   nameCategories,
   nameCategoriesHover,
@@ -8,8 +17,10 @@ import {
 } from "../asset";
 import "../styles/components/Major.scss";
 
+// Définition des paliers de niveaux
 const major: number[] = [25, 75, 125, 175];
 
+// Définition des messages de survol
 const majorHover = {
   1: "+1 PA",
   2: {
@@ -29,15 +40,22 @@ const majorHover = {
   7: "+50 Résistance Elémentaire",
 };
 
+// Limites de points pour chaque élément
 const maxPoints = [1, 1, 1, 1, 1, 1, 1];
 
 const Major: React.FC = () => {
-  const [valueCount, setValueCount] = useState<number>(0);
+  const dispatch: AppDispatch = useDispatch();
+  const points = useSelector((state: RootState) => state.major.points);
+  const valueCount = useSelector((state: RootState) => state.major.valueCount);
   const [hovered, setHovered] = useState<boolean>(false);
   const [hoveredElement, setHoveredElement] = useState<number | null>(null);
-  const [points, setPoints] = useState<number[]>([0, 0, 0, 0, 0, 0, 0]);
 
   useEffect(() => {
+    const savedPoints = localStorage.getItem("intelPoints");
+    if (savedPoints) {
+      dispatch(setPointsFromStorage(JSON.parse(savedPoints)));
+    }
+    
     const lvlClass = document.querySelector("#lvl") as HTMLInputElement | null;
 
     if (!lvlClass) return;
@@ -48,8 +66,7 @@ const Major: React.FC = () => {
       const closestIndex =
         index === -1 ? major.length - 1 : index === 0 ? 0 : index - 1;
       const newValueCount = closestIndex + 1;
-      setValueCount(newValueCount);
-      setPoints([0, 0, 0, 0, 0, 0, 0]);
+      dispatch(setLevelPoints(newValueCount));
     };
 
     handleInputChange();
@@ -66,7 +83,11 @@ const Major: React.FC = () => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem("intelPoints", JSON.stringify(points));
+  }, [points]);
 
   const handleMouseEnter = () => setHovered(true);
   const handleMouseLeave = () => setHovered(false);
@@ -74,37 +95,19 @@ const Major: React.FC = () => {
   const handleElementMouseLeave = () => setHoveredElement(null);
 
   const handleIncrement = (index: number, event: React.MouseEvent) => {
-    const isCtrlClick = event.ctrlKey;
-    const incrementValue = isCtrlClick ? Math.min(10, valueCount) : 1;
-
-    if (points[index] < maxPoints[index] && valueCount > 0) {
-      const newPoints = [...points];
-      newPoints[index] = Math.min(
-        points[index] + incrementValue,
-        maxPoints[index]
-      );
-      setPoints(newPoints);
-      setValueCount(valueCount - incrementValue);
-    }
+    const isShiftClick = event.shiftKey;
+    const incrementValue = isShiftClick ? Math.min(10, valueCount) : 1;
+    dispatch(incrementPoint({ index, increment: incrementValue }));
   };
 
   const handleDecrement = (index: number, event: React.MouseEvent) => {
-    const isCtrlClick = event.ctrlKey;
-    const decrementValue = isCtrlClick ? Math.min(10, points[index]) : 1;
-
-    if (points[index] > 0) {
-      const newPoints = [...points];
-      newPoints[index] = Math.max(points[index] - decrementValue, 0);
-      setPoints(newPoints);
-      setValueCount(valueCount + decrementValue);
-    }
+    const isShiftClick = event.shiftKey;
+    const decrementValue = isShiftClick ? Math.min(10, points[index]) : 1;
+    dispatch(decrementPoint({ index, decrement: decrementValue }));
   };
 
   const handleReset = (index: number) => {
-    const newPoints = [...points];
-    setValueCount(valueCount + newPoints[index]);
-    newPoints[index] = 0;
-    setPoints(newPoints);
+    dispatch(resetPoint(index));
   };
 
   const getHoverText = (index: number, subIndex: number | null = null) => {
