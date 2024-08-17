@@ -4,6 +4,7 @@ import '../styles/components/SpellsClasses.scss';
 interface Spell {
     src: string;
     alt: string;
+    key?: string;
 }
 
 interface SpellsClassesProps {
@@ -30,9 +31,9 @@ const SpellsClasses: React.FC<SpellsClassesProps> = ({
 
         return (
             <section>
-                {Object.entries(spellsSection).map(([key, spell]) => (
+                {Object.entries(spellsSection).map(([key, spell], index) => (
                     <div
-                        key={`${sectionKey}-${key}`}
+                        key={spell.key || `${sectionKey}-${key}-${spell.src}-${index}`}
                         onDoubleClick={() => handleSpellDoubleClick(spell, type)}
                     >
                         <img

@@ -153,11 +153,11 @@ export const PrimaryStats: { [key: number]: {src: string; alt: string } } = {
 };
 
 // Importantion des aptitudes
-import Intelligence from './assets/aptitudes/intelligence.webp';
-import Strength from './assets/aptitudes/strength.webp';
-import Agility from './assets/aptitudes/agility.webp';
-import Chance from './assets/aptitudes/chance.webp';
-import Major from './assets/aptitudes/major.webp';
+import Intelligence from './assets/iconsAptitudes/intelligence.webp';
+import Strength from './assets/iconsAptitudes/strength.webp';
+import Agility from './assets/iconsAptitudes/agility.webp';
+import Chance from './assets/iconsAptitudes/chance.webp';
+import Major from './assets/iconsAptitudes/major.webp';
 export const nameCategories = {
     1: { src : Intelligence, alt: 'Intelligence'},
     2: { src : Strength, alt: 'Strength'},
@@ -166,11 +166,11 @@ export const nameCategories = {
     5: { src : Major, alt: 'Major'},
 }
 
-import IntelligenceHover from './assets/aptitudes/intelligence_over.webp';
-import StrengthHover from './assets/aptitudes/strength_over.webp';
-import AgilityHover from './assets/aptitudes/agility_over.webp';
-import ChanceHover from './assets/aptitudes/chance_over.webp';
-import MajorHover from './assets/aptitudes/major_over.webp';
+import IntelligenceHover from './assets/iconsAptitudes/intelligence_over.webp';
+import StrengthHover from './assets/iconsAptitudes/strength_over.webp';
+import AgilityHover from './assets/iconsAptitudes/agility_over.webp';
+import ChanceHover from './assets/iconsAptitudes/chance_over.webp';
+import MajorHover from './assets/iconsAptitudes/major_over.webp';
 export const nameCategoriesHover = {
     1: { src : IntelligenceHover, alt: 'Intelligence hover'},
     2: { src : StrengthHover, alt: 'Strength hover'},
@@ -264,7 +264,6 @@ export const aptLogos = {
         7: { src : ElementalResistanceMajorApt, alt: 'Résistance Elementaire'}, 
     },
 }
-
 export const aptLogosHover = {
     1: {
         1: { src : PercentHpAptHover, alt: '% Points de Vie'},
@@ -329,3 +328,26 @@ export const selectors = {
     3: { src : Zero, alt: 'Zero'},
 }
 
+// Importation des cases d'enchantement
+import ShardBlueActived from './assets/enchant/shard_blue_full.webp';
+import ShardGreenActived from './assets/enchant/shard_green_full.webp';
+import ShardRedActived from './assets/enchant/shard_red_full.webp';
+import ShardWhiteActived from './assets/enchant/shard_white_full.webp';
+import ShardWhiteEmpty from './assets/enchant/shard_white_empty.webp';
+export const shards = {
+    1: { src : ShardBlueActived, alt: 'Shard Blue Actived'},
+    2: { src : ShardGreenActived, alt: 'Shard Green Actived'},
+    3: { src : ShardRedActived, alt: 'Shard Red Actived'},
+    4: { src : ShardWhiteActived, alt: 'Shard White Actived'},
+    5: { src : ShardWhiteEmpty, alt: 'Shard White Empty'},
+}
+
+// Importations des parchemins
+import GreenParchment from './assets/sublimations/greenParchment.webp';
+import OrangeParchment from './assets/sublimations/orangeParchment.webp';
+import WhiteParchment from './assets/sublimations/whiteParchment.webp';
+export const parchments = {
+    1: { src : GreenParchment, alt: 'Green Parchment'},
+    2: { src : OrangeParchment, alt: 'Orange Parchment'},
+    3: { src : WhiteParchment, alt: 'White Parchment'},
+}

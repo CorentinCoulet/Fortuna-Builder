@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Deck from "../components/Deck";
 import SpellsClasses from "../components/SpellsClasses";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../store";
+import {
+  setSelectedClass,
+  addActiveSpell,
+  removeActiveSpell,
+  addPassiveSpell,
+  removePassiveSpell,
+  clearAllSpells,
+  loadSpellsFromStorage,
+} from "../features/components/spellsSlice.ts";
 
 interface Spell {
   src: string;
@@ -14,27 +23,31 @@ interface Spells {
 }
 
 const Spells: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const selectedClass = useSelector((state: RootState) => state.spells.selectedClass);
+  const activeSpells = useSelector((state: RootState) => state.spells.activeSpells);
+  const passiveSpells = useSelector((state: RootState) => state.spells.passiveSpells);
   const selectedImage = useSelector(
     (state: RootState) => state.image.selectedImage
   );
   const [spells, setSpells] = useState<Spells>({});
   const [commonSpells, setCommonSpells] = useState<Spells>({});
-  const [selectedClass, setSelectedClass] = useState<string>("");
-  const [activeSpells, setActiveSpells] = useState<Spell[]>([]);
-  const [passiveSpells, setPassiveSpells] = useState<Spell[]>([]);
+
 
   useEffect(() => {
     const savedActiveSpells = localStorage.getItem("activeSpells");
     const savedPassiveSpells = localStorage.getItem("passiveSpells");
 
-    if (savedActiveSpells) {
-      setActiveSpells(JSON.parse(savedActiveSpells));
+    if (savedActiveSpells && savedPassiveSpells) {
+      dispatch(
+        loadSpellsFromStorage({
+          selectedClass,
+          activeSpells: JSON.parse(savedActiveSpells),
+          passiveSpells: JSON.parse(savedPassiveSpells),
+        })
+      );
     }
-
-    if (savedPassiveSpells) {
-      setPassiveSpells(JSON.parse(savedPassiveSpells));
-    }
-  }, []);
+  }, [dispatch, selectedClass]);
 
   useEffect(() => {
     localStorage.setItem("activeSpells", JSON.stringify(activeSpells));
@@ -44,9 +57,9 @@ const Spells: React.FC = () => {
   useEffect(() => {
     if (selectedImage) {
       const className = selectedImage.split("/").pop()?.split(".")[0] || "";
-      setSelectedClass(className.charAt(0).toUpperCase() + className.slice(1));
+      dispatch(setSelectedClass(className.charAt(0).toUpperCase() + className.slice(1)));
     }
-  }, [selectedImage]);
+  }, [dispatch, selectedImage]);
 
   useEffect(() => {
     if (selectedClass) {
@@ -77,13 +90,9 @@ const Spells: React.FC = () => {
     if (isSelected) {
       imageElement.classList.remove("selected");
       if (type === "active") {
-        setActiveSpells((prev) => 
-            prev.filter((s) => s.src !== spell.src || s.alt !== spell.alt)
-          );
+        dispatch(removeActiveSpell(spell));
       } else {
-        setPassiveSpells((prev) => 
-            prev.filter((s) => s.src !== spell.src || s.alt !== spell.alt)
-          );
+        dispatch(removePassiveSpell(spell));
       }
       
     } else {
@@ -92,13 +101,13 @@ const Spells: React.FC = () => {
             activeSpells.length < 12 && 
             (selectedElementCount + selectedActiveCount) < 12){
             imageElement.classList.add('selected');
-            setActiveSpells((prev) => [...prev, spell]);       
+            dispatch(addActiveSpell(spell));       
         } else if(
             type === 'passive' && 
             passiveSpells.length < 6 && 
             selectedPassiveCount < 6){
             imageElement.classList.add('selected');
-            setPassiveSpells((prev) => [...prev, spell]);
+            dispatch(addPassiveSpell(spell));
         }
     }
   };
@@ -107,8 +116,7 @@ const Spells: React.FC = () => {
     document.querySelectorAll('.spellsClasses img.selected').forEach((img) => {
         img.classList.remove('selected');
     });
-    setActiveSpells([]);
-    setPassiveSpells([]);
+    dispatch(clearAllSpells());
     localStorage.removeItem('activeSpells');
     localStorage.removeItem('passiveSpells');
   }

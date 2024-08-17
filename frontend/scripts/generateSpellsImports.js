@@ -1,123 +1,123 @@
 // Common
-import CommonActive1 from '../src/assets/sorts/common/active-1.png';
-import CommonActive2 from '../src/assets/sorts/common/active-2.png';
-import CommonActive3 from '../src/assets/sorts/common/active-3.png';
-import CommonPassive1 from '../src/assets/sorts/common/passive-1.png';
-import CommonPassive2 from '../src/assets/sorts/common/passive-2.png';
-import CommonPassive3 from '../src/assets/sorts/common/passive-3.png';
-import CommonPassive4 from '../src/assets/sorts/common/passive-4.png';
-import CommonPassive5 from '../src/assets/sorts/common/passive-5.png';
-import CommonPassive6 from '../src/assets/sorts/common/passive-6.png';
-import CommonPassive7 from '../src/assets/sorts/common/passive-7.png';
-import CommonPassive8 from '../src/assets/sorts/common/passive-8.png';
+import CommonActive1 from '../src/assets/sorts/common/active-1.webp';
+import CommonActive2 from '../src/assets/sorts/common/active-2.webp';
+import CommonActive3 from '../src/assets/sorts/common/active-3.webp';
+import CommonPassive1 from '../src/assets/sorts/common/passive-1.webp';
+import CommonPassive2 from '../src/assets/sorts/common/passive-2.webp';
+import CommonPassive3 from '../src/assets/sorts/common/passive-3.webp';
+import CommonPassive4 from '../src/assets/sorts/common/passive-4.webp';
+import CommonPassive5 from '../src/assets/sorts/common/passive-5.webp';
+import CommonPassive6 from '../src/assets/sorts/common/passive-6.webp';
+import CommonPassive7 from '../src/assets/sorts/common/passive-7.webp';
+import CommonPassive8 from '../src/assets/sorts/common/passive-8.webp';
 export const CommonSpells = {
     active: {
-        1: { src: CommonActive1, alt: '' },
-        2: { src: CommonActive2, alt: '' },
-        3: { src: CommonActive3, alt: '' },
+        1: { src: CommonActive1, alt: '', number: 5622 },
+        2: { src: CommonActive2, alt: '', number: 5623 },
+        3: { src: CommonActive3, alt: '', number: 6327 },
     },
     passive: {
-        1: { src: CommonPassive1, alt: '' },
-        2: { src: CommonPassive2, alt: '' },
-        3: { src: CommonPassive3, alt: '' },
-        4: { src: CommonPassive4, alt: '' },
-        5: { src: CommonPassive5, alt: '' },
-        6: { src: CommonPassive6, alt: '' },
-        7: { src: CommonPassive7, alt: '' },
-        8: { src: CommonPassive8, alt: '' },
+        1: { src: CommonPassive1, alt: '', number: 4957 },
+        2: { src: CommonPassive2, alt: '', number: 4958 },
+        3: { src: CommonPassive3, alt: '', number: 4956 },
+        4: { src: CommonPassive4, alt: '', number: 5237 },
+        5: { src: CommonPassive5, alt: '', number: 5146 },
+        6: { src: CommonPassive6, alt: '', number: 5145 },
+        7: { src: CommonPassive7, alt: '', number: 5144 },
+        8: { src: CommonPassive8, alt: '', number: 5621 },
     },
 };
 // Cra
-import CraActive1 from '../src/assets/sorts/cra/active-1.png';
-import CraActive2 from '../src/assets/sorts/cra/active-2.png';
-import CraActive3 from '../src/assets/sorts/cra/active-3.png';
-import CraActive4 from '../src/assets/sorts/cra/active-4.png';
-import CraActive5 from '../src/assets/sorts/cra/active-5.png';
-import CraActive6 from '../src/assets/sorts/cra/active-6.png';
-import CraEarth1 from '../src/assets/sorts/cra/earth-1.png';
-import CraEarth2 from '../src/assets/sorts/cra/earth-2.png';
-import CraEarth3 from '../src/assets/sorts/cra/earth-3.png';
-import CraEarth4 from '../src/assets/sorts/cra/earth-4.png';
-import CraEarth5 from '../src/assets/sorts/cra/earth-5.png';
-import CraFire1 from '../src/assets/sorts/cra/fire-1.png';
-import CraFire2 from '../src/assets/sorts/cra/fire-2.png';
-import CraFire3 from '../src/assets/sorts/cra/fire-3.png';
-import CraFire4 from '../src/assets/sorts/cra/fire-4.png';
-import CraFire5 from '../src/assets/sorts/cra/fire-5.png';
-import CraPassive1 from '../src/assets/sorts/cra/passive-1.png';
-import CraPassive10 from '../src/assets/sorts/cra/passive-10.png';
-import CraPassive11 from '../src/assets/sorts/cra/passive-11.png';
-import CraPassive12 from '../src/assets/sorts/cra/passive-12.png';
-import CraPassive13 from '../src/assets/sorts/cra/passive-13.png';
-import CraPassive14 from '../src/assets/sorts/cra/passive-14.png';
-import CraPassive15 from '../src/assets/sorts/cra/passive-15.png';
-import CraPassive16 from '../src/assets/sorts/cra/passive-16.png';
-import CraPassive17 from '../src/assets/sorts/cra/passive-17.png';
-import CraPassive18 from '../src/assets/sorts/cra/passive-18.png';
-import CraPassive19 from '../src/assets/sorts/cra/passive-19.png';
-import CraPassive2 from '../src/assets/sorts/cra/passive-2.png';
-import CraPassive3 from '../src/assets/sorts/cra/passive-3.png';
-import CraPassive4 from '../src/assets/sorts/cra/passive-4.png';
-import CraPassive5 from '../src/assets/sorts/cra/passive-5.png';
-import CraPassive6 from '../src/assets/sorts/cra/passive-6.png';
-import CraPassive7 from '../src/assets/sorts/cra/passive-7.png';
-import CraPassive8 from '../src/assets/sorts/cra/passive-8.png';
-import CraPassive9 from '../src/assets/sorts/cra/passive-9.png';
-import CraWind1 from '../src/assets/sorts/cra/wind-1.png';
-import CraWind2 from '../src/assets/sorts/cra/wind-2.png';
-import CraWind3 from '../src/assets/sorts/cra/wind-3.png';
-import CraWind4 from '../src/assets/sorts/cra/wind-4.png';
-import CraWind5 from '../src/assets/sorts/cra/wind-5.png';
+import CraActive1 from '../src/assets/sorts/cra/active-1.webp';
+import CraActive2 from '../src/assets/sorts/cra/active-2.webp';
+import CraActive3 from '../src/assets/sorts/cra/active-3.webp';
+import CraActive4 from '../src/assets/sorts/cra/active-4.webp';
+import CraActive5 from '../src/assets/sorts/cra/active-5.webp';
+import CraActive6 from '../src/assets/sorts/cra/active-6.webp';
+import CraEarth1 from '../src/assets/sorts/cra/earth-1.webp';
+import CraEarth2 from '../src/assets/sorts/cra/earth-2.webp';
+import CraEarth3 from '../src/assets/sorts/cra/earth-3.webp';
+import CraEarth4 from '../src/assets/sorts/cra/earth-4.webp';
+import CraEarth5 from '../src/assets/sorts/cra/earth-5.webp';
+import CraFire1 from '../src/assets/sorts/cra/fire-1.webp';
+import CraFire2 from '../src/assets/sorts/cra/fire-2.webp';
+import CraFire3 from '../src/assets/sorts/cra/fire-3.webp';
+import CraFire4 from '../src/assets/sorts/cra/fire-4.webp';
+import CraFire5 from '../src/assets/sorts/cra/fire-5.webp';
+import CraPassive1 from '../src/assets/sorts/cra/passive-1.webp';
+import CraPassive10 from '../src/assets/sorts/cra/passive-10.webp';
+import CraPassive11 from '../src/assets/sorts/cra/passive-11.webp';
+import CraPassive12 from '../src/assets/sorts/cra/passive-12.webp';
+import CraPassive13 from '../src/assets/sorts/cra/passive-13.webp';
+import CraPassive14 from '../src/assets/sorts/cra/passive-14.webp';
+import CraPassive15 from '../src/assets/sorts/cra/passive-15.webp';
+import CraPassive16 from '../src/assets/sorts/cra/passive-16.webp';
+import CraPassive17 from '../src/assets/sorts/cra/passive-17.webp';
+import CraPassive18 from '../src/assets/sorts/cra/passive-18.webp';
+import CraPassive19 from '../src/assets/sorts/cra/passive-19.webp';
+import CraPassive2 from '../src/assets/sorts/cra/passive-2.webp';
+import CraPassive3 from '../src/assets/sorts/cra/passive-3.webp';
+import CraPassive4 from '../src/assets/sorts/cra/passive-4.webp';
+import CraPassive5 from '../src/assets/sorts/cra/passive-5.webp';
+import CraPassive6 from '../src/assets/sorts/cra/passive-6.webp';
+import CraPassive7 from '../src/assets/sorts/cra/passive-7.webp';
+import CraPassive8 from '../src/assets/sorts/cra/passive-8.webp';
+import CraPassive9 from '../src/assets/sorts/cra/passive-9.webp';
+import CraWind1 from '../src/assets/sorts/cra/wind-1.webp';
+import CraWind2 from '../src/assets/sorts/cra/wind-2.webp';
+import CraWind3 from '../src/assets/sorts/cra/wind-3.webp';
+import CraWind4 from '../src/assets/sorts/cra/wind-4.webp';
+import CraWind5 from '../src/assets/sorts/cra/wind-5.webp';
 export const CraSpells = {
     active: {
-        1: { src: CraActive1, alt: '' },
-        2: { src: CraActive2, alt: '' },
-        3: { src: CraActive3, alt: '' },
-        4: { src: CraActive4, alt: '' },
-        5: { src: CraActive5, alt: '' },
-        6: { src: CraActive6, alt: '' },
+        1: { src: CraActive1, alt: '', number: 4774 },
+        2: { src: CraActive2, alt: '', number: 4805 },
+        3: { src: CraActive3, alt: '', number: 4806 },
+        4: { src: CraActive4, alt: '', number: 7753 },
+        5: { src: CraActive5, alt: '', number: 4808 },
+        6: { src: CraActive6, alt: '', number: 6842 },
     },
     earth: {
-        1: { src: CraEarth1, alt: '' },
-        2: { src: CraEarth2, alt: '' },
-        3: { src: CraEarth3, alt: '' },
-        4: { src: CraEarth4, alt: '' },
-        5: { src: CraEarth5, alt: '' },
+        1: { src: CraEarth1, alt: '', number: 4816 },
+        2: { src: CraEarth2, alt: '', number: 4817 },
+        3: { src: CraEarth3, alt: '', number: 4818 },
+        4: { src: CraEarth4, alt: '', number: 4815 },
+        5: { src: CraEarth5, alt: '', number: 4814 },
     },
     fire: {
-        1: { src: CraFire1, alt: '' },
-        2: { src: CraFire2, alt: '' },
-        3: { src: CraFire3, alt: '' },
-        4: { src: CraFire4, alt: '' },
-        5: { src: CraFire5, alt: '' },
+        1: { src: CraFire1, alt: '', number: 4820 },
+        2: { src: CraFire2, alt: '', number: 4822 },
+        3: { src: CraFire3, alt: '', number: 4821 },
+        4: { src: CraFire4, alt: '', number: 4769 },
+        5: { src: CraFire5, alt: '', number: 4819 },
     },
     passive: {
-        1: { src: CraPassive1, alt: '' },
-        10: { src: CraPassive10, alt: '' },
-        11: { src: CraPassive11, alt: '' },
-        12: { src: CraPassive12, alt: '' },
-        13: { src: CraPassive13, alt: '' },
-        14: { src: CraPassive14, alt: '' },
-        15: { src: CraPassive15, alt: '' },
-        16: { src: CraPassive16, alt: '' },
-        17: { src: CraPassive17, alt: '' },
-        18: { src: CraPassive18, alt: '' },
-        19: { src: CraPassive19, alt: '' },
-        2: { src: CraPassive2, alt: '' },
-        3: { src: CraPassive3, alt: '' },
-        4: { src: CraPassive4, alt: '' },
-        5: { src: CraPassive5, alt: '' },
-        6: { src: CraPassive6, alt: '' },
-        7: { src: CraPassive7, alt: '' },
-        8: { src: CraPassive8, alt: '' },
-        9: { src: CraPassive9, alt: '' },
+        1: { src: CraPassive1, alt: '', number: 6945 },
+        10: { src: CraPassive10, alt: '', number: 6955 },
+        11: { src: CraPassive11, alt: '', number: 6956 },
+        12: { src: CraPassive12, alt: '', number: 6959 },
+        13: { src: CraPassive13, alt: '', number: 6958 },
+        14: { src: CraPassive14, alt: '', number: 6948 },
+        15: { src: CraPassive15, alt: '', number: 6949 },
+        16: { src: CraPassive16, alt: '', number: 6961 },
+        17: { src: CraPassive17, alt: '', number: 7795 },
+        18: { src: CraPassive18, alt: '', number: 6963 },
+        19: { src: CraPassive19, alt: '', number: 6962 },
+        2: { src: CraPassive2, alt: '', number: 6946 },
+        3: { src: CraPassive3, alt: '', number: 6947 },
+        4: { src: CraPassive4, alt: '', number: 6950 },
+        5: { src: CraPassive5, alt: '', number: 6960 },
+        6: { src: CraPassive6, alt: '', number: 6957 },
+        7: { src: CraPassive7, alt: '', number: 6951 },
+        8: { src: CraPassive8, alt: '', number: 6952 },
+        9: { src: CraPassive9, alt: '', number: 6953 },
     },
     wind: {
-        1: { src: CraWind1, alt: '' },
-        2: { src: CraWind2, alt: '' },
-        3: { src: CraWind3, alt: '' },
-        4: { src: CraWind4, alt: '' },
-        5: { src: CraWind5, alt: '' },
+        1: { src: CraWind1, alt: '', number: 4813 },
+        2: { src: CraWind2, alt: '', number: 4810 },
+        3: { src: CraWind3, alt: '', number: 4809 },
+        4: { src: CraWind4, alt: '', number: 4811 },
+        5: { src: CraWind5, alt: '', number: 4812 },
     },
 };
 // Ecaflip
@@ -164,58 +164,58 @@ import EcaflipWater4 from '../src/assets/sorts/ecaflip/water-4.png';
 import EcaflipWater5 from '../src/assets/sorts/ecaflip/water-5.png';
 export const EcaflipSpells = {
     active: {
-        1: { src: EcaflipActive1, alt: '' },
-        2: { src: EcaflipActive2, alt: '' },
-        3: { src: EcaflipActive3, alt: '' },
-        4: { src: EcaflipActive4, alt: '' },
-        5: { src: EcaflipActive5, alt: '' },
-        6: { src: EcaflipActive6, alt: '' },
+        1: { src: EcaflipActive1, alt: '', number: 2060 },
+        2: { src: EcaflipActive2, alt: '', number: 2075 },
+        3: { src: EcaflipActive3, alt: '', number: 2061 },
+        4: { src: EcaflipActive4, alt: '', number: 2078 },
+        5: { src: EcaflipActive5, alt: '', number: 2079 },
+        6: { src: EcaflipActive6, alt: '', number: 7225 },
     },
     earth: {
-        1: { src: EcaflipEarth1, alt: '' },
-        2: { src: EcaflipEarth2, alt: '' },
-        3: { src: EcaflipEarth3, alt: '' },
-        4: { src: EcaflipEarth4, alt: '' },
-        5: { src: EcaflipEarth5, alt: '' },
+        1: { src: EcaflipEarth1, alt: '', number: 2041 },
+        2: { src: EcaflipEarth2, alt: '', number: 2047 },
+        3: { src: EcaflipEarth3, alt: '', number: 2049 },
+        4: { src: EcaflipEarth4, alt: '', number: 2043 },
+        5: { src: EcaflipEarth5, alt: '', number: 2044 },
     },
     fire: {
-        1: { src: EcaflipFire1, alt: '' },
-        2: { src: EcaflipFire2, alt: '' },
-        3: { src: EcaflipFire3, alt: '' },
-        4: { src: EcaflipFire4, alt: '' },
-        5: { src: EcaflipFire5, alt: '' },
+        1: { src: EcaflipFire1, alt: '', number: 2045 },
+        2: { src: EcaflipFire2, alt: '', number: 2050 },
+        3: { src: EcaflipFire3, alt: '', number: 2042 },
+        4: { src: EcaflipFire4, alt: '', number: 2048 },
+        5: { src: EcaflipFire5, alt: '', number: 2046 },
     },
     passive: {
-        1: { src: EcaflipPassive1, alt: '' },
-        10: { src: EcaflipPassive10, alt: '' },
-        11: { src: EcaflipPassive11, alt: '' },
-        12: { src: EcaflipPassive12, alt: '' },
-        13: { src: EcaflipPassive13, alt: '' },
-        14: { src: EcaflipPassive14, alt: '' },
-        15: { src: EcaflipPassive15, alt: '' },
-        16: { src: EcaflipPassive16, alt: '' },
-        17: { src: EcaflipPassive17, alt: '' },
-        18: { src: EcaflipPassive18, alt: '' },
-        19: { src: EcaflipPassive19, alt: '' },
-        2: { src: EcaflipPassive2, alt: '' },
-        20: { src: EcaflipPassive20, alt: '' },
-        3: { src: EcaflipPassive3, alt: '' },
-        4: { src: EcaflipPassive4, alt: '' },
-        5: { src: EcaflipPassive5, alt: '' },
-        6: { src: EcaflipPassive6, alt: '' },
-        7: { src: EcaflipPassive7, alt: '' },
-        8: { src: EcaflipPassive8, alt: '' },
-        9: { src: EcaflipPassive9, alt: '' },
+        1: { src: EcaflipPassive1, alt: '', number: 2068 },  
+        10: { src: EcaflipPassive10, alt: '', number: 7954 },
+        11: { src: EcaflipPassive11, alt: '', number: 7955 },
+        12: { src: EcaflipPassive12, alt: '', number: 7956 },
+        13: { src: EcaflipPassive13, alt: '', number: 7957 },
+        14: { src: EcaflipPassive14, alt: '', number: 7958 },
+        15: { src: EcaflipPassive15, alt: '', number: 7959 },
+        16: { src: EcaflipPassive16, alt: '', number: 7960 },
+        17: { src: EcaflipPassive17, alt: '', number: 7961 },
+        18: { src: EcaflipPassive18, alt: '', number: 8001 },
+        19: { src: EcaflipPassive19, alt: '', number: 7999 },
+        2: { src: EcaflipPassive2, alt: '', number: 2062 },
+        20: { src: EcaflipPassive20, alt: '', number: 8000 },
+        3: { src: EcaflipPassive3, alt: '', number: 2076 },
+        4: { src: EcaflipPassive4, alt: '', number: 2080 },
+        5: { src: EcaflipPassive5, alt: '', number: 2059 },
+        6: { src: EcaflipPassive6, alt: '', number: 5246 },
+        7: { src: EcaflipPassive7, alt: '', number: 5250 },
+        8: { src: EcaflipPassive8, alt: '', number: 5249 },
+        9: { src: EcaflipPassive9, alt: '', number: 5251 },
     },
     water: {
-        1: { src: EcaflipWater1, alt: '' },
-        2: { src: EcaflipWater2, alt: '' },
-        3: { src: EcaflipWater3, alt: '' },
-        4: { src: EcaflipWater4, alt: '' },
-        5: { src: EcaflipWater5, alt: '' },
+        1: { src: EcaflipWater1, alt: '', number: 2065 },
+        2: { src: EcaflipWater2, alt: '', number: 2066 },
+        3: { src: EcaflipWater3, alt: '', number: 2067 },
+        4: { src: EcaflipWater4, alt: '', number: 2072 },
+        5: { src: EcaflipWater5, alt: '', number: 2073 },
     },
 };
-// Eliotrope
+// Eliotrope manquant
 import EliotropeActive1 from '../src/assets/sorts/eliotrope/active-1.png';
 import EliotropeActive2 from '../src/assets/sorts/eliotrope/active-2.png';
 import EliotropeActive3 from '../src/assets/sorts/eliotrope/active-3.png';
@@ -354,58 +354,58 @@ import EniripsaWind4 from '../src/assets/sorts/eniripsa/wind-4.png';
 import EniripsaWind5 from '../src/assets/sorts/eniripsa/wind-5.png';
 export const EniripsaSpells = {
     active: {
-        1: { src: EniripsaActive1, alt: '' },
-        2: { src: EniripsaActive2, alt: '' },
-        3: { src: EniripsaActive3, alt: '' },
-        4: { src: EniripsaActive4, alt: '' },
-        5: { src: EniripsaActive5, alt: '' },
-        6: { src: EniripsaActive6, alt: '' },
+        1: { src: EniripsaActive1, alt: '', number: 1535 },
+        2: { src: EniripsaActive2, alt: '', number: 782 },
+        3: { src: EniripsaActive3, alt: '', number: 781 },
+        4: { src: EniripsaActive4, alt: '', number: 627 },
+        5: { src: EniripsaActive5, alt: '', number: 1538 },
+        6: { src: EniripsaActive6, alt: '', number: 7985 },
     },
     fire: {
-        1: { src: EniripsaFire1, alt: '' },
-        2: { src: EniripsaFire2, alt: '' },
-        3: { src: EniripsaFire3, alt: '' },
-        4: { src: EniripsaFire4, alt: '' },
-        5: { src: EniripsaFire5, alt: '' },
+        1: { src: EniripsaFire1, alt: '', number: 645 },
+        2: { src: EniripsaFire2, alt: '', number: 1539 },
+        3: { src: EniripsaFire3, alt: '', number: 638 },
+        4: { src: EniripsaFire4, alt: '', number: 636 },
+        5: { src: EniripsaFire5, alt: '', number: 1534 },
     },
     passive: {
-        1: { src: EniripsaPassive1, alt: '' },
-        10: { src: EniripsaPassive10, alt: '' },
-        11: { src: EniripsaPassive11, alt: '' },
-        12: { src: EniripsaPassive12, alt: '' },
-        13: { src: EniripsaPassive13, alt: '' },
-        14: { src: EniripsaPassive14, alt: '' },
-        15: { src: EniripsaPassive15, alt: '' },
-        16: { src: EniripsaPassive16, alt: '' },
-        17: { src: EniripsaPassive17, alt: '' },
-        18: { src: EniripsaPassive18, alt: '' },
-        19: { src: EniripsaPassive19, alt: '' },
-        2: { src: EniripsaPassive2, alt: '' },
-        20: { src: EniripsaPassive20, alt: '' },
-        3: { src: EniripsaPassive3, alt: '' },
-        4: { src: EniripsaPassive4, alt: '' },
-        5: { src: EniripsaPassive5, alt: '' },
-        6: { src: EniripsaPassive6, alt: '' },
-        7: { src: EniripsaPassive7, alt: '' },
-        8: { src: EniripsaPassive8, alt: '' },
-        9: { src: EniripsaPassive9, alt: '' },
+        1: { src: EniripsaPassive1, alt: '', number: 1536 },
+        10: { src: EniripsaPassive10, alt: '', number: 7991 },
+        11: { src: EniripsaPassive11, alt: '', number: 7992 },
+        12: { src: EniripsaPassive12, alt: '', number: 5451 },
+        13: { src: EniripsaPassive13, alt: '', number: 7993 },
+        14: { src: EniripsaPassive14, alt: '', number: 7994 },
+        15: { src: EniripsaPassive15, alt: '', number: 7995 },
+        16: { src: EniripsaPassive16, alt: '', number: 7996 },
+        17: { src: EniripsaPassive17, alt: '', number: 5453 },
+        18: { src: EniripsaPassive18, alt: '', number: 7997 },
+        19: { src: EniripsaPassive19, alt: '', number: 7998 },
+        2: { src: EniripsaPassive2, alt: '', number: 1537 },
+        20: { src: EniripsaPassive20, alt: '', number: 5455 },
+        3: { src: EniripsaPassive3, alt: '', number: 5454 },
+        4: { src: EniripsaPassive4, alt: '', number: 644 },
+        5: { src: EniripsaPassive5, alt: '', number: 5463 },
+        6: { src: EniripsaPassive6, alt: '', number: 7987 },
+        7: { src: EniripsaPassive7, alt: '', number: 7990 },
+        8: { src: EniripsaPassive8, alt: '', number: 628 },
+        9: { src: EniripsaPassive9, alt: '', number: 1415 },
     },
     water: {
-        1: { src: EniripsaWater1, alt: '' },
-        2: { src: EniripsaWater2, alt: '' },
-        3: { src: EniripsaWater3, alt: '' },
-        4: { src: EniripsaWater4, alt: '' },
-        5: { src: EniripsaWater5, alt: '' },
+        1: { src: EniripsaWater1, alt: '', number: 1533 },
+        2: { src: EniripsaWater2, alt: '', number: 779 },
+        3: { src: EniripsaWater3, alt: '', number: 1532 },
+        4: { src: EniripsaWater4, alt: '', number: 780 },
+        5: { src: EniripsaWater5, alt: '', number: 625 },
     },
     wind: {
-        1: { src: EniripsaWind1, alt: '' },
-        2: { src: EniripsaWind2, alt: '' },
-        3: { src: EniripsaWind3, alt: '' },
-        4: { src: EniripsaWind4, alt: '' },
-        5: { src: EniripsaWind5, alt: '' },
+        1: { src: EniripsaWind1, alt: '', number: 630 },
+        2: { src: EniripsaWind2, alt: '', number: 1540 },
+        3: { src: EniripsaWind3, alt: '', number: 623 },
+        4: { src: EniripsaWind4, alt: '', number: 1542 },
+        5: { src: EniripsaWind5, alt: '', number: 1541 },
     },
 };
-// Enutrof
+// Enutrof 
 import EnutrofActive1 from '../src/assets/sorts/enutrof/active-1.png';
 import EnutrofActive2 from '../src/assets/sorts/enutrof/active-2.png';
 import EnutrofActive3 from '../src/assets/sorts/enutrof/active-3.png';
@@ -439,48 +439,48 @@ import EnutrofWater4 from '../src/assets/sorts/enutrof/water-4.png';
 import EnutrofWater5 from '../src/assets/sorts/enutrof/water-5.png';
 export const EnutrofSpells = {
     active: {
-        1: { src: EnutrofActive1, alt: '' },
-        2: { src: EnutrofActive2, alt: '' },
-        3: { src: EnutrofActive3, alt: '' },
-        4: { src: EnutrofActive4, alt: '' },
-        5: { src: EnutrofActive5, alt: '' },
-        6: { src: EnutrofActive6, alt: '' },
+        1: { src: EnutrofActive1, alt: '', number: 6324 },
+        2: { src: EnutrofActive2, alt: '', number: 2027 },
+        3: { src: EnutrofActive3, alt: '', number: 6405 },
+        4: { src: EnutrofActive4, alt: '', number: 6337 },
+        5: { src: EnutrofActive5, alt: '', number: 2064 },
+        6: { src: EnutrofActive6, alt: '', number: 2026 },
     },
     earth: {
-        1: { src: EnutrofEarth1, alt: '' },
-        2: { src: EnutrofEarth2, alt: '' },
-        3: { src: EnutrofEarth3, alt: '' },
-        4: { src: EnutrofEarth4, alt: '' },
-        5: { src: EnutrofEarth5, alt: '' },
+        1: { src: EnutrofEarth1, alt: '', number: 2008 },
+        2: { src: EnutrofEarth2, alt: '', number: 2010 },
+        3: { src: EnutrofEarth3, alt: '', number: 2011 },
+        4: { src: EnutrofEarth4, alt: '', number: 2012 },
+        5: { src: EnutrofEarth5, alt: '', number: 2013 },
     },
     fire: {
-        1: { src: EnutrofFire1, alt: '' },
-        2: { src: EnutrofFire2, alt: '' },
-        3: { src: EnutrofFire3, alt: '' },
-        4: { src: EnutrofFire4, alt: '' },
-        5: { src: EnutrofFire5, alt: '' },
+        1: { src: EnutrofFire1, alt: '', number: 2018 },
+        2: { src: EnutrofFire2, alt: '', number: 2019 },
+        3: { src: EnutrofFire3, alt: '', number: 2021 },
+        4: { src: EnutrofFire4, alt: '', number: 2037 },
+        5: { src: EnutrofFire5, alt: '', number: 2022 },
     },
     passive: {
-        1: { src: EnutrofPassive1, alt: '' },
-        10: { src: EnutrofPassive10, alt: '' },
-        2: { src: EnutrofPassive2, alt: '' },
-        3: { src: EnutrofPassive3, alt: '' },
-        4: { src: EnutrofPassive4, alt: '' },
-        5: { src: EnutrofPassive5, alt: '' },
-        6: { src: EnutrofPassive6, alt: '' },
-        7: { src: EnutrofPassive7, alt: '' },
-        8: { src: EnutrofPassive8, alt: '' },
-        9: { src: EnutrofPassive9, alt: '' },
+        1: { src: EnutrofPassive1, alt: '', number: 2028 },
+        10: { src: EnutrofPassive10, alt: '', number: 5071 },
+        2: { src: EnutrofPassive2, alt: '', number: 2009 },
+        3: { src: EnutrofPassive3, alt: '', number: 2057 },
+        4: { src: EnutrofPassive4, alt: '', number: 5076 },
+        5: { src: EnutrofPassive5, alt: '', number: 2039 },
+        6: { src: EnutrofPassive6, alt: '', number: 5059 },
+        7: { src: EnutrofPassive7, alt: '', number: 5075 },
+        8: { src: EnutrofPassive8, alt: '', number: 2040 },
+        9: { src: EnutrofPassive9, alt: '', number: 6326 },
     },
     water: {
-        1: { src: EnutrofWater1, alt: '' },
-        2: { src: EnutrofWater2, alt: '' },
-        3: { src: EnutrofWater3, alt: '' },
-        4: { src: EnutrofWater4, alt: '' },
-        5: { src: EnutrofWater5, alt: '' },
+        1: { src: EnutrofWater1, alt: '', number: 2032 },
+        2: { src: EnutrofWater2, alt: '', number: 2015 },
+        3: { src: EnutrofWater3, alt: '', number: 2014 },
+        4: { src: EnutrofWater4, alt: '', number: 2016 },
+        5: { src: EnutrofWater5, alt: '', number: 2017 },
     },
 };
-// Feca
+// Feca manquant
 import FecaActive1 from '../src/assets/sorts/feca/active-1.png';
 import FecaActive2 from '../src/assets/sorts/feca/active-2.png';
 import FecaActive3 from '../src/assets/sorts/feca/active-3.png';
@@ -618,63 +618,63 @@ import HuppermageWind4 from '../src/assets/sorts/huppermage/wind-4.png';
 import HuppermageWind5 from '../src/assets/sorts/huppermage/wind-5.png';
 export const HuppermageSpells = {
     active: {
-        1: { src: HuppermageActive1, alt: '' },
-        2: { src: HuppermageActive2, alt: '' },
-        3: { src: HuppermageActive3, alt: '' },
-        4: { src: HuppermageActive4, alt: '' },
-        5: { src: HuppermageActive5, alt: '' },
-        6: { src: HuppermageActive6, alt: '' },
+        1: { src: HuppermageActive1, alt: '', number: 5575 },
+        2: { src: HuppermageActive2, alt: '', number: 7755 },
+        3: { src: HuppermageActive3, alt: '', number: 5576 },
+        4: { src: HuppermageActive4, alt: '', number: 7754 },
+        5: { src: HuppermageActive5, alt: '', number: 5577 },
+        6: { src: HuppermageActive6, alt: '', number: 7809 },
     },
     earth: {
-        1: { src: HuppermageEarth1, alt: '' },
-        2: { src: HuppermageEarth2, alt: '' },
-        3: { src: HuppermageEarth3, alt: '' },
-        4: { src: HuppermageEarth4, alt: '' },
-        5: { src: HuppermageEarth5, alt: '' },
+        1: { src: HuppermageEarth1, alt: '', number: 5567 },
+        2: { src: HuppermageEarth2, alt: '', number: 5569 },
+        3: { src: HuppermageEarth3, alt: '', number: 5597 },
+        4: { src: HuppermageEarth4, alt: '', number: 5568 },
+        5: { src: HuppermageEarth5, alt: '', number: 5595 },
     },
     fire: {
-        1: { src: HuppermageFire1, alt: '' },
-        2: { src: HuppermageFire2, alt: '' },
-        3: { src: HuppermageFire3, alt: '' },
-        4: { src: HuppermageFire4, alt: '' },
-        5: { src: HuppermageFire5, alt: '' },
+        1: { src: HuppermageFire1, alt: '', number: 5562 },
+        2: { src: HuppermageFire2, alt: '', number: 5571 },
+        3: { src: HuppermageFire3, alt: '', number: 5561 },
+        4: { src: HuppermageFire4, alt: '', number: 5563 },
+        5: { src: HuppermageFire5, alt: '', number: 5591 },
     },
     passive: {
-        1: { src: HuppermagePassive1, alt: '' },
-        10: { src: HuppermagePassive10, alt: '' },
-        11: { src: HuppermagePassive11, alt: '' },
-        12: { src: HuppermagePassive12, alt: '' },
-        13: { src: HuppermagePassive13, alt: '' },
-        14: { src: HuppermagePassive14, alt: '' },
-        15: { src: HuppermagePassive15, alt: '' },
-        16: { src: HuppermagePassive16, alt: '' },
-        17: { src: HuppermagePassive17, alt: '' },
-        18: { src: HuppermagePassive18, alt: '' },
-        2: { src: HuppermagePassive2, alt: '' },
-        3: { src: HuppermagePassive3, alt: '' },
-        4: { src: HuppermagePassive4, alt: '' },
-        5: { src: HuppermagePassive5, alt: '' },
-        6: { src: HuppermagePassive6, alt: '' },
-        7: { src: HuppermagePassive7, alt: '' },
-        8: { src: HuppermagePassive8, alt: '' },
-        9: { src: HuppermagePassive9, alt: '' },
+        1: { src: HuppermagePassive1, alt: '', number: 5579 },
+        10: { src: HuppermagePassive10, alt: '', number: 5588 },
+        11: { src: HuppermagePassive11, alt: '', number: 7804 },
+        12: { src: HuppermagePassive12, alt: '', number: 7805 },
+        13: { src: HuppermagePassive13, alt: '', number: 7803 },
+        14: { src: HuppermagePassive14, alt: '', number: 7801 },
+        15: { src: HuppermagePassive15, alt: '', number: 5584 },
+        16: { src: HuppermagePassive16, alt: '', number: 5580 },
+        17: { src: HuppermagePassive17, alt: '', number: 7800 },
+        18: { src: HuppermagePassive18, alt: '', number: 7798 },
+        2: { src: HuppermagePassive2, alt: '', number: 7802 },
+        3: { src: HuppermagePassive3, alt: '', number: 5581 },
+        4: { src: HuppermagePassive4, alt: '', number: 5582 },
+        5: { src: HuppermagePassive5, alt: '', number: 5585 },
+        6: { src: HuppermagePassive6, alt: '', number: 5583 },
+        7: { src: HuppermagePassive7, alt: '', number: 7797 },
+        8: { src: HuppermagePassive8, alt: '', number: 5586 },
+        9: { src: HuppermagePassive9, alt: '', number: 5587 },
     },
     water: {
-        1: { src: HuppermageWater1, alt: '' },
-        2: { src: HuppermageWater2, alt: '' },
-        3: { src: HuppermageWater3, alt: '' },
-        4: { src: HuppermageWater4, alt: '' },
-        5: { src: HuppermageWater5, alt: '' },
+        1: { src: HuppermageWater1, alt: '', number: 5564 },
+        2: { src: HuppermageWater2, alt: '', number: 5565 },
+        3: { src: HuppermageWater3, alt: '', number: 5594 },
+        4: { src: HuppermageWater4, alt: '', number: 5566 },
+        5: { src: HuppermageWater5, alt: '', number: 5593 },
     },
     wind: {
-        1: { src: HuppermageWind1, alt: '' },
-        2: { src: HuppermageWind2, alt: '' },
-        3: { src: HuppermageWind3, alt: '' },
-        4: { src: HuppermageWind4, alt: '' },
-        5: { src: HuppermageWind5, alt: '' },
+        1: { src: HuppermageWind1, alt: '', number: 5570 },
+        2: { src: HuppermageWind2, alt: '', number: 5572 },
+        3: { src: HuppermageWind3, alt: '', number: 5590 },
+        4: { src: HuppermageWind4, alt: '', number: 5596 },
+        5: { src: HuppermageWind5, alt: '', number: 5592 },
     },
 };
-// Iop
+// Iop manquant
 import IopActive1 from '../src/assets/sorts/iop/active-1.png';
 import IopActive2 from '../src/assets/sorts/iop/active-2.png';
 import IopActive3 from '../src/assets/sorts/iop/active-3.png';
@@ -749,7 +749,7 @@ export const IopSpells = {
         5: { src: IopWind5, alt: '' },
     },
 };
-// Osamodas
+// Osamodas manquant
 import OsamodasActive1 from '../src/assets/sorts/osamodas/active-1.png';
 import OsamodasActive2 from '../src/assets/sorts/osamodas/active-2.png';
 import OsamodasActive3 from '../src/assets/sorts/osamodas/active-3.png';
@@ -838,7 +838,7 @@ export const OsamodasSpells = {
         5: { src: OsamodasWind5, alt: '' },
     },
 };
-// Ouginak
+// Ouginak manquant
 import OuginakActive1 from '../src/assets/sorts/ouginak/active-1.png';
 import OuginakActive2 from '../src/assets/sorts/ouginak/active-2.png';
 import OuginakActive3 from '../src/assets/sorts/ouginak/active-3.png';
@@ -931,7 +931,7 @@ export const OuginakSpells = {
         5: { src: OuginakWind5, alt: '' },
     },
 };
-// Pandawa
+// Pandawa manquant
 import PandawaActive1 from '../src/assets/sorts/pandawa/active-1.png';
 import PandawaActive2 from '../src/assets/sorts/pandawa/active-2.png';
 import PandawaActive3 from '../src/assets/sorts/pandawa/active-3.png';
@@ -1006,7 +1006,7 @@ export const PandawaSpells = {
         5: { src: PandawaWater5, alt: '' },
     },
 };
-// Roublard
+// Roublard manquant
 import RoublardActive1 from '../src/assets/sorts/roublard/active-1.png';
 import RoublardActive2 from '../src/assets/sorts/roublard/active-2.png';
 import RoublardActive3 from '../src/assets/sorts/roublard/active-3.png';
@@ -1101,7 +1101,7 @@ export const RoublardSpells = {
         5: { src: RoublardWind5, alt: '' },
     },
 };
-// Sacrieur
+// Sacrieur 
 import SacrieurActive1 from '../src/assets/sorts/sacrieur/active-1.png';
 import SacrieurActive2 from '../src/assets/sorts/sacrieur/active-2.png';
 import SacrieurActive3 from '../src/assets/sorts/sacrieur/active-3.png';
@@ -1145,58 +1145,58 @@ import SacrieurWind4 from '../src/assets/sorts/sacrieur/wind-4.png';
 import SacrieurWind5 from '../src/assets/sorts/sacrieur/wind-5.png';
 export const SacrieurSpells = {
     active: {
-        1: { src: SacrieurActive1, alt: '' },
-        2: { src: SacrieurActive2, alt: '' },
-        3: { src: SacrieurActive3, alt: '' },
-        4: { src: SacrieurActive4, alt: '' },
-        5: { src: SacrieurActive5, alt: '' },
-        6: { src: SacrieurActive6, alt: '' },
+        1: { src: SacrieurActive1, alt: '', number: 5043 },
+        2: { src: SacrieurActive2, alt: '', number: 5045 },
+        3: { src: SacrieurActive3, alt: '', number: 5044 },
+        4: { src: SacrieurActive4, alt: '', number: 5047 },
+        5: { src: SacrieurActive5, alt: '', number: 7211 },
+        6: { src: SacrieurActive6, alt: '', number: 7212 },
     },
     earth: {
-        1: { src: SacrieurEarth1, alt: '' },
-        2: { src: SacrieurEarth2, alt: '' },
-        3: { src: SacrieurEarth3, alt: '' },
-        4: { src: SacrieurEarth4, alt: '' },
-        5: { src: SacrieurEarth5, alt: '' },
+        1: { src: SacrieurEarth1, alt: '', number: 5033 },
+        2: { src: SacrieurEarth2, alt: '', number: 5039 },
+        3: { src: SacrieurEarth3, alt: '', number: 5035 },
+        4: { src: SacrieurEarth4, alt: '', number: 5037 },
+        5: { src: SacrieurEarth5, alt: '', number: 5036 },
     },
     fire: {
-        1: { src: SacrieurFire1, alt: '' },
-        2: { src: SacrieurFire2, alt: '' },
-        3: { src: SacrieurFire3, alt: '' },
-        4: { src: SacrieurFire4, alt: '' },
-        5: { src: SacrieurFire5, alt: '' },
+        1: { src: SacrieurFire1, alt: '', number: 5028 },
+        2: { src: SacrieurFire2, alt: '', number: 5030 },
+        3: { src: SacrieurFire3, alt: '', number: 5031 },
+        4: { src: SacrieurFire4, alt: '', number: 5029 },
+        5: { src: SacrieurFire5, alt: '', number: 5032 },
     },
     passive: {
-        1: { src: SacrieurPassive1, alt: '' },
-        10: { src: SacrieurPassive10, alt: '' },
-        11: { src: SacrieurPassive11, alt: '' },
-        12: { src: SacrieurPassive12, alt: '' },
-        13: { src: SacrieurPassive13, alt: '' },
-        14: { src: SacrieurPassive14, alt: '' },
-        15: { src: SacrieurPassive15, alt: '' },
-        16: { src: SacrieurPassive16, alt: '' },
-        17: { src: SacrieurPassive17, alt: '' },
-        18: { src: SacrieurPassive18, alt: '' },
-        19: { src: SacrieurPassive19, alt: '' },
-        2: { src: SacrieurPassive2, alt: '' },
-        20: { src: SacrieurPassive20, alt: '' },
-        3: { src: SacrieurPassive3, alt: '' },
-        4: { src: SacrieurPassive4, alt: '' },
-        5: { src: SacrieurPassive5, alt: '' },
-        6: { src: SacrieurPassive6, alt: '' },
-        7: { src: SacrieurPassive7, alt: '' },
-        8: { src: SacrieurPassive8, alt: '' },
-        9: { src: SacrieurPassive9, alt: '' },
+        1: { src: SacrieurPassive1, alt: '', number: 5050 },
+        10: { src: SacrieurPassive10, alt: '', number: 5052 },
+        11: { src: SacrieurPassive11, alt: '', number: 7213 },
+        12: { src: SacrieurPassive12, alt: '', number: 7214 },
+        13: { src: SacrieurPassive13, alt: '', number: 7215 },
+        14: { src: SacrieurPassive14, alt: '', number: 7216 },
+        15: { src: SacrieurPassive15, alt: '', number: 7217 },
+        16: { src: SacrieurPassive16, alt: '', number: 7218 },
+        17: { src: SacrieurPassive17, alt: '', number: 7219 },
+        18: { src: SacrieurPassive18, alt: '', number: 7220 },
+        19: { src: SacrieurPassive19, alt: '', number: 7224 },
+        2: { src: SacrieurPassive2, alt: '', number: 5051 },
+        20: { src: SacrieurPassive20, alt: '', number: 7830 },
+        3: { src: SacrieurPassive3, alt: '', number: 5194 },
+        4: { src: SacrieurPassive4, alt: '', number: 5192 },
+        5: { src: SacrieurPassive5, alt: '', number: 5053 },
+        6: { src: SacrieurPassive6, alt: '', number: 5193 },
+        7: { src: SacrieurPassive7, alt: '', number: 5054 },
+        8: { src: SacrieurPassive8, alt: '', number: 5049 },
+        9: { src: SacrieurPassive9, alt: '', number: 5195 },
     },
     wind: {
-        1: { src: SacrieurWind1, alt: '' },
-        2: { src: SacrieurWind2, alt: '' },
-        3: { src: SacrieurWind3, alt: '' },
-        4: { src: SacrieurWind4, alt: '' },
-        5: { src: SacrieurWind5, alt: '' },
+        1: { src: SacrieurWind1, alt: '', number: 5038 },
+        2: { src: SacrieurWind2, alt: '', number: 5041 },
+        3: { src: SacrieurWind3, alt: '', number: 5040 },
+        4: { src: SacrieurWind4, alt: '', number: 5034 },
+        5: { src: SacrieurWind5, alt: '', number: 5042 },
     },
 };
-// Sadida
+// Sadida manquant
 import SadidaActive1 from '../src/assets/sorts/sadida/active-1.png';
 import SadidaActive2 from '../src/assets/sorts/sadida/active-2.png';
 import SadidaActive3 from '../src/assets/sorts/sadida/active-3.png';
@@ -1291,7 +1291,7 @@ export const SadidaSpells = {
         5: { src: SadidaWind5, alt: '' },
     },
 };
-// Sram
+// Sram manquant
 import SramActive1 from '../src/assets/sorts/sram/active-1.png';
 import SramActive2 from '../src/assets/sorts/sram/active-2.png';
 import SramActive3 from '../src/assets/sorts/sram/active-3.png';
@@ -1366,7 +1366,7 @@ export const SramSpells = {
         5: { src: SramWind5, alt: '' },
     },
 };
-// Streamer
+// Streamer manquant
 import StreamerActive1 from '../src/assets/sorts/streamer/active-1.png';
 import StreamerActive2 from '../src/assets/sorts/streamer/active-2.png';
 import StreamerActive3 from '../src/assets/sorts/streamer/active-3.png';
@@ -1461,7 +1461,7 @@ export const StreamerSpells = {
         5: { src: StreamerWater5, alt: '' },
     },
 };
-// Xelor
+// Xelor manquant
 import XelorActive1 from '../src/assets/sorts/xelor/active-1.png';
 import XelorActive2 from '../src/assets/sorts/xelor/active-2.png';
 import XelorActive3 from '../src/assets/sorts/xelor/active-3.png';
@@ -1556,7 +1556,7 @@ export const XelorSpells = {
         5: { src: XelorWind5, alt: '' },
     },
 };
-// Zobal
+// Zobal 
 import ZobalActive1 from '../src/assets/sorts/zobal/active-1.png';
 import ZobalActive2 from '../src/assets/sorts/zobal/active-2.png';
 import ZobalActive3 from '../src/assets/sorts/zobal/active-3.png';
@@ -1599,53 +1599,53 @@ import ZobalWind4 from '../src/assets/sorts/zobal/wind-4.png';
 import ZobalWind5 from '../src/assets/sorts/zobal/wind-5.png';
 export const ZobalSpells = {
     active: {
-        1: { src: ZobalActive1, alt: '' },
-        2: { src: ZobalActive2, alt: '' },
-        3: { src: ZobalActive3, alt: '' },
-        4: { src: ZobalActive4, alt: '' },
-        5: { src: ZobalActive5, alt: '' },
-        6: { src: ZobalActive6, alt: '' },
+        1: { src: ZobalActive1, alt: '', number: 7084 },
+        2: { src: ZobalActive2, alt: '', number: 7085 },
+        3: { src: ZobalActive3, alt: '', number: 7086 },
+        4: { src: ZobalActive4, alt: '', number: 7087 },
+        5: { src: ZobalActive5, alt: '', number: 7088 },
+        6: { src: ZobalActive6, alt: '', number: 7089 },
     },
     fire: {
-        1: { src: ZobalFire1, alt: '' },
-        2: { src: ZobalFire2, alt: '' },
-        3: { src: ZobalFire3, alt: '' },
-        4: { src: ZobalFire4, alt: '' },
-        5: { src: ZobalFire5, alt: '' },
+        1: { src: ZobalFire1, alt: '', number: 7066 },
+        2: { src: ZobalFire2, alt: '', number: 7067 },
+        3: { src: ZobalFire3, alt: '', number: 7068 },
+        4: { src: ZobalFire4, alt: '', number: 7069 },
+        5: { src: ZobalFire5, alt: '', number: 7070 },
     },
     passive: {
-        1: { src: ZobalPassive1, alt: '' },
-        10: { src: ZobalPassive10, alt: '' },
-        11: { src: ZobalPassive11, alt: '' },
-        12: { src: ZobalPassive12, alt: '' },
-        13: { src: ZobalPassive13, alt: '' },
-        14: { src: ZobalPassive14, alt: '' },
-        15: { src: ZobalPassive15, alt: '' },
-        16: { src: ZobalPassive16, alt: '' },
-        17: { src: ZobalPassive17, alt: '' },
-        18: { src: ZobalPassive18, alt: '' },
-        19: { src: ZobalPassive19, alt: '' },
-        2: { src: ZobalPassive2, alt: '' },
-        3: { src: ZobalPassive3, alt: '' },
-        4: { src: ZobalPassive4, alt: '' },
-        5: { src: ZobalPassive5, alt: '' },
-        6: { src: ZobalPassive6, alt: '' },
-        7: { src: ZobalPassive7, alt: '' },
-        8: { src: ZobalPassive8, alt: '' },
-        9: { src: ZobalPassive9, alt: '' },
+        1: { src: ZobalPassive1, alt: '', number: 7093 },
+        10: { src: ZobalPassive10, alt: '', number: 7102 },
+        11: { src: ZobalPassive11, alt: '', number: 7103 },
+        12: { src: ZobalPassive12, alt: '', number: 7104 },
+        13: { src: ZobalPassive13, alt: '', number: 7105 },
+        14: { src: ZobalPassive14, alt: '', number: 7106 },
+        15: { src: ZobalPassive15, alt: '', number: 7107 },
+        16: { src: ZobalPassive16, alt: '', number: 7108 },
+        17: { src: ZobalPassive17, alt: '', number: 7111 },
+        18: { src: ZobalPassive18, alt: '', number: 7112 },
+        19: { src: ZobalPassive19, alt: '', number: 7113 },
+        2: { src: ZobalPassive2, alt: '', number: 7094 },
+        3: { src: ZobalPassive3, alt: '', number: 7095 },
+        4: { src: ZobalPassive4, alt: '', number: 7096 },
+        5: { src: ZobalPassive5, alt: '', number: 7097 },
+        6: { src: ZobalPassive6, alt: '', number: 7098 },
+        7: { src: ZobalPassive7, alt: '', number: 7099 },
+        8: { src: ZobalPassive8, alt: '', number: 7100 },
+        9: { src: ZobalPassive9, alt: '', number: 7101 },
     },
     water: {
-        1: { src: ZobalWater1, alt: '' },
-        2: { src: ZobalWater2, alt: '' },
-        3: { src: ZobalWater3, alt: '' },
-        4: { src: ZobalWater4, alt: '' },
-        5: { src: ZobalWater5, alt: '' },
+        1: { src: ZobalWater1, alt: '', number: 7071 },
+        2: { src: ZobalWater2, alt: '', number: 7072 },
+        3: { src: ZobalWater3, alt: '', number: 7073 },
+        4: { src: ZobalWater4, alt: '', number: 7074 },
+        5: { src: ZobalWater5, alt: '', number: 7075 },
     },
     wind: {
-        1: { src: ZobalWind1, alt: '' },
-        2: { src: ZobalWind2, alt: '' },
-        3: { src: ZobalWind3, alt: '' },
-        4: { src: ZobalWind4, alt: '' },
-        5: { src: ZobalWind5, alt: '' },
+        1: { src: ZobalWind1, alt: '', number: 7076 },
+        2: { src: ZobalWind2, alt: '', number: 7077 },
+        3: { src: ZobalWind3, alt: '', number: 7078 },
+        4: { src: ZobalWind4, alt: '', number: 7079 },
+        5: { src: ZobalWind5, alt: '', number: 7080 },
     },
 };
