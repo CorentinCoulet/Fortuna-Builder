@@ -334,12 +334,16 @@ import ShardGreenActived from './assets/enchant/shard_green_full.webp';
 import ShardRedActived from './assets/enchant/shard_red_full.webp';
 import ShardWhiteActived from './assets/enchant/shard_white_full.webp';
 import ShardWhiteEmpty from './assets/enchant/shard_white_empty.webp';
+import Epic from './assets/enchant/epic.webp';
+import Relic from './assets/enchant/relic.webp';
 export const shards = {
-    1: { src : ShardBlueActived, alt: 'Shard Blue Actived'},
+    1: { src : ShardRedActived, alt: 'Shard Red Actived'},
     2: { src : ShardGreenActived, alt: 'Shard Green Actived'},
-    3: { src : ShardRedActived, alt: 'Shard Red Actived'},
+    3: { src : ShardBlueActived, alt: 'Shard Blue Actived'},
     4: { src : ShardWhiteActived, alt: 'Shard White Actived'},
     5: { src : ShardWhiteEmpty, alt: 'Shard White Empty'},
+    6: { src : Epic, alt: 'Relic'},
+    7: { src : Relic, alt: 'Epic'},
 }
 
 // Importations des parchemins
@@ -350,4 +354,122 @@ export const parchments = {
     1: { src : GreenParchment, alt: 'Green Parchment'},
     2: { src : OrangeParchment, alt: 'Orange Parchment'},
     3: { src : WhiteParchment, alt: 'White Parchment'},
+}
+
+// Importation des icons d'équipement
+import HelmetSearch from './assets/emplacementEquipements/helmet.webp';
+import NecklaceSearch from './assets/emplacementEquipements/necklace.webp';
+import BreastplateSearch from './assets/emplacementEquipements/breastplate.webp';
+import RingSearch from './assets/emplacementEquipements/ring.webp';
+import BootsSearch from './assets/emplacementEquipements/boots.webp';
+import CapeSearch from './assets/emplacementEquipements/cape.webp';
+import EpaulettesSearch from './assets/emplacementEquipements/epaulettes.webp';
+import BeltSearch from './assets/emplacementEquipements/belt.webp';
+import TwoHandedSearch from './assets/emplacementEquipements/two_handed_weapon.webp';
+
+import DaggerSearch from "./assets/emplacementEquipements/dagger.webp";
+import EmblemSearch from "./assets/emplacementEquipements/emblem.webp";
+import MountSearch from "./assets/emplacementEquipements/mount.webp";
+import PetSearch from "./assets/emplacementEquipements/pet.webp";
+import ToolsSearch from "./assets/emplacementEquipements/tools.webp";
+import ShieldSearch from "./assets/emplacementEquipements/shield.webp";
+import OneHandedSearch from "./assets/emplacementEquipements/one_handed_weapon.webp";
+
+export const runesEquipment = {
+    1: { src : HelmetSearch, alt: ''},
+    2: { src : NecklaceSearch, alt: ''},
+    3: { src : BreastplateSearch, alt: ''},
+    4: { src : RingSearch, alt: ''},
+    5: { src : RingSearch, alt: ''},
+    6: { src : BootsSearch, alt: ''},
+    7: { src : CapeSearch, alt: ''},
+    8: { src : EpaulettesSearch, alt: ''},
+    9: { src : BeltSearch, alt: ''},
+    10: { src : TwoHandedSearch, alt: ''},
+}
+
+export const enchantmentEquipment = {
+    1: { 
+        1: { src : HelmetSearch, alt: 'Casque' },
+        2: { src : CapeSearch, alt: 'Cape' },
+    },
+    2: { 
+        1: { src : BeltSearch, alt: 'Ceinture' },
+        2: { src : OneHandedSearch, alt: 'Arme 1 main' },
+        3: { src : TwoHandedSearch, alt: 'Arme 2 mains' },
+    },
+    3: { 
+        1: { src : NecklaceSearch, alt: 'Amulette' },
+        2: { src : CapeSearch, alt: 'Cape' },
+    },
+    4: { 
+        1: { src : BreastplateSearch, alt: 'Plastron' },
+        2: { src : BootsSearch, alt: 'Bottes' },
+    },
+    5: { 
+        1: { src : EpaulettesSearch, alt: 'Epaulettes' },
+        2: { src : OneHandedSearch, alt: 'Arme 1 main' },
+        3: { src : TwoHandedSearch, alt: 'Arme 2 mains' },
+    },
+    6: { 
+        1: { src : BeltSearch, alt: 'Ceinture' },
+        2: { src : BootsSearch, alt: 'Bottes' },
+    },
+    7: { 
+        1: { src : RingSearch, alt: 'Anneau' },
+        2: { src : RingSearch, alt: 'Anneau' },
+    },
+    8: { 
+        1: { src : NecklaceSearch, alt: 'Amulette' },
+        2: { src : CapeSearch, alt: 'Cape' },
+    },
+    9: { 
+        1: { src : BreastplateSearch, alt: 'Plastron' },
+        2: { src : BeltSearch, alt: 'Ceinture' },
+    },
+    10: { 
+        1: { src : BreastplateSearch, alt: 'Plastron' },
+        2: { src : CapeSearch, alt: 'Cape' },
+    },
+    11: { 
+        1: { src : RingSearch, alt: 'Anneau' },
+        2: { src : RingSearch, alt: 'Anneau' },
+    },
+    12: { 
+        1: { src : EpaulettesSearch, alt: 'Epaulettes' },
+        2: { src : BreastplateSearch, alt: 'Plastron' },
+    },
+    13: { 
+        1: { src : BreastplateSearch, alt: 'Plastron' },
+        2: { src : CapeSearch, alt: 'Cape' },
+    },
+    14: { 
+        1: { src : HelmetSearch, alt: 'Casque' },
+        2: { src : OneHandedSearch, alt: 'Arme 1 main' },
+        3: { src : TwoHandedSearch, alt: 'Arme 2 mains' },
+    },
+    15: { 
+        1: { src : EpaulettesSearch, alt: 'Epaulettes' },
+        2: { src : NecklaceSearch, alt: 'Amulette' },
+    },
+}
+
+export const searchEquipment = {
+    1: { src : HelmetSearch, alt: ''},
+    2: { src : NecklaceSearch, alt: ''},
+    3: { src : BreastplateSearch, alt: ''},
+    4: { src : RingSearch, alt: ''},
+    5: { src : RingSearch, alt: ''},
+    6: { src : BootsSearch, alt: ''},
+    7: { src : CapeSearch, alt: ''},
+    8: { src : EpaulettesSearch, alt: ''},
+    9: { src : BeltSearch, alt: ''},
+    10: { src : DaggerSearch, alt: ''},
+    11: { src : ShieldSearch, alt: ''},
+    12: { src : OneHandedSearch, alt: ''}, 
+    13: { src : TwoHandedSearch, alt: ''}, 
+    14: { src : EmblemSearch, alt: ''}, 
+    15: { src : MountSearch, alt: ''}, 
+    16: { src : PetSearch, alt: ''}, 
+    17: { src : ToolsSearch, alt: ''}, 
 }

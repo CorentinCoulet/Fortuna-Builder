@@ -1,0 +1,154 @@
+@import '../generic/mixins';
+
+.enchantment-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    padding: 0 15px 20px 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    h2 {
+        text-align: center;
+    }
+
+    .slider-container {
+        position: relative;
+        margin-bottom: 20px;
+
+        .global-slider {
+            width: 100%;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            pointer-events: none;
+            margin-left: 5px;
+        }
+
+        .slider-label {
+            font-size: 12px;
+            color: #333;
+
+            &.disabled {
+                color: #999;
+            }
+        }
+    }
+
+    .enchantment-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        margin: 2px 0;
+        padding: 8px 10px;
+        transition: background-color 0.3s ease;
+        position: relative;
+        cursor: pointer;
+
+        &.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+
+        >div:first-child {
+            display: flex;
+            align-items: center;
+
+            img.shard-image {
+                width: 24px;
+                height: 24px;
+                margin-right: 10px;
+            }
+
+            h2 {
+                font-size: 16px;
+                color: #333;
+                margin: 0;
+            }
+        }
+
+        .equipment-list {
+            display: flex;
+            flex-direction: row;
+
+            .equipment-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 8px;
+
+                &:first-child {
+                    margin-left: 0;
+                }
+
+                img.equipment-image {
+                    width: 24px;
+                    height: 24px;
+                    object-fit: contain;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+
+        .popup {
+            position: absolute;
+            width: 200px;
+            top: 100%;
+            left: 40%;
+            transform: translateX(-50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            z-index: 10;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+          }
+          
+          .popup-shard-image {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 5px;
+          }
+          
+          div {
+            display: flex;
+            flex-direction: row;
+
+            p {
+                margin: 5px 0;
+                font-size: 14px;
+                text-align: center;
+
+                &:first-child {
+                    margin-right: 5px;
+                }
+            }
+          }
+          
+    }
+}
