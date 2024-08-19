@@ -28,6 +28,13 @@ export class AppController {
     `;
   }
 
+  // ajout des jeux de données
+  @Get('/api/fetch-and-save')
+  async fetchAndSaveData(): Promise<string> {
+    await this.dataService.fetchAndSaveData();
+    return 'Data fetching and saving initiated successfully';
+  }
+
   @Get('/api/:table')
   async getTableData(@Param('table') table: string): Promise<any> {
     if (!['actions', 'equipmentItemTypes', 'itemTypes', 'items', 'jobsItems', 'states'].includes(table)) {

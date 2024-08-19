@@ -25,14 +25,21 @@ services:
     depends_on:
       - postgres
     command: ["npm", "run", "start"]
+    volumes:
+      - ./backend:/usr/src/app
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: frontend
+  adminer:
+    image: 'adminer:latest'
     ports:
-      - "8080:8080"
+      - '3001:3001'
+
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: frontend
+  #   ports:
+  #     - "8080:8080"
 
 volumes:
   postgres_data:
