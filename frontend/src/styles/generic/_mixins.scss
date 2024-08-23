@@ -1,0 +1,9 @@
+@mixin parent-style-on-child($parent, $child) {
+    #{$parent} {
+      &:has(#{$child}) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+}
+  

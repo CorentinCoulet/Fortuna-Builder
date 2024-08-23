@@ -1,0 +1,109 @@
+.search-stats-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: 0;
+  padding: 10px 20px 10px 0px;
+  box-sizing: border-box;
+
+  .search-bar {
+    position: relative;
+    width: 100%;
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background-color: white;
+      color: black;
+      font-size: 14px;
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-color: #ff4081;
+        outline: none;
+      }
+    }
+
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: white;
+      border: 1px solid #333;
+      border-radius: 6px;
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      .search-result-item {
+        padding: 8px 10px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: grey;
+        }
+
+        img {
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+        }
+
+        span {
+          color: black;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .selected-stats {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .selected-stat-item {
+      display: flex;
+      align-items: center;
+      background-color: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 5px 10px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #2a2a2a;
+      }
+
+      img {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+      }
+
+      span {
+        color: #e5e5e5;
+        margin-right: 10px;
+        font-size: 14px;
+      }
+
+      button {
+        background: none;
+        border: none;
+        color: #ff4081;
+        cursor: pointer;
+        font-size: 16px;
+      }
+    }
+  }
+}

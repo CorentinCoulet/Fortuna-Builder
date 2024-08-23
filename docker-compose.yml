@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: fortuna
+      POSTGRES_PASSWORD: 46785319205470164
+      POSTGRES_DB: FortunaBuilder
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    environment:
+      DATABASE_URL: "postgresql://fortuna:46785319205470164@postgres:5432/FortunaBuilder?schema=public"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    command: ["npm", "run", "start"]
+    volumes:
+      - ./backend:/usr/src/app
+
+  adminer:
+    image: 'adminer:latest'
+    ports:
+      - '3001:3001'
+
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: frontend
+  #   ports:
+  #     - "8080:8080"
+
+volumes:
+  postgres_data:

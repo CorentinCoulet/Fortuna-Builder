@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@babel/runtime": "^7.25.4",
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "react-slider": "^2.0.6"
+  }
+}
