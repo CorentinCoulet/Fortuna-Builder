@@ -45,8 +45,8 @@ interface ClassInformationsState {
 }
 
 const initialState: ClassInformationsState = {
-  buildName: 'Cratte 200',
-  level: 200,
+  buildName: 'Build 230',
+  level: 230,
 
   hp: 0,
   armor: 0,

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { useDispatch } from 'react-redux';
 import '../styles/components/SpellsClasses.scss';
+import { setSelectedClass } from '../features/components/spellsSlice.ts';
 
 interface Spell {
     src: string;
@@ -22,6 +24,20 @@ const SpellsClasses: React.FC<SpellsClassesProps> = ({
     commonSpells,
     onSpellSelect,
 }) => {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        // Sélectionner l'élément image par sa classe
+        const imageElement = document.querySelector('.imgClasses');
+
+        if (imageElement && imageElement instanceof HTMLImageElement) {
+            const altText = imageElement.alt;
+
+            // Dispatch l'action pour mettre à jour selectedClass avec l'attribut alt
+            dispatch(setSelectedClass(altText));
+        }
+    }, [dispatch]);
+
     const handleSpellDoubleClick = (spell: Spell, type: 'active' | 'passive') => {
         onSpellSelect(spell, type);
     };

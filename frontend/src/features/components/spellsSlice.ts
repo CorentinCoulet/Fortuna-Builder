@@ -13,7 +13,7 @@ interface SpellsState {
 }
 
 const initialState: SpellsState = {
-  selectedClass: 'Cra',
+  selectedClass: '',
   activeSpells: [],
   passiveSpells: [],
 };
@@ -81,6 +81,3 @@ export const {
 } = spellsSlice.actions;
 
 export default spellsSlice.reducer;
-
-
-6463-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0

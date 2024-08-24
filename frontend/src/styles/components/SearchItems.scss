@@ -1,0 +1,148 @@
+.search-items-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  color: black;
+  max-width: 320px;
+  margin: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  .input-group {
+    margin-bottom: 15px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      color: black;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #444;
+      background-color: white;
+      color: black;
+      font-size: 14px;
+      padding: 5px 0;
+      transition: border-color 0.1s;
+
+      &:focus {
+        border-color: #ff4081;
+        outline: none;
+      }
+    }
+
+    span {
+      display: block;
+      text-align: right;
+      margin-top: 5px;
+      font-size: 12px;
+      color: black;
+    }
+  }
+
+  .horizontal-slider {
+    margin: 15px 0;
+
+    .track {
+      background-color: #ff4081;
+      height: 8px;
+      border-radius: 5px;
+    }
+
+    .thumb {
+      height: 16px;
+      width: 16px;
+      top: -6px;
+      background-color: #444;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #ff4081;
+      transition: background-color 0.1s, transform 0.1s;
+
+      &:hover {
+        background-color: #ff4081;
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  .rarity-section {
+    margin-top: 15px;
+  }
+
+  .rarity-section,
+  .equipment-section {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      color: black;
+    }
+
+    .rarity-options,
+    .equipment-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    img {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.1s, transform 0.1s, border-color 0.1s;
+
+      &.selected {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      &:hover {
+        opacity: 0.75;
+      }
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      flex: 1;
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.1s;
+
+      &.clear-button {
+        background-color: #333;
+        color: #fff;
+      }
+
+      &.search-button {
+        background-color: #ff4081;
+        color: #fff;
+      }
+
+      &:hover {
+        background-color: #4a4a4a;
+      }
+
+      &.search-button:hover {
+        background-color: #d75a7b;
+      }
+    }
+  }
+}

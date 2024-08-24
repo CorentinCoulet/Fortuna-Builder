@@ -1,0 +1,25 @@
+.search-page-container {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  min-height: 400px;
+}
+
+.placeholder-container {
+  background-color: #e0e0e0;
+  padding: 50px;
+  border-radius: 8px;
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 200px;
+}
+
+.placeholder-container p {
+  margin: 0;
+  font-weight: 500;
+}
