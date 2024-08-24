@@ -1,9 +1,9 @@
 import React from 'react';
-import Intel from '../components/Intel';
-import Strength from '../components/Strength';
-import Agility from '../components/Agility';
-import Chance from '../components/Chance';
-import Major from '../components/Major';
+import Intel from '../components/Aptitudes/Intel';
+import Strength from '../components/Aptitudes/Strength';
+import Agility from '../components/Aptitudes/Agility';
+import Chance from '../components/Aptitudes/Chance';
+import Major from '../components/Aptitudes/Major';
 import RecapApt from '../components/RecapApt';
 
 const Aptitudes: React.FC = () => {

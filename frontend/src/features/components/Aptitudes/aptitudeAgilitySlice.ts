@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../../store';
 
 interface AptitudeAgilityState {
   points: number[];
@@ -46,5 +47,7 @@ const aptitudeAgilitySlice = createSlice({
 });
 
 export const { setLevelPoints, incrementPoint, decrementPoint, resetPoint, setPointsFromStorage } = aptitudeAgilitySlice.actions;
+
+export const selectAgilityPoints = (state: RootState) => state.agility.points;
 
 export default aptitudeAgilitySlice.reducer;

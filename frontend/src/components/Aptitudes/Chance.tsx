@@ -1,44 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../store";
+import { RootState, AppDispatch } from "../../store";
 import {
   setLevelPoints,
   incrementPoint,
   decrementPoint,
   resetPoint,
   setPointsFromStorage,
-} from "../features/components/aptitudeIntelSlice";
+} from "../../features/components/Aptitudes/aptitudeChanceSlice";
 import {
   nameCategories,
   nameCategoriesHover,
   aptLogos,
   aptLogosHover,
   selectors,
-} from "../asset";
-import "../styles/components/Intel.scss";
+} from "../../asset";
+import "../../styles/components/Aptitudes/Chance.scss";
 
 // Définition des paliers de niveaux
-const intel: number[] = [];
-for (let i = 2; i < 231; i += 4) {
-  intel.push(i);
+const chance: number[] = [];
+for (let i = 5; i < 231; i += 4) {
+  chance.push(i);
 }
 
 // Définition des messages de survol
-const intelHover = {
-  1: "+4% PdV",
-  2: "+10 Rés. Elem",
-  3: "50% niveau / coup",
-  4: "+6% Soins eçus",
-  5: "+4% PdV en Armure",
+const chanceHover = {
+  1: "+1% Coup Critique",
+  2: "+1% Parade",
+  3: "+4 Maîtrise Critique",
+  4: "+6 Maîtrise Dos",
+  5: "+8 Maîtrise Berserk",
+  6: "+6 Maîtrise Soin",
+  7: "+4 Résistance Dos",
+  8: "+4 Résistance Critique",
 };
 
 // Limites de points pour chaque élément
-const maxPoints = [Infinity, 10, 10, 5, 10];
+const maxPoints = [20, 20, Infinity, Infinity, Infinity, Infinity, 20, 20];
 
-const Intel: React.FC = () => {
+const Chance: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const points = useSelector((state: RootState) => state.intel.points);
-  const valueCount = useSelector((state: RootState) => state.intel.valueCount);
+  const points = useSelector((state: RootState) => state.chance.points);
+  const valueCount = useSelector((state: RootState) => state.chance.valueCount);
   const [hovered, setHovered] = useState<boolean>(false);
   const [hoveredElement, setHoveredElement] = useState<number | null>(null);
 
@@ -54,9 +57,9 @@ const Intel: React.FC = () => {
 
     const handleInputChange = () => {
       const lvlValue = parseInt(lvlClass.value, 10);
-      const index = intel.findIndex((value) => value > lvlValue);
+      const index = chance.findIndex((value) => value > lvlValue);
       const closestIndex =
-        index === -1 ? intel.length - 1 : index === 0 ? 0 : index - 1;
+        index === -1 ? chance.length - 1 : index === 0 ? 0 : index - 1;
       const newValueCount = closestIndex + 1;
       dispatch(setLevelPoints(newValueCount));
     };
@@ -80,7 +83,7 @@ const Intel: React.FC = () => {
   useEffect(() => {
     localStorage.setItem("intelPoints", JSON.stringify(points));
   }, [points]);
-  
+
   const handleMouseEnter = () => setHovered(true);
   const handleMouseLeave = () => setHovered(false);
   const handleElementMouseEnter = (index: number) => setHoveredElement(index);
@@ -102,27 +105,39 @@ const Intel: React.FC = () => {
     dispatch(resetPoint(index));
   };
 
+  const getHoverText = (index: number) => {
+    const hoverInfo = chanceHover[index + 1];
+    let i = 1;
+    if (typeof hoverInfo === "string") {
+      return hoverInfo;
+    } else if (typeof hoverInfo === "object") {
+      return Object.values(hoverInfo[i]).join("");
+      i++;
+    }
+    return "";
+  };
+
   return (
     <div
-      className="intel"
+      className="chance"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div>
         <div>
-          <p>INTELLIGENCE</p>
+          <p>CHANCE</p>
           <span>{valueCount}</span>
         </div>
         <div>
           <img
             loading="lazy"
-            src={hovered ? nameCategoriesHover[1].src : nameCategories[1].src}
-            alt={hovered ? nameCategoriesHover[1].alt : nameCategories[1].alt}
+            src={hovered ? nameCategoriesHover[4].src : nameCategories[4].src}
+            alt={hovered ? nameCategoriesHover[4].alt : nameCategories[4].alt}
           />
         </div>
       </div>
       <div>
-        {Object.values(aptLogos[1]).map((logo, index) => (
+        {Object.keys(aptLogos[4]).map((key, index) => (
           <div
             key={index}
             onMouseEnter={() => handleElementMouseEnter(index)}
@@ -130,8 +145,12 @@ const Intel: React.FC = () => {
             className="element-container"
           >
             <div className="element-content">
-              <img loading="lazy" src={logo.src} alt={logo.alt} />
-              <p>{logo.alt}</p>
+              <img
+                loading="lazy"
+                src={aptLogos[4][key].src}
+                alt={aptLogos[4][key].alt}
+              />
+              <p>{aptLogos[4][key].alt}</p>
             </div>
             <div
               className="popup"
@@ -140,10 +159,10 @@ const Intel: React.FC = () => {
               <div className="popup-content">
                 <img
                   loading="lazy"
-                  src={aptLogosHover[1][index + 1]?.src}
-                  alt={aptLogosHover[1][index + 1]?.alt}
+                  src={aptLogosHover[4][index + 1]?.src}
+                  alt={aptLogosHover[4][index + 1]?.alt}
                 />
-                <p>{intelHover[index + 1]}</p>
+                <p>{getHoverText(index)}</p>
               </div>
             </div>
             <div>
@@ -203,4 +222,4 @@ const Intel: React.FC = () => {
   );
 };
 
-export default Intel;
+export default Chance;

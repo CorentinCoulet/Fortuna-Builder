@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../../store';
 
 interface AptitudeChanceState {
   points: number[];
@@ -46,5 +47,7 @@ const aptitudeChanceSlice = createSlice({
 });
 
 export const { setLevelPoints, incrementPoint, decrementPoint, resetPoint, setPointsFromStorage } = aptitudeChanceSlice.actions;
+
+export const selectChancePoints = (state: RootState) => state.chance.points;
 
 export default aptitudeChanceSlice.reducer;

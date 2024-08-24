@@ -1,22 +1,28 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../store';
+import { selectIntelPoints } from './Aptitudes/aptitudeIntelSlice';
+import { selectStrengthPoints } from './Aptitudes/aptitudeStrengthSlice';
+import { selectAgilityPoints } from './Aptitudes/aptitudeAgilitySlice';
+import { selectChancePoints } from './Aptitudes/aptitudeChanceSlice';
+import { selectMajorPoints } from './Aptitudes/aptitudeMajorSlice';
 
 interface ClassInformationsState {
   buildName: string;
   level: number;
 
-  hp: number;
-  armor: number;
+  baseHp: number;
+  baseArmor: number;
   ap: number;
   wp: number;
   mp: number;
 
-  waterArmor: number;
+  waterResist: number;
   waterMastery: number;
-  earthArmor: number;
+  earthResist: number;
   earthMastery: number;
-  airArmor: number;
+  airResist: number;
   airMastery: number;
-  fireArmor: number;
+  fireResist: number;
   fireMastery: number;
   armorReceived: number;
   armorGiven: number;
@@ -48,29 +54,29 @@ const initialState: ClassInformationsState = {
   buildName: 'Build 230',
   level: 230,
 
-  hp: 0,
-  armor: 0,
+  baseHp: 60,
+  baseArmor: 0,
   ap: 6,
   wp: 6,
   mp: 3,
 
-  waterArmor: 0,
+  waterResist: 0,
   waterMastery: 0,
-  earthArmor: 0,
+  earthResist: 0,
   earthMastery: 0,
-  airArmor: 0,
+  airResist: 0,
   airMastery: 0,
-  fireArmor: 0,
+  fireResist: 0,
   fireMastery: 0,
   armorReceived: 0,
   armorGiven: 0,
 
   damageDealt: 0,
-  critical: 0,
+  critical: 3,
   initiative: 0,
   dodge: 0,
   wisdom: 0,
-  control: 0,
+  control: 1,
   heals: 0,
   block: 0,
   range: 0,
@@ -100,10 +106,10 @@ const classInformationsSlice = createSlice({
     },
 
     setHp(state, action: PayloadAction<number>) {
-      state.hp = action.payload;
+      state.baseHp = action.payload;
     },
     setArmor(state, action: PayloadAction<number>){
-      state.armor = action.payload;
+      state.baseArmor = action.payload;
     },
     setAp(state, action: PayloadAction<number>) {
       state.ap = action.payload;
@@ -115,26 +121,26 @@ const classInformationsSlice = createSlice({
       state.mp = action.payload;
     },
 
-    setWaterArmor(state, action: PayloadAction<number>) {
-      state.waterArmor = action.payload;
+    setWaterResist(state, action: PayloadAction<number>) {
+      state.waterResist = action.payload;
     },
     setWaterMastery(state, action: PayloadAction<number>) {
       state.waterMastery = action.payload;
     },
-    setEarthArmor(state, action: PayloadAction<number>) {
-      state.earthArmor = action.payload;
+    setEarthResist(state, action: PayloadAction<number>) {
+      state.earthResist = action.payload;
     },
     setEarthMastery(state, action: PayloadAction<number>) {
       state.earthMastery = action.payload;
     },
-    setAirArmor(state, action: PayloadAction<number>) {
-      state.airArmor = action.payload;
+    setAirResist(state, action: PayloadAction<number>) {
+      state.airResist = action.payload;
     },
     setAirMastery(state, action: PayloadAction<number>) {
       state.airMastery = action.payload;
     },
-    setFireArmor(state, action: PayloadAction<number>) {
-      state.fireArmor = action.payload;
+    setFireResist(state, action: PayloadAction<number>) {
+      state.fireResist = action.payload;
     },
     setFireMastery(state, action: PayloadAction<number>) {
       state.fireMastery = action.payload;
@@ -214,19 +220,19 @@ export const {
   setBuildName,
   setLevel,
 
-  setHp,
+  setHp, 
   setArmor,
   setAp,
   setWp,
   setMp,
 
-  setWaterArmor,
+  setWaterResist,
   setWaterMastery,
-  setEarthArmor,
+  setEarthResist,
   setEarthMastery,
-  setAirArmor,
+  setAirResist,
   setAirMastery,
-  setFireArmor,
+  setFireResist,
   setFireMastery,
   setArmorReceived,
   setArmorGiven,
@@ -253,5 +259,104 @@ export const {
   setHealMastery,
   setBerserkMastery,
 } = classInformationsSlice.actions;
+
+// Aptitudes
+export const selectCalculatedStats = createSelector(
+  (state: RootState) => state.classInformations,
+  selectIntelPoints,
+  selectStrengthPoints,
+  selectAgilityPoints,
+  selectChancePoints,
+  selectMajorPoints,
+  (classInfo, intelPoints, strengthPoints, agilityPoints, chancePoints, majorPoints) => {
+    // Calcul des points de vie
+    let totalBaseHp = classInfo.baseHp + (classInfo.level - 1) * 10;
+    if (strengthPoints[3] > 0) {
+      totalBaseHp += (strengthPoints[3] * 20);
+    }
+    if (intelPoints[0] > 0) {
+      totalBaseHp *= (1 + intelPoints[0] * 4 / 100);
+    }
+    const hp = Math.floor(totalBaseHp);
+
+    // Calcul des résistances
+    const resistBonusIntel = intelPoints[1] * 10;
+    const resistBonusMajor = majorPoints[6] * 50;
+    const resists = {
+      waterResist: classInfo.waterResist + resistBonusIntel + resistBonusMajor,
+      earthResist: classInfo.earthResist + resistBonusIntel + resistBonusMajor,
+      airResist: classInfo.airResist + resistBonusIntel + resistBonusMajor,
+      fireResist: classInfo.fireResist + resistBonusIntel + resistBonusMajor,
+    };
+
+    // Calcul de l'armure
+    const armorBonus = intelPoints[4] * 4;
+    const armor = classInfo.baseArmor + Math.floor(hp * (armorBonus / 100));
+
+    // Calcul des maîtrises élémentaires
+    const bonusStrength = strengthPoints[0] * 5;
+    const bonusMajorPM = majorPoints[1] * 20;
+    const bonusMajorPO = majorPoints[2] * 40;
+    const bonusMajorControl = majorPoints[4] * 40;
+    const elems = {
+      waterMastery: classInfo.waterMastery + bonusStrength + bonusMajorPM + bonusMajorPO + bonusMajorControl,
+      earthMastery: classInfo.earthMastery + bonusStrength + bonusMajorPM + bonusMajorPO + bonusMajorControl,
+      airMastery: classInfo.airMastery + bonusStrength + bonusMajorPM + bonusMajorPO + bonusMajorControl,
+      fireMastery: classInfo.fireMastery + bonusStrength + bonusMajorPM + bonusMajorPO + bonusMajorControl,
+    };
+
+    // Calcul des autres statistiques
+    const meleeMastery = classInfo.meleeMastery + strengthPoints[1] * 8;
+    const distanceMastery = classInfo.distanceMastery + strengthPoints[2] * 8;
+
+    const lock = classInfo.lock + agilityPoints[0] * 6 + agilityPoints[3] * 4;
+    const dodge = classInfo.dodge + agilityPoints[1] * 6 + agilityPoints[3] * 4;
+    const initiative = classInfo.initiative + agilityPoints[2] * 4;
+    const will = classInfo.will + agilityPoints[4];
+
+    const critical = classInfo.critical + chancePoints[0];
+    const block = classInfo.block + chancePoints[1];
+    const critMastery = classInfo.critMastery + chancePoints[2] * 4;
+    const rearMastery = classInfo.rearMastery + chancePoints[3] * 6;
+    const berserkMastery = classInfo.berserkMastery + chancePoints[4] * 8;
+    const healMastery = classInfo.healMastery + chancePoints[5] * 6;
+    const rearResist = classInfo.rearResist + chancePoints[6] * 4;
+    const critResist = classInfo.critResist + chancePoints[7] * 4;
+
+    const ap = classInfo.ap + majorPoints[0];
+    const mp = classInfo.mp + majorPoints[1];
+    const range = classInfo.range + majorPoints[2];
+    const wp = classInfo.wp + majorPoints[3] * 2;
+    const control = classInfo.control + majorPoints[4] * 2;
+    const damageDealt = classInfo.damageDealt + majorPoints[5] * 10;
+
+    return {
+      hp,
+      armor,
+      resists,
+      elems,
+      meleeMastery,
+      distanceMastery,
+      lock,
+      dodge,
+      initiative,
+      will,
+      critical,
+      block,
+      critMastery,
+      rearMastery,
+      berserkMastery,
+      healMastery,
+      rearResist,
+      critResist,
+      ap,
+      mp,
+      range,
+      wp,
+      control,
+      damageDealt,
+    };
+  }
+);
 
 export default classInformationsSlice.reducer;

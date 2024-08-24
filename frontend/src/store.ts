@@ -3,11 +3,11 @@ import classInformationsReducer from './features/components/classInformationsSli
 import imageReducer from './features/components/imageSlice';
 import editableValuesReducer from './features/components/editableValuesSlice';
 import spellsReducer from './features/components/spellsSlice';
-import aptitudeIntelReducer from './features/components/aptitudeIntelSlice';
-import aptitudeStrengthReducer from './features/components/aptitudeStrengthSlice';
-import aptitudeAgilityReducer from './features/components/aptitudeAgilitySlice';
-import aptitudeChanceReducer from './features/components/aptitudeChanceSlice';
-import aptitudeMajorReducer from './features/components/aptitudeMajorSlice';
+import aptitudeIntelReducer from './features/components/Aptitudes/aptitudeIntelSlice';
+import aptitudeStrengthReducer from './features/components/Aptitudes/aptitudeStrengthSlice';
+import aptitudeAgilityReducer from './features/components/Aptitudes/aptitudeAgilitySlice';
+import aptitudeChanceReducer from './features/components/Aptitudes/aptitudeChanceSlice';
+import aptitudeMajorReducer from './features/components/Aptitudes/aptitudeMajorSlice';
 
 export const store = configureStore({
   reducer: {

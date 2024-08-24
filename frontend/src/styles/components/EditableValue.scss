@@ -6,7 +6,11 @@
   padding: 0 5px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  
+
+  &.outlined {
+    outline: dotted 2px;
+  }
+
   .label {
     min-width: 50px;
     text-align: left;
@@ -43,6 +47,7 @@
 
   input.number-input {
     position: absolute;
+    width: 98%;
     height: 20px;
     top: -9px;
     left: 5px;

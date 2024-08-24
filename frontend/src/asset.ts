@@ -350,8 +350,8 @@ export const shards = {
     3: {src: ShardBlueActived, alt: 'Shard Blue Actived'},
     4: {src: ShardWhiteActived, alt: 'Shard White Actived'},
     5: {src: ShardWhiteEmpty, alt: 'Shard White Empty'},
-    6: {src: Epic, alt: 'Relique'},
-    7: {src: Relic, alt: 'Epique'},
+    6: {src: Epic, alt: 'Epique'},
+    7: {src: Relic, alt: 'Relique'},
 }
 
 // Importations des parchemins
@@ -548,6 +548,6 @@ export const rarityEquipment = {
     3: {src: MythicRarity, alt: 'Mythique'},
     4: {src: LegendaryRarity, alt: 'Légendaire'},
     5: {src: MemoryRarity, alt: 'Souvenir'},
-    6: {src: RelicRarity, alt: 'Relique'},
-    7: {src: EpicRarity, alt: 'Epique'},
+    6: {src: EpicRarity, alt: 'Epique'},
+    7: {src: RelicRarity, alt: 'Relique'},
 }

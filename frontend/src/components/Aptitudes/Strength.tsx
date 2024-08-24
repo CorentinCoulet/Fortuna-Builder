@@ -1,47 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../store";
+import { RootState, AppDispatch } from "../../store";
 import {
   setLevelPoints,
   incrementPoint,
   decrementPoint,
   resetPoint,
   setPointsFromStorage,
-} from "../features/components/aptitudeAgilitySlice";
+} from "../../features/components/Aptitudes/aptitudeStrengthSlice";
 import {
   nameCategories,
   nameCategoriesHover,
   aptLogos,
   aptLogosHover,
   selectors,
-} from "../asset";
-import "../styles/components/Agility.scss";
+} from "../../asset";
+import "../../styles/components/Aptitudes/Strength.scss";
 
 // Définition des paliers de niveaux
-const agility: number[] = [];
-for (let i = 4; i < 231; i += 4) {
-  agility.push(i);
+const strength: number[] = [];
+for (let i = 3; i < 231; i += 4) {
+  strength.push(i);
 }
 
 // Définition des messages de survol
-const agilityHover = {
-  1: "+6 Tacle",
-  2: "+6 Esquive",
-  3: "+4 Initiative",
-  4: {
-    1: "+4 Tacle",
-    2: "+4 Esquive",
-  },
-  5: "+1 Volonté",
+const strengthHover = {
+  1: "+5 Maitrise Elem",
+  2: "+8 Maitrise Mêlée",
+  3: "8 Maitrise Distance",
+  4: "+20 PdV",
 };
 
 // Limites de points pour chaque élément
-const maxPoints = [Infinity, Infinity, 20, Infinity, 20];
+const maxPoints = [Infinity, 40, 40, Infinity];
 
-const Agility: React.FC = () => {
+const Strength: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const points = useSelector((state: RootState) => state.agility.points);
-  const valueCount = useSelector((state: RootState) => state.agility.valueCount);
+  const points = useSelector((state: RootState) => state.strength.points);
+  const valueCount = useSelector((state: RootState) => state.strength.valueCount);
   const [hovered, setHovered] = useState<boolean>(false);
   const [hoveredElement, setHoveredElement] = useState<number | null>(null);
 
@@ -57,11 +53,11 @@ const Agility: React.FC = () => {
 
     const handleInputChange = () => {
       const lvlValue = parseInt(lvlClass.value, 10);
-      const index = agility.findIndex((value) => value > lvlValue);
+      const index = strength.findIndex((value) => value > lvlValue);
       const closestIndex =
-        index === -1 ? agility.length - 1 : index === 0 ? 0 : index - 1;
+        index === -1 ? strength.length - 1 : index === 0 ? 0 : index - 1;
       const newValueCount = closestIndex + 1;
-      dispatch(setLevelPoints(newValueCount))
+      dispatch(setLevelPoints(newValueCount));
     };
 
     handleInputChange();
@@ -105,67 +101,27 @@ const Agility: React.FC = () => {
     dispatch(resetPoint(index));
   };
 
-  const getHoverText = (index: number, subIndex: number | null = null) => {
-    const hoverInfo = agilityHover[index + 1];
-
-    if (typeof hoverInfo === "string") {
-      return hoverInfo;
-    } else if (typeof hoverInfo === "object" && subIndex !== null) {
-      return hoverInfo[subIndex + 1];
-    }
-
-    return "";
-  };
-
-  const getHoverImages = (index: number) => {
-    const hoverInfo = agilityHover[index + 1];
-
-    if (typeof hoverInfo === "object") {
-      return Object.keys(hoverInfo).map((key) => (
-        <div key={key} className="multiple-informations">
-          <img
-            loading="lazy"
-            src={aptLogosHover[3][parseInt(key)].src}
-            alt={aptLogosHover[3][parseInt(key)].alt}
-          />
-          <p>{getHoverText(index, parseInt(key) - 1)}</p>
-        </div>
-      ));
-    } else {
-      return (
-        <div>
-          <img
-            loading="lazy"
-            src={aptLogosHover[3][index + 1]?.src}
-            alt={aptLogosHover[3][index + 1]?.alt}
-          />
-          <p>{getHoverText(index)}</p>
-        </div>
-      );
-    }
-  };
-
   return (
     <div
-      className="agility"
+      className="strength"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div>
         <div>
-          <p>AGILITÉ</p>
+          <p>FORCE</p>
           <span>{valueCount}</span>
         </div>
         <div>
           <img
             loading="lazy"
-            src={hovered ? nameCategoriesHover[3].src : nameCategories[3].src}
-            alt={hovered ? nameCategoriesHover[3].alt : nameCategories[3].alt}
+            src={hovered ? nameCategoriesHover[2].src : nameCategories[2].src}
+            alt={hovered ? nameCategoriesHover[2].alt : nameCategories[2].alt}
           />
         </div>
       </div>
       <div>
-        {Object.keys(aptLogos[3]).map((key, index) => (
+        {Object.values(aptLogos[2]).map((logo, index) => (
           <div
             key={index}
             onMouseEnter={() => handleElementMouseEnter(index)}
@@ -173,18 +129,21 @@ const Agility: React.FC = () => {
             className="element-container"
           >
             <div className="element-content">
-              <img
-                loading="lazy"
-                src={aptLogos[3][key].src}
-                alt={aptLogos[3][key].alt}
-              />
-              <p>{aptLogos[3][key].alt}</p>
+              <img loading="lazy" src={logo.src} alt={logo.alt} />
+              <p>{logo.alt}</p>
             </div>
             <div
               className="popup"
               style={{ display: hoveredElement === index ? "block" : "none" }}
             >
-              <div className="popup-content">{getHoverImages(index)}</div>
+              <div className="popup-content">
+                <img
+                  loading="lazy"
+                  src={aptLogosHover[2][index + 1]?.src}
+                  alt={aptLogosHover[2][index + 1]?.alt}
+                />
+                <p>{strengthHover[index + 1]}</p>
+              </div>
             </div>
             <div>
               <div className="selector-apt">
@@ -243,4 +202,4 @@ const Agility: React.FC = () => {
   );
 };
 
-export default Agility;
+export default Strength;

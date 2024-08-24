@@ -1,6 +1,6 @@
-@import '../generic/mixins';
+@import '../../generic/mixins';
 
-.agility {
+.major {
     display: flex;
     flex-direction: column;
     width: 95%;
@@ -122,7 +122,7 @@
     }
   
     @include parent-style-on-child('.popup-content', '.multiple-informations');
-
+    
     .popup {
       position: absolute;
       background-color: #fff;
@@ -132,7 +132,7 @@
       z-index: 10;
       width: 200px;
       display: none;
-      
+  
       &-content {
         display: flex;
         flex-direction: row;
@@ -173,3 +173,4 @@
       display: block;
     }
   }
+  

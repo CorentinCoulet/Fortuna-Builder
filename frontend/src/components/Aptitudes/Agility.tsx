@@ -1,47 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../store";
+import { RootState, AppDispatch } from "../../store";
 import {
   setLevelPoints,
   incrementPoint,
   decrementPoint,
   resetPoint,
   setPointsFromStorage,
-} from "../features/components/aptitudeChanceSlice";
+} from "../../features/components/Aptitudes/aptitudeAgilitySlice";
 import {
   nameCategories,
   nameCategoriesHover,
   aptLogos,
   aptLogosHover,
   selectors,
-} from "../asset";
-import "../styles/components/Chance.scss";
+} from "../../asset";
+import "../../styles/components/Aptitudes/Agility.scss";
 
 // Définition des paliers de niveaux
-const chance: number[] = [];
-for (let i = 5; i < 231; i += 4) {
-  chance.push(i);
+const agility: number[] = [];
+for (let i = 4; i < 231; i += 4) {
+  agility.push(i);
 }
 
 // Définition des messages de survol
-const chanceHover = {
-  1: "+1% Coup Critique",
-  2: "+1% Parade",
-  3: "+4 Maîtrise Critique",
-  4: "+6 Maîtrise Dos",
-  5: "+8 Maîtrise Berserk",
-  6: "+6 Maîtrise Soin",
-  7: "+4 Résistance Dos",
-  8: "+4 Résistance Critique",
+const agilityHover = {
+  1: "+6 Tacle",
+  2: "+6 Esquive",
+  3: "+4 Initiative",
+  4: {
+    1: "+4 Tacle",
+    2: "+4 Esquive",
+  },
+  5: "+1 Volonté",
 };
 
 // Limites de points pour chaque élément
-const maxPoints = [20, 20, Infinity, Infinity, Infinity, Infinity, 20, 20];
+const maxPoints = [Infinity, Infinity, 20, Infinity, 20];
 
-const Chance: React.FC = () => {
+const Agility: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const points = useSelector((state: RootState) => state.chance.points);
-  const valueCount = useSelector((state: RootState) => state.chance.valueCount);
+  const points = useSelector((state: RootState) => state.agility.points);
+  const valueCount = useSelector((state: RootState) => state.agility.valueCount);
   const [hovered, setHovered] = useState<boolean>(false);
   const [hoveredElement, setHoveredElement] = useState<number | null>(null);
 
@@ -57,11 +57,11 @@ const Chance: React.FC = () => {
 
     const handleInputChange = () => {
       const lvlValue = parseInt(lvlClass.value, 10);
-      const index = chance.findIndex((value) => value > lvlValue);
+      const index = agility.findIndex((value) => value > lvlValue);
       const closestIndex =
-        index === -1 ? chance.length - 1 : index === 0 ? 0 : index - 1;
+        index === -1 ? agility.length - 1 : index === 0 ? 0 : index - 1;
       const newValueCount = closestIndex + 1;
-      dispatch(setLevelPoints(newValueCount));
+      dispatch(setLevelPoints(newValueCount))
     };
 
     handleInputChange();
@@ -105,39 +105,67 @@ const Chance: React.FC = () => {
     dispatch(resetPoint(index));
   };
 
-  const getHoverText = (index: number) => {
-    const hoverInfo = chanceHover[index + 1];
-    let i = 1;
+  const getHoverText = (index: number, subIndex: number | null = null) => {
+    const hoverInfo = agilityHover[index + 1];
+
     if (typeof hoverInfo === "string") {
       return hoverInfo;
-    } else if (typeof hoverInfo === "object") {
-      return Object.values(hoverInfo[i]).join("");
-      i++;
+    } else if (typeof hoverInfo === "object" && subIndex !== null) {
+      return hoverInfo[subIndex + 1];
     }
+
     return "";
+  };
+
+  const getHoverImages = (index: number) => {
+    const hoverInfo = agilityHover[index + 1];
+
+    if (typeof hoverInfo === "object") {
+      return Object.keys(hoverInfo).map((key) => (
+        <div key={key} className="multiple-informations">
+          <img
+            loading="lazy"
+            src={aptLogosHover[3][parseInt(key)].src}
+            alt={aptLogosHover[3][parseInt(key)].alt}
+          />
+          <p>{getHoverText(index, parseInt(key) - 1)}</p>
+        </div>
+      ));
+    } else {
+      return (
+        <div>
+          <img
+            loading="lazy"
+            src={aptLogosHover[3][index + 1]?.src}
+            alt={aptLogosHover[3][index + 1]?.alt}
+          />
+          <p>{getHoverText(index)}</p>
+        </div>
+      );
+    }
   };
 
   return (
     <div
-      className="chance"
+      className="agility"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div>
         <div>
-          <p>CHANCE</p>
+          <p>AGILITÉ</p>
           <span>{valueCount}</span>
         </div>
         <div>
           <img
             loading="lazy"
-            src={hovered ? nameCategoriesHover[4].src : nameCategories[4].src}
-            alt={hovered ? nameCategoriesHover[4].alt : nameCategories[4].alt}
+            src={hovered ? nameCategoriesHover[3].src : nameCategories[3].src}
+            alt={hovered ? nameCategoriesHover[3].alt : nameCategories[3].alt}
           />
         </div>
       </div>
       <div>
-        {Object.keys(aptLogos[4]).map((key, index) => (
+        {Object.keys(aptLogos[3]).map((key, index) => (
           <div
             key={index}
             onMouseEnter={() => handleElementMouseEnter(index)}
@@ -147,23 +175,16 @@ const Chance: React.FC = () => {
             <div className="element-content">
               <img
                 loading="lazy"
-                src={aptLogos[4][key].src}
-                alt={aptLogos[4][key].alt}
+                src={aptLogos[3][key].src}
+                alt={aptLogos[3][key].alt}
               />
-              <p>{aptLogos[4][key].alt}</p>
+              <p>{aptLogos[3][key].alt}</p>
             </div>
             <div
               className="popup"
               style={{ display: hoveredElement === index ? "block" : "none" }}
             >
-              <div className="popup-content">
-                <img
-                  loading="lazy"
-                  src={aptLogosHover[4][index + 1]?.src}
-                  alt={aptLogosHover[4][index + 1]?.alt}
-                />
-                <p>{getHoverText(index)}</p>
-              </div>
+              <div className="popup-content">{getHoverImages(index)}</div>
             </div>
             <div>
               <div className="selector-apt">
@@ -222,4 +243,4 @@ const Chance: React.FC = () => {
   );
 };
 
-export default Chance;
+export default Agility;

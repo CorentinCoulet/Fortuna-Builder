@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../../store';
 
 interface AptitudeMajorState {
   points: number[];
@@ -46,5 +47,7 @@ const aptitudeMajorSlice = createSlice({
 });
 
 export const { setLevelPoints, incrementPoint, decrementPoint, resetPoint, setPointsFromStorage } = aptitudeMajorSlice.actions;
+
+export const selectMajorPoints = (state: RootState) => state.major.points;
 
 export default aptitudeMajorSlice.reducer;

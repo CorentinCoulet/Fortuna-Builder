@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../store";
+import { RootState, AppDispatch } from "../../store";
 import {
   setLevelPoints,
   incrementPoint,
   decrementPoint,
   resetPoint,
   setPointsFromStorage,
-} from "../features/components/aptitudeMajorSlice";
+} from "../../features/components/Aptitudes/aptitudeMajorSlice";
 import {
   nameCategories,
   nameCategoriesHover,
   aptLogos,
   aptLogosHover,
   selectors,
-} from "../asset";
-import "../styles/components/Major.scss";
+} from "../../asset";
+import "../../styles/components/Aptitudes/Major.scss";
 
 // Définition des paliers de niveaux
 const major: number[] = [25, 75, 125, 175];

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../../store';
 
 interface AptitudeStrengthState {
   points: number[];
@@ -46,5 +47,7 @@ const aptitudeStrengthSlice = createSlice({
 });
 
 export const { setLevelPoints, incrementPoint, decrementPoint, resetPoint, setPointsFromStorage } = aptitudeStrengthSlice.actions;
+
+export const selectStrengthPoints = (state: RootState) => state.strength.points;
 
 export default aptitudeStrengthSlice.reducer;

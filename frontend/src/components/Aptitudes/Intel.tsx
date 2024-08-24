@@ -1,43 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../store";
+import { RootState, AppDispatch } from "../../store";
 import {
   setLevelPoints,
   incrementPoint,
   decrementPoint,
   resetPoint,
   setPointsFromStorage,
-} from "../features/components/aptitudeStrengthSlice";
+} from "../../features/components/Aptitudes/aptitudeIntelSlice";
 import {
   nameCategories,
   nameCategoriesHover,
   aptLogos,
   aptLogosHover,
   selectors,
-} from "../asset";
-import "../styles/components/Strength.scss";
+} from "../../asset";
+import "../../styles/components/Aptitudes/Intel.scss";
 
 // Définition des paliers de niveaux
-const strength: number[] = [];
-for (let i = 3; i < 231; i += 4) {
-  strength.push(i);
+const intel: number[] = [];
+for (let i = 2; i < 231; i += 4) {
+  intel.push(i);
 }
 
 // Définition des messages de survol
-const strengthHover = {
-  1: "+5 Maitrise Elem",
-  2: "+8 Maitrise Mêlée",
-  3: "8 Maitrise Distance",
-  4: "+20 PdV",
+const intelHover = {
+  1: "+4% PdV",
+  2: "+10 Rés. Elem",
+  3: "50% niveau / coup",
+  4: "+6% Soins eçus",
+  5: "+4% PdV en Armure",
 };
 
 // Limites de points pour chaque élément
-const maxPoints = [Infinity, 40, 40, Infinity];
+const maxPoints = [Infinity, 10, 10, 5, 10];
 
-const Strength: React.FC = () => {
+const Intel: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const points = useSelector((state: RootState) => state.strength.points);
-  const valueCount = useSelector((state: RootState) => state.strength.valueCount);
+  const points = useSelector((state: RootState) => state.intel.points);
+  const valueCount = useSelector((state: RootState) => state.intel.valueCount);
   const [hovered, setHovered] = useState<boolean>(false);
   const [hoveredElement, setHoveredElement] = useState<number | null>(null);
 
@@ -53,9 +54,9 @@ const Strength: React.FC = () => {
 
     const handleInputChange = () => {
       const lvlValue = parseInt(lvlClass.value, 10);
-      const index = strength.findIndex((value) => value > lvlValue);
+      const index = intel.findIndex((value) => value > lvlValue);
       const closestIndex =
-        index === -1 ? strength.length - 1 : index === 0 ? 0 : index - 1;
+        index === -1 ? intel.length - 1 : index === 0 ? 0 : index - 1;
       const newValueCount = closestIndex + 1;
       dispatch(setLevelPoints(newValueCount));
     };
@@ -79,7 +80,7 @@ const Strength: React.FC = () => {
   useEffect(() => {
     localStorage.setItem("intelPoints", JSON.stringify(points));
   }, [points]);
-
+  
   const handleMouseEnter = () => setHovered(true);
   const handleMouseLeave = () => setHovered(false);
   const handleElementMouseEnter = (index: number) => setHoveredElement(index);
@@ -103,25 +104,25 @@ const Strength: React.FC = () => {
 
   return (
     <div
-      className="strength"
+      className="intel"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div>
         <div>
-          <p>FORCE</p>
+          <p>INTELLIGENCE</p>
           <span>{valueCount}</span>
         </div>
         <div>
           <img
             loading="lazy"
-            src={hovered ? nameCategoriesHover[2].src : nameCategories[2].src}
-            alt={hovered ? nameCategoriesHover[2].alt : nameCategories[2].alt}
+            src={hovered ? nameCategoriesHover[1].src : nameCategories[1].src}
+            alt={hovered ? nameCategoriesHover[1].alt : nameCategories[1].alt}
           />
         </div>
       </div>
       <div>
-        {Object.values(aptLogos[2]).map((logo, index) => (
+        {Object.values(aptLogos[1]).map((logo, index) => (
           <div
             key={index}
             onMouseEnter={() => handleElementMouseEnter(index)}
@@ -139,10 +140,10 @@ const Strength: React.FC = () => {
               <div className="popup-content">
                 <img
                   loading="lazy"
-                  src={aptLogosHover[2][index + 1]?.src}
-                  alt={aptLogosHover[2][index + 1]?.alt}
+                  src={aptLogosHover[1][index + 1]?.src}
+                  alt={aptLogosHover[1][index + 1]?.alt}
                 />
-                <p>{strengthHover[index + 1]}</p>
+                <p>{intelHover[index + 1]}</p>
               </div>
             </div>
             <div>
@@ -202,4 +203,4 @@ const Strength: React.FC = () => {
   );
 };
 
-export default Strength;
+export default Intel;

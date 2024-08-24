@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../../store';
 
 interface AptitudeIntelState {
   points: number[];
@@ -46,5 +47,7 @@ const aptitudeIntelSlice = createSlice({
 });
 
 export const { setLevelPoints, incrementPoint, decrementPoint, resetPoint, setPointsFromStorage } = aptitudeIntelSlice.actions;
+
+export const selectIntelPoints = (state: RootState) => state.intel.points;
 
 export default aptitudeIntelSlice.reducer;

@@ -11,13 +11,9 @@ interface EditableValueProps {
 
 const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChange }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [inputValue, setInputValue] = useState<string>(value.toString());
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState<string>("0");
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setInputValue(value.toString());
-  }, [value]);
+  const [hasValidated, setHasValidated] = useState(false);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -30,19 +26,25 @@ const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChang
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [inputValue, value]);
+  }, []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
   const handleInputBlur = () => {
-    const numberValue = parseFloat(inputValue);
-    if (!isNaN(numberValue) && numberValue !== value) {
-      onChange(numberValue);
+    const trimmedValue = inputValue.trim();
+    const numberValue = parseFloat(trimmedValue);
+    if (trimmedValue === "" || isNaN(numberValue)) {
+      setInputValue("0");
+      onChange(value);
+    }
+    if(numberValue !== 0 && !isNaN(numberValue)){
+      setHasValidated(true);
+    } else {
+      setHasValidated(false);
     }
     setIsEditing(false);
-    setInputValue(value.toString());
   };
 
   const handleInputKeyDown = (event: React.KeyboardEvent) => {
@@ -56,26 +58,27 @@ const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChang
   };
 
   const image = PrimaryStats[id];
+  const accumulatedValue = value + parseFloat(inputValue);
+
+  const containerClass = hasValidated ? 'editable-value outlined' : 'editable-value';
 
   return (
-    <div ref={containerRef} className="editable-value">
+    <div ref={containerRef} className={containerClass}>
       {image && <img loading="lazy" src={image.src} alt={image.alt} className="stat-icon" />}
       {label && (
         <span className="label">{label}</span>
       )}
       <div className="value-container">
         {!isEditing ? (
-          <span className="value" onClick={handleValueClick}>{value}</span>
+          <span className="value" onClick={handleValueClick}>{accumulatedValue}</span>
         ) : (
           <input
-            ref={inputRef}
             type="number"
             className="number-input"
             value={inputValue}
             onChange={handleInputChange}
-            onBlur={handleInputBlur}
             onKeyDown={handleInputKeyDown}
-            placeholder={value.toString()}
+            onBlur={handleInputBlur}
             autoFocus
           />
         )}
