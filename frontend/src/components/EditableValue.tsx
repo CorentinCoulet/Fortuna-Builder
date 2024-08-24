@@ -19,6 +19,7 @@ const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChang
     setInputValue(value.toString());
   }, [value]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleClickOutside = (event: MouseEvent) => {
     if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
       handleInputBlur();
@@ -30,7 +31,7 @@ const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChang
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [inputValue, value]);
+  }, [handleClickOutside, inputValue, value]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
