@@ -2,48 +2,9 @@ import React from "react";
 import "../styles/components/ClassInformations.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setBuildName,
-  setLevel,
-
-  setHp,
-  setArmor,
-  setAp,
-  setWp,
-  setMp,
-
-  setWaterResist,
-  setWaterMastery,
-  setEarthResist,
-  setEarthMastery,
-  setAirResist,
-  setAirMastery,
-  setFireResist,
-  setFireMastery,
-  setArmorReceived,
-  setArmorGiven,
-
-  setDamageDealt,
-  setCritical,
-  setInitiative,
-  setDodge,
-  setWisdom,
-  setControl,
-  setHeals,
-  setBlock,
-  setRange,
-  setLock,
-  setProspecting,
-  setWill,
-
-  setCritMastery,
-  setCritResist,
-  setRearMastery,
-  setRearResist,
-  setMeleeMastery,
-  setDistanceResist,
-  setHealMastery,
-  setBerserkMastery,
-
+  updateProperty,
+  updateResistances,
+  updateMasteries,
   selectCalculatedStats
 } from "../features/components/classInformationsSlice";
 import { RootState } from "../store";
@@ -68,7 +29,7 @@ const ClassInformations: React.FC = () => {
               name="nom"
               id="nom"
               value={classInfo.buildName}
-              onChange={(e) => dispatch(setBuildName(e.target.value))}
+              onChange={(e) => dispatch(updateProperty({ key: 'buildName', value: e.target.value }))}
             />
             <label htmlFor="lvl">Niveau : </label>
             <input
@@ -76,7 +37,7 @@ const ClassInformations: React.FC = () => {
               name="lvl"
               id="lvl"
               value={classInfo.level}
-              onChange={(e) => dispatch(setLevel(Number(e.target.value)))}
+              onChange={(e) => dispatch(updateProperty({ key: 'level', value: Number(e.target.value) }))}
               min="1"
               max="230"
             />
@@ -89,31 +50,31 @@ const ClassInformations: React.FC = () => {
             id={1}
             label="Pdv"
             value={calculatedStats.hp}
-            onChange={(value) => dispatch(setHp(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'baseHp', value }))}
           />
           <EditableValue
             id={2}
             label="Armure"
             value={calculatedStats.armor}
-            onChange={(value) => dispatch(setArmor(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'baseArmor', value }))}
           />
           <EditableValue
             id={3}
             label="PA"
             value={calculatedStats.ap}
-            onChange={(value) => dispatch(setAp(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'ap', value }))}
           />
           <EditableValue
             id={4}
             label="PM"
             value={calculatedStats.mp}
-            onChange={(value) => dispatch(setMp(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'mp', value }))}
           />
           <EditableValue
             id={5}
             label="PW"
             value={calculatedStats.wp}
-            onChange={(value) => dispatch(setWp(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'wp', value }))}
           />
         </div>
         <div className="armorStats">
@@ -123,25 +84,25 @@ const ClassInformations: React.FC = () => {
                 id={6}
                 label=""
                 value={calculatedStats.elems.waterMastery}
-                onChange={(value) => dispatch(setWaterMastery(value))}
+                onChange={(value) => dispatch(updateMasteries({ waterMastery: value }))}
               />
               <EditableValue
                 id={7}
                 label=""
                 value={calculatedStats.resists.waterResist}
-                onChange={(value) => dispatch(setWaterResist(value))}
+                onChange={(value) => dispatch(updateResistances({ waterResist: value }))}
               />
               <EditableValue
                 id={8}
                 label=""
                 value={calculatedStats.elems.earthMastery}
-                onChange={(value) => dispatch(setEarthMastery(value))}
+                onChange={(value) => dispatch(updateMasteries({ earthMastery: value }))}
               />
               <EditableValue
                 id={9}
                 label=""
                 value={calculatedStats.resists.earthResist}
-                onChange={(value) => dispatch(setEarthResist(value))}
+                onChange={(value) => dispatch(updateResistances({ earthResist: value }))}
               />
             </div>
             <div className="element-row">
@@ -149,25 +110,25 @@ const ClassInformations: React.FC = () => {
                 id={10}
                 label=""
                 value={calculatedStats.elems.airMastery}
-                onChange={(value) => dispatch(setAirMastery(value))}
+                onChange={(value) => dispatch(updateMasteries({ airMastery: value }))}
               />
               <EditableValue
                 id={11}
                 label=""
                 value={calculatedStats.resists.airResist}
-                onChange={(value) => dispatch(setAirResist(value))}
+                onChange={(value) => dispatch(updateResistances({ airResist: value }))}
               />
               <EditableValue
                 id={12}
                 label=""
                 value={calculatedStats.elems.fireMastery}
-                onChange={(value) => dispatch(setFireMastery(value))}
+                onChange={(value) => dispatch(updateMasteries({ fireMastery: value }))}
               />
               <EditableValue
                 id={13}
                 label=""
                 value={calculatedStats.resists.fireResist}
-                onChange={(value) => dispatch(setFireResist(value))}
+                onChange={(value) => dispatch(updateResistances({ fireResist: value }))}
               />
             </div>
           </div>
@@ -177,138 +138,138 @@ const ClassInformations: React.FC = () => {
               id={14}
               label="Armure Reçue"
               value={classInfo.armorReceived}
-              onChange={(value) => dispatch(setArmorReceived(value))}
+              onChange={(value) => dispatch(updateProperty({ key: 'armorReceived', value }))}
             />
             <EditableValue
               id={15}
               label="Armure Donnée"
               value={classInfo.armorGiven}
-              onChange={(value) => dispatch(setArmorGiven(value))}
+              onChange={(value) => dispatch(updateProperty({ key: 'armorGiven', value }))}
             />
           </div>
         </div>
         <div className="abilities">
           <EditableValue
             id={16}
-            label="Domm. Inf."
+            label="Domm. Infligés"
             value={calculatedStats.damageDealt}
-            onChange={(value) => dispatch(setDamageDealt(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'damageDealt', value }))}
           />
           <EditableValue
             id={17}
-            label="Soins réal."
+            label="Soins Réalisés"
             value={calculatedStats.healMastery}
-            onChange={(value) => dispatch(setHeals(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'heals', value }))}
           />
           <EditableValue
             id={18}
             label="Coup Crit."
             value={calculatedStats.critical}
-            onChange={(value) => dispatch(setCritical(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'critical', value }))}
           />
           <EditableValue
             id={19}
             label="Parade"
             value={calculatedStats.block}
-            onChange={(value) => dispatch(setBlock(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'block', value }))}
           />
           <EditableValue
             id={20}
             label="Initiative"
             value={calculatedStats.initiative}
-            onChange={(value) => dispatch(setInitiative(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'initiative', value }))}
           />
           <EditableValue
             id={21}
             label="Portée"
             value={calculatedStats.range}
-            onChange={(value) => dispatch(setRange(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'range', value }))}
           />
           <EditableValue
             id={22}
             label="Esquive"
             value={calculatedStats.dodge}
-            onChange={(value) => dispatch(setDodge(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'dodge', value }))}
           />
           <EditableValue
             id={23}
             label="Tacle"
             value={calculatedStats.lock}
-            onChange={(value) => dispatch(setLock(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'lock', value }))}
           />
           <EditableValue
             id={24}
             label="Sagesse"
             value={classInfo.wisdom}
-            onChange={(value) => dispatch(setWisdom(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'wisdom', value }))}
           />
           <EditableValue
             id={25}
             label="Prospection"
             value={classInfo.prospecting}
-            onChange={(value) => dispatch(setProspecting(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'prospecting', value }))}
           />
           <EditableValue
             id={26}
             label="Contrôle"
             value={calculatedStats.control}
-            onChange={(value) => dispatch(setControl(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'control', value }))}
           />
           <EditableValue
             id={27}
             label="Volonté"
             value={calculatedStats.will}
-            onChange={(value) => dispatch(setWill(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'will', value }))}
           />
         </div>
         <div className="masteries">
           <EditableValue
             id={28}
-            label="Maitrise Critique"
+            label="Maîtrise Critique"
             value={calculatedStats.critMastery}
-            onChange={(value) => dispatch(setCritMastery(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'critMastery', value }))}
           />
           <EditableValue
             id={29}
             label="Résistance Critique"
             value={calculatedStats.critResist}
-            onChange={(value) => dispatch(setCritResist(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'critResist', value }))}
           />
           <EditableValue
             id={30}
-            label="Maitrise Dos"
+            label="Maîtrise Dos"
             value={calculatedStats.rearMastery}
-            onChange={(value) => dispatch(setRearMastery(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'rearMastery', value }))}
           />
           <EditableValue
             id={31}
             label="Résistance Dos"
             value={calculatedStats.rearResist}
-            onChange={(value) => dispatch(setRearResist(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'rearResist', value }))}
           />
           <EditableValue
             id={32}
-            label="Maitrise Mêlée"
+            label="Maîtrise Mêlée"
             value={calculatedStats.meleeMastery}
-            onChange={(value) => dispatch(setMeleeMastery(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'meleeMastery', value }))}
           />
           <EditableValue
             id={33}
-            label="Maitrise Distance"
+            label="Maîtrise Distance"
             value={calculatedStats.distanceMastery}
-            onChange={(value) => dispatch(setDistanceResist(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'distanceMastery', value }))}
           />
           <EditableValue
             id={34}
-            label="Maitrise Soin"
+            label="Maîtrise Soin"
             value={calculatedStats.healMastery}
-            onChange={(value) => dispatch(setHealMastery(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'healMastery', value }))}
           />
           <EditableValue
             id={35}
-            label="Maitrise Berserk"
+            label="Maîtrise Berserk"
             value={calculatedStats.berserkMastery}
-            onChange={(value) => dispatch(setBerserkMastery(value))}
+            onChange={(value) => dispatch(updateProperty({ key: 'berserkMastery', value }))}
           />
         </div>
       </section>

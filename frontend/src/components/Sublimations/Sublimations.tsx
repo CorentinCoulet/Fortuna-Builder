@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { shards, parchments } from '../asset';
-import '../styles/components/Sublimations.scss';
+import { shards, parchments } from '../../asset';
+import '../../styles/components/Sublimations/Sublimations.scss';
 import { FaSearch } from 'react-icons/fa';
 
 const comboShards = {

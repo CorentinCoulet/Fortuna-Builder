@@ -24,6 +24,7 @@
     margin: 3px 0;
     padding: 8px 10px;
     transition: background-color 0.3s ease;
+    position: relative;
 
     &:hover {
       background-color: #f0f0f0;
@@ -37,29 +38,87 @@
       margin-top: 5px;
 
       > div:first-child {
-        img {
-          width: 34px;
-          height: 34px;
-          object-fit: contain;
-          margin-right: 8px;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          cursor: pointer;
+        display: flex;
 
-          &:hover {
-            transform: scale(1.1);
+        .shard-container {
+          position: relative;
+          display: inline-block;
+
+          img {
+            width: 34px;
+            height: 34px;
+            object-fit: contain;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+              transform: scale(1.1);
+            }
           }
 
-          &:last-child {
-            margin-right: 0;
+          .shard-level {
+            position: absolute;
+            bottom: 1px;
+            right: 1px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 5;
+            cursor: pointer;
           }
 
-          &:first-child {
-            margin-left: 12px;
+          &:hover .shard-hover-info {
+            display: flex;
+          }
+        }
+
+        .shard-hover-info {
+          position: absolute;
+          width: 200px;
+          top: calc(100% + 5px);
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: white;
+          border: 1px solid #ccc;
+          padding: 5px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          border-radius: 5px;
+          z-index: 10;
+          display: none;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+
+          div {
+            display: flex;
+            flex-direction: row;
+            margin-left: 10px;
+
+            :first-child {
+              margin-right: 5px;
+            }
+          }
+
+          &:after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent rgba(0, 0, 0, 0.2) transparent;
           }
         }
       }
 
       > div:last-child {
+        display: flex;
+        align-items: center;
+
         img {
           object-fit: contain;
           margin-right: 10px;
@@ -105,14 +164,6 @@
 
         &:hover {
           transform: scale(1.1);
-        }
-
-        &:first-child {
-          margin-right: 10px;
-        }
-
-        &:last-child {
-          margin-right: 0;
         }
       }
     }

@@ -6,7 +6,21 @@ import { selectAgilityPoints } from './Aptitudes/aptitudeAgilitySlice';
 import { selectChancePoints } from './Aptitudes/aptitudeChanceSlice';
 import { selectMajorPoints } from './Aptitudes/aptitudeMajorSlice';
 
-interface ClassInformationsState {
+export interface Resistances {
+  waterResist: number;
+  earthResist: number;
+  airResist: number;
+  fireResist: number;
+}
+
+export interface Masteries {
+  waterMastery: number;
+  earthMastery: number;
+  airMastery: number;
+  fireMastery: number;
+}
+
+export interface ClassInformationsState {
   buildName: string;
   level: number;
 
@@ -16,14 +30,8 @@ interface ClassInformationsState {
   wp: number;
   mp: number;
 
-  waterResist: number;
-  waterMastery: number;
-  earthResist: number;
-  earthMastery: number;
-  airResist: number;
-  airMastery: number;
-  fireResist: number;
-  fireMastery: number;
+  resistances: Resistances;
+  masteries: Masteries;
   armorReceived: number;
   armorGiven: number;
 
@@ -50,6 +58,7 @@ interface ClassInformationsState {
   berserkMastery: number;
 }
 
+
 const initialState: ClassInformationsState = {
   buildName: 'Build 230',
   level: 230,
@@ -60,14 +69,18 @@ const initialState: ClassInformationsState = {
   wp: 6,
   mp: 3,
 
-  waterResist: 0,
-  waterMastery: 0,
-  earthResist: 0,
-  earthMastery: 0,
-  airResist: 0,
-  airMastery: 0,
-  fireResist: 0,
-  fireMastery: 0,
+  resistances: {
+    waterResist: 0,
+    earthResist: 0,
+    airResist: 0,
+    fireResist: 0,
+  },
+  masteries: {
+    waterMastery: 0,
+    earthMastery: 0,
+    airMastery: 0,
+    fireMastery: 0,
+  },
   armorReceived: 0,
   armorGiven: 0,
 
@@ -98,166 +111,29 @@ const classInformationsSlice = createSlice({
   name: 'classInformations',
   initialState,
   reducers: {
-    setBuildName(state, action: PayloadAction<string>) {
-      state.buildName = action.payload;
+    updateProperty<T extends keyof ClassInformationsState>(
+      state: ClassInformationsState,
+      action: PayloadAction<{ key: T; value: ClassInformationsState[T] }>
+    ) {
+      state[action.payload.key] = action.payload.value;
     },
-    setLevel(state, action: PayloadAction<number>) {
-      state.level = action.payload;
+    updateResistances(state, action: PayloadAction<Partial<Resistances>>) {
+      state.resistances = { ...state.resistances, ...action.payload };
     },
-
-    setHp(state, action: PayloadAction<number>) {
-      state.baseHp = action.payload;
+    updateMasteries(state, action: PayloadAction<Partial<Masteries>>) {
+      state.masteries = { ...state.masteries, ...action.payload };
     },
-    setArmor(state, action: PayloadAction<number>){
-      state.baseArmor = action.payload;
-    },
-    setAp(state, action: PayloadAction<number>) {
-      state.ap = action.payload;
-    },
-    setWp(state, action: PayloadAction<number>) {
-      state.wp = action.payload;
-    },
-    setMp(state, action: PayloadAction<number>) {
-      state.mp = action.payload;
-    },
-
-    setWaterResist(state, action: PayloadAction<number>) {
-      state.waterResist = action.payload;
-    },
-    setWaterMastery(state, action: PayloadAction<number>) {
-      state.waterMastery = action.payload;
-    },
-    setEarthResist(state, action: PayloadAction<number>) {
-      state.earthResist = action.payload;
-    },
-    setEarthMastery(state, action: PayloadAction<number>) {
-      state.earthMastery = action.payload;
-    },
-    setAirResist(state, action: PayloadAction<number>) {
-      state.airResist = action.payload;
-    },
-    setAirMastery(state, action: PayloadAction<number>) {
-      state.airMastery = action.payload;
-    },
-    setFireResist(state, action: PayloadAction<number>) {
-      state.fireResist = action.payload;
-    },
-    setFireMastery(state, action: PayloadAction<number>) {
-      state.fireMastery = action.payload;
-    },
-    setArmorReceived(state, action: PayloadAction<number>) {
-      state.armorReceived = action.payload;
-    },
-    setArmorGiven(state, action: PayloadAction<number>) {
-      state.armorGiven = action.payload;
-    },
-
-    setDamageDealt(state, action: PayloadAction<number>) {
-      state.damageDealt = action.payload;
-    },
-    setCritical(state, action: PayloadAction<number>) {
-      state.critical = action.payload;
-    },
-    setInitiative(state, action: PayloadAction<number>) {
-      state.initiative = action.payload;
-    },
-    setDodge(state, action: PayloadAction<number>) {
-      state.dodge = action.payload;
-    },
-    setWisdom(state, action: PayloadAction<number>) {
-      state.wisdom = action.payload;
-    },
-    setControl(state, action: PayloadAction<number>) {
-      state.control = action.payload;
-    },
-    setHeals(state, action: PayloadAction<number>) {
-      state.heals = action.payload;
-    },
-    setBlock(state, action: PayloadAction<number>) {
-      state.block = action.payload;
-    },
-    setRange(state, action: PayloadAction<number>) {
-      state.range = action.payload;
-    },
-    setLock(state, action: PayloadAction<number>) {
-      state.lock = action.payload;
-    },
-    setProspecting(state, action: PayloadAction<number>) {
-      state.prospecting = action.payload;
-    },
-    setWill(state, action: PayloadAction<number>) {
-      state.will = action.payload;
-    },
-
-    setCritMastery(state, action: PayloadAction<number>) {
-      state.critMastery = action.payload;
-    },
-    setCritResist(state, action: PayloadAction<number>) {
-      state.critResist = action.payload;
-    },
-    setRearMastery(state, action: PayloadAction<number>) {
-      state.rearMastery = action.payload;
-    },
-    setRearResist(state, action: PayloadAction<number>) {
-      state.rearResist = action.payload;
-    },
-    setMeleeMastery(state, action: PayloadAction<number>) {
-      state.meleeMastery = action.payload;
-    },
-    setDistanceResist(state, action: PayloadAction<number>) {
-      state.distanceMastery = action.payload;
-    },
-    setHealMastery(state, action: PayloadAction<number>) {
-      state.healMastery = action.payload;
-    },
-    setBerserkMastery(state, action: PayloadAction<number>) {
-      state.berserkMastery = action.payload;
+    updateCharacterStats(state, action: PayloadAction<Partial<ClassInformationsState>>) {
+      return { ...state, ...action.payload };
     },
   },
 });
 
 export const {
-  setBuildName,
-  setLevel,
-
-  setHp, 
-  setArmor,
-  setAp,
-  setWp,
-  setMp,
-
-  setWaterResist,
-  setWaterMastery,
-  setEarthResist,
-  setEarthMastery,
-  setAirResist,
-  setAirMastery,
-  setFireResist,
-  setFireMastery,
-  setArmorReceived,
-  setArmorGiven,
-
-  setDamageDealt,
-  setCritical,
-  setInitiative,
-  setDodge,
-  setWisdom,
-  setControl,
-  setHeals,
-  setBlock,
-  setRange,
-  setLock,
-  setProspecting,
-  setWill,
-
-  setCritMastery,
-  setCritResist,
-  setRearMastery,
-  setRearResist,
-  setMeleeMastery,
-  setDistanceResist,
-  setHealMastery,
-  setBerserkMastery,
+  updateProperty,
+  updateResistances,
+  updateMasteries,
+  updateCharacterStats,
 } = classInformationsSlice.actions;
 
 // Aptitudes
@@ -283,10 +159,10 @@ export const selectCalculatedStats = createSelector(
     const resistBonusIntel = intelPoints[1] * 10;
     const resistBonusMajor = majorPoints[6] * 50;
     const resists = {
-      waterResist: classInfo.waterResist + resistBonusIntel + resistBonusMajor,
-      earthResist: classInfo.earthResist + resistBonusIntel + resistBonusMajor,
-      airResist: classInfo.airResist + resistBonusIntel + resistBonusMajor,
-      fireResist: classInfo.fireResist + resistBonusIntel + resistBonusMajor,
+      waterResist: classInfo.resistances.waterResist + resistBonusIntel + resistBonusMajor,
+      earthResist: classInfo.resistances.earthResist + resistBonusIntel + resistBonusMajor,
+      airResist: classInfo.resistances.airResist + resistBonusIntel + resistBonusMajor,
+      fireResist: classInfo.resistances.fireResist + resistBonusIntel + resistBonusMajor,
     };
 
     // Calcul de l'armure
@@ -299,10 +175,10 @@ export const selectCalculatedStats = createSelector(
     const bonusMajorPO = majorPoints[2] * 40;
     const bonusMajorControl = majorPoints[4] * 40;
     const elems = {
-      waterMastery: classInfo.waterMastery + bonusStrength + bonusMajorPM + bonusMajorPO + bonusMajorControl,
-      earthMastery: classInfo.earthMastery + bonusStrength + bonusMajorPM + bonusMajorPO + bonusMajorControl,
-      airMastery: classInfo.airMastery + bonusStrength + bonusMajorPM + bonusMajorPO + bonusMajorControl,
-      fireMastery: classInfo.fireMastery + bonusStrength + bonusMajorPM + bonusMajorPO + bonusMajorControl,
+      waterMastery: classInfo.masteries.waterMastery + bonusStrength + bonusMajorPM + bonusMajorPO + bonusMajorControl,
+      earthMastery: classInfo.masteries.earthMastery + bonusStrength + bonusMajorPM + bonusMajorPO + bonusMajorControl,
+      airMastery: classInfo.masteries.airMastery + bonusStrength + bonusMajorPM + bonusMajorPO + bonusMajorControl,
+      fireMastery: classInfo.masteries.fireMastery + bonusStrength + bonusMajorPM + bonusMajorPO + bonusMajorControl,
     };
 
     // Calcul des autres statistiques

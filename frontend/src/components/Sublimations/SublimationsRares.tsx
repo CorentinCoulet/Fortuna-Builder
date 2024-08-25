@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import '../styles/components/SublimationsRares.scss';
+import '../../styles/components/Sublimations/SublimationsRares.scss';
 import { FaSearch } from 'react-icons/fa';
-import { sublimationsEpic, sublimationsRelic } from "../asset.ts";
-import { rarityEquipment } from "../asset.ts";
+import { sublimationsEpic, sublimationsRelic, rarityEquipment } from "../../asset.ts";
 
 const fakeSublimations = {
     1: { label: "Abnégation", type: 'epic', number: 5 },

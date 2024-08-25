@@ -1,23 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { shards, enchantmentEquipment } from "../asset";
-import "../styles/components/EnchantmentPerEquipment.scss";
+import React, { useState, useEffect, useCallback } from "react";
+import { shards, enchantmentEquipment } from "../../asset.ts";
+import "../../styles/components/Sublimations/EnchantmentPerEquipment.scss";
+
+interface EnchantmentPerEquipmentProps {
+  selectedShard: {
+    src: string;
+    alt: string;
+    statValue: number;
+    label: string;
+    runeLevel: number;
+  } | null;
+  setSelectedShard: React.Dispatch<
+    React.SetStateAction<{
+      src: string;
+      alt: string;
+      statValue: number;
+      label: string;
+      runeLevel: number;
+    } | null>
+  >;
+}
 
 const masteryEnchantmentLabels = {
-  1: { label: "Maîtrise Mêlée", double: [] },
-  2: { label: "Maîtrise Distance", double: [] },
-  3: { label: "Maîtrise Berserk", double: [] },
-  4: { label: "Résistance Terre", double: [] },
-  5: { label: "Maîtrise Critique", double: [] },
-  6: { label: "Maîtrise Dos", double: [] },
-  7: { label: "Esquive", double: [] },
-  8: { label: "Initiative", double: [] },
-  9: { label: "Résistance Feu", double: [] },
-  10: { label: "Maîtrise Elémentaire", double: [] },
-  11: { label: "Tacle", double: [] },
-  12: { label: "Résistance Eau", double: [] },
-  13: { label: "Résistance Air", double: [] },
-  14: { label: "Vie", double: [] },
-  15: { label: "Maîtrise Soin", double: [] },
+  1: { label: "Maîtrise Mêlée", actions: ['meleeMastery'] },
+  2: { label: "Maîtrise Distance", actions: ['distanceMastery'] },
+  3: { label: "Maîtrise Berserk", actions: ['berserkMastery'] },
+  4: { label: "Résistance Terre", actions: ['resistances:earthResist'] },
+  5: { label: "Maîtrise Critique", actions: ['critMastery'] },
+  6: { label: "Maîtrise Dos", actions: ['rearMastery'] },
+  7: { label: "Esquive", actions: ['dodge'] },
+  8: { label: "Initiative", actions: ['initiative'] },
+  9: { label: "Résistance Feu", actions: ['resistances:fireResist'] },
+  10: { label: "Maîtrise Elémentaire", actions: ['masteries'] },
+  11: { label: "Tacle", actions: ['lock'] },
+  12: { label: "Résistance Eau", actions: ['resistances:waterResist'] },
+  13: { label: "Résistance Air", actions: ['resistances:airResist'] },
+  14: { label: "Vie", actions: ['baseHp'] },
+  15: { label: "Maîtrise Soin", actions: ['healMastery'] },
 };
 
 // On ne garde que les images Bleues, Vertes et Rouges
@@ -225,10 +244,13 @@ function calculateElementary(index) {
   }
 }
 
-const EnchantmentPerEquipment: React.FC = () => {
+const EnchantmentPerEquipment: React.FC<EnchantmentPerEquipmentProps> = ({
+  setSelectedShard,
+}) => {
   const [lvl, setLvl] = useState(200);
   const [sliderValue, setSliderValue] = useState(1);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const [selectedItem, setSelectedItem] = useState<number | null>(null); 
 
   // Récupère le niveau du personnage
   useEffect(() => {
@@ -268,26 +290,67 @@ const EnchantmentPerEquipment: React.FC = () => {
   };
 
   // Calcule les valeurs en fonction de la formule donnée
-  const calculateStat = (element: number) => {
-    let value = sliderValue;
+  const calculateStat = useCallback(
+    (element: number) => {
+      const value = sliderValue;
 
-    if (statsEmplacement.masteries.includes(element)) {
-      return calculateMasteries(value);
+      if (statsEmplacement.masteries.includes(element)) {
+        return calculateMasteries(value);
+      }
+      if (statsEmplacement.hp.includes(element)) {
+        return calculateHP(value);
+      }
+      if (statsEmplacement.resistances.includes(element)) {
+        return calculateResistances(value);
+      }
+      if (statsEmplacement.lockAndDodge.includes(element)) {
+        return calculateLockAndDodge(value);
+      }
+      if (statsEmplacement.initiative.includes(element)) {
+        return calculateInitiative(value);
+      }
+      if (statsEmplacement.elementary.includes(element)) {
+        return calculateElementary(value);
+      }
+      return 0;
+    },
+    [sliderValue]
+  );
+
+  useEffect(() => {
+    if (selectedItem !== null) {
+      const statValue = calculateStat(selectedItem) || 0;
+      const label = masteryEnchantmentLabels[selectedItem].label;
+      setSelectedShard((prev) => {
+        if (prev) {
+          return {
+            ...prev,
+            statValue,
+            runeLevel: sliderValue,
+            label,
+          };
+        }
+        return prev;
+      });
     }
-    if (statsEmplacement.hp.includes(element)) {
-      return calculateHP(value);
-    }
-    if (statsEmplacement.resistances.includes(element)) {
-      return calculateResistances(value);
-    }
-    if (statsEmplacement.lockAndDodge.includes(element)) {
-      return calculateLockAndDodge(value);
-    }
-    if (statsEmplacement.initiative.includes(element)) {
-      return calculateInitiative(value);
-    }
-    if (statsEmplacement.elementary.includes(element)) {
-      return calculateElementary(value);
+  }, [sliderValue, selectedItem, calculateStat, setSelectedShard]);
+
+  const handleItemClick = (idx: number, shardImage: { src: string; alt: string }) => {
+    const statValue = calculateStat(idx) || 0;
+    const label = masteryEnchantmentLabels[idx].label;
+    const runeLevel = sliderValue;
+    if (selectedItem === idx) {
+      setSelectedItem(null);
+      setSelectedShard(null);
+    } else {
+      setSelectedItem(idx);
+      setSelectedShard({
+        src: shardImage.src,
+        alt: shardImage.alt,
+        statValue,
+        label,
+        runeLevel,
+      });
     }
   };
 
@@ -310,9 +373,10 @@ const EnchantmentPerEquipment: React.FC = () => {
       return (
         <div
           key={index}
-          className="enchantment-item"
+          className={`enchantment-item ${selectedItem === idx ? "selected" : ""}`} 
           onMouseEnter={() => setHoveredItem(idx)}
           onMouseLeave={() => setHoveredItem(null)}
+          onClick={() => handleItemClick(idx, shardImage)}
         >
           <div>
             <img
