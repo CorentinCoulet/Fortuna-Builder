@@ -83,9 +83,14 @@
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
+  position: relative;
 
   &:hover {
     background-color: #f0f0f0;
+  }
+
+  &:hover .sublimation-tooltip {
+    display: block;
   }
 
   &-info {
@@ -165,4 +170,35 @@
       }
     }
   }
+}
+
+.sublimation-tooltip {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #2b2b2b;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  width: 250px;
+}
+
+.sublimation-tooltip .label-sublimation {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.sublimation-tooltip .shards {
+  margin-bottom: 5px;
+}
+
+.sublimation-tooltip .description {
+  margin-bottom: 10px;
+}
+
+.sublimation-tooltip .bonus {
+  margin-top: 10px;
 }
