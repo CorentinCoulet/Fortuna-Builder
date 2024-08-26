@@ -9,7 +9,6 @@ import {
   removeActiveSpell,
   addPassiveSpell,
   removePassiveSpell,
-  clearAllSpells,
   loadSpellsFromStorage,
 } from "../features/components/spellsSlice.ts";
 
@@ -112,22 +111,9 @@ const Spells: React.FC = () => {
     }
   };
 
-  const handleClearAllSpells = () => {
-    document.querySelectorAll('.spellsClasses img.selected').forEach((img) => {
-        img.classList.remove('selected');
-    });
-    dispatch(clearAllSpells());
-    localStorage.removeItem('activeSpells');
-    localStorage.removeItem('passiveSpells');
-  }
-
   return (
     <div>
-        <Deck 
-            activeSpells={activeSpells} 
-            passiveSpells={passiveSpells} 
-            onClearAllSpells={handleClearAllSpells}
-        />
+        <Deck />
         <SpellsClasses
             spells={spells}
             commonSpells={commonSpells}

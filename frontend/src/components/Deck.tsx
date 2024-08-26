@@ -4,6 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import '../styles/components/Deck.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../store';
+import { clearAllSpells } from '../features/components/spellsSlice';
 
 interface Spell {
     src: string;
@@ -11,29 +14,34 @@ interface Spell {
 }
 
 interface DeckProps {
-    activeSpells: Spell[];
-    passiveSpells: Spell[];
-    onClearAllSpells: () => void;
+    isReadOnly?: boolean;
 }
 
-const Deck: React.FC<DeckProps> = ({ activeSpells, passiveSpells, onClearAllSpells }) => {
-    useEffect(() => {
-        const imgClasses = document.querySelector('.imgClasses');
-        if (imgClasses && imgClasses instanceof HTMLImageElement) {
-            const observer = new MutationObserver((mutationsList) => {
-                for (const mutation of mutationsList) {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'alt') {
-                        onClearAllSpells();
-                    }
-                }
-            });
+const Deck: React.FC<DeckProps> = ({ isReadOnly = false }) => {
+    const dispatch = useDispatch<AppDispatch>();
 
-            observer.observe(imgClasses, { attributes: true });
-            return () => {
-                observer.disconnect();
-            };
+    const activeSpells = useSelector((state: RootState) => state.spells.activeSpells);
+    const passiveSpells = useSelector((state: RootState) => state.spells.passiveSpells);
+
+    useEffect(() => {
+        if (!isReadOnly) {
+            const imgClasses = document.querySelector('.imgClasses');
+            if (imgClasses && imgClasses instanceof HTMLImageElement) {
+                const observer = new MutationObserver((mutationsList) => {
+                    for (const mutation of mutationsList) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'alt') {
+                            dispatch(clearAllSpells());
+                        }
+                    }
+                });
+
+                observer.observe(imgClasses, { attributes: true });
+                return () => {
+                    observer.disconnect();
+                };
+            }
         }
-    }, [onClearAllSpells]);
+    }, [dispatch, isReadOnly]);
 
     const renderSpellImage = (spell: Spell, index: number) => (
         <img
@@ -44,13 +52,25 @@ const Deck: React.FC<DeckProps> = ({ activeSpells, passiveSpells, onClearAllSpel
         />
     );
 
+    const handleClearAllSpells = () => {
+        if (!isReadOnly) {
+            dispatch(clearAllSpells());
+            localStorage.removeItem('activeSpells');
+            localStorage.removeItem('passiveSpells');
+        }
+    };
+
     return (
         <div className="deck">
             <div>
                 <p>Deck</p>
                 <div>
-                    <FontAwesomeIcon icon={faTrashAlt} onClick={onClearAllSpells} />
-                    <FontAwesomeIcon icon={faCopy} />
+                    {!isReadOnly && (
+                        <>
+                            <FontAwesomeIcon icon={faTrashAlt} onClick={handleClearAllSpells} />
+                            <FontAwesomeIcon icon={faCopy} />
+                        </>
+                    )}
                 </div>
             </div>
             <div>

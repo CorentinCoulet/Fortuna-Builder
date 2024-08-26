@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/components/Sublimations/Runes.scss";
 import { runesEquipment, parchments, shards } from "../../asset.ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,7 +22,7 @@ interface Shard {
 }
 
 interface RunesProps {
-  selectedShard: Shard | null;
+  isReadOnly?: boolean;
 }
 
 const whiteParchment = {
@@ -42,6 +42,19 @@ const activeShard = {
   alt: shards[4].alt,
   statValue: 0,
   label: "Active",
+};
+
+// Sauvegarde les runes
+const saveShardsToLocalStorage = (
+  appliedShards: Array<Array<Shard | null>>
+) => {
+  localStorage.setItem("appliedShards", JSON.stringify(appliedShards));
+};
+
+// Charge les runes
+const loadShardsFromLocalStorage = (): Array<Array<Shard | null>> => {
+  const savedShards = localStorage.getItem("appliedShards");
+  return savedShards ? JSON.parse(savedShards) : null;
 };
 
 const getActionsForLabel = (
@@ -160,20 +173,31 @@ const removeBonus = (
   }
 };
 
-const Runes: React.FC<RunesProps> = ({ selectedShard }) => {
+const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   const dispatch = useDispatch();
   const classInformations = useSelector(
     (state: RootState) => state.classInformations
   );
+  const selectedShard = useSelector(
+    (state: RootState) => state.runes.selectedShard
+  );
   const [appliedShards, setAppliedShards] = useState<
     Array<Array<Shard | null>>
-  >(
-    Array(Object.keys(runesEquipment).length)
-      .fill(null)
-      .map(() => Array(4).fill(null))
-  );
+  >(() => {
+    const savedShards = loadShardsFromLocalStorage();
+    return savedShards
+      ? savedShards
+      : Array(Object.keys(runesEquipment).length)
+          .fill(null)
+          .map(() => Array(4).fill(null));
+  });
+
+  useEffect(() => {
+    saveShardsToLocalStorage(appliedShards);
+  }, [appliedShards]);
 
   const handleShardClick = (rowIndex: number, shardIndex: number) => {
+    if (isReadOnly) return;
     const currentShard = appliedShards[rowIndex][shardIndex];
     if (currentShard && currentShard.label !== "Default") {
       removeBonus(currentShard, classInformations, dispatch);
@@ -210,6 +234,7 @@ const Runes: React.FC<RunesProps> = ({ selectedShard }) => {
     shardIndex: number
   ) => {
     e.preventDefault();
+    if (isReadOnly) return;
     setAppliedShards((prev) => {
       const newShards = [...prev];
       const currentRow = newShards[rowIndex] || Array(4).fill(null);
@@ -236,15 +261,17 @@ const Runes: React.FC<RunesProps> = ({ selectedShard }) => {
     // Créer une copie des shards appliqués pour ne pas modifier l'état en cours de traitement
     const shardsToRemove = appliedShards
       .flat()
-      .filter((shard): shard is Shard => shard !== null && shard.label !== "Default");
-  
+      .filter(
+        (shard): shard is Shard => shard !== null && shard.label !== "Default"
+      );
+
     // Calculer combien de fois chaque shard doit être supprimé
     const shardCounts = shardsToRemove.reduce((acc, shard) => {
       const key = `${shard.label}-${shard.statValue}`;
       acc[key] = (acc[key] || 0) + 1;
       return acc;
     }, {} as { [key: string]: number });
-  
+
     // Retirer tous les bonus des runes actuellement appliquées
     Object.entries(shardCounts).forEach(([key, count]) => {
       const [label, statValue] = key.split("-");
@@ -256,14 +283,14 @@ const Runes: React.FC<RunesProps> = ({ selectedShard }) => {
         removeBonus(shardToRemove, classInformations, dispatch, count);
       }
     });
-  
+
     // Réinitialise toutes les runes à leur état par défaut
     setAppliedShards(
       Array(Object.keys(runesEquipment).length)
         .fill(null)
         .map(() => Array(4).fill(whiteParchment.whiteShard))
     );
-  };  
+  };
 
   const renderList = () => {
     return Object.keys(runesEquipment).map((index) => {
@@ -292,7 +319,7 @@ const Runes: React.FC<RunesProps> = ({ selectedShard }) => {
                       onContextMenu={(e) =>
                         handleShardRightClick(e, parseInt(index), i)
                       }
-                      className="shard-image"
+                      className={`shard-image ${isReadOnly ? "read-only" : ""}`}
                     />
                     {appliedShardRow[i] && appliedShardRow[i]!.runeLevel && (
                       <span className="shard-level">
@@ -371,7 +398,9 @@ const Runes: React.FC<RunesProps> = ({ selectedShard }) => {
             alt={whiteParchment.relic.alt}
           />
         </div>
-        <FontAwesomeIcon icon={faTrashAlt} onClick={handleTrashClick} />
+        {!isReadOnly && (
+          <FontAwesomeIcon icon={faTrashAlt} onClick={handleTrashClick} />
+        )}
       </div>
     </div>
   );

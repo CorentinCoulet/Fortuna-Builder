@@ -1,9 +1,14 @@
-import React from 'react';
+import React from "react";
+import Runes from "../components/Sublimations/Runes";
+import Deck from "../components/Deck";
+import RecapApt from "../components/Aptitudes/RecapApt";
 
 const Recap: React.FC = () => {
   return (
     <div>
-      <h1>Salut depuis Récap</h1>
+      <Runes isReadOnly={true} />
+      <Deck isReadOnly={true} />
+      <RecapApt />
     </div>
   );
 };

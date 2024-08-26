@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../store";
-import "../styles/components/RecapApt.scss";
-import { aptLogos } from "../asset";
+import { RootState } from "../../store";
+import "../../styles/components/RecapApt.scss";
+import { aptLogos } from "../../asset";
 
 const Recap: React.FC = () => {
   const intelPoints = useSelector((state: RootState) => state.intel.points);

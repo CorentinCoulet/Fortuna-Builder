@@ -1,25 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { shards, enchantmentEquipment } from "../../asset.ts";
 import "../../styles/components/Sublimations/EnchantmentPerEquipment.scss";
-
-interface EnchantmentPerEquipmentProps {
-  selectedShard: {
-    src: string;
-    alt: string;
-    statValue: number;
-    label: string;
-    runeLevel: number;
-  } | null;
-  setSelectedShard: React.Dispatch<
-    React.SetStateAction<{
-      src: string;
-      alt: string;
-      statValue: number;
-      label: string;
-      runeLevel: number;
-    } | null>
-  >;
-}
+import { setSelectedShard } from "../../features/components/runesSlice";
 
 const masteryEnchantmentLabels = {
   1: { label: "Maîtrise Mêlée", actions: ['meleeMastery'] },
@@ -244,9 +227,8 @@ function calculateElementary(index) {
   }
 }
 
-const EnchantmentPerEquipment: React.FC<EnchantmentPerEquipmentProps> = ({
-  setSelectedShard,
-}) => {
+const EnchantmentPerEquipment: React.FC = () => {
+  const dispatch = useDispatch();
   const [lvl, setLvl] = useState(200);
   const [sliderValue, setSliderValue] = useState(1);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
@@ -319,21 +301,25 @@ const EnchantmentPerEquipment: React.FC<EnchantmentPerEquipmentProps> = ({
 
   useEffect(() => {
     if (selectedItem !== null) {
+      const shardImage =
+        selectedItem <= 4
+          ? shardsElements[1]
+          : selectedItem <= 9
+          ? shardsElements[2]
+          : shardsElements[3];
       const statValue = calculateStat(selectedItem) || 0;
       const label = masteryEnchantmentLabels[selectedItem].label;
-      setSelectedShard((prev) => {
-        if (prev) {
-          return {
-            ...prev,
-            statValue,
-            runeLevel: sliderValue,
-            label,
-          };
-        }
-        return prev;
-      });
+      dispatch(
+        setSelectedShard({
+          src: shardImage.src,
+          alt: shardImage.alt,
+          statValue,
+          label,
+          runeLevel: sliderValue,
+        })
+      );
     }
-  }, [sliderValue, selectedItem, calculateStat, setSelectedShard]);
+  }, [sliderValue, selectedItem, calculateStat, dispatch]);
 
   const handleItemClick = (idx: number, shardImage: { src: string; alt: string }) => {
     const statValue = calculateStat(idx) || 0;
@@ -341,16 +327,18 @@ const EnchantmentPerEquipment: React.FC<EnchantmentPerEquipmentProps> = ({
     const runeLevel = sliderValue;
     if (selectedItem === idx) {
       setSelectedItem(null);
-      setSelectedShard(null);
+      dispatch(setSelectedShard(null));
     } else {
       setSelectedItem(idx);
-      setSelectedShard({
-        src: shardImage.src,
-        alt: shardImage.alt,
-        statValue,
-        label,
-        runeLevel,
-      });
+      dispatch(
+        setSelectedShard({
+          src: shardImage.src,
+          alt: shardImage.alt,
+          statValue,
+          label,
+          runeLevel,
+        })
+      );
     }
   };
 

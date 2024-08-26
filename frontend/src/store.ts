@@ -3,11 +3,12 @@ import classInformationsReducer from './features/components/classInformationsSli
 import imageReducer from './features/components/imageSlice';
 import editableValuesReducer from './features/components/editableValuesSlice';
 import spellsReducer from './features/components/spellsSlice';
+import runesReducer from './features/components/runesSlice';
 import aptitudeIntelReducer from './features/components/Aptitudes/aptitudeIntelSlice';
 import aptitudeStrengthReducer from './features/components/Aptitudes/aptitudeStrengthSlice';
 import aptitudeAgilityReducer from './features/components/Aptitudes/aptitudeAgilitySlice';
 import aptitudeChanceReducer from './features/components/Aptitudes/aptitudeChanceSlice';
-import aptitudeMajorReducer from './features/components/Aptitudes/aptitudeMajorSlice';
+import aptitudeMajorReducer from './features/components/Aptitudes/aptitudeMajorSlice'; 
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     classInformations: classInformationsReducer,
     image: imageReducer,
     spells: spellsReducer,
+    runes: runesReducer,
     intel: aptitudeIntelReducer,
     strength: aptitudeStrengthReducer,
     agility: aptitudeAgilityReducer,
