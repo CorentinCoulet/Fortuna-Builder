@@ -84,33 +84,33 @@
   border: 1px solid #ddd;
   border-radius: 6px;
   position: relative;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     background-color: #f0f0f0;
-  }
-
-  &:hover .sublimation-tooltip {
-    display: block;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
   &-info {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
 
-    .label-sublimation {
+    div:first-child {
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
       align-items: center;
-      font-size: 16px;
-      color: #333;
+      padding: 0 3px;
 
-      span {
-        margin-right: 8px;
-      }
+      .label-sublimation {
+        display: flex;
+        flex-direction: row;
+        font-size: 16px;
+        color: #333;
 
-      p {
-        font-weight: bold;
+        p {
+          font-weight: bold;
+        }
       }
     }
 
@@ -122,14 +122,59 @@
         width: 30px;
         height: 30px;
         margin-right: 5px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
 
         &:hover {
           transform: scale(1.1);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
 
         &:last-child {
           margin-right: 0;
+        }
+      }
+    }
+
+    .sublimation-levels {
+      display: flex;
+
+      .level-container {
+        position: relative;
+        display: inline-block;
+        margin-right: 5px;
+
+        .level-image {
+          width: 40px;
+          height: 40px;
+          border-radius: 4px;
+          transition: transform 0.4s ease, box-shadow 0.4s ease;
+          cursor: pointer;
+
+          &:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+          }
+
+          &:hover + .sublimation-tooltip {
+            display: block;
+          }
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+
+        .level-number {
+          position: absolute;
+          bottom: -3px;
+          right: -3px;
+          background-color: rgba(0, 0, 0, 0.7);
+          color: white;
+          font-size: 12px;
+          font-weight: bold;
+          padding: 2px 4px;
+          border-radius: 50%;
+          z-index: 1;
         }
       }
     }
@@ -141,11 +186,12 @@
     .parchment-item {
       position: relative;
       margin-right: 5px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
       cursor: pointer;
 
       &:hover {
         transform: scale(1.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
       }
 
       &:last-child {
@@ -173,7 +219,6 @@
 }
 
 .sublimation-tooltip {
-  display: none;
   position: absolute;
   top: 100%;
   left: 0;
@@ -184,21 +229,29 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 10;
   width: 250px;
-}
+  transition: opacity 0.3s ease, transform 0.3s ease;
 
-.sublimation-tooltip .label-sublimation {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
+  .label-sublimation {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
 
-.sublimation-tooltip .shards {
-  margin-bottom: 5px;
-}
+  .shards {
+    display: flex;
+    margin-bottom: 5px;
 
-.sublimation-tooltip .description {
-  margin-bottom: 10px;
-}
+    .rune-image {
+      width: 30px;
+      height: 30px;
+      margin-right: 5px;
 
-.sublimation-tooltip .bonus {
-  margin-top: 10px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .description {
+    margin-bottom: 10px;
+  }
 }
