@@ -1,0 +1,88 @@
+.total-masteries-calcul {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+
+    input:focus {
+        outline: none;
+    }
+
+    .stat-icon {
+        width: 18px;
+        height: 18px;
+        padding-right: 2px;
+    }
+
+    .mastery-input {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        width: 100%;
+        margin: 0;
+        text-align: right;
+        box-sizing: border-box;
+        border: none;
+        background: none;
+        padding: 0;
+        cursor: pointer;
+        height: 26px;
+        font-size: 16px;
+    }
+
+    .mastery-popup {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        z-index: 10;
+        max-height: 200px;
+        overflow-y: auto;
+        width: 100%;
+
+        .mastery-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+
+            label {
+                font-size: 14px;
+                color: #333;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+
+            input[type='checkbox'] {
+                margin-right: 8px;
+                width: 16px;
+                height: 16px;
+                cursor: pointer;
+
+                &::-webkit-inner-spin-button,
+                &::-webkit-outer-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+
+                &::-moz-inner-spin-button,
+                &::-moz-outer-spin-button {
+                    display: none;
+                }
+
+                &::-ms-expand {
+                    display: none;
+                }
+            }
+        }
+    }
+}

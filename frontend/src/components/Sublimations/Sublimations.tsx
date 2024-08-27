@@ -592,18 +592,35 @@ const Sublimations: React.FC = () => {
             </div>
             {hoveredSublimation && hoveredSublimation.key === key && (
               <div className="sublimation-tooltip">
-                <div className="label-sublimation">
-                  {sublimation.label} [MAX: {maxLevel}]
-                </div>
-                <div className="shards">
-                  {sublimation.order.map((shard, index) => (
+                <div>
+                  <div className="hovered-image">
                     <img
-                      key={index}
-                      src={shard.src}
-                      alt={shard.alt}
-                      className="rune-image"
+                      src={parchments[hoveredSublimation.level]?.src}
+                      alt={
+                        parchments[hoveredSublimation.level]?.alt ||
+                        `Niveau ${hoveredSublimation.level}`
+                      }
+                      className="level-image"
                     />
-                  ))}
+                    <span className="level-number">
+                      {hoveredSublimation.level}
+                    </span>
+                  </div>
+                  <div>
+                    <div className="label-sublimation">
+                      {sublimation.label} [MAX: {maxLevel}]
+                    </div>
+                    <div className="shards">
+                      {sublimation.order.map((shard, index) => (
+                        <img
+                          key={index}
+                          src={shard.src}
+                          alt={shard.alt}
+                          className="rune-image"
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
                 <div className="description">
                   <p>

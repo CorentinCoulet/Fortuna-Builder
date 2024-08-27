@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/components/ClassInformations.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,6 +9,7 @@ import {
 } from "../features/components/classInformationsSlice";
 import { RootState } from "../store";
 import EditableValue from "./EditableValue";
+import TotalMasteriesCalcul from "./TotalMasteriesCalcul";
 import ImageSelector from "./ImageSelector";
 import { Images } from "../asset";
 
@@ -16,6 +17,7 @@ const ClassInformations: React.FC = () => {
   const dispatch = useDispatch();
   const classInfo = useSelector((state: RootState) => state.classInformations);
   const calculatedStats = useSelector(selectCalculatedStats);
+  const [selectedMasteries, setSelectedMasteries] = useState<string[]>([]);
 
   return (
     <div className="class-informations">
@@ -75,6 +77,10 @@ const ClassInformations: React.FC = () => {
             label="PW"
             value={calculatedStats.wp}
             onChange={(value) => dispatch(updateProperty({ key: 'wp', value }))}
+          />
+          <TotalMasteriesCalcul
+            selectedMasteries={selectedMasteries}
+            onChange={setSelectedMasteries}
           />
         </div>
         <div className="armorStats">

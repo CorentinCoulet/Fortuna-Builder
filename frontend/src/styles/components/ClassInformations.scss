@@ -1,71 +1,73 @@
-
 .class-informations {
 
-    .statsGlobales {
+  .statsGlobales {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+
+    .sect1 {
       display: flex;
-      flex-direction: row;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #ccc;
-      
-      .sect1 {
+      flex-direction: column;
+      align-items: center;
+
+      .modal-content {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+
+    .sect2 {
+      form {
         display: flex;
         flex-direction: column;
-        align-items: center;
-  
-        .modal-content {
-          display: flex;
-          justify-content: center;
-          flex-wrap: wrap;
-        }
-      }
-  
-      .sect2 {
-        form {
-          display: flex;
-          flex-direction: column;     
-        }
       }
     }
-  
-    .primaryStats, .abilities, .masteries {
+  }
+
+  .primaryStats,
+  .abilities,
+  .masteries {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+  }
+
+  .primaryStats,
+  .armorStats,
+  .abilities {
+    margin-bottom: 15px;
+  }
+
+  .armorStats {
+    width: 100%;
+
+    .element-row {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 3px;
-    }
-
-    .primaryStats, .armorStats, .abilities {
-      margin-bottom: 15px;
-    }
-
-    .armorStats {
       width: 100%;
 
-      .element-row {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 3px;
+      .editable-value {
+        box-sizing: border-box;
         width: 100%;
-  
-        .editable-value {
-          box-sizing: border-box;
-          width: 100%;
-          margin-bottom: 3px;
-        }
+        margin-bottom: 3px;
       }
-    
-      .armor-summary {
-        display: flex;
-        flex-direction: row;
-        gap: 3px;
-        grid-column: span 2;
+    }
+
+    .armor-summary {
+      display: flex;
+      flex-direction: row;
+      gap: 3px;
+      grid-column: span 2;
+      width: 100%;
+
+      .editable-value {
+        box-sizing: border-box;
         width: 100%;
-    
-        .editable-value {
-          box-sizing: border-box;
-          width: 100%;
-        }
       }
-    }    
+    }
+  }
 }
-  
