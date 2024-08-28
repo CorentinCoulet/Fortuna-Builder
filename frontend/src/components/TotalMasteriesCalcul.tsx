@@ -1,14 +1,67 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
 import "../styles/components/TotalMasteriesCalcul.scss";
 import { PrimaryStats } from "../asset";
 import { RootState } from "../store";
-import { selectCalculatedStats } from "../features/components/classInformationsSlice";
+
+interface CalculatedStats {
+  elems: {
+    waterMastery: number;
+    earthMastery: number;
+    airMastery: number;
+    fireMastery: number;
+  };
+  meleeMastery: number;
+  distanceMastery: number;
+  critMastery: number;
+  rearMastery: number;
+  berserkMastery: number;
+  healMastery: number;
+}
 
 interface TotalMasteriesCalculProps {
   selectedMasteries: string[];
   onChange: (selectedMasteries: string[]) => void;
 }
+
+const masteryLabels: { [key in keyof CalculatedStats | 'elems']: string } = {
+  elems: "Maîtrise Élémentaire",
+  meleeMastery: "Maîtrise Mêlée",
+  distanceMastery: "Maîtrise Distance",
+  critMastery: "Maîtrise Critique",
+  rearMastery: "Maîtrise Dos",
+  berserkMastery: "Maîtrise Berserk",
+  healMastery: "Maîtrise Soin",
+};
+
+const selectCalculatedStats = createSelector(
+  (state: RootState) => state.classInformations,
+  (classInformations) => {
+    const highestElementalMastery = Math.max(
+      classInformations.masteries.waterMastery,
+      classInformations.masteries.earthMastery,
+      classInformations.masteries.airMastery,
+      classInformations.masteries.fireMastery,
+    );
+
+    return {
+      elems: {
+        waterMastery: classInformations.masteries.waterMastery,
+        earthMastery: classInformations.masteries.earthMastery,
+        airMastery: classInformations.masteries.airMastery,
+        fireMastery: classInformations.masteries.fireMastery,
+      },
+      highestElementalMastery,
+      meleeMastery: classInformations.meleeMastery,
+      distanceMastery: classInformations.distanceMastery,
+      critMastery: classInformations.critMastery,
+      rearMastery: classInformations.rearMastery,
+      berserkMastery: classInformations.berserkMastery,
+      healMastery: classInformations.healMastery,
+    };
+  }
+);
 
 const TotalMasteriesCalcul: React.FC<TotalMasteriesCalculProps> = ({
   selectedMasteries,
@@ -18,7 +71,9 @@ const TotalMasteriesCalcul: React.FC<TotalMasteriesCalculProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
 
-  const calculatedStats = useSelector((state: RootState) => selectCalculatedStats(state));
+  const calculatedStats = useSelector((state: RootState) => selectCalculatedStats(state)) as CalculatedStats & {
+    highestElementalMastery: number;
+  };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -49,23 +104,32 @@ const TotalMasteriesCalcul: React.FC<TotalMasteriesCalculProps> = ({
     onChange(newSelectedMasteries);
   };
 
-  const masteryOptions = [
-    { id: "waterMastery", label: "Maîtrise Eau", value: calculatedStats.elems.waterMastery },
-    { id: "earthMastery", label: "Maîtrise Terre", value: calculatedStats.elems.earthMastery },
-    { id: "airMastery", label: "Maîtrise Air", value: calculatedStats.elems.airMastery },
-    { id: "fireMastery", label: "Maîtrise Feu", value: calculatedStats.elems.fireMastery },
-    { id: "meleeMastery", label: "Maîtrise Mêlée", value: calculatedStats.meleeMastery },
-    { id: "distanceMastery", label: "Maîtrise Distance", value: calculatedStats.distanceMastery },
-    { id: "critMastery", label: "Maîtrise Critique", value: calculatedStats.critMastery },
-    { id: "rearMastery", label: "Maîtrise Dos", value: calculatedStats.rearMastery },
-    { id: "berserkMastery", label: "Maîtrise Berserk", value: calculatedStats.berserkMastery },
-    { id: "healMastery", label: "Maîtrise Soin", value: calculatedStats.healMastery },
-  ];
+  const masteryOptions = useMemo(() => {
+    return [
+      { id: "elementalMastery", label: masteryLabels.elems, value: calculatedStats.highestElementalMastery },
+      { id: "meleeMastery", label: masteryLabels.meleeMastery, value: calculatedStats.meleeMastery },
+      { id: "distanceMastery", label: masteryLabels.distanceMastery, value: calculatedStats.distanceMastery },
+      { id: "critMastery", label: masteryLabels.critMastery, value: calculatedStats.critMastery },
+      { id: "rearMastery", label: masteryLabels.rearMastery, value: calculatedStats.rearMastery },
+      { id: "berserkMastery", label: masteryLabels.berserkMastery, value: calculatedStats.berserkMastery },
+      { id: "healMastery", label: masteryLabels.healMastery, value: calculatedStats.healMastery },
+    ];
+  }, [
+    calculatedStats.highestElementalMastery, 
+    calculatedStats.berserkMastery, 
+    calculatedStats.critMastery, 
+    calculatedStats.distanceMastery, 
+    calculatedStats.healMastery, 
+    calculatedStats.meleeMastery, 
+    calculatedStats.rearMastery,
+  ]);
 
-  const totalValue = selectedMasteries.reduce((total, masteryId) => {
-    const mastery = masteryOptions.find((m) => m.id === masteryId);
-    return mastery ? total + mastery.value : total;
-  }, 0);
+  const totalValue = useMemo(() => {
+    return selectedMasteries.reduce((total, masteryId) => {
+      const mastery = masteryOptions.find((m) => m.id === masteryId);
+      return mastery ? total + mastery.value : total;
+    }, 0);
+  }, [selectedMasteries, masteryOptions]);
 
   return (
     <div className="total-masteries-calcul">
@@ -94,7 +158,7 @@ const TotalMasteriesCalcul: React.FC<TotalMasteriesCalculProps> = ({
                   checked={selectedMasteries.includes(mastery.id)}
                   onChange={() => handleCheckboxChange(mastery.id)}
                 />
-                {mastery.label} (+{mastery.value})
+                {mastery.label}
               </label>
             </div>
           ))}

@@ -38,12 +38,10 @@ const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChang
     if (trimmedValue === "" || isNaN(numberValue)) {
       setInputValue("0");
       onChange(value);
-    }
-    if(numberValue !== 0 && !isNaN(numberValue)){
-      setHasValidated(true);
-    } else {
       setHasValidated(false);
-    }
+    } else if (numberValue !== 0) {
+      setHasValidated(true);
+    }    
     setIsEditing(false);
   };
 
@@ -60,7 +58,7 @@ const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChang
   const image = PrimaryStats[id];
   const accumulatedValue = value + parseFloat(inputValue);
 
-  const containerClass = hasValidated ? 'editable-value outlined' : 'editable-value';
+  const containerClass = hasValidated ? 'editable-value selected' : 'editable-value';
 
   return (
     <div ref={containerRef} className={containerClass}>
