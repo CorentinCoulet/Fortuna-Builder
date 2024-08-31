@@ -121,6 +121,7 @@
   .sublimations-rares-list {
     display: flex;
     flex-direction: column;
+    position: relative;
   }
 
   .sublimation-rares-item {
@@ -132,9 +133,24 @@
     border: 1px solid #ddd;
     border-radius: 6px;
     transition: background-color 0.3s ease;
+    position: relative;
 
     &:hover {
       background-color: #f0f0f0;
+
+      .sublimation-popup {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    &.selected {
+      background-color: #e7f3ff;
+      border-color: #007bff;
+
+      .label-sublimation-rares {
+        color: #007bff;
+      }
     }
 
     .label-sublimation-rares {
@@ -156,6 +172,89 @@
 
         &:hover {
           transform: scale(1.1);
+        }
+      }
+    }
+
+    .sublimation-popup {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      width: 250px;
+      padding: 10px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      > div:first-child {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+
+        img {
+          margin-right: 10px;
+        }
+      }
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 10px;
+        border-style: solid;
+        border-color: transparent transparent #ddd transparent;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 8px;
+        border-style: solid;
+        border-color: transparent transparent #ffffff transparent;
+      }
+
+      .sublimation-popup-image {
+        display: flex;
+        justify-content: center;
+
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+
+      .sublimation-popup-label {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      .sublimation-popup-descriptif {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 10px;;
+
+        .sublimation-popup-bonus {
+          font-size: 14px;
+          color: #333;
+          margin-top: 10px;
+
+          > div {
+            display: flex;
+            flex-wrap: wrap;
+          }
         }
       }
     }

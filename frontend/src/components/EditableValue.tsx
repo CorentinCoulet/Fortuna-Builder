@@ -11,7 +11,7 @@ interface EditableValueProps {
 
 const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChange }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [inputValue, setInputValue] = useState<string>("0");
+  const [inputValue, setInputValue] = useState<string>('0');
   const containerRef = useRef<HTMLDivElement>(null);
   const [hasValidated, setHasValidated] = useState(false);
 
@@ -40,6 +40,7 @@ const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChang
       onChange(value);
       setHasValidated(false);
     } else if (numberValue !== 0) {
+      onChange(numberValue);
       setHasValidated(true);
     }    
     setIsEditing(false);
@@ -56,8 +57,6 @@ const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChang
   };
 
   const image = PrimaryStats[id];
-  const accumulatedValue = value + parseFloat(inputValue);
-
   const containerClass = hasValidated ? 'editable-value selected' : 'editable-value';
 
   return (
@@ -68,7 +67,7 @@ const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChang
       )}
       <div className="value-container">
         {!isEditing ? (
-          <span className="value" onClick={handleValueClick}>{accumulatedValue}</span>
+          <span className="value" onClick={handleValueClick}>{value}</span>
         ) : (
           <input
             type="number"

@@ -11,6 +11,10 @@ import {
   ClassInformationsState,
 } from "../../features/components/classInformationsSlice";
 import { RootState, AppDispatch } from "../../store.ts";
+import {
+  setSelectedEpicSublimation,
+  setSelectedRelicSublimation,
+} from "../../features/components/sublimationsSlice.ts";
 
 interface Shard {
   src: string;
@@ -181,6 +185,13 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   const selectedShard = useSelector(
     (state: RootState) => state.runes.selectedShard
   );
+  const selectedEpicSublimation = useSelector(
+    (state: RootState) => state.sublimations.selectedEpicSublimation
+  );
+  const selectedRelicSublimation = useSelector(
+    (state: RootState) => state.sublimations.selectedRelicSublimation
+  );
+
   const [appliedShards, setAppliedShards] = useState<
     Array<Array<Shard | null>>
   >(() => {
@@ -192,9 +203,54 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
           .map(() => Array(4).fill(null));
   });
 
+  const [appliedEpicSublimation, setAppliedEpicSublimation] = useState(
+    whiteParchment.epic
+  );
+  const [appliedRelicSublimation, setAppliedRelicSublimation] = useState(
+    whiteParchment.relic
+  );
+
+  const [hoveredSublimation, setHoveredSublimation] = useState<
+    "epic" | "relic" | null
+  >(null);
+
   useEffect(() => {
     saveShardsToLocalStorage(appliedShards);
   }, [appliedShards]);
+
+  const handleEpicSublimationClick = () => {
+    if (isReadOnly) return;
+    if (selectedEpicSublimation) {
+      setAppliedEpicSublimation(selectedEpicSublimation);
+      dispatch(setSelectedEpicSublimation(selectedEpicSublimation));
+    }
+  };
+
+  const handleRelicSublimationClick = () => {
+    if (isReadOnly) return;
+    if (selectedRelicSublimation) {
+      setAppliedRelicSublimation(selectedRelicSublimation);
+      dispatch(setSelectedRelicSublimation(selectedRelicSublimation));
+    }
+  };
+
+  const handleEpicSublimationRightClick = (
+    e: React.MouseEvent<HTMLImageElement>
+  ) => {
+    e.preventDefault();
+    if (isReadOnly) return;
+    setAppliedEpicSublimation(whiteParchment.epic);
+    dispatch(setSelectedEpicSublimation(null));
+  };
+
+  const handleRelicSublimationRightClick = (
+    e: React.MouseEvent<HTMLImageElement>
+  ) => {
+    e.preventDefault();
+    if (isReadOnly) return;
+    setAppliedRelicSublimation(whiteParchment.relic);
+    dispatch(setSelectedRelicSublimation(null));
+  };
 
   const handleShardClick = (rowIndex: number, shardIndex: number) => {
     if (isReadOnly) return;
@@ -258,6 +314,12 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   };
 
   const handleTrashClick = () => {
+    // Suppression des Sublimations épique et relique
+    setAppliedEpicSublimation(whiteParchment.epic);
+    setAppliedRelicSublimation(whiteParchment.relic);
+    dispatch(setSelectedEpicSublimation(null));
+    dispatch(setSelectedRelicSublimation(null));
+
     // Créer une copie des shards appliqués pour ne pas modifier l'état en cours de traitement
     const shardsToRemove = appliedShards
       .flat()
@@ -377,6 +439,23 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
     });
   };
 
+  const renderSublimationInfo = (type: "epic" | "relic") => {
+    const sublimation =
+      type === "epic" ? appliedEpicSublimation : appliedRelicSublimation;
+    if (!sublimation || sublimation.alt === whiteParchment[type].alt)
+      return null;
+
+    return (
+      <div className="sublimation-info">
+        <div>
+          <img src={sublimation.src} alt={sublimation.alt} />
+          <strong>{sublimation.alt}</strong>
+        </div>
+        <div>{}</div>
+      </div>
+    );
+  };
+
   return (
     <div className="runes">
       <div>
@@ -384,19 +463,29 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
       </div>
       {renderList()}
       <div className="runes-trash">
-        <div>
-          <img
-            loading="lazy"
-            key={`${whiteParchment.epic.src}-${whiteParchment.epic.alt}`}
-            src={whiteParchment.epic.src}
-            alt={whiteParchment.epic.alt}
-          />
-          <img
-            loading="lazy"
-            key={`${whiteParchment.relic.src}-${whiteParchment.relic.alt}`}
-            src={whiteParchment.relic.src}
-            alt={whiteParchment.relic.alt}
-          />
+        <div className="sublimations">
+          <div className="sublimation-slot">
+            <img
+              src={appliedEpicSublimation.src}
+              alt={appliedEpicSublimation.alt}
+              onClick={handleEpicSublimationClick}
+              onContextMenu={handleEpicSublimationRightClick}
+              onMouseEnter={() => setHoveredSublimation("epic")}
+              onMouseLeave={() => setHoveredSublimation(null)}
+            />
+            {hoveredSublimation === "epic" && renderSublimationInfo("epic")}
+          </div>
+          <div className="sublimation-slot">
+            <img
+              src={appliedRelicSublimation.src}
+              alt={appliedRelicSublimation.alt}
+              onClick={handleRelicSublimationClick}
+              onContextMenu={handleRelicSublimationRightClick}
+              onMouseEnter={() => setHoveredSublimation("relic")}
+              onMouseLeave={() => setHoveredSublimation(null)}
+            />
+            {hoveredSublimation === "relic" && renderSublimationInfo("relic")}
+          </div>
         </div>
         {!isReadOnly && (
           <FontAwesomeIcon icon={faTrashAlt} onClick={handleTrashClick} />

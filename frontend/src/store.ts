@@ -9,6 +9,7 @@ import aptitudeStrengthReducer from './features/components/Aptitudes/aptitudeStr
 import aptitudeAgilityReducer from './features/components/Aptitudes/aptitudeAgilitySlice';
 import aptitudeChanceReducer from './features/components/Aptitudes/aptitudeChanceSlice';
 import aptitudeMajorReducer from './features/components/Aptitudes/aptitudeMajorSlice'; 
+import sublimationsReducer from './features/components/sublimationsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -21,7 +22,8 @@ export const store = configureStore({
     strength: aptitudeStrengthReducer,
     agility: aptitudeAgilityReducer,
     chance: aptitudeChanceReducer,
-    major: aptitudeMajorReducer
+    major: aptitudeMajorReducer,
+    sublimations: sublimationsReducer,
   },
 });
 
