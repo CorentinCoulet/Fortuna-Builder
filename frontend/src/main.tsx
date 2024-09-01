@@ -5,7 +5,9 @@ import { store } from './store';
 import Modal from 'react-modal';
 import './styles/pages/Main.scss';
 import React from 'react';
+import { enableMapSet } from 'immer';
 
+enableMapSet();
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 Modal.setAppElement('#root');

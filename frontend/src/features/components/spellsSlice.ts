@@ -4,18 +4,27 @@ interface Spell {
   src: string;
   alt: string;
   key?: string;
+  name?: string;
+  effects?: string;
+  details?: string;
 }
 
 interface SpellsState {
   selectedClass: string;
-  activeSpells: Spell[];
-  passiveSpells: Spell[];
+  activeSpells: (Spell | null)[];
+  passiveSpells: (Spell | null)[];
+  selectedSpell: Spell | null;
+  draggedSpell: Spell | null;
+  usedSpells: string[];
 }
 
 const initialState: SpellsState = {
   selectedClass: '',
-  activeSpells: [],
-  passiveSpells: [],
+  activeSpells: Array(12).fill(null),
+  passiveSpells: Array(6).fill(null),
+  selectedSpell: null,
+  draggedSpell: null,
+  usedSpells: [],
 };
 
 const spellsSlice = createSlice({
@@ -24,49 +33,60 @@ const spellsSlice = createSlice({
   reducers: {
     setSelectedClass(state, action: PayloadAction<string>) {
       state.selectedClass = action.payload;
-      state.activeSpells = [];
-      state.passiveSpells = [];
+      state.activeSpells = Array(12).fill(null);
+      state.passiveSpells = Array(6).fill(null);
+      state.usedSpells = [];
     },
-    addActiveSpell(state, action: PayloadAction<Spell>) {
-        if (state.activeSpells.length < 12) {
-            state.activeSpells.push({
-                ...action.payload,
-                key: `${state.selectedClass}-active-${action.payload.src}-${Date.now()}`
-            });
-        }
+    addActiveSpell(state, action: PayloadAction<{ spell: Spell, index: number }>) {
+      const { spell, index } = action.payload;
+      state.activeSpells[index] = {
+        ...spell,
+        key: `${state.selectedClass}-active-${spell.src}-${Date.now()}`,
+      };
+      if (!state.usedSpells.includes(spell.src)) {
+        state.usedSpells.push(spell.src);
+      }
     },
     removeActiveSpell(state, action: PayloadAction<Spell>) {
-      state.activeSpells = state.activeSpells.filter(
-        (spell) => spell.src !== action.payload.src || spell.alt !== action.payload.alt
+      state.activeSpells = state.activeSpells.map(spell =>
+        spell?.src === action.payload.src && spell?.alt === action.payload.alt ? null : spell
       );
+      state.usedSpells = state.usedSpells.filter(src => src !== action.payload.src);
     },
-    addPassiveSpell(state, action: PayloadAction<Spell>) {
-        if (state.passiveSpells.length < 6) {
-            state.passiveSpells.push({
-                ...action.payload,
-                key: `${state.selectedClass}-passive-${action.payload.src}-${Date.now()}`
-            });
-        }
+    addPassiveSpell(state, action: PayloadAction<{ spell: Spell, index: number }>) {
+      const { spell, index } = action.payload;
+      state.passiveSpells[index] = {
+        ...spell,
+        key: `${state.selectedClass}-passive-${spell.src}-${Date.now()}`,
+      };
+      if (!state.usedSpells.includes(spell.src)) {
+        state.usedSpells.push(spell.src);
+      }
     },
     removePassiveSpell(state, action: PayloadAction<Spell>) {
-      state.passiveSpells = state.passiveSpells.filter(
-        (spell) => spell.src !== action.payload.src || spell.alt !== action.payload.alt
+      state.passiveSpells = state.passiveSpells.map(spell =>
+        spell?.src === action.payload.src && spell?.alt === action.payload.alt ? null : spell
       );
+      state.usedSpells = state.usedSpells.filter(src => src !== action.payload.src);
     },
     clearAllSpells(state) {
-      state.activeSpells = [];
-      state.passiveSpells = [];
+      state.activeSpells = Array(12).fill(null);
+      state.passiveSpells = Array(6).fill(null);
+      state.usedSpells = [];
     },
     loadSpellsFromStorage(state, action: PayloadAction<SpellsState>) {
-        state.activeSpells = action.payload.activeSpells.map(spell => ({
-            ...spell,
-            key: `${spell.src}-${Date.now()}`
-        }));
-        state.passiveSpells = action.payload.passiveSpells.map(spell => ({
-            ...spell,
-            key: `${spell.src}-${Date.now()}`
-        }));
-    }
+      state.selectedClass = action.payload.selectedClass;
+      state.activeSpells = action.payload.activeSpells;
+      state.passiveSpells = action.payload.passiveSpells;
+      state.selectedSpell = action.payload.selectedSpell;
+      state.draggedSpell = action.payload.draggedSpell;
+    },
+    setSelectedSpell(state, action: PayloadAction<Spell | null>) {
+      state.selectedSpell = action.payload;
+    },
+    spellDrag(state, action: PayloadAction<Spell | null>) {
+      state.draggedSpell = action.payload;
+    },
   },
 });
 
@@ -78,6 +98,8 @@ export const {
   removePassiveSpell,
   clearAllSpells,
   loadSpellsFromStorage,
+  setSelectedSpell,
+  spellDrag,
 } = spellsSlice.actions;
 
 export default spellsSlice.reducer;

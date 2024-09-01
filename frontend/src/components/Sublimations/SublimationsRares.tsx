@@ -198,6 +198,7 @@ const SublimationsRares: React.FC = () => {
                 alt: sublimation.label,
                 label: sublimation.label,
                 type: sublimation.type,
+                descriptif: sublimation.descriptif,
                 bonus: sublimation.bonus,
             };
             dispatch(sublimation.type === 'epic' ? setSelectedEpicSublimation(selectedData) : setSelectedRelicSublimation(selectedData));

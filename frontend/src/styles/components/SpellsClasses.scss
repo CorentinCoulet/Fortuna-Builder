@@ -7,6 +7,11 @@
     border-radius: 5px;
     background-color: #f9f9f9;
 
+    .grayed-out {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
     .selected {
         opacity: 0.5;
     }

@@ -1,6 +1,6 @@
 import React from "react";
 import Runes from "../components/Sublimations/Runes";
-import Deck from "../components/Deck";
+import Deck from "../components/Spells/Deck";
 import RecapApt from "../components/Aptitudes/RecapApt";
 
 const Recap: React.FC = () => {

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Deck from "../components/Deck";
-import SpellsClasses from "../components/SpellsClasses";
+import React, { useCallback, useEffect, useState } from "react";
+import Deck from "../components/Spells/Deck";
+import SpellsClasses from "../components/Spells/SpellsClasses";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../store";
 import {
@@ -10,11 +10,16 @@ import {
   addPassiveSpell,
   removePassiveSpell,
   loadSpellsFromStorage,
+  setSelectedSpell,
+  spellDrag,
 } from "../features/components/spellsSlice.ts";
 
 interface Spell {
   src: string;
   alt: string;
+  name?: string;
+  effects?: string;
+  details?: string;
 }
 
 interface Spells {
@@ -26,23 +31,32 @@ const Spells: React.FC = () => {
   const selectedClass = useSelector((state: RootState) => state.spells.selectedClass);
   const activeSpells = useSelector((state: RootState) => state.spells.activeSpells);
   const passiveSpells = useSelector((state: RootState) => state.spells.passiveSpells);
-  const selectedImage = useSelector(
-    (state: RootState) => state.image.selectedImage
-  );
+  const usedSpells = useSelector((state: RootState) => state.spells.usedSpells);
+  const selectedImage = useSelector((state: RootState) => state.image.selectedImage);
   const [spells, setSpells] = useState<Spells>({});
   const [commonSpells, setCommonSpells] = useState<Spells>({});
-
 
   useEffect(() => {
     const savedActiveSpells = localStorage.getItem("activeSpells");
     const savedPassiveSpells = localStorage.getItem("passiveSpells");
 
     if (savedActiveSpells && savedPassiveSpells) {
+      const parsedActiveSpells = JSON.parse(savedActiveSpells);
+      const parsedPassiveSpells = JSON.parse(savedPassiveSpells);
+
+      const newUsedSpells = [
+        ...parsedActiveSpells.filter((spell: Spell | null) => spell !== null).map((spell: Spell) => spell.src),
+        ...parsedPassiveSpells.filter((spell: Spell | null) => spell !== null).map((spell: Spell) => spell.src),
+      ];
+
       dispatch(
         loadSpellsFromStorage({
           selectedClass,
-          activeSpells: JSON.parse(savedActiveSpells),
-          passiveSpells: JSON.parse(savedPassiveSpells),
+          activeSpells: parsedActiveSpells,
+          passiveSpells: parsedPassiveSpells,
+          selectedSpell: null,
+          draggedSpell: null,
+          usedSpells: newUsedSpells,
         })
       );
     }
@@ -78,38 +92,45 @@ const Spells: React.FC = () => {
     }
   }, [selectedClass]);
 
-  const handleSpellSelect = (spell: Spell, type: "active" | "passive") => {
-    const imageElement = document.querySelector(
-      `.spellsClasses img[src="${spell.src}"]`
-    ) as HTMLImageElement;
-    const isSelected = imageElement?.classList.contains("selected");
-    const selectedElementCount = document.querySelectorAll('.spellsClasses div:first-child img.selected').length;
-    const selectedActiveCount = document.querySelectorAll('.spellsClasses .spells-active img.selected').length;
-    const selectedPassiveCount = document.querySelectorAll('.spellsClasses .spells-passive img.selected').length;
-    if (isSelected) {
-      imageElement.classList.remove("selected");
+  const handleSpellSelect = useCallback(
+    (spell: Spell, type: "active" | "passive", index: number) => {
+      const isSpellActiveSelected = activeSpells.some(s => s?.src === spell.src);
+      const isSpellPassiveSelected = passiveSpells.some(s => s?.src === spell.src);
+
       if (type === "active") {
-        dispatch(removeActiveSpell(spell));
-      } else {
-        dispatch(removePassiveSpell(spell));
-      }
-      
-    } else {
-        if(
-            type === 'active' && 
-            activeSpells.length < 12 && 
-            (selectedElementCount + selectedActiveCount) < 12){
-            imageElement.classList.add('selected');
-            dispatch(addActiveSpell(spell));       
-        } else if(
-            type === 'passive' && 
-            passiveSpells.length < 6 && 
-            selectedPassiveCount < 6){
-            imageElement.classList.add('selected');
-            dispatch(addPassiveSpell(spell));
+        if (isSpellActiveSelected) {
+          dispatch(removeActiveSpell(spell));
+        } else {
+          dispatch(addActiveSpell({ spell, index }));
         }
-    }
-  };
+      } else if (type === "passive") {
+        if (isSpellPassiveSelected) {
+          dispatch(removePassiveSpell(spell));
+        } else {
+          dispatch(addPassiveSpell({ spell, index }));
+        }
+      }
+    },
+    [dispatch, activeSpells, passiveSpells]
+  );
+
+  const handleSpellClick = useCallback(
+    (spell: Spell) => {
+      if (!usedSpells.includes(spell.src)) {
+        dispatch(setSelectedSpell(spell));
+      }
+    },
+    [dispatch, usedSpells]
+  );
+
+  const handleSpellDrag = useCallback(
+    (spell: Spell) => {
+      if (!usedSpells.includes(spell.src)) {
+        dispatch(spellDrag(spell));
+      }
+    },
+    [dispatch, usedSpells]
+  );
 
   return (
     <div>
@@ -118,6 +139,8 @@ const Spells: React.FC = () => {
             spells={spells}
             commonSpells={commonSpells}
             onSpellSelect={handleSpellSelect}
+            onSpellClick={handleSpellClick}
+            onSpellDrag={handleSpellDrag}
         />
     </div>
   );

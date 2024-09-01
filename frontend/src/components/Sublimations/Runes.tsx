@@ -9,11 +9,13 @@ import {
   updateResistances,
   updateMasteries,
   ClassInformationsState,
+  Resistances,
+  Masteries,
 } from "../../features/components/classInformationsSlice";
 import { RootState, AppDispatch } from "../../store.ts";
 import {
-  setSelectedEpicSublimation,
-  setSelectedRelicSublimation,
+  setEquippedEpicSublimation,
+  setEquippedRelicSublimation,
 } from "../../features/components/sublimationsSlice.ts";
 
 interface Shard {
@@ -28,6 +30,51 @@ interface Shard {
 interface RunesProps {
   isReadOnly?: boolean;
 }
+
+const bonusLabels: { [key: string]: string } = {
+  waterResist: "Résistance Eau",
+  earthResist: "Résistance Terre",
+  airResist: "Résistance Air",
+  fireResist: "Résistance Feu",
+
+  waterMastery: "Maîtrise Eau",
+  earthMastery: "Maîtrise Terre",
+  airMastery: "Maîtrise Air",
+  fireMastery: "Maîtrise Feu",
+
+  hp: "Points de Vie",
+  armor: "Armure",
+  
+  ap: "Points d'Action",
+  wp: "Points de Wakfu",
+  mp: "Points de Mouvement",
+  
+  critMastery: "Maîtrise Critique",
+  rearMastery: "Maîtrise Dos",
+  meleeMastery: "Maîtrise Mêlée",
+  distanceMastery: "Maîtrise Distance",
+  healMastery: "Maîtrise Soin",
+  berserkMastery: "Maîtrise Berserk",
+  
+  critResist: "Résistance Critique",
+  rearResist: "Résistance Dos",
+  damageReduction: "Réduction de Dégâts",
+  
+  critical: "Coup Critique",
+  block: "Blocage",
+  
+  initiative: "Initiative",
+  dodge: "Esquive",
+  lock: "Tacle",
+  wisdom: "Sagesse",
+  control: "Contrôle",
+  range: "Portée",
+  prospecting: "Prospection",
+  will: "Volonté",
+  
+  damageDealt: "Dégâts Infligés",
+  heals: "Soins",
+};
 
 const whiteParchment = {
   whiteParchment: parchments[3],
@@ -191,6 +238,12 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   const selectedRelicSublimation = useSelector(
     (state: RootState) => state.sublimations.selectedRelicSublimation
   );
+  const equippedEpicSublimation = useSelector(
+    (state: RootState) => state.sublimations.equippedEpicSublimation
+  );
+  const equippedRelicSublimation = useSelector(
+    (state: RootState) => state.sublimations.equippedRelicSublimation
+  );
 
   const [appliedShards, setAppliedShards] = useState<
     Array<Array<Shard | null>>
@@ -222,7 +275,21 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
     if (isReadOnly) return;
     if (selectedEpicSublimation) {
       setAppliedEpicSublimation(selectedEpicSublimation);
-      dispatch(setSelectedEpicSublimation(selectedEpicSublimation));
+      dispatch(setEquippedEpicSublimation(selectedEpicSublimation));
+
+      if (selectedEpicSublimation.bonus) {
+        Object.entries(selectedEpicSublimation.bonus).forEach(([key, value]) => {
+          if (key in bonusLabels) {
+            if (key.includes("Resist")) {
+              dispatch(updateResistances({ [key]: value }));
+            } else if (key.includes("Mastery")) {
+              dispatch(updateMasteries({ [key]: value }));
+            } else {
+              dispatch(updateProperty({ key: key as keyof ClassInformationsState, value }));
+            }
+          }
+        });
+      }
     }
   };
 
@@ -230,7 +297,21 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
     if (isReadOnly) return;
     if (selectedRelicSublimation) {
       setAppliedRelicSublimation(selectedRelicSublimation);
-      dispatch(setSelectedRelicSublimation(selectedRelicSublimation));
+      dispatch(setEquippedRelicSublimation(selectedRelicSublimation));
+
+      if (selectedRelicSublimation.bonus) {
+        Object.entries(selectedRelicSublimation.bonus).forEach(([key, value]) => {
+          if (key in bonusLabels) {
+            if (key.includes("Resist")) {
+              dispatch(updateResistances({ [key]: value }));
+            } else if (key.includes("Mastery")) {
+              dispatch(updateMasteries({ [key]: value }));
+            } else {
+              dispatch(updateProperty({ key: key as keyof ClassInformationsState, value }));
+            }
+          }
+        });
+      }
     }
   };
 
@@ -239,8 +320,26 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   ) => {
     e.preventDefault();
     if (isReadOnly) return;
+
+    if (equippedEpicSublimation && equippedEpicSublimation.bonus) {
+      Object.entries(equippedEpicSublimation.bonus).forEach(([key, value]) => {
+        if (key in bonusLabels) {
+          if (key.includes("Resist")) {
+            const currentResist = classInformations.resistances[key as keyof Resistances] || 0;
+            dispatch(updateResistances({ [key]: currentResist - value }));
+          } else if (key.includes("Mastery")) {
+            const currentMastery = classInformations.masteries[key as keyof Masteries] || 0;
+            dispatch(updateMasteries({ [key]: currentMastery - value }));
+          } else {
+            const currentValue = classInformations[key as keyof ClassInformationsState] as number;
+            dispatch(updateProperty({ key: key as keyof ClassInformationsState, value: currentValue - value }));
+          }
+        }
+      });
+    }
+
     setAppliedEpicSublimation(whiteParchment.epic);
-    dispatch(setSelectedEpicSublimation(null));
+    dispatch(setEquippedEpicSublimation(null));
   };
 
   const handleRelicSublimationRightClick = (
@@ -248,12 +347,33 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   ) => {
     e.preventDefault();
     if (isReadOnly) return;
+
+    if (equippedRelicSublimation && equippedRelicSublimation.bonus) {
+      Object.entries(equippedRelicSublimation.bonus).forEach(([key, value]) => {
+        if (key in bonusLabels) {
+          if (key.includes("Resist")) {
+            const currentResist = classInformations.resistances[key as keyof Resistances] || 0;
+            dispatch(updateResistances({ [key]: currentResist - value }));
+          } else if (key.includes("Mastery")) {
+            const currentMastery = classInformations.masteries[key as keyof Masteries] || 0;
+            dispatch(updateMasteries({ [key]: currentMastery - value }));
+          } else {
+            const currentValue = classInformations[key as keyof ClassInformationsState] as number;
+            dispatch(updateProperty({ key: key as keyof ClassInformationsState, value: currentValue - value }));
+          }
+        }
+      });
+    }
+
     setAppliedRelicSublimation(whiteParchment.relic);
-    dispatch(setSelectedRelicSublimation(null));
+    dispatch(setEquippedRelicSublimation(null));
   };
 
   const handleShardClick = (rowIndex: number, shardIndex: number) => {
     if (isReadOnly) return;
+    if(!appliedShards[rowIndex]){
+      return;
+    }
     const currentShard = appliedShards[rowIndex][shardIndex];
     if (currentShard && currentShard.label !== "Default") {
       removeBonus(currentShard, classInformations, dispatch);
@@ -315,10 +435,44 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
 
   const handleTrashClick = () => {
     // Suppression des Sublimations épique et relique
+    if (equippedEpicSublimation && equippedEpicSublimation.bonus) {
+      Object.entries(equippedEpicSublimation.bonus).forEach(([key, value]) => {
+        if (key in bonusLabels) {
+          if (key.includes("Resist")) {
+            const currentResist = classInformations.resistances[key as keyof Resistances] || 0;
+            dispatch(updateResistances({ [key]: currentResist - value }));
+          } else if (key.includes("Mastery")) {
+            const currentMastery = classInformations.masteries[key as keyof Masteries] || 0;
+            dispatch(updateMasteries({ [key]: currentMastery - value }));
+          } else {
+            const currentValue = classInformations[key as keyof ClassInformationsState] as number;
+            dispatch(updateProperty({ key: key as keyof ClassInformationsState, value: currentValue - value }));
+          }
+        }
+      });
+    }
+  
+    if (equippedRelicSublimation && equippedRelicSublimation.bonus) {
+      Object.entries(equippedRelicSublimation.bonus).forEach(([key, value]) => {
+        if (key in bonusLabels) {
+          if (key.includes("Resist")) {
+            const currentResist = classInformations.resistances[key as keyof Resistances] || 0;
+            dispatch(updateResistances({ [key]: currentResist - value }));
+          } else if (key.includes("Mastery")) {
+            const currentMastery = classInformations.masteries[key as keyof Masteries] || 0;
+            dispatch(updateMasteries({ [key]: currentMastery - value }));
+          } else {
+            const currentValue = classInformations[key as keyof ClassInformationsState] as number;
+            dispatch(updateProperty({ key: key as keyof ClassInformationsState, value: currentValue - value }));
+          }
+        }
+      });
+    }
+
     setAppliedEpicSublimation(whiteParchment.epic);
     setAppliedRelicSublimation(whiteParchment.relic);
-    dispatch(setSelectedEpicSublimation(null));
-    dispatch(setSelectedRelicSublimation(null));
+    dispatch(setEquippedEpicSublimation(null));
+    dispatch(setEquippedRelicSublimation(null));
 
     // Créer une copie des shards appliqués pour ne pas modifier l'état en cours de traitement
     const shardsToRemove = appliedShards
@@ -441,7 +595,7 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
 
   const renderSublimationInfo = (type: "epic" | "relic") => {
     const sublimation =
-      type === "epic" ? appliedEpicSublimation : appliedRelicSublimation;
+      type === "epic" ? equippedEpicSublimation : equippedRelicSublimation;
     if (!sublimation || sublimation.alt === whiteParchment[type].alt)
       return null;
 
@@ -449,9 +603,20 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
       <div className="sublimation-info">
         <div>
           <img src={sublimation.src} alt={sublimation.alt} />
-          <strong>{sublimation.alt}</strong>
+          <strong>{sublimation.label}</strong>
         </div>
-        <div>{}</div>
+        <div>
+          {sublimation.descriptif && <div>{sublimation.descriptif}</div>}
+          {sublimation.bonus && (
+            <ul>
+              {Object.entries(sublimation.bonus).map(([key, value]) => (
+                <li key={key}>
+                  {bonusLabels[key] || key}: {value}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
     );
   };
