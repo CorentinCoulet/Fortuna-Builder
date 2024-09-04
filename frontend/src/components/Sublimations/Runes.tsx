@@ -16,6 +16,7 @@ import { RootState, AppDispatch } from "../../store.ts";
 import {
   setEquippedEpicSublimation,
   setEquippedRelicSublimation,
+  setEquippedNormalSublimation,
 } from "../../features/components/sublimationsSlice.ts";
 
 interface Shard {
@@ -30,6 +31,32 @@ interface Shard {
 interface RunesProps {
   isReadOnly?: boolean;
 }
+
+const checkSublimationCondition = (
+  shardRow: (Shard | null)[],
+  order: { src: string; alt: string }[]
+) => {
+  const len = shardRow.length;
+  for (let i = 0; i <= len - 3; i++) {
+    let valid = true;
+    for (let j = 0; j < 3; j++) {
+      const currentRune = shardRow[i + j];
+      const requiredColor = order[j];
+      if (
+        currentRune?.src !== requiredColor.src &&
+        currentRune?.alt !== "white" &&
+        currentRune !== null
+      ) {
+        valid = false;
+        break;
+      }
+    }
+    if (valid) {
+      return true;
+    }
+  }
+  return false;
+};
 
 const bonusLabels: { [key: string]: string } = {
   waterResist: "Résistance Eau",
@@ -229,6 +256,7 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   const classInformations = useSelector(
     (state: RootState) => state.classInformations
   );
+
   const selectedShard = useSelector(
     (state: RootState) => state.runes.selectedShard
   );
@@ -238,11 +266,18 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   const selectedRelicSublimation = useSelector(
     (state: RootState) => state.sublimations.selectedRelicSublimation
   );
+  const selectedSublimation = useSelector(
+    (state: RootState) => state.sublimations.selectedNormalSublimation
+  );
+
   const equippedEpicSublimation = useSelector(
     (state: RootState) => state.sublimations.equippedEpicSublimation
   );
   const equippedRelicSublimation = useSelector(
     (state: RootState) => state.sublimations.equippedRelicSublimation
+  );
+  const equippedNormalSublimation = useSelector(
+    (state: RootState) => state.sublimations.equippedNormalSublimation
   );
 
   const [appliedShards, setAppliedShards] = useState<
@@ -264,7 +299,7 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   );
 
   const [hoveredSublimation, setHoveredSublimation] = useState<
-    "epic" | "relic" | null
+    "epic" | "relic" | "normal" | null
   >(null);
 
   useEffect(() => {
@@ -313,6 +348,31 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
         });
       }
     }
+  };
+
+  const handleNormalSublimationClick = () => {
+    const shardRow = appliedShards[0]; 
+    if (!selectedSublimation || !selectedSublimation.shardsOrder) return;
+
+    const validSublimation = checkSublimationCondition(
+      shardRow,
+      selectedSublimation.shardsOrder!
+    );
+
+    if (validSublimation) {
+      dispatch(
+        setEquippedNormalSublimation({
+          sublimation: selectedSublimation?.sublimation || null,
+          type: selectedSublimation?.type || null,
+          shardsOrder: selectedSublimation?.shardsOrder || null,
+        })
+      );
+    }
+  };
+
+  const isSublimationValid = (shardRow: (Shard | null)[]) => {
+    if (!selectedSublimation || !selectedSublimation.shardsOrder) return false;
+    return checkSublimationCondition(shardRow, selectedSublimation.shardsOrder!);
   };
 
   const handleEpicSublimationRightClick = (
@@ -508,6 +568,39 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
     );
   };
 
+  const renderNormalSublimationSlot = () => {
+    const shardRow = appliedShards[0];
+    const validSublimation = isSublimationValid(shardRow);
+
+    return (
+      <div
+        className={`sublimation-slot ${validSublimation ? "" : "invalid"}`}
+        onClick={handleNormalSublimationClick}
+        onMouseEnter={() => setHoveredSublimation("normal")}
+        onMouseLeave={() => setHoveredSublimation(null)}
+      >
+        <img
+        src={
+          equippedNormalSublimation?.sublimation?.src ||
+          whiteParchment.whiteParchment.src
+        }
+        alt={
+          equippedNormalSublimation?.sublimation?.alt ||
+          whiteParchment.whiteParchment.alt
+        }
+      />
+        {hoveredSublimation === "normal" && (
+          <div className="sublimation-info">
+            <strong>{equippedNormalSublimation?.sublimation?.label}</strong>
+            {equippedNormalSublimation?.sublimation?.descriptif && (
+              <div>{equippedNormalSublimation.sublimation.descriptif}</div>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   const renderList = () => {
     return Object.keys(runesEquipment).map((index) => {
       const equipment = runesEquipment[index];
@@ -574,12 +667,7 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
               ))}
             </div>
             <div>
-              <img
-                key={`parchment-${index}`}
-                loading="lazy"
-                src={whiteParchment.whiteParchment.src}
-                alt={whiteParchment.whiteParchment.alt}
-              />
+              { renderNormalSublimationSlot() }
               <img
                 key={`equipment-${index}`}
                 loading="lazy"

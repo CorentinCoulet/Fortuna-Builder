@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { shards, parchments } from "../../asset";
 import "../../styles/components/Sublimations/Sublimations.scss";
 import { FaSearch } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import {
+  Sublimation,
+  setSelectedNormalSublimation,
+} from "../../features/components/sublimationsSlice";
 
 const comboShards = {
   red: { src: shards[1].src, alt: shards[1].alt }, // Rouge
@@ -493,9 +498,14 @@ const fakeSublimations = {
 };
 
 const Sublimations: React.FC = () => {
+  const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [hoveredSublimation, setHoveredSublimation] = useState<null | {
+    key: string;
+    level: number;
+  }>(null);
+  const [selectedSublimation, setSelectedSublimation] = useState<null | {
     key: string;
     level: number;
   }>(null);
@@ -525,6 +535,31 @@ const Sublimations: React.FC = () => {
 
   const handleMouseLeave = () => {
     setHoveredSublimation(null);
+  };
+
+  const handleSelectSublimation = (
+    type: 'rare' | 'mythique' | 'legendaire', 
+    sublimation: Sublimation | null,
+    key: string,
+    level: number
+  ) => {
+    const selectedOrder = sublimation?.order || null;
+    console.log(selectedOrder);
+    if (
+      selectedSublimation &&
+      selectedSublimation.key === key &&
+      selectedSublimation.level === level
+    ) {
+      setSelectedSublimation(null);
+      dispatch(setSelectedNormalSublimation({ type, sublimation: null, shardsOrder: null }));    
+    } else {
+      setSelectedSublimation({ key, level });
+      dispatch(setSelectedNormalSublimation({
+        type, 
+        sublimation, 
+        shardsOrder: selectedOrder
+      }));    
+    }
   };
 
   return (
@@ -577,13 +612,22 @@ const Sublimations: React.FC = () => {
               </div>
               <div className="sublimation-levels">
                 {[1, 2, 3].map((level) => (
-                  <div className="level-container" key={level}>
+                  <div 
+                    className={`level-container ${selectedSublimation && selectedSublimation.key === key && selectedSublimation.level === level ? 'selected' : ''}`} 
+                    key={level}
+                  >
                     <img
                       src={parchments[level]?.src}
                       alt={parchments[level]?.alt || `Niveau ${level}`}
                       className="level-image"
                       onMouseEnter={() => handleMouseEnter(key, level)}
                       onMouseLeave={handleMouseLeave}
+                      onClick={() => handleSelectSublimation(
+                        level === 1 ? 'rare' : level === 2 ? 'mythique' : 'legendaire',
+                        sublimation,
+                        key,
+                        level
+                      )}
                     />
                     <span className="level-number">{level}</span>
                   </div>

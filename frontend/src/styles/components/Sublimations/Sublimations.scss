@@ -141,7 +141,14 @@
         display: inline-block;
         margin-right: 5px;
         transition: transform 0.4s ease, box-shadow 0.4s ease;
-        
+
+        &.selected {
+          border: 1px solid #c3f1de;
+          border-radius: 3px;
+          background-color: #c3f1de;
+          box-shadow: 0 0 10px rgba(29, 155, 86, 0.5);
+        }
+
         &:hover {
           transform: scale(1.1);
         }
@@ -150,6 +157,7 @@
           width: 40px;
           height: 40px;
           border-radius: 4px;
+          margin: 0 3px;
           cursor: pointer;
 
           &:hover + .sublimation-tooltip {
