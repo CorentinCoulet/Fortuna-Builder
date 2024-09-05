@@ -544,7 +544,6 @@ const Sublimations: React.FC = () => {
     level: number
   ) => {
     const selectedOrder = sublimation?.order || null;
-    console.log(selectedOrder);
     if (
       selectedSublimation &&
       selectedSublimation.key === key &&

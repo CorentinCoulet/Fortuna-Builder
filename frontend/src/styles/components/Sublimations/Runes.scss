@@ -127,8 +127,7 @@
           &:first-child {
             width: 36px;
             height: 36px;
-            cursor: pointer;
-            opacity: 0.5;
+            cursor: pointer; 
           }
 
           &:last-child {
@@ -183,6 +182,10 @@
           cursor: pointer;
           transition: transform 0.3s ease;
 
+          .sublimation-default {
+            opacity: 0.5;
+          }    
+          
           &:hover {
             transform: scale(1.1);
           }
