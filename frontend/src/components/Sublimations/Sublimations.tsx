@@ -538,26 +538,30 @@ const Sublimations: React.FC = () => {
   };
 
   const handleSelectSublimation = (
-    type: 'rare' | 'mythique' | 'legendaire', 
     sublimation: Sublimation | null,
     key: string,
     level: number
   ) => {
-    const selectedOrder = sublimation?.order || null;
     if (
       selectedSublimation &&
       selectedSublimation.key === key &&
       selectedSublimation.level === level
     ) {
       setSelectedSublimation(null);
-      dispatch(setSelectedNormalSublimation({ type, sublimation: null, shardsOrder: null }));    
+      dispatch(setSelectedNormalSublimation(null));
     } else {
+      const sublimationData = fakeSublimations[key];
+      const selectedLevelData = sublimationData.levels[level];
       setSelectedSublimation({ key, level });
-      dispatch(setSelectedNormalSublimation({
-        type, 
-        sublimation, 
-        shardsOrder: selectedOrder
-      }));    
+      dispatch(
+        setSelectedNormalSublimation({
+          ...sublimation,
+          src: sublimation?.src ?? "",
+          alt: sublimation?.alt ?? "",
+          max: sublimationData.max,
+          descriptif: selectedLevelData.description,
+        })
+      );
     }
   };
 
@@ -610,27 +614,42 @@ const Sublimations: React.FC = () => {
                 </div>
               </div>
               <div className="sublimation-levels">
-                {[1, 2, 3].map((level) => (
-                  <div 
-                    className={`level-container ${selectedSublimation && selectedSublimation.key === key && selectedSublimation.level === level ? 'selected' : ''}`} 
-                    key={level}
-                  >
-                    <img
-                      src={parchments[level]?.src}
-                      alt={parchments[level]?.alt || `Niveau ${level}`}
-                      className="level-image"
-                      onMouseEnter={() => handleMouseEnter(key, level)}
-                      onMouseLeave={handleMouseLeave}
-                      onClick={() => handleSelectSublimation(
-                        level === 1 ? 'rare' : level === 2 ? 'mythique' : 'legendaire',
-                        sublimation,
-                        key,
-                        level
-                      )}
-                    />
-                    <span className="level-number">{level}</span>
-                  </div>
-                ))}
+                {[1, 2, 3].map((level) => {
+                  const sublimationType =
+                    level === 1
+                      ? "rare"
+                      : level === 2
+                      ? "mythique"
+                      : "legendaire";
+                  return (
+                    <div
+                      className={`level-container ${
+                        selectedSublimation &&
+                        selectedSublimation.key === key &&
+                        selectedSublimation.level === level
+                          ? "selected"
+                          : ""
+                      }`}
+                      key={level}
+                    >
+                      <img
+                        src={parchments[level]?.src}
+                        alt={parchments[level]?.alt || `Niveau ${level}`}
+                        className="level-image"
+                        onMouseEnter={() => handleMouseEnter(key, level)}
+                        onMouseLeave={handleMouseLeave}
+                        onClick={() =>
+                          handleSelectSublimation(
+                            { ...sublimation, type: sublimationType },
+                            key,
+                            level
+                          )
+                        }
+                      />
+                      <span className="level-number">{level}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             {hoveredSublimation && hoveredSublimation.key === key && (

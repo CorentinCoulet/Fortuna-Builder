@@ -1,30 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface Sublimation {
-    src: string;
-    alt: string;
+    src?: string;
+    alt?: string;
     label?: string;
-    type?: 'epic' | 'relic';
+    type?: 'epic' | 'relic' | 'rare' | 'mythique' | 'legendaire' | null;
     descriptif? : string;
     bonus?: Record<string, number> | null;
     order?: { src: string; alt: string }[],
+    max?: number;
 }
 
 interface SublimationsState {
     selectedEpicSublimation: Sublimation | null;
     selectedRelicSublimation: Sublimation | null;
-    selectedNormalSublimation: {
-        sublimation: Sublimation | null;
-        type: 'rare' | 'mythique' | 'legendaire' | null;
-        shardsOrder: { src: string; alt: string }[] | null;
-    } | null;
+    selectedNormalSublimation: Sublimation | null; 
     equippedEpicSublimation: Sublimation | null;
     equippedRelicSublimation: Sublimation | null;
-    equippedNormalSublimation: { 
-        sublimation: Sublimation | null;
-        type: 'rare' | 'mythique' | 'legendaire' | null;
-        shardsOrder: { src: string; alt: string }[] | null;
-    } | null;
+    equippedNormalSublimation: Sublimation | null;
 }
 
 const initialState: SublimationsState = {
@@ -46,30 +39,16 @@ const sublimationsSlice = createSlice({
         setSelectedRelicSublimation: (state, action: PayloadAction<Sublimation | null>) => {
             state.selectedRelicSublimation = action.payload;
         },
-        setSelectedNormalSublimation: (
-            state, 
-            action: PayloadAction<{
-              sublimation: Sublimation | null;
-              type: 'rare' | 'mythique' | 'legendaire' | null;
-              shardsOrder: { src: string; alt: string }[] | null;
-            }>
-          ) => {
-              state.selectedNormalSublimation = action.payload;
-          },
+        setSelectedNormalSublimation: (state, action: PayloadAction<Sublimation | null>) => {
+            state.selectedNormalSublimation = action.payload;
+        },
         setEquippedEpicSublimation: (state, action: PayloadAction<Sublimation | null>) => {
             state.equippedEpicSublimation = action.payload;
         },
         setEquippedRelicSublimation: (state, action: PayloadAction<Sublimation | null>) => {
             state.equippedRelicSublimation = action.payload;
         },
-        setEquippedNormalSublimation: (
-            state, 
-            action: PayloadAction<{
-                sublimation: Sublimation | null;
-                type: 'rare' | 'mythique' | 'legendaire' | null;
-                shardsOrder: { src: string; alt: string }[] | null;
-            }>
-        ) => {
+        setEquippedNormalSublimation: (state, action: PayloadAction<Sublimation | null>) => {
             state.equippedNormalSublimation = action.payload;
         },
     },
