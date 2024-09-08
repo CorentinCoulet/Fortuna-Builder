@@ -49,8 +49,8 @@ const checkSublimationCondition = (
       if (
         currentRune !== null &&
         currentRune.alt !== "Shard White Empty" &&
-        currentRune.alt !== "shard_white_full" &&
-        currentRune.src !== requiredColor.src
+        currentRune.alt !== "Shard White Actived" &&
+        currentRune.alt !== requiredColor.alt
       ) {
         valid = false;
         break;
@@ -292,7 +292,7 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
     Array<Array<Shard | null>>
   >(() => {
     const savedShards = loadShardsFromLocalStorage();
-    const initialShards = Array(Object.keys(runesEquipment).length)
+    const initialShards = Array(10)
       .fill(null)
       .map(() => Array(4).fill(null));
 
@@ -604,6 +604,18 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   ) => {
     e.preventDefault();
     if (isReadOnly) return;
+
+    const currentShard = appliedShards[rowIndex]?.[shardIndex];
+    if (!currentShard || currentShard.alt === "Shard White Empty") return; // Exclure les shards vides
+
+    const isAllowedColor =
+      currentShard.alt === shards[1].alt ||
+      currentShard.alt === shards[2].alt || 
+      currentShard.alt === shards[3].alt ||
+      currentShard.alt === shards[4].alt; 
+
+    if (!isAllowedColor) return;
+
     setAppliedShards((prev) => {
       const newShards = [...prev];
       const currentRow = newShards[rowIndex] || Array(4).fill(null);
@@ -624,6 +636,7 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
       newShards[rowIndex] = currentRow;
       return newShards;
     });
+    checkAllSublimationValidity();
   };
 
   const handleTrashClick = () => {
@@ -841,17 +854,20 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   };
 
   const renderList = () => {
-    return Object.keys(runesEquipment).map((index) => {
+    return Array.from({ length: 10 }, (_, index) => index).map((index) => {      
       const equipment = runesEquipment[index];
-      const appliedShardRow = appliedShards[parseInt(index)] || [];
-
+      if (!equipment) {
+        console.error(`Equipment at index ${index} is undefined or null.`);
+        return null;
+      }
+      const appliedShardRow = appliedShards[index] || [];
       return (
         <div key={index} className="rune-item">
           <div className="rune-images">
             <div>
               {[...Array(4)].map((_, i) => (
                 <div className="shard-container" key={`shard-${index}-${i}`}>
-                  <div onClick={() => handleShardClick(parseInt(index), i)}>
+                  <div onClick={() => handleShardClick(index, i)}>
                     <img
                       loading="lazy"
                       src={
@@ -865,7 +881,7 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
                           : whiteParchment.whiteShard.alt
                       }
                       onContextMenu={(e) =>
-                        handleShardRightClick(e, parseInt(index), i)
+                        handleShardRightClick(e, index, i)
                       }
                       className={`shard-image ${isReadOnly ? "read-only" : ""}`}
                     />
@@ -890,9 +906,9 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
                               ? appliedShardRow[i]!.alt
                               : whiteParchment.whiteShard.alt
                           }
-                          onClick={() => handleShardClick(parseInt(index), i)}
+                          onClick={() => handleShardClick(index, i)}
                           onContextMenu={(e) =>
-                            handleShardRightClick(e, parseInt(index), i)
+                            handleShardRightClick(e, index, i)
                           }
                           className="shard-image"
                         />
@@ -906,7 +922,7 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
               ))}
             </div>
             <div>
-              {renderNormalSublimationSlot(parseInt(index))}
+              {renderNormalSublimationSlot(index)}
               <img
                 key={`equipment-${index}`}
                 loading="lazy"

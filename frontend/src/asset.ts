@@ -385,16 +385,16 @@ import ShieldSearch from "./assets/emplacementEquipements/shield.webp";
 import OneHandedSearch from "./assets/emplacementEquipements/one_handed_weapon.webp";
 
 export const runesEquipment = {
-    1: {src: HelmetSearch, alt: ''},
-    2: {src: NecklaceSearch, alt: ''},
-    3: {src: BreastplateSearch, alt: ''},
-    4: {src: RingSearch, alt: ''},
-    5: {src: RingSearch, alt: ''},
-    6: {src: BootsSearch, alt: ''},
-    7: {src: CapeSearch, alt: ''},
-    8: {src: EpaulettesSearch, alt: ''},
-    9: {src: BeltSearch, alt: ''},
-    10: {src: TwoHandedSearch, alt: ''},
+    0: {src: HelmetSearch, alt: 'Casque'},
+    1: {src: NecklaceSearch, alt: 'Amulette'},
+    2: {src: BreastplateSearch, alt: 'Plastron'},
+    3: {src: RingSearch, alt: 'Anneau'},
+    4: {src: RingSearch, alt: 'Anneau'},
+    5: {src: BootsSearch, alt: 'Bottes'},
+    6: {src: CapeSearch, alt: 'Cape'},
+    7: {src: EpaulettesSearch, alt: 'Epaulettes'},
+    8: {src: BeltSearch, alt: 'Ceinture'},
+    9: {src: TwoHandedSearch, alt: 'Arme à 2 Mains'},
 }
 
 export const enchantmentEquipment = {
