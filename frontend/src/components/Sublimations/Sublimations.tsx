@@ -560,6 +560,7 @@ const Sublimations: React.FC = () => {
           alt: sublimation?.alt ?? "",
           max: sublimationData.max,
           descriptif: selectedLevelData.description,
+          bonus: selectedLevelData.bonus,
         })
       );
     }

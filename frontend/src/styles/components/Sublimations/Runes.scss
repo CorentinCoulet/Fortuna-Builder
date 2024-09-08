@@ -9,12 +9,17 @@
   border-radius: 8px;
   padding: 10px 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
 
   h2 {
     text-align: center;
     font-size: 24px;
     color: #333;
     margin-bottom: 20px;
+  }
+
+  .not-valid {
+    border: 2px solid red;
   }
 
   .rune-item {
@@ -24,7 +29,6 @@
     margin: 3px 0;
     padding: 8px 10px;
     transition: background-color 0.3s ease;
-    position: relative;
 
     &:hover {
       background-color: #f0f0f0;
@@ -43,6 +47,7 @@
         .shard-container {
           position: relative;
           display: inline-block;
+          z-index: 1;
 
           img {
             width: 34px;
@@ -120,7 +125,7 @@
         align-items: center;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-        .sublimation-slot {
+        .rune-slot {
           margin-right: 10px;
 
           img {
@@ -132,86 +137,24 @@
 
           .sublimation-default {
             opacity: 0.4;
-          }   
+          }
 
           &:hover {
             transform: scale(1.1);
           }
-        }  
-
-        > img {
-            object-fit: contain;
-            margin-right: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 30px;
-            height: 30px; 
-  
-            &:hover {
-              transform: scale(1.1);
-            }
         }
-      }
-    }
 
-    .runes-sublimation-tooltip {
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: white;
-      color: black;
-      padding: 10px 10px 0 10px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      z-index: 10;
-      width: 360px;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    
-      > div:first-child {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-evenly;
-    
-        .runes-hovered-image {
-          position: relative;
-    
-          .runes-level-image {
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-            object-fit: contain;
-            margin-right: 5px;
-          }
-    
-          .level-number {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 2px 4px;
-            border-radius: 50%;
-            z-index: 1;
+        >img {
+          object-fit: contain;
+          margin-right: 10px;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          width: 30px;
+          height: 30px;
+
+          &:hover {
+            transform: scale(1.1);
           }
         }
-    
-        > div:last-child {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-      }
-    
-      .runes-label-sublimation {
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-    
-      .runes-description {
-        margin-left: 10px;
       }
     }
   }
@@ -240,12 +183,11 @@
       }
     }
 
-    .sublimations {
+    .runes-global {
       display: flex;
       flex-direction: row;
 
-      .sublimation-slot {
-        position: relative;
+      .rune-slot {
         margin-right: 10px;
 
         img {
@@ -253,18 +195,18 @@
           height: 42px;
           object-fit: contain;
           cursor: pointer;
-          transition: transform 0.3s ease; 
-          
+          transition: transform 0.3s ease;
+
           &:hover {
             transform: scale(1.1);
           }
         }
 
-        &:hover .sublimation-info {
+        &:hover .rune-info {
           display: flex;
         }
 
-        .sublimation-info {
+        .rune-info {
           position: absolute;
           width: 250px;
           top: calc(100% + 5px);
@@ -363,34 +305,81 @@
       }
     }
   }
+}
 
-  .rune-sublimation-tooltip {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px); 
-    background-color: white;
-    color: black;
-    padding: 10px 10px 0 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    z-index: 100;
-    width: 360px;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+.rune-sublimation-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  color: black;
+  padding: 10px 10px 0 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  width: 353px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 
-    > div {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-evenly;
+  >div:first-child {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
 
-      img {
+    .rune-hovered-image {
+      position: relative;
+
+      .rune-level-image {
         width: 40px;
         height: 40px;
         border-radius: 4px;
         object-fit: contain;
         margin-right: 5px;
-      }    
+      }
+
+      .rune-level-number {
+        position: absolute;
+        bottom: 3px;
+        right: 3px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 2px 4px;
+        border-radius: 50%;
+        z-index: 1;
+      }
     }
+
+    >div:last-child {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .rune-label-sublimation {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .rune-shards {
+    display: flex;
+    margin-bottom: 5px;
+
+    .rune-image {
+      width: 30px;
+      height: 30px;
+      margin-right: 5px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .rune-description {
+    margin-left: 10px;
   }
 }

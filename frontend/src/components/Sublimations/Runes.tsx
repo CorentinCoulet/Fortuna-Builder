@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "../../styles/components/Sublimations/Runes.scss";
 import { runesEquipment, parchments, shards } from "../../asset.ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -38,26 +38,33 @@ const checkSublimationCondition = (
   order: { src: string; alt: string }[]
 ) => {
   const len = shardRow.length;
+
   for (let i = 0; i <= len - 3; i++) {
     let valid = true;
+
     for (let j = 0; j < 3; j++) {
       const currentRune = shardRow[i + j];
       const requiredColor = order[j];
+
       if (
-        currentRune?.src !== requiredColor.src &&
-        currentRune?.alt !== "white" &&
-        currentRune !== null
+        currentRune !== null &&
+        currentRune.alt !== "Shard White Empty" &&
+        currentRune.alt !== "shard_white_full" &&
+        currentRune.src !== requiredColor.src
       ) {
         valid = false;
         break;
       }
     }
+
     if (valid) {
       return true;
     }
   }
+
   return false;
 };
+
 
 const bonusLabels: { [key: string]: string } = {
   waterResist: "Résistance Eau",
@@ -150,14 +157,14 @@ const getActionsForLabel = (
     "résistance terre": "resistances:earthResist",
     "maîtrise critique": "critMastery",
     "maîtrise dos": "rearMastery",
-    esquive: "dodge",
-    initiative: "initiative",
+    "esquive": "dodge",
+    "initiative": "initiative",
     "résistance feu": "resistances:fireResist",
     "maîtrise elémentaire": "masteries",
-    tacle: "lock",
+    "tacle": "lock",
     "résistance eau": "resistances:waterResist",
     "résistance air": "resistances:airResist",
-    vie: "baseHp",
+    "vie": "baseHp",
     "maîtrise soin": "healMastery",
   };
 
@@ -280,9 +287,6 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   const equippedRelicSublimation = useSelector(
     (state: RootState) => state.sublimations.equippedRelicSublimation
   );
-  const equippedNormalSublimation = useSelector(
-    (state: RootState) => state.sublimations.equippedNormalSublimation
-  );
 
   const [appliedShards, setAppliedShards] = useState<
     Array<Array<Shard | null>>
@@ -317,9 +321,34 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
     type: "rare" | "mythique" | "legendaire" | null;
   } | null>(null);
 
+  const [isNormalSublimationValid, setIsNormalSublimationValid] = useState<
+    Array<boolean>
+  >(Array(Object.keys(runesEquipment).length).fill(true));
+
   useEffect(() => {
     saveShardsToLocalStorage(appliedShards);
   }, [appliedShards]);
+
+  
+  const checkAllSublimationValidity = useCallback(() => {
+    const newValidity = appliedShards.map((shardRow, index) => isSublimationValid(shardRow, index));
+    setIsNormalSublimationValid(newValidity);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [appliedShards, appliedNormalSublimations]);
+
+  useEffect(() => {
+    checkAllSublimationValidity();
+  }, [appliedShards, selectedSublimation, checkAllSublimationValidity]);
+
+  const isSublimationValid = (shardRow: (Shard | null)[], index: number) => {
+    if (!shardRow || !appliedNormalSublimations[index]) return true;
+    const equippedSublimation = appliedNormalSublimations[index];
+    if (equippedSublimation?.order) {
+      return checkSublimationCondition(shardRow, equippedSublimation.order);
+    }
+    return true;
+  };
+
 
   const handleEpicSublimationClick = () => {
     if (isReadOnly) return;
@@ -382,6 +411,25 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   const handleSublimationClick = (index: number) => {
     if (!selectedSublimation) return;
 
+    if (selectedSublimation.bonus) {
+      Object.entries(selectedSublimation.bonus).forEach(([key, value]) => {
+        if (key in bonusLabels) {
+          if (key.includes("Resist")) {
+            dispatch(updateResistances({ [key]: value }));
+          } else if (key.includes("Mastery")) {
+            dispatch(updateMasteries({ [key]: value }));
+          } else {
+            dispatch(
+              updateProperty({
+                key: key as keyof ClassInformationsState,
+                value,
+              })
+            );
+          }
+        }
+      });
+    }
+
     setAppliedNormalSublimations((prev) => {
       const newSublimations = [...prev];
       newSublimations[index] = selectedSublimation;
@@ -389,13 +437,45 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
     });
 
     dispatch(setEquippedNormalSublimation(selectedSublimation));
+
+    checkAllSublimationValidity();
   };
 
-  // const isSublimationValid = (shardRow: (Shard | null)[], index: number) => {
-  //   if (!shardRow || !selectedSublimation || !selectedSublimation.shardsOrder) return false;
-  //   const equippedSublimation = appliedSublimations[index];
-  //   return checkSublimationCondition(shardRow, selectedSublimation.shardsOrder) && equippedSublimation;
-  // };
+  const handleShardClick = (rowIndex: number, shardIndex: number) => {
+    if (isReadOnly) return;
+    if (!appliedShards[rowIndex]) {
+      return;
+    }
+    const currentShard = appliedShards[rowIndex][shardIndex];
+    if (currentShard && currentShard.label !== "Default") {
+      removeBonus(currentShard, classInformations, dispatch);
+    } else if (selectedShard) {
+      applyBonus(selectedShard, classInformations, dispatch);
+    }
+
+    setAppliedShards((prev) => {
+      const newShards = [...prev];
+      const currentRow = newShards[rowIndex] || Array(4).fill(null);
+
+      if (selectedShard) {
+        const isSameShard =
+          currentRow[shardIndex] &&
+          currentRow[shardIndex]?.statValue === selectedShard.statValue &&
+          currentRow[shardIndex]?.label === selectedShard.label &&
+          currentRow[shardIndex]?.runeLevel === selectedShard.runeLevel;
+
+        if (isSameShard) {
+          currentRow[shardIndex] = whiteParchment.whiteShard;
+        } else {
+          currentRow[shardIndex] = { ...selectedShard };
+        }
+      }
+
+      newShards[rowIndex] = currentRow;
+      return newShards;
+    });
+    checkAllSublimationValidity();
+  };
 
   const handleEpicSublimationRightClick = (
     e: React.MouseEvent<HTMLImageElement>
@@ -469,39 +549,52 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
     dispatch(setEquippedRelicSublimation(null));
   };
 
-  const handleShardClick = (rowIndex: number, shardIndex: number) => {
+  const handleNormalSublimationRightClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number
+  ) => {
+    e.preventDefault();
     if (isReadOnly) return;
-    if (!appliedShards[rowIndex]) {
-      return;
-    }
-    const currentShard = appliedShards[rowIndex][shardIndex];
-    if (currentShard && currentShard.label !== "Default") {
-      removeBonus(currentShard, classInformations, dispatch);
-    } else if (selectedShard) {
-      applyBonus(selectedShard, classInformations, dispatch);
-    }
 
-    setAppliedShards((prev) => {
-      const newShards = [...prev];
-      const currentRow = newShards[rowIndex] || Array(4).fill(null);
+    const appliedSublimation = appliedNormalSublimations[index];
 
-      if (selectedShard) {
-        const isSameShard =
-          currentRow[shardIndex] &&
-          currentRow[shardIndex]?.statValue === selectedShard.statValue &&
-          currentRow[shardIndex]?.label === selectedShard.label &&
-          currentRow[shardIndex]?.runeLevel === selectedShard.runeLevel;
-
-        if (isSameShard) {
-          currentRow[shardIndex] = whiteParchment.whiteShard;
-        } else {
-          currentRow[shardIndex] = { ...selectedShard };
-        }
+    if (appliedSublimation) {
+      if (appliedSublimation.bonus) {
+        Object.entries(appliedSublimation.bonus).forEach(([key, value]) => {
+          if (key in bonusLabels) {
+            if (key.includes("Resist")) {
+              const currentResist =
+                classInformations.resistances[key as keyof Resistances] || 0;
+              dispatch(updateResistances({ [key]: currentResist - value }));
+            } else if (key.includes("Mastery")) {
+              const currentMastery =
+                classInformations.masteries[key as keyof Masteries] || 0;
+              dispatch(updateMasteries({ [key]: currentMastery - value }));
+            } else {
+              const currentValue = classInformations[
+                key as keyof ClassInformationsState
+              ] as number;
+              dispatch(
+                updateProperty({
+                  key: key as keyof ClassInformationsState,
+                  value: currentValue - value,
+                })
+              );
+            }
+          }
+        });
       }
 
-      newShards[rowIndex] = currentRow;
-      return newShards;
-    });
+      // Réinitialiser la sublimation normale dans l'interface
+      setAppliedNormalSublimations((prev) => {
+        const newSublimations = [...prev];
+        newSublimations[index] = null;
+        return newSublimations;
+      });
+
+      // Déséquiper la sublimation dans le slice redux
+      dispatch(setEquippedNormalSublimation(null));
+    }
   };
 
   const handleShardRightClick = (
@@ -592,6 +685,41 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
     dispatch(setEquippedEpicSublimation(null));
     dispatch(setEquippedRelicSublimation(null));
 
+    // Supprimer toutes les sublimations normales
+    appliedNormalSublimations.forEach((sublimation) => {
+      if (sublimation && sublimation.bonus) {
+        Object.entries(sublimation.bonus).forEach(([key, value]) => {
+          if (key in bonusLabels) {
+            if (key.includes("Resist")) {
+              const currentResist =
+                classInformations.resistances[key as keyof Resistances] || 0;
+              dispatch(updateResistances({ [key]: currentResist - value }));
+            } else if (key.includes("Mastery")) {
+              const currentMastery =
+                classInformations.masteries[key as keyof Masteries] || 0;
+              dispatch(updateMasteries({ [key]: currentMastery - value }));
+            } else {
+              const currentValue = classInformations[
+                key as keyof ClassInformationsState
+              ] as number;
+              dispatch(
+                updateProperty({
+                  key: key as keyof ClassInformationsState,
+                  value: currentValue - value,
+                })
+              );
+            }
+          }
+        });
+      }
+    });
+
+    // Réinitialise toutes les sublimations normales
+    setAppliedNormalSublimations(
+      Array(Object.keys(runesEquipment).length).fill(null)
+    );
+    dispatch(setEquippedNormalSublimation(null));
+
     // Créer une copie des shards appliqués pour ne pas modifier l'état en cours de traitement
     const shardsToRemove = appliedShards
       .flat()
@@ -637,9 +765,9 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
     let lvlSubli = 1;
 
     if (appliedSublimation) {
-      if(appliedSublimation.type === "mythique"){
+      if (appliedSublimation.type === "mythique") {
         lvlSubli = 2;
-      } else if(appliedSublimation.type === "legendaire") {
+      } else if (appliedSublimation.type === "legendaire") {
         lvlSubli = 3;
       }
 
@@ -654,40 +782,58 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
         subliAlt = whiteParchment.whiteParchment.alt;
       }
     }
-    
+
+    const isValid = isNormalSublimationValid[index];
+    const validationClass = isValid ? "" : "not-valid";
+
     return (
       <div
-        className={`sublimation-slot`}
+        className={`rune-slot ${validationClass}`}
         onClick={() => handleSublimationClick(index)}
-        onMouseEnter={() => appliedSublimation && setHoveredSublimation({ index, type: appliedSublimation.type as "rare" | "mythique" | "legendaire" })}
+        onContextMenu={(e) => handleNormalSublimationRightClick(e, index)}
+        onMouseEnter={() =>
+          appliedSublimation &&
+          setHoveredSublimation({
+            index,
+            type: appliedSublimation.type as "rare" | "mythique" | "legendaire",
+          })
+        }
         onMouseLeave={() => setHoveredSublimation(null)}
       >
         <img className={className} src={subliSrc} alt={subliAlt} />
         {appliedSublimation &&
-            hoveredSublimation &&
-            hoveredSublimation.index === index &&
-            hoveredSublimation.type === appliedSublimation.type && (
+          hoveredSublimation &&
+          hoveredSublimation.index === index &&
+          hoveredSublimation.type === appliedSublimation.type && (
             <div className="rune-sublimation-tooltip">
               <div>
-                <div>
-                  <img src={subliSrc} alt={subliAlt} />
-                  <span className="level-number">
-                    {lvlSubli}
-                  </span>
+                <div className="rune-hovered-image">
+                  <img
+                    src={subliSrc}
+                    alt={subliAlt}
+                    className="rune-level-image"
+                  />
+                  <span className="rune-level-number">{lvlSubli}</span>
                 </div>
                 <div>
-                  <p>{appliedSublimation.label} [MAX : {appliedSublimation.max}]</p>
-                  {appliedSublimation.order?.map((sublimation, index) => (
-                    <img
-                      key={index}
-                      src={sublimation.src}
-                      alt={sublimation.alt}
-                      className="rune-image"
-                    />
-                  ))}
+                  <div className="rune-label-sublimation">
+                    {appliedSublimation.label} [MAX : {appliedSublimation.max}]
+                  </div>
+                  <div className="rune-shards">
+                    {appliedSublimation.order?.map((sublimation, index) => (
+                      <img
+                        key={index}
+                        src={sublimation.src}
+                        alt={sublimation.alt}
+                        className="rune-image"
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
-              <p>{}</p>
+              <div className="rune-description">
+                <p>{appliedSublimation.descriptif}</p>
+              </div>
             </div>
           )}
       </div>
@@ -781,7 +927,7 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
       return null;
 
     return (
-      <div className="sublimation-info">
+      <div className="rune-info">
         <div>
           <img src={sublimation.src} alt={sublimation.alt} />
           <strong>{sublimation.label}</strong>
@@ -809,8 +955,8 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
       </div>
       {renderList()}
       <div className="runes-trash">
-        <div className="sublimations">
-          <div className="sublimation-slot">
+        <div className="runes-global">
+          <div className="rune-slot">
             <img
               src={appliedEpicSublimation.src}
               alt={appliedEpicSublimation.alt}
@@ -818,10 +964,12 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
               onContextMenu={handleEpicSublimationRightClick}
               onMouseEnter={() => setHoveredSpecialSublimation("epic")}
               onMouseLeave={() => setHoveredSpecialSublimation(null)}
+              className="special-rune"
             />
-            {hoveredSpecialSublimation === "epic" && renderSublimationInfo("epic")}
+            {hoveredSpecialSublimation === "epic" &&
+              renderSublimationInfo("epic")}
           </div>
-          <div className="sublimation-slot">
+          <div className="rune-slot">
             <img
               src={appliedRelicSublimation.src}
               alt={appliedRelicSublimation.alt}
@@ -829,8 +977,10 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
               onContextMenu={handleRelicSublimationRightClick}
               onMouseEnter={() => setHoveredSpecialSublimation("relic")}
               onMouseLeave={() => setHoveredSpecialSublimation(null)}
+              className="special-rune"
             />
-            {hoveredSpecialSublimation === "relic" && renderSublimationInfo("relic")}
+            {hoveredSpecialSublimation === "relic" &&
+              renderSublimationInfo("relic")}
           </div>
         </div>
         {!isReadOnly && (
