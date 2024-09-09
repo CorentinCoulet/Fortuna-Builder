@@ -1,18 +1,24 @@
 .items-container {
-    display: flex;
-    flex-direction: row; 
-    flex-wrap: wrap; 
-    gap: 5px; 
-    padding: 20px 0;
-    margin-top: 20px;
-    justify-content: center; 
-    border-top: 1px solid #ccc;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 20px 0;
+  margin-top: 20px;
+  justify-content: center;
+  border-top: 1px solid #ccc;
+}
+
+.item-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+@media (min-width: 1025px) { 
+  .items-container {
+    border: 0;
+    margin: 0 20px;
   }
-  
-  .item-image {
-    width: 50px; 
-    height: 50px;
-    object-fit: cover;
-    cursor: pointer;
-  }
-  
+}

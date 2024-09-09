@@ -1,0 +1,15 @@
+.header {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+    padding: 20px;
+    margin: 5px auto 10px auto; 
+
+    .logo {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+    }
+}

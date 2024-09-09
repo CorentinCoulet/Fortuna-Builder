@@ -1,21 +1,26 @@
 .internal-navbar {
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-  
-    ul {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      gap: 10px;
-    }
-  
-    li {
-      cursor: pointer;
-      font-weight: bold;
-  
-      &:hover {
-        color: gray;
-      }
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+  }
+
+  li {
+    cursor: pointer;
+    font-weight: bold;
+
+    &:hover {
+      color: gray;
     }
   }
-  
+}
+
+@media (min-width: 1025px) {
+  .internal-navbar {
+    border: 0;
+  }
+}
