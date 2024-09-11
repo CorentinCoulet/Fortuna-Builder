@@ -133,7 +133,7 @@ const Spells: React.FC = () => {
   );
 
   return (
-    <div>
+    <div className="spellsPage">
         <Deck />
         <SpellsClasses
             spells={spells}

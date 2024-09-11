@@ -6,7 +6,7 @@ import SublimationsRares from "../components/Sublimations/SublimationsRares.tsx"
 
 const Enchantment: React.FC = () => {
   return (
-    <div>
+    <div className="enchantmentPage">
       <EnchantmentPerEquipment />
       <Runes />
       <Sublimations />

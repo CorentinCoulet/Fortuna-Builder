@@ -18,7 +18,7 @@ const Search: React.FC = () => {
     };
 
   return (
-    <div>
+    <div className='searching'>
       <SearchItems onSearch={handleSearch} />
         {!searchTriggered ? (
             <div className="placeholder-container">
