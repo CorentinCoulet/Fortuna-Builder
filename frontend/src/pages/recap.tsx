@@ -5,10 +5,12 @@ import RecapApt from "../components/Aptitudes/RecapApt";
 
 const Recap: React.FC = () => {
   return (
-    <div>
+    <div className="recapPage">
       <Runes isReadOnly={true} />
-      <Deck isReadOnly={true} />
-      <RecapApt />
+      <div>
+        <Deck isReadOnly={true} />
+        <RecapApt />
+      </div>
     </div>
   );
 };

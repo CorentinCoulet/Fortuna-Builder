@@ -73,6 +73,7 @@
                         display: flex;
                         flex-wrap: wrap;
                         margin-bottom: 30px;
+                        margin-top: -10px;
 
                         >div {
                             width: 30%;
@@ -184,6 +185,35 @@
                         > div {
                             width: 50%;
                             margin: 0;
+                        }
+                    }
+
+                    >.recapPage {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+
+                        .runes {
+                            width: 25%;
+                            margin: 0;
+                            margin-bottom: 30px;
+
+                            .rune-item {
+                                padding: 0 5px;
+
+                                .rune-images > div:first-child div {
+                                    margin-left: 1px;
+                                }
+                            }
+                        }
+
+                        >div:nth-child(2){
+                            width: 50%;
+                            margin-left: 10px;
+
+                            .deck, .recap-apt {
+                                width: 70%;
+                            }
                         }
                     }
                 }

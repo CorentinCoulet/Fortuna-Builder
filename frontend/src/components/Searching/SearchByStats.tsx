@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {PrimaryStats} from "../asset.ts";
-import '../styles/components/SearchByStats.scss';
+import {PrimaryStats} from "../../asset.ts";
+import '../../styles/components/SearchByStats.scss';
 
 interface StatOption {
     id: string;
@@ -121,6 +121,7 @@ const statsOptions: StatOption[] = [
         prefix: '-',
     })),
 ];
+
 const SearchByStats: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedStats, setSelectedStats] = useState<StatOption[]>([]);
