@@ -55,20 +55,20 @@ import Emblem from './assets/equipements/emblem.webp';
 import Pet from './assets/equipements/pet.webp';
 
 export const Equipments = [
-    { src: Headgear, alt: 'Headgear' },
-    { src: Amulet, alt: 'Amulet' },
-    { src: Cape, alt: 'Cape' },
-    { src: Epaulettes, alt: 'Epaulettes' },
-    { src: Breastplate, alt: 'Breastplate' },
-    { src: Belt, alt: 'Belt' },
-    { src: RightRing, alt: 'Right Ring' },
-    { src: LeftRing, alt: 'Left Ring' },
-    { src: Boots, alt: 'Boots' },
-    { src: RightHand, alt: 'Right Hand' },
-    { src: LeftHand, alt: 'Left Hand' },
-    { src: Emblem, alt: 'Emblem' },
-    { src: Pet, alt: 'Pet' },
-    { src: Pet, alt: 'Mount' },
+    { src: Headgear, alt: 'Headgear', tag: 'headgear' },
+    { src: Amulet, alt: 'Amulet', tag: 'amulet' },
+    { src: Cape, alt: 'Cape', tag: 'cape' },
+    { src: Epaulettes, alt: 'Epaulettes', tag: 'epaulettes' },
+    { src: Breastplate, alt: 'Breastplate', tag: 'breastplate' },
+    { src: Belt, alt: 'Belt', tag: 'belt' },
+    { src: RightRing, alt: 'Right Ring', tag: 'right-ring' },
+    { src: LeftRing, alt: 'Left Ring', tag: 'left-ring' },
+    { src: Boots, alt: 'Boots', tag: 'boots' },
+    { src: RightHand, alt: 'Right Hand', tag: 'one-handed' },
+    { src: LeftHand, alt: 'Left Hand', tag: 'shield' },
+    { src: Emblem, alt: 'Emblem', tag: 'emblem' },
+    { src: Pet, alt: 'Pet', tag: 'pet' },
+    { src: Pet, alt: 'Mount', tag: 'mount' },
 ];
 
 // Importation des stats globales

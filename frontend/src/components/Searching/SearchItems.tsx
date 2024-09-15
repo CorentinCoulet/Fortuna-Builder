@@ -56,7 +56,6 @@ const SearchItems: React.FC<SearchItemsProps> = ({ onSearch }) => {
       selectedRarities,
       selectedEquipmentTags,
     };
-    console.log(filters);
     onSearch(filters);
   };
 

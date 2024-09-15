@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SearchItems from "../components/Searching/SearchItems.tsx";
-import ListSearchItems from "../components/Searching/ListSearchItems.tsx";
+import ItemsListSearch from "../components/Searching/ItemsListSearch.tsx";
 import '../styles/pages/Search.scss';
 
 interface Filters {
@@ -23,7 +23,7 @@ const Search: React.FC = () => {
         <div className='searching'>
             <SearchItems onSearch={handleSearch} />
             {searchTriggered && filters ? (
-                <ListSearchItems searchTriggered={searchTriggered} filters={filters} />
+                <ItemsListSearch searchTriggered={searchTriggered} filters={filters} />
             ) : (
                 <div className="placeholder-container">
                     <p>Aucune recherche effectuée pour le moment.</p>

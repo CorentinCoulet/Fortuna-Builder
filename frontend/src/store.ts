@@ -10,6 +10,7 @@ import aptitudeAgilityReducer from './features/components/Aptitudes/aptitudeAgil
 import aptitudeChanceReducer from './features/components/Aptitudes/aptitudeChanceSlice';
 import aptitudeMajorReducer from './features/components/Aptitudes/aptitudeMajorSlice'; 
 import sublimationsReducer from './features/components/Sublimations/sublimationsSlice';
+import equipedItemsReducer from './features/components/Builder/equipedItemsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
     chance: aptitudeChanceReducer,
     major: aptitudeMajorReducer,
     sublimations: sublimationsReducer,
+    equippedItem: equipedItemsReducer,
   },
 });
 

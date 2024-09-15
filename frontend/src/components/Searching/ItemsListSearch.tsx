@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { rarityEquipment, searchEquipment } from "../../asset.ts";
 import "../../styles/components/Searching/ListSearchItems.scss";
-import Logo from "../../../public/logo-fortuna-V2.webp";
+import Logo from "../../assets/logo-fortuna-V2.webp";
+import { useDispatch } from "react-redux";
+import { equipItem } from "../../features/components/Builder/equipedItemsSlice.ts";
+import RingModal from "./RingModal.tsx";
 
 const fakeItemsData = [
   {
@@ -248,7 +251,10 @@ const ItemsListSearch: React.FC<ItemsListSearchProps> = ({
   searchTriggered,
   filters,
 }) => {
+  const dispatch = useDispatch();
   const [filteredItems, setFilteredItems] = useState(fakeItemsData);
+  const [showModal, setShowModal] = useState(false);
+  const [currentItem, setCurrentItem] = useState(null);
 
   useEffect(() => {
     if (searchTriggered) {
@@ -284,8 +290,28 @@ const ItemsListSearch: React.FC<ItemsListSearchProps> = ({
     }
   }, [searchTriggered, filters]);
 
-  const handleEquip = (item) => {
-    console.log(`Item équipé : ${item.name}`);
+  const handleEquipClick = (item) => {
+    if (item.tag === "ring") {
+      setCurrentItem(item);
+      setShowModal(true);
+    } else {
+      dispatch(
+        equipItem({ tag: item.tag, item: { src: item.src, alt: item.alt } })
+      );
+    }
+  };
+
+  const handleModalSelect = (choice: "left-ring" | "right-ring") => {
+    if (currentItem) {
+      dispatch(
+        equipItem({
+          tag: choice,
+          item: { src: currentItem.image, alt: currentItem.name },
+        })
+      );
+      setShowModal(false);
+      setCurrentItem(null);
+    }
   };
 
   const getRarityColor = (rarityTag) => {
@@ -307,7 +333,7 @@ const ItemsListSearch: React.FC<ItemsListSearchProps> = ({
             <div
               key={item.id}
               className="item-row"
-              onClick={() => handleEquip(item)}
+              onClick={() => handleEquipClick(item)}
               style={{
                 backgroundColor: getBackgroundColor(item.rarity),
               }}
@@ -345,6 +371,12 @@ const ItemsListSearch: React.FC<ItemsListSearchProps> = ({
               <p>Aucun objet ne correspond aux critères de recherche.</p>
             </div>
           )}
+      {showModal && (
+        <RingModal
+          onSelect={handleModalSelect}
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 };
