@@ -3,7 +3,7 @@ import '../../styles/components/Sublimations/SublimationsRares.scss';
 import { FaSearch } from 'react-icons/fa';
 import { sublimationsEpic, sublimationsRelic, rarityEquipment } from "../../asset.ts";
 import { useDispatch } from 'react-redux';
-import { setSelectedEpicSublimation, setSelectedRelicSublimation } from '../../features/components/sublimationsSlice.ts';
+import { setSelectedEpicSublimation, setSelectedRelicSublimation } from '../../features/components/Sublimations/sublimationsSlice.ts';
 const fakeSublimations = {
     1: { 
         label: "Abnégation", 

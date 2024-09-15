@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactSlider from "react-slider";
 import { rarityEquipment, searchEquipment } from "../../asset.ts";
-import "../../styles/components/SearchItems.scss";
+import "../../styles/components/Searching/SearchItems.scss";
 import SearchByStats from "./SearchByStats.tsx";
 
 interface Filters {

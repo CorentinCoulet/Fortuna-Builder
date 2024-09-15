@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import "../styles/components/TotalMasteriesCalcul.scss";
-import { PrimaryStats } from "../asset";
-import { RootState } from "../store";
+import "../../styles/components/Builder/TotalMasteriesCalcul.scss";
+import { PrimaryStats } from "../../asset";
+import { RootState } from "../../store";
 
 interface CalculatedStats {
   elems: {

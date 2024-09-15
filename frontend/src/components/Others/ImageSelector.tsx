@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
-import { RootState, AppDispatch } from "../store";
-import { setSelectedImage, openModal, closeModal } from "../features/components/imageSlice";
-import '../styles/components/ImageSelector.scss';
-import { Images } from "../asset";
+import { RootState, AppDispatch } from "../../store";
+import { setSelectedImage, openModal, closeModal } from "../../features/components/Builder/imageSlice";
+import '../../styles/components/Others/ImageSelector.scss';
+import { Images } from "../../asset";
 
 interface ImageSelectorProps {
   images: string[];

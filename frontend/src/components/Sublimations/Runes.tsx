@@ -11,14 +11,14 @@ import {
   ClassInformationsState,
   Resistances,
   Masteries,
-} from "../../features/components/classInformationsSlice";
+} from "../../features/components/Builder/classInformationsSlice";
 import { RootState, AppDispatch } from "../../store.ts";
 import {
   setEquippedEpicSublimation,
   setEquippedRelicSublimation,
   setEquippedNormalSublimation,
   Sublimation,
-} from "../../features/components/sublimationsSlice.ts";
+} from "../../features/components/Sublimations/sublimationsSlice.ts";
 
 interface Shard {
   src: string;

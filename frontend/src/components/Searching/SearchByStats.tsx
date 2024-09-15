@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {PrimaryStats} from "../../asset.ts";
-import '../../styles/components/SearchByStats.scss';
+import '../../styles/components/Searching/SearchByStats.scss';
 
 interface StatOption {
     id: string;

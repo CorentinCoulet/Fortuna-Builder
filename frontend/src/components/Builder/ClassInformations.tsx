@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import "../styles/components/ClassInformations.scss";
+import "../../styles/components/Builder/ClassInformations.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateProperty,
   updateResistances,
   updateMasteries,
   selectCalculatedStats
-} from "../features/components/classInformationsSlice";
-import { RootState } from "../store";
+} from "../../features/components/Builder/classInformationsSlice";
+import { RootState } from "../../store";
 import EditableValue from "./EditableValue";
 import TotalMasteriesCalcul from "./TotalMasteriesCalcul";
-import ImageSelector from "./ImageSelector";
-import { Images } from "../asset";
+import ImageSelector from "../Others/ImageSelector";
+import { Images } from "../../asset";
 
 const ClassInformations: React.FC = () => {
   const dispatch = useDispatch();

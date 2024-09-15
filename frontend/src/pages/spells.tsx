@@ -12,7 +12,7 @@ import {
   loadSpellsFromStorage,
   setSelectedSpell,
   spellDrag,
-} from "../features/components/spellsSlice.ts";
+} from "../features/components/Spells/spellsSlice.ts";
 
 interface Spell {
   src: string;

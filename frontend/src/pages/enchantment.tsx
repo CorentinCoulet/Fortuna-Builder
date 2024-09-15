@@ -9,8 +9,10 @@ const Enchantment: React.FC = () => {
     <div className="enchantmentPage">
       <EnchantmentPerEquipment />
       <Runes />
-      <Sublimations />
-      <SublimationsRares />
+      <div>
+        <Sublimations />
+        <SublimationsRares />
+      </div>
     </div>
   );
 };

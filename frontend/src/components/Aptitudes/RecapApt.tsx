@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import "../../styles/components/RecapApt.scss";
+import "../../styles/components/Aptitudes/RecapApt.scss";
 import { aptLogos } from "../../asset";
 
 const Recap: React.FC = () => {

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import '../styles/components/EditableValue.scss';
-import { PrimaryStats } from "../asset";
+import '../../styles/components/Builder/EditableValue.scss';
+import { PrimaryStats } from "../../asset";
 
 interface EditableValueProps {
   id: number;
@@ -26,6 +26,7 @@ const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChang
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/components/InternalNavbar.scss';
+import '../../styles/components/Others/InternalNavbar.scss';
 
 interface InternalNavbarProps {
   setActiveSection: (section: string) => void;

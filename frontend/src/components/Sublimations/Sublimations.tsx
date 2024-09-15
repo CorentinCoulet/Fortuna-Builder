@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import {
   Sublimation,
   setSelectedNormalSublimation,
-} from "../../features/components/sublimationsSlice";
+} from "../../features/components/Sublimations/sublimationsSlice";
 
 const comboShards = {
   red: { src: shards[1].src, alt: shards[1].alt }, // Rouge

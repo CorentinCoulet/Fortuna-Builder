@@ -94,9 +94,8 @@ const Major: React.FC = () => {
   const handleElementMouseEnter = (index: number) => setHoveredElement(index);
   const handleElementMouseLeave = () => setHoveredElement(null);
 
-  const handleIncrement = (index: number, event: React.MouseEvent) => {
-    const isShiftClick = event.shiftKey;
-    const incrementValue = isShiftClick ? Math.min(10, valueCount) : 1;
+  const handleIncrement = (index: number) => {
+    const incrementValue = 1;
     dispatch(incrementPoint({ index, increment: incrementValue }));
   };
 

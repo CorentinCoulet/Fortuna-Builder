@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { shards, enchantmentEquipment } from "../../asset.ts";
 import "../../styles/components/Sublimations/EnchantmentPerEquipment.scss";
-import { setSelectedShard } from "../../features/components/runesSlice";
+import { setSelectedShard } from "../../features/components/Sublimations/runesSlice";
 
 const masteryEnchantmentLabels = {
   1: { label: "Maîtrise Mêlée", actions: ['meleeMastery'] },

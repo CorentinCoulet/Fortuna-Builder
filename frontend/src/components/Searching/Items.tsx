@@ -1,5 +1,5 @@
-import '../styles/components/Items.scss';
-import { Equipments } from '../asset';
+import '../../styles/components/Searching/Items.scss';
+import { Equipments } from '../../asset';
 import React from 'react';
   
 const Items: React.FC = () => {

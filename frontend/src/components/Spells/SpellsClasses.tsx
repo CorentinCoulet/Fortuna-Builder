@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "../../styles/components/SpellsClasses.scss";
-import { setSelectedClass } from "../../features/components/spellsSlice.ts";
+import "../../styles/components/Spells/SpellsClasses.scss";
+import { setSelectedClass } from "../../features/components/Spells/spellsSlice.ts";
 import { RootState } from "../../store.ts";
 // import SpellsClassesInformations from "./SpellsClassesInformations.tsx";
-
 
 interface Spell {
   src: string;

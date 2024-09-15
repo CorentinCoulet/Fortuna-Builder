@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/components/ListSearchItems.scss";
 import { rarityEquipment, searchEquipment } from "../../asset.ts";
-import "../../styles/components/ListSearchItems.scss";
+import "../../styles/components/Searching/ListSearchItems.scss";
 import Logo from "../../../public/logo-fortuna-V2.webp";
 
 const fakeItemsData = [

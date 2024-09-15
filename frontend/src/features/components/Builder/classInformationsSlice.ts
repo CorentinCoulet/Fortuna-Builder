@@ -1,10 +1,10 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../store';
-import { selectIntelPoints } from './Aptitudes/aptitudeIntelSlice';
-import { selectStrengthPoints } from './Aptitudes/aptitudeStrengthSlice';
-import { selectAgilityPoints } from './Aptitudes/aptitudeAgilitySlice';
-import { selectChancePoints } from './Aptitudes/aptitudeChanceSlice';
-import { selectMajorPoints } from './Aptitudes/aptitudeMajorSlice';
+import { RootState } from '../../../store';
+import { selectIntelPoints } from '../Aptitudes/aptitudeIntelSlice';
+import { selectStrengthPoints } from '../Aptitudes/aptitudeStrengthSlice';
+import { selectAgilityPoints } from '../Aptitudes/aptitudeAgilitySlice';
+import { selectChancePoints } from '../Aptitudes/aptitudeChanceSlice';
+import { selectMajorPoints } from '../Aptitudes/aptitudeMajorSlice';
 
 export interface Resistances {
   waterResist: number;

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import EmptyCase from "../../assets/sorts/deck.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faCopy } from "@fortawesome/free-solid-svg-icons";
-import "../../styles/components/Deck.scss";
+import "../../styles/components/Spells/Deck.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../store";
 import {
@@ -11,7 +11,7 @@ import {
   addPassiveSpell,
   removeActiveSpell,
   removePassiveSpell,
-} from "../../features/components/spellsSlice";
+} from "../../features/components/Spells/spellsSlice";
 
 interface Spell {
   src: string;

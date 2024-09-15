@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../styles/components/Header.scss";
-import Logo from "../assets/logo-fortuna-V2.webp";
+import "../../styles/components/Others/Header.scss";
+import Logo from "../../assets/logo-fortuna-V2.webp";
 
 const Header: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);

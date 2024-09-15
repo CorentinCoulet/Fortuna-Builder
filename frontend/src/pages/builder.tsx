@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import ClassInformations from "../components/ClassInformations";
-import Items from "../components/Items";
+import ClassInformations from "../components/Builder/ClassInformations";
+import Items from "../components/Searching/Items";
 import Recherche from "../pages/search";
 import Aptitudes from "../pages/aptitudes";
 import Sorts from "../pages/spells";
 import Enchantement from "../pages/enchantment";
 import Recap from "../pages/recap";
-import InternalNavbar from "../components/InternalNavbar";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import InternalNavbar from "../components/Others/InternalNavbar";
+import Header from "../components/Others/Header";
+import Footer from "../components/Others/Footer";
 import "../styles/pages/Builder.scss";
 
 const Builder: React.FC = () => {
