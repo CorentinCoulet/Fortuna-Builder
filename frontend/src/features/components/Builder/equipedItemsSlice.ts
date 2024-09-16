@@ -7,9 +7,12 @@ interface EquippedItem {
 
 interface EquippedItemsState {
   [tag: string]: EquippedItem | null;
+  tempRingItem: EquippedItem | null;
 }
 
-const initialState: EquippedItemsState = {};
+const initialState: EquippedItemsState = {
+  tempRingItem: null,
+};
 
 const equippedItemsSlice = createSlice({
   name: 'equippedItem',
@@ -21,8 +24,14 @@ const equippedItemsSlice = createSlice({
     unequipItem: (state, action: PayloadAction<{ tag: string }>) => {
       state[action.payload.tag] = null;
     },
+    setTempRingItem: (state, action: PayloadAction<EquippedItem>) => {
+      state.tempRingItem = action.payload;
+    },
+    clearTempRingItem: (state) => {
+      state.tempRingItem = null; 
+    },
   },
 });
 
-export const { equipItem, unequipItem } = equippedItemsSlice.actions;
+export const { equipItem, unequipItem, setTempRingItem, clearTempRingItem } = equippedItemsSlice.actions;
 export default equippedItemsSlice.reducer;

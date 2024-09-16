@@ -2,9 +2,15 @@ import React, { useState, useEffect } from "react";
 import { rarityEquipment, searchEquipment } from "../../asset.ts";
 import "../../styles/components/Searching/ListSearchItems.scss";
 import Logo from "../../assets/logo-fortuna-V2.webp";
-import { useDispatch } from "react-redux";
-import { equipItem } from "../../features/components/Builder/equipedItemsSlice.ts";
+import { useDispatch, useSelector } from "react-redux";
+import { 
+  equipItem,
+  setTempRingItem,
+  clearTempRingItem,
+ } from "../../features/components/Builder/equipedItemsSlice.ts";
 import RingModal from "./RingModal.tsx";
+import { RootState } from "../../store.ts";
+import { setSearchTriggered } from "../../features/components/Searching/searchFilterSlice.ts";
 
 const fakeItemsData = [
   {
@@ -237,27 +243,15 @@ const fakeItemsData = [
   },
 ];
 
-interface ItemsListSearchProps {
-  searchTriggered: boolean;
-  filters: {
-    itemName: string;
-    levelRange: [number, number];
-    selectedRarities: string[];
-    selectedEquipmentTags: string[];
-  };
-}
-
-const ItemsListSearch: React.FC<ItemsListSearchProps> = ({
-  searchTriggered,
-  filters,
-}) => {
+const ItemsListSearch: React.FC = () => {
   const dispatch = useDispatch();
+  const filters = useSelector((state: RootState) => state.searchFilters);
+  const equippedItems = useSelector((state: RootState) => state.equippedItem);
   const [filteredItems, setFilteredItems] = useState(fakeItemsData);
   const [showModal, setShowModal] = useState(false);
-  const [currentItem, setCurrentItem] = useState(null);
 
   useEffect(() => {
-    if (searchTriggered) {
+    if (filters.searchTriggered) {
       let filteredResults = fakeItemsData.filter((item) => {
         // Filtrer par nom de l'item
         const matchesName =
@@ -287,12 +281,14 @@ const ItemsListSearch: React.FC<ItemsListSearchProps> = ({
       );
 
       setFilteredItems(filteredResults);
+
+      dispatch(setSearchTriggered(false));
     }
-  }, [searchTriggered, filters]);
+  }, [filters, dispatch]);
 
   const handleEquipClick = (item) => {
     if (item.tag === "ring") {
-      setCurrentItem(item);
+      dispatch(setTempRingItem({ src: item.image, alt: item.name }));
       setShowModal(true);
     } else {
       dispatch(
@@ -302,15 +298,11 @@ const ItemsListSearch: React.FC<ItemsListSearchProps> = ({
   };
 
   const handleModalSelect = (choice: "left-ring" | "right-ring") => {
-    if (currentItem) {
-      dispatch(
-        equipItem({
-          tag: choice,
-          item: { src: currentItem.image, alt: currentItem.name },
-        })
-      );
+    const tempRingItem = equippedItems.tempRingItem;
+    if (tempRingItem) {
+      dispatch(equipItem({ tag: choice, item: tempRingItem }));
+      dispatch(clearTempRingItem());
       setShowModal(false);
-      setCurrentItem(null);
     }
   };
 
@@ -328,7 +320,7 @@ const ItemsListSearch: React.FC<ItemsListSearchProps> = ({
 
   return (
     <div className="items-list-container">
-      {searchTriggered && filteredItems.length > 0
+      {filteredItems.length > 0
         ? filteredItems.map((item) => (
             <div
               key={item.id}
@@ -365,8 +357,8 @@ const ItemsListSearch: React.FC<ItemsListSearchProps> = ({
                 </div>
               </div>
             </div>
-          ))
-        : searchTriggered && (
+          )
+        ) : (
             <div className="no-results">
               <p>Aucun objet ne correspond aux critères de recherche.</p>
             </div>

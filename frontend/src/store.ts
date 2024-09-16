@@ -11,6 +11,7 @@ import aptitudeChanceReducer from './features/components/Aptitudes/aptitudeChanc
 import aptitudeMajorReducer from './features/components/Aptitudes/aptitudeMajorSlice'; 
 import sublimationsReducer from './features/components/Sublimations/sublimationsSlice';
 import equipedItemsReducer from './features/components/Builder/equipedItemsSlice';
+import searchFiltersReducer from './features/components/Searching/searchFilterSlice';
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     major: aptitudeMajorReducer,
     sublimations: sublimationsReducer,
     equippedItem: equipedItemsReducer,
+    searchFilters: searchFiltersReducer,
   },
 });
 

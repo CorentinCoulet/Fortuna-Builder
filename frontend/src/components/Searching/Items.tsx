@@ -5,7 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { unequipItem } from "../../features/components/Builder/equipedItemsSlice";
 import React from "react";
 
-const Items: React.FC = () => {
+interface ItemsProps {
+  onEquipmentClick: (tag: string) => void;
+}
+
+const Items: React.FC<ItemsProps> = ({ onEquipmentClick }) => {
   const dispatch = useDispatch();
   const equippedItems = useSelector((state: RootState) => state.equippedItem);
 
@@ -13,12 +17,16 @@ const Items: React.FC = () => {
     dispatch(unequipItem({ tag }));
   };
 
+  const handleClick = (tag: string) => {
+    onEquipmentClick(tag);
+  };
+
   return (
     <div className="items-container">
       {Equipments.map((item, index) => {
         const equippedItem = equippedItems[item.tag];
         return (
-          <div key={index} className="item-wrapper">
+          <div key={index} className="item-wrapper" onClick={() => handleClick(item.tag)}>
             <img
               src={equippedItem ? equippedItem.src : item.src}
               alt={equippedItem ? equippedItem.alt : item.alt}
@@ -41,3 +49,5 @@ const Items: React.FC = () => {
 };
 
 export default Items;
+
+

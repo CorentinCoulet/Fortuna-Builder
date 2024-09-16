@@ -1,80 +1,69 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import ReactSlider from "react-slider";
 import { rarityEquipment, searchEquipment } from "../../asset.ts";
 import "../../styles/components/Searching/SearchItems.scss";
 import SearchByStats from "./SearchByStats.tsx";
+import {
+  setItemName,
+  setLevelRange,
+  setSelectedRarities,
+  setSelectedEquipmentTags,
+  setAdditionalTag,
+  clearFilters,
+  setSearchTriggered,
+} from '../../features/components/Searching/searchFilterSlice.ts';
+import { RootState } from "../../store.ts";
+import { useDispatch, useSelector } from "react-redux";
 
-interface Filters {
-  itemName: string;
-  levelRange: [number, number];
-  selectedRarities: string[];
-  selectedEquipmentTags: string[];
-}
-
-interface SearchItemsProps {
-  onSearch: (filters: Filters) => void;
-}
-
-const SearchItems: React.FC<SearchItemsProps> = ({ onSearch }) => {
-  const [itemName, setItemName] = useState<string>("");
-  const [levelRange, setLevelRange] = useState<[number, number]>([1, 230]);
-  const [selectedRarities, setSelectedRarities] = useState<string[]>([]);
-  const [selectedEquipmentTags, setSelectedEquipmentTags] = useState<string[]>(
-    []
-  );
+const SearchItems: React.FC = () => {
+  const dispatch = useDispatch();
+  const filters = useSelector((state: RootState) => state.searchFilters);
 
   const handleItemNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setItemName(e.target.value);
+    dispatch(setItemName(e.target.value));
   };
 
   const handleLevelChange = (values: [number, number]) => {
-    setLevelRange(values);
+    dispatch(setLevelRange(values));
   };
 
   const handleRaritySelect = (rarityTag: string) => {
-    setSelectedRarities((prevSelectedRarities) => {
-      const newRarities = prevSelectedRarities.includes(rarityTag)
-        ? prevSelectedRarities.filter((tag) => tag !== rarityTag)
-        : [...prevSelectedRarities, rarityTag];
-      return newRarities;
-    });
+    const updatedRarities = filters.selectedRarities.includes(rarityTag)
+      ? filters.selectedRarities.filter((tag) => tag !== rarityTag)
+      : [...filters.selectedRarities, rarityTag];
+    dispatch(setSelectedRarities(updatedRarities));
   };
 
   const handleEquipmentTagSelect = (tag: string) => {
-    setSelectedEquipmentTags((prevSelectedEquipmentTags) => {
-      const newTags = prevSelectedEquipmentTags.includes(tag)
-        ? prevSelectedEquipmentTags.filter((existingTag) => existingTag !== tag)
-        : [...prevSelectedEquipmentTags, tag];
-      return newTags;
-    });
+    const updatedTags = filters.selectedEquipmentTags.includes(tag)
+      ? filters.selectedEquipmentTags.filter((existingTag) => existingTag !== tag)
+      : [...filters.selectedEquipmentTags, tag];
+    dispatch(setSelectedEquipmentTags(updatedTags)); 
   };
 
-  const handleSearch = () => {
-    const filters: Filters = {
-      itemName,
-      levelRange,
-      selectedRarities,
-      selectedEquipmentTags,
-    };
-    onSearch(filters);
+  useEffect(() => {
+    if (filters.selectedEquipmentTags.length === 1) {
+      dispatch(setAdditionalTag(filters.selectedEquipmentTags[0]));
+    }
+  }, [filters.selectedEquipmentTags, dispatch]);
+
+  const handleClassicSearch = () => {
+    dispatch(setSearchTriggered(true));
   };
 
   const handleClear = () => {
-    setItemName("");
-    setLevelRange([1, 230]);
-    setSelectedRarities([]);
-    setSelectedEquipmentTags([]);
+    dispatch(clearFilters()); 
   };
 
   return (
     <div className="search-items-container">
       <div className="input-group">
         <label>NOM DE L'ITEM</label>
-        <input type="text" value={itemName} onChange={handleItemNameChange} />
+        <input type="text" value={filters.itemName} onChange={handleItemNameChange} />
       </div>
       <div className="input-group">
         <label>
-          NIVEAU ({levelRange[0]} - {levelRange[1]})
+          NIVEAU ({filters.levelRange[0]} - {filters.levelRange[1]})
         </label>
         <ReactSlider
           className="horizontal-slider"
@@ -82,7 +71,7 @@ const SearchItems: React.FC<SearchItemsProps> = ({ onSearch }) => {
           trackClassName="track"
           min={1}
           max={230}
-          value={levelRange}
+          value={filters.levelRange}
           onChange={handleLevelChange}
           minDistance={1}
           ariaLabel={["Lower thumb", "Upper thumb"]}
@@ -93,14 +82,14 @@ const SearchItems: React.FC<SearchItemsProps> = ({ onSearch }) => {
         <div className="rarity-options">
           {Object.keys(rarityEquipment).map((key) => {
             const rarity = rarityEquipment[Number(key)];
-            const isSelected = selectedRarities.includes(rarity.tag);
+            const isSelected = filters.selectedRarities.includes(rarity.tag);
             return (
               <img
                 key={key}
                 src={rarity.src}
                 alt={rarity.alt}
                 className={`rarity-image ${isSelected ? "selected" : ""}`}
-                onClick={() => handleRaritySelect(rarity.tag)} 
+                onClick={() => handleRaritySelect(rarity.tag)}
               />
             );
           })}
@@ -111,7 +100,7 @@ const SearchItems: React.FC<SearchItemsProps> = ({ onSearch }) => {
         <div className="equipment-options">
           {Object.keys(searchEquipment).map((key) => {
             const equipment = searchEquipment[Number(key)];
-            const isSelected = selectedEquipmentTags.includes(equipment.tag);
+            const isSelected = filters.selectedEquipmentTags.includes(equipment.tag);
             return (
               <img
                 key={key}
@@ -129,7 +118,7 @@ const SearchItems: React.FC<SearchItemsProps> = ({ onSearch }) => {
         <button className="clear-button" onClick={handleClear}>
           VIDER LES CHAMPS
         </button>
-        <button className="search-button" onClick={handleSearch}>
+        <button className="search-button" onClick={handleClassicSearch}>
           RECHERCHER
         </button>
       </div>
