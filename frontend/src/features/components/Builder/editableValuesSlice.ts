@@ -21,8 +21,13 @@ const editableValuesSlice = createSlice({
     resetValue(state, action: PayloadAction<{ label: string }>) {
       state.values[action.payload.label] = 0;
     },
+    resetAllValues(state) {
+      Object.keys(state.values).forEach((key) => {
+        state.values[key] = 0;
+      });
+    },
   },
 });
 
-export const { setInitialValue, updateValue, resetValue } = editableValuesSlice.actions;
+export const { setInitialValue, updateValue, resetValue, resetAllValues } = editableValuesSlice.actions;
 export default editableValuesSlice.reducer;

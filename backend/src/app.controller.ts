@@ -31,17 +31,29 @@ export class AppController {
   // ajout des jeux de données
   @Get('/api/fetch-and-save')
   async fetchAndSaveData(): Promise<string> {
-    await this.dataService.fetchAndSaveData();
-    return 'Data fetching and saving initiated successfully';
+    try {
+      await this.dataService.fetchAndSaveData();
+      return 'Data fetching and saving initiated successfully';
+    } catch (error) {
+      console.error('Erreur lors de l\'importation des données : ', error);
+      return 'Erreur lors de l\'importation des données';
+    }
   }
 
   @Get('/api/:table')
   async getTableData(@Param('table') table: string): Promise<any> {
-    if (!['actions', 'equipmentItemTypes', 'itemTypes', 'items', 'jobsItems', 'states'].includes(table)) {
+    const validTables = ['actions', 'equipmentItemTypes', 'itemTypes', 'items', 'jobsItems', 'states'];
+    
+    if (!validTables.includes(table)) {
       return { error: 'Table non trouvée' };
     }
 
-    const data = await this.dataService.getDataForTable(table); 
-    return data;
+    try {
+      const data = await this.dataService.getDataForTable(table);
+      return data;
+    } catch (error) {
+      console.error(`Erreur lors de la récupération des données pour ${table}: `, error);
+      return { error: 'Erreur lors de la récupération des données' };
+    }
   }
 }

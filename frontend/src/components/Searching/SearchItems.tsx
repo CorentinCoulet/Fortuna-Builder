@@ -8,16 +8,27 @@ import {
   setLevelRange,
   setSelectedRarities,
   setSelectedEquipmentTags,
-  setAdditionalTag,
+  setInstantSearch,
   clearFilters,
   setSearchTriggered,
 } from '../../features/components/Searching/searchFilterSlice.ts';
 import { RootState } from "../../store.ts";
 import { useDispatch, useSelector } from "react-redux";
 
-const SearchItems: React.FC = () => {
+interface Filters {
+  itemName: string;
+  levelRange: [number, number];
+  selectedRarities: string[];
+  selectedEquipmentTags: string[];
+}
+interface SearchItemsProps {
+  onSearch: (filters: Filters) => void; 
+}
+
+const SearchItems: React.FC<SearchItemsProps> = ({ onSearch }) => {
   const dispatch = useDispatch();
   const filters = useSelector((state: RootState) => state.searchFilters);
+  const instantSearch = useSelector((state: RootState) => state.searchFilters.instantSearch); 
 
   const handleItemNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setItemName(e.target.value));
@@ -26,6 +37,14 @@ const SearchItems: React.FC = () => {
   const handleLevelChange = (values: [number, number]) => {
     dispatch(setLevelRange(values));
   };
+
+  useEffect(() => {
+    if (instantSearch) {
+      dispatch(setSearchTriggered(true)); 
+      onSearch(filters);
+      dispatch(setInstantSearch(false)); 
+    }
+  }, [instantSearch, dispatch, filters, onSearch]);
 
   const handleRaritySelect = (rarityTag: string) => {
     const updatedRarities = filters.selectedRarities.includes(rarityTag)
@@ -41,14 +60,9 @@ const SearchItems: React.FC = () => {
     dispatch(setSelectedEquipmentTags(updatedTags)); 
   };
 
-  useEffect(() => {
-    if (filters.selectedEquipmentTags.length === 1) {
-      dispatch(setAdditionalTag(filters.selectedEquipmentTags[0]));
-    }
-  }, [filters.selectedEquipmentTags, dispatch]);
-
   const handleClassicSearch = () => {
     dispatch(setSearchTriggered(true));
+    onSearch(filters);
   };
 
   const handleClear = () => {

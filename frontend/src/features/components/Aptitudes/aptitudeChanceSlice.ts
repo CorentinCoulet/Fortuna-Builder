@@ -40,13 +40,19 @@ const aptitudeChanceSlice = createSlice({
       state.valueCount += state.points[index];
       state.points[index] = 0;
     },
+    resetAllPoints(state) {
+      state.points.forEach((point, index) => {
+        state.valueCount += state.points[index];
+        state.points[index] = 0;
+      });
+    },
     setPointsFromStorage(state, action: PayloadAction<number[]>) {
       state.points = action.payload;
     },
   },
 });
 
-export const { setLevelPoints, incrementPoint, decrementPoint, resetPoint, setPointsFromStorage } = aptitudeChanceSlice.actions;
+export const { setLevelPoints, incrementPoint, decrementPoint, resetPoint, resetAllPoints, setPointsFromStorage } = aptitudeChanceSlice.actions;
 
 export const selectChancePoints = (state: RootState) => state.chance.points;
 

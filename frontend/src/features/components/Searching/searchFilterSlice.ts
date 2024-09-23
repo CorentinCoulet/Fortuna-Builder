@@ -6,6 +6,7 @@ interface FiltersState {
     selectedRarities: string[];
     selectedEquipmentTags: string[];
     searchTriggered: boolean;
+    instantSearch: boolean;
 }
 
 const initialState: FiltersState = {
@@ -14,6 +15,7 @@ const initialState: FiltersState = {
     selectedRarities: [],
     selectedEquipmentTags: [],
     searchTriggered: false,
+    instantSearch: false,
 };
 
 const searchFiltersSlice = createSlice({
@@ -35,14 +37,22 @@ const searchFiltersSlice = createSlice({
         setAdditionalTag: (state, action: PayloadAction<string>) => {
             state.selectedEquipmentTags = [action.payload];
         },
+        replaceAllTagsWithClicked: (state, action: PayloadAction<string>) => {
+            state.selectedEquipmentTags = [action.payload];
+          },
         setSearchTriggered: (state, action: PayloadAction<boolean>) => {
             state.searchTriggered = action.payload;
+        },
+        setInstantSearch: (state, action: PayloadAction<boolean>) => {
+            state.instantSearch = action.payload;
         },
         clearFilters: (state) => {
             state.itemName = '';
             state.levelRange = [1, 230];
             state.selectedRarities = [];
             state.selectedEquipmentTags = [];
+            state.searchTriggered = false;
+            state.instantSearch = false;
         },
     },
 });
@@ -53,7 +63,9 @@ export const {
     setSelectedRarities,
     setSelectedEquipmentTags,
     setAdditionalTag,
+    replaceAllTagsWithClicked,
     setSearchTriggered,
+    setInstantSearch,
     clearFilters,
 } = searchFiltersSlice.actions;
 

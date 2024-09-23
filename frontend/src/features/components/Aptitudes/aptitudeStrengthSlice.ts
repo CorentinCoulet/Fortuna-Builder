@@ -40,13 +40,19 @@ const aptitudeStrengthSlice = createSlice({
       state.valueCount += state.points[index];
       state.points[index] = 0;
     },
+    resetAllPoints(state) {
+      state.points.forEach((point, index) => {
+        state.valueCount += state.points[index];
+        state.points[index] = 0;
+      });
+    },
     setPointsFromStorage(state, action: PayloadAction<number[]>) {
       state.points = action.payload;
     },
   },
 });
 
-export const { setLevelPoints, incrementPoint, decrementPoint, resetPoint, setPointsFromStorage } = aptitudeStrengthSlice.actions;
+export const { setLevelPoints, incrementPoint, decrementPoint, resetPoint, resetAllPoints, setPointsFromStorage } = aptitudeStrengthSlice.actions;
 
 export const selectStrengthPoints = (state: RootState) => state.strength.points;
 

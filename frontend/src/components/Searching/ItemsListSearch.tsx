@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { rarityEquipment, searchEquipment } from "../../asset.ts";
-import "../../styles/components/Searching/ListSearchItems.scss";
+import "../../styles/components/Searching/ItemsListSearch.scss";
 import Logo from "../../assets/logo-fortuna-V2.webp";
 import { useDispatch, useSelector } from "react-redux";
-import { 
+import {
   equipItem,
   setTempRingItem,
   clearTempRingItem,
- } from "../../features/components/Builder/equipedItemsSlice.ts";
+} from "../../features/components/Builder/equipedItemsSlice.ts";
 import RingModal from "./RingModal.tsx";
 import { RootState } from "../../store.ts";
-import { setSearchTriggered } from "../../features/components/Searching/searchFilterSlice.ts";
 
 const fakeItemsData = [
   {
@@ -27,7 +26,13 @@ const fakeItemsData = [
       meleeMastery: 15,
       ap: 1,
     },
-    labels: ["+20 Maîtrise Feu", "+15 Maîtrise Mêlée", "+1 PA"],
+    labels: [
+      "+20 Maîtrise Feu",
+      "+15 Maîtrise Mêlée",
+      "+1 PA",
+      "Dommage : 12",
+      "Dommage Crit : 18",
+    ],
   },
   {
     id: 2,
@@ -149,7 +154,12 @@ const fakeItemsData = [
       critMastery: 10,
       rearResist: 5,
     },
-    labels: ["+10 Maîtrise Critique", "+5 Résistance Dos"],
+    labels: [
+      "+10 Maîtrise Critique",
+      "+5 Résistance Dos",
+      "Dommage : 8",
+      "Dommage Crit : 12",
+    ],
   },
   {
     id: 10,
@@ -243,15 +253,45 @@ const fakeItemsData = [
   },
 ];
 
-const ItemsListSearch: React.FC = () => {
+interface Item {
+  id: number;
+  name: string;
+  level: number;
+  rarity: string;
+  image: string;
+  rarityIcon: string;
+  typeIcon: string;
+  tag: string;
+  bonus: {
+    [key: string]: number;
+  };
+  labels: string[];
+}
+
+interface Filters {
+  itemName: string;
+  levelRange: [number, number];
+  selectedRarities: string[];
+  selectedEquipmentTags: string[];
+}
+
+interface ItemsListSearchProps {
+  filters: Filters;
+  searchTriggered: boolean;
+}
+
+const ItemsListSearch: React.FC<ItemsListSearchProps> = ({
+  filters,
+  searchTriggered,
+}) => {
   const dispatch = useDispatch();
-  const filters = useSelector((state: RootState) => state.searchFilters);
   const equippedItems = useSelector((state: RootState) => state.equippedItem);
   const [filteredItems, setFilteredItems] = useState(fakeItemsData);
   const [showModal, setShowModal] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState<Item | null>(null);
 
   useEffect(() => {
-    if (filters.searchTriggered) {
+    if (searchTriggered) {
       let filteredResults = fakeItemsData.filter((item) => {
         // Filtrer par nom de l'item
         const matchesName =
@@ -281,10 +321,16 @@ const ItemsListSearch: React.FC = () => {
       );
 
       setFilteredItems(filteredResults);
-
-      dispatch(setSearchTriggered(false));
     }
-  }, [filters, dispatch]);
+  }, [filters, searchTriggered]);
+
+  const handleMouseEnter = (item) => {
+    setHoveredItem(item);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredItem(null);
+  };
 
   const handleEquipClick = (item) => {
     if (item.tag === "ring") {
@@ -292,7 +338,7 @@ const ItemsListSearch: React.FC = () => {
       setShowModal(true);
     } else {
       dispatch(
-        equipItem({ tag: item.tag, item: { src: item.src, alt: item.alt } })
+        equipItem({ tag: item.tag, item: { src: item.image, alt: item.name } })
       );
     }
   };
@@ -320,49 +366,58 @@ const ItemsListSearch: React.FC = () => {
 
   return (
     <div className="items-list-container">
-      {filteredItems.length > 0
-        ? filteredItems.map((item) => (
-            <div
-              key={item.id}
-              className="item-row"
-              onClick={() => handleEquipClick(item)}
-              style={{
-                backgroundColor: getBackgroundColor(item.rarity),
-              }}
-            >
-              <div className="item-top">
-                <img src={item.image} alt={item.name} className="item-image" />
-                <div className="item-level">Niveau: {item.level}</div>
+      {filteredItems.length > 0 ? (
+        filteredItems.map((item) => (
+          <div
+            key={item.id}
+            className="item-row"
+            onMouseEnter={() => handleMouseEnter(item)}
+            onMouseLeave={handleMouseLeave}
+            onClick={() => handleEquipClick(item)}
+            style={{
+              backgroundColor: getBackgroundColor(item.rarity),
+            }}
+          >
+            <div className="item-top">
+              <img src={item.image} alt={item.name} className="item-image" />
+              <div className="item-level">Niveau: {item.level}</div>
+            </div>
+            <div className="item-details">
+              <div
+                className="item-name"
+                style={{
+                  color: getRarityColor(item.rarity),
+                }}
+              >
+                {item.name}
               </div>
-              <div className="item-details">
-                <div
-                  className="item-name"
-                  style={{
-                    color: getRarityColor(item.rarity),
-                  }}
-                >
-                  {item.name}
-                </div>
-                <div className="item-info">
-                  <img
-                    src={item.rarityIcon}
-                    alt={item.rarity}
-                    className="item-icon"
-                  />
-                  <img
-                    src={item.typeIcon}
-                    alt={item.tag}
-                    className="item-icon"
-                  />
-                </div>
+              <div className="item-info">
+                <img
+                  src={item.rarityIcon}
+                  alt={item.rarity}
+                  className="item-icon"
+                />
+                <img src={item.typeIcon} alt={item.tag} className="item-icon" />
               </div>
             </div>
-          )
-        ) : (
-            <div className="no-results">
-              <p>Aucun objet ne correspond aux critères de recherche.</p>
-            </div>
-          )}
+            {hoveredItem?.id === item.id && (
+              <div className="item-hover-box">
+                <h3>{item.name}</h3>
+                <p>Niveau: {item.level}</p>
+                <ul>
+                  {item.labels.map((label, index) => (
+                    <li key={index}>{label}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        ))
+      ) : (
+        <div className="no-results">
+          <p>Aucun objet ne correspond aux critères de recherche.</p>
+        </div>
+      )}
       {showModal && (
         <RingModal
           onSelect={handleModalSelect}

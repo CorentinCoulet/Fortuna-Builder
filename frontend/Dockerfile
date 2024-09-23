@@ -1,4 +1,3 @@
-# Étape 1: Construire l'application avec Vite
 FROM node:18 AS build
 
 WORKDIR /app
@@ -8,7 +7,6 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Étape 2: Configurer Nginx pour servir les fichiers construits
 FROM nginx:alpine
 
 COPY --from=build /app/dist /usr/share/nginx/html

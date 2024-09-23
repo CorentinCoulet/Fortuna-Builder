@@ -1,51 +1,59 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model Actions {
-  id          Int     @id @default(autoincrement())
-  definition  Json
-  description Json
-  version     String
+generator client {
+  provider = "prisma-client-js"
 }
 
-model EquipmentItemTypes {
-  id          Int     @id @default(autoincrement())
-  definition  Json
-  title       Json
-  version     String
+model User {
+  id        Int    @id @default(autoincrement())
+  username  String @unique
+  email     String @unique
+  password  String
+  createdAt DateTime @default(now())
 }
 
-model ItemTypes {
-  id          Int     @id @default(autoincrement())
-  definition  Json
-  title       Json
-  version     String
-}
+// model Actions {
+//   id          Int     @id @default(autoincrement())
+//   definition  Json
+//   description Json
+//   version     String
+// }
 
-model Items {
-  id          Int     @id @default(autoincrement())
-  definition  Json
-  title       Json
-  version     String
-}
+// model EquipmentItemTypes {
+//   id          Int     @id @default(autoincrement())
+//   definition  Json
+//   title       Json
+//   version     String
+// }
 
-model JobItems {
-  id          Int     @id @default(autoincrement())
-  definition  Json
-  title       Json
-  description Json
-  version     String
-}
+// model ItemTypes {
+//   id          Int     @id @default(autoincrement())
+//   definition  Json
+//   title       Json
+//   version     String
+// }
 
-model States {
-  id          Int     @id @default(autoincrement())
-  definition  Json
-  title       Json
-  version     String
-}
+// model Items {
+//   id          Int     @id @default(autoincrement())
+//   definition  Json
+//   title       Json
+//   version     String
+// }
+
+// model JobItems {
+//   id          Int     @id @default(autoincrement())
+//   definition  Json
+//   title       Json
+//   description Json
+//   version     String
+// }
+
+// model States {
+//   id          Int     @id @default(autoincrement())
+//   definition  Json
+//   title       Json
+//   version     String
+// }

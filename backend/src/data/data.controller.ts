@@ -14,7 +14,7 @@ export class DataController {
   async getIndex(@Res() res: Response) {
     const tables = ['actions', 'equipmentItemTypes', 'itemTypes', 'items', 'jobsItems', 'states'];
     const version = this.versionService.getLatestVersion();
-    
+
     if (!version) {
       return res.send('Version non disponible');
     }
