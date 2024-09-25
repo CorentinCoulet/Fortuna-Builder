@@ -40,13 +40,19 @@ const aptitudeIntelSlice = createSlice({
       state.valueCount += state.points[index];
       state.points[index] = 0;
     },
+    resetAllPoints(state) {
+      state.points.forEach((point, index) => {
+        state.valueCount += state.points[index];
+        state.points[index] = 0;
+      });
+    },
     setPointsFromStorage(state, action: PayloadAction<number[]>) {
       state.points = action.payload;
     },
   },
 });
 
-export const { setLevelPoints, incrementPoint, decrementPoint, resetPoint, setPointsFromStorage } = aptitudeIntelSlice.actions;
+export const { setLevelPoints, incrementPoint, decrementPoint, resetPoint, resetAllPoints, setPointsFromStorage } = aptitudeIntelSlice.actions;
 
 export const selectIntelPoints = (state: RootState) => state.intel.points;
 

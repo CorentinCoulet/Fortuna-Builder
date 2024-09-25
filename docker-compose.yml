@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres:15
+    image: postgres:15-alpine
     container_name: postgres
     environment:
       POSTGRES_USER: fortuna
@@ -12,6 +12,8 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
 
   backend:
     build:
@@ -24,22 +26,38 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
-    command: ["npm", "run", "start"]
     volumes:
       - ./backend:/usr/src/app
+    networks:
+      - app-network
 
   adminer:
-    image: 'adminer:latest'
+    image: adminer:latest
+    container_name: adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
     ports:
-      - '3001:3001'
+      - '8080:8080'
+    depends_on:
+      - postgres
+    networks:
+      - app-network
 
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   container_name: frontend
-  #   ports:
-  #     - "8080:8080"
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/usr/src/app
+    networks:
+      - app-network
 
 volumes:
   postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

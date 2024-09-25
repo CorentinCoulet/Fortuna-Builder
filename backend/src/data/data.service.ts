@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
+import {Injectable, OnModuleInit} from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Cron } from '@nestjs/schedule';
 import { firstValueFrom } from 'rxjs';
@@ -17,7 +17,7 @@ const paths = [
 ];
 
 @Injectable()
-export class DataService {
+export class DataService implements OnModuleInit {
   private version: string;
 
   constructor(
@@ -104,7 +104,7 @@ export class DataService {
                 await this.prisma.states.createMany({
                   data: response.data.map(item => ({
                     definition: item.definition,
-                    title: item.title,
+                    title: item.title || '',
                     version: this.version,
                   })),
                 });
@@ -124,6 +124,10 @@ export class DataService {
     } catch (error) {
       console.error('Erreur lors de la récupération des données de version:', error);
     }
+  }
+
+  async onModuleInit() {
+    await this.fetchAndSaveData();
   }
 
   async getDataForTable(table: string): Promise<any> {
