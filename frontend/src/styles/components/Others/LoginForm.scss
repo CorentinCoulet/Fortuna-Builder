@@ -1,0 +1,6 @@
+@import "../../generic/mixins";
+
+.loginForm {
+  @include authentication-form();
+
+}

@@ -1,9 +1,40 @@
+@import "./variables";
+
 @mixin parent-style-on-child($parent, $child) {
-    #{$parent} {
-      &:has(#{$child}) {
-        display: flex;
-        flex-direction: column;
-      }
+  #{$parent} {
+    &:has(#{$child}) {
+      display: flex;
+      flex-direction: column;
     }
+  }
 }
-  
+
+@mixin blur-modal($blur) {
+  backdrop-filter: blur($blur);
+}
+
+@mixin authentication-form() {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+
+  button[type="submit"] {
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 12px 16px;
+    width: fit-content;
+    border: none;
+    font-size: 16px;
+    background-color: #3b82f6;
+    color: #fff;
+    cursor: pointer;
+    transition: $transition;
+    margin: 10px 0;
+
+    &:hover {
+      background-color: #2e66c0;
+      transform: $transform;
+    }
+  }
+}
