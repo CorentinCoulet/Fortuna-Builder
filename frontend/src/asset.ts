@@ -550,3 +550,9 @@ export const rarityEquipment = {
     6: { src: EpicRarity, alt: "Epique", tag: "epic", color: "#ffb6c1" },       // Rose clair pour épique
     7: { src: RelicRarity, alt: "Relique", tag: "relic", color: "#6a0dad" },    // Violet légèrement foncé pour relique
 };
+
+import Guild from './assets/guild.webp';
+
+export const guildBonus = {
+    1: { src: Guild, alt: "Guild bonus"}
+}

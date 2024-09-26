@@ -92,11 +92,17 @@ const Header: React.FC = () => {
 
         <div className="button-group">
           <button className="reset-button" onClick={handleResetClick}>
-            <img src={Reset} alt="Reset" className="icon reset" />
+            <img 
+              loading="lazy" 
+              src={Reset} 
+              alt="Reset" 
+              className="icon reset" 
+            />
           </button>
 
           <button className="settings-button" onClick={handleSettingsClick}>
             <img
+              loading="lazy" 
               src={Parameters}
               alt="Paramètres"
               className="icon parameters"
@@ -105,6 +111,7 @@ const Header: React.FC = () => {
 
           <button className="login-button" onClick={handleLoginClick}>
             <img
+              loading="lazy" 
               src={isLoggedIn ? Logout : Login}
               alt={isLoggedIn ? "Mon Compte" : "Se Connecter"}
               className="icon logIcon"

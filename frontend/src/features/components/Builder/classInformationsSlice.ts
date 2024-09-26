@@ -107,6 +107,21 @@ const initialState: ClassInformationsState = {
   berserkMastery: 0,
 };
 
+const guildBonus = {
+  hp: 55,
+  fireResist: 20,
+  waterResist: 20,
+  earthResist: 20,
+  airResist: 20,
+  damageDealt: 8,
+  heals: 8,
+  prospecting: 10,
+  wisdom: 10,
+  initiative: 10,
+  lock: 10,
+  dodge: 10,
+};
+
 const classInformationsSlice = createSlice({
   name: 'classInformations',
   initialState,
@@ -126,6 +141,34 @@ const classInformationsSlice = createSlice({
     updateCharacterStats(state, action: PayloadAction<Partial<ClassInformationsState>>) {
       return { ...state, ...action.payload };
     },
+    applyGuildBonus(state) {
+      state.baseHp += guildBonus.hp;
+      state.resistances.fireResist += guildBonus.fireResist;
+      state.resistances.waterResist += guildBonus.waterResist;
+      state.resistances.earthResist += guildBonus.earthResist;
+      state.resistances.airResist += guildBonus.airResist;
+      state.damageDealt += guildBonus.damageDealt;
+      state.heals += guildBonus.heals;
+      state.prospecting += guildBonus.prospecting;
+      state.wisdom += guildBonus.wisdom;
+      state.initiative += guildBonus.initiative;
+      state.lock += guildBonus.lock;
+      state.dodge += guildBonus.dodge;
+    },
+    removeGuildBonus(state) {
+      state.baseHp -= guildBonus.hp;
+      state.resistances.fireResist -= guildBonus.fireResist;
+      state.resistances.waterResist -= guildBonus.waterResist;
+      state.resistances.earthResist -= guildBonus.earthResist;
+      state.resistances.airResist -= guildBonus.airResist;
+      state.damageDealt -= guildBonus.damageDealt;
+      state.heals -= guildBonus.heals;
+      state.prospecting -= guildBonus.prospecting;
+      state.wisdom -= guildBonus.wisdom;
+      state.initiative -= guildBonus.initiative;
+      state.lock -= guildBonus.lock;
+      state.dodge -= guildBonus.dodge;
+    },
   },
 });
 
@@ -134,6 +177,8 @@ export const {
   updateResistances,
   updateMasteries,
   updateCharacterStats,
+  applyGuildBonus,
+  removeGuildBonus,
 } = classInformationsSlice.actions;
 
 // Aptitudes
