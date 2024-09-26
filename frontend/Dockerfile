@@ -1,16 +1,14 @@
 FROM node:18 AS build
 
-WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+WORKDIR /usr/src/app
 
-FROM nginx:alpine
+# Let's use a docker-entrypoint, it's easier, cleaner and more flexible than dodgy dockerfile hacks
+COPY docker-entrypoint.sh /usr/src/app/
+RUN chmod +x /usr/src/app/docker-entrypoint.sh && \
+    chown node:node /usr/src/app/docker-entrypoint.sh
 
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
+# TODO: Manage the exposed port depending on the deployment environment DEV/PROD
+EXPOSE 5173
 
-EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["./docker-entrypoint.sh"]

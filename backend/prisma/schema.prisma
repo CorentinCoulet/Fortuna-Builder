@@ -15,12 +15,12 @@ model User {
   createdAt DateTime @default(now())
 }
 
-// model Actions {
-//   id          Int     @id @default(autoincrement())
-//   definition  Json
-//   description Json
-//   version     String
-// }
+model Actions {
+  id          Int     @id @default(autoincrement())
+  definition  Json
+  description Json
+  version     String
+}
 
 // model EquipmentItemTypes {
 //   id          Int     @id @default(autoincrement())

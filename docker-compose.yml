@@ -26,17 +26,16 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
-    command: ["npm", "run", "start"]
     volumes:
       - ./backend:/usr/src/app
     networks:
       - app-network
 
   adminer:
-    image: 'adminer:latest'
+    image: adminer:latest
     container_name: adminer
     environment:
-      - ADMINER_DEFAULT_SERVER=postgres
+      ADMINER_DEFAULT_SERVER: postgres
     ports:
       - '8080:8080'
     depends_on:
@@ -51,6 +50,8 @@ services:
     container_name: frontend
     ports:
       - "5173:5173"
+    volumes:
+      - ./frontend:/usr/src/app
     networks:
       - app-network
 
