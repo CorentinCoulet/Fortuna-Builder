@@ -1,6 +1,5 @@
 FROM node:18 AS build
 
-
 WORKDIR /usr/src/app
 
 # Let's use a docker-entrypoint, it's easier, cleaner and more flexible than dodgy dockerfile hacks
