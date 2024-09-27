@@ -19,28 +19,25 @@ model Actions {
   id          Int     @id @default(autoincrement())
   definition  Json
   description Json
-  version     String
 }
 
 model EquipmentItemTypes {
   id          Int     @id @default(autoincrement())
   definition  Json
   title       Json
-  version     String
 }
 
 model ItemTypes {
   id          Int     @id @default(autoincrement())
   definition  Json
   title       Json
-  version     String
 }
 
 model Items {
   id          Int     @id @default(autoincrement())
   definition  Json
   title       Json
-  version     String
+  description Json
 }
 
 model JobItems {
@@ -48,12 +45,10 @@ model JobItems {
   definition  Json
   title       Json
   description Json
-  version     String
 }
 
 model States {
   id          Int     @id @default(autoincrement())
   definition  Json
   title       Json
-  version     String
 }
