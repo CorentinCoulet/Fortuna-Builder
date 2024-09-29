@@ -29,12 +29,16 @@ const Header: React.FC = () => {
   const dispatch = useDispatch();
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const [wantToLogin, setWantToLogin] = useState<boolean>(false);
+  const [isBurgerModalOpen, setIsBurgerModalOpen] = useState<boolean>(false);
+  const [wantToLogin, setWantToLogin] = useState<boolean>(false); 
 
   const handleLoginClick = () => {
-    setIsLoggedIn(!isLoggedIn);
-    setIsMenuOpen(true);
+    setIsBurgerModalOpen(false); 
+    setWantToLogin(true);
+  };
+
+  const handleLogoutClick = () => {
+    setIsLoggedIn(false);
   };
 
   const handleResetClick = () => {
@@ -50,15 +54,15 @@ const Header: React.FC = () => {
     dispatch(resetPointMajor());
     dispatch(resetAllValues());
 
-    setIsMenuOpen(false);
+    setIsBurgerModalOpen(false);
   };
 
   const handleSettingsClick = () => {
-    setIsMenuOpen(false);
+    setIsBurgerModalOpen(false);
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const toggleBurgerModal = () => {
+    setIsBurgerModalOpen(!isBurgerModalOpen);
   };
 
   return (
@@ -69,75 +73,108 @@ const Header: React.FC = () => {
           <p>Fortuna Builder</p>
         </div>
 
-        <div className={`burger-menu ${isMenuOpen ? "open" : ""}`}>
-          <button className="burger-icon" onClick={toggleMenu}>
+        <div className="burger-menu">
+          <button className="burger-icon" onClick={toggleBurgerModal}>
             ☰
           </button>
-          {isMenuOpen && (
-            <div className="menu-content">
-              <button className="menu-button" onClick={handleResetClick}>
-                Reset
-              </button>
-
-              <button className="menu-button" onClick={handleSettingsClick}>
-                Paramètres
-              </button>
-
-              <button className="menu-button" onClick={handleLoginClick}>
-                {isLoggedIn ? "Mon Compte" : "Se Connecter"}
-              </button>
-            </div>
-          )}
         </div>
 
         <div className="button-group">
           <button className="reset-button" onClick={handleResetClick}>
-            <img 
-              loading="lazy" 
-              src={Reset} 
-              alt="Reset" 
-              className="icon reset" 
+            <img
+              loading="lazy"
+              src={Reset}
+              alt="Reset"
+              className="icon reset"
             />
           </button>
 
           <button className="settings-button" onClick={handleSettingsClick}>
             <img
-              loading="lazy" 
+              loading="lazy"
               src={Parameters}
               alt="Paramètres"
               className="icon parameters"
             />
           </button>
-
-          <button className="login-button" onClick={handleLoginClick}>
-            <img
-              loading="lazy" 
-              src={isLoggedIn ? Logout : Login}
-              alt={isLoggedIn ? "Mon Compte" : "Se Connecter"}
-              className="icon logIcon"
-            />
-          </button>
+          {!isLoggedIn && (
+            <button className="login-button" onClick={handleLoginClick}>
+              <img
+                loading="lazy"
+                src={Login}
+                alt={"Se Connecter"}
+                className="icon logIcon"
+              />
+            </button>
+          )}
+          {isLoggedIn && (
+            <button className="logout-button" onClick={handleLogoutClick}>
+              <img
+                loading="lazy"
+                src={Logout}
+                alt={"Mon Compte"}
+                className="icon logIcon"
+              />
+            </button>
+          )}
         </div>
       </header>
+
       <Modal
-        isOpen={isMenuOpen}
-        onRequestClose={() => setIsMenuOpen(false)}
+        isOpen={isBurgerModalOpen}
+        onRequestClose={toggleBurgerModal}
+        overlayClassName="modal-overlay"
+        className="burger-modal"
+      >
+        <div className="menu-content">
+          <button className="menu-button" onClick={handleResetClick}>
+            Reset
+          </button>
+
+          <button className="menu-button" onClick={handleSettingsClick}>
+            Paramètres
+          </button>
+
+          {!isLoggedIn && (
+            <button className="login-button" onClick={handleLoginClick}>
+              <img
+                loading="lazy"
+                src={Login}
+                alt={"Se Connecter"}
+                className="icon logIcon"
+              />
+            </button>
+          )}
+          {isLoggedIn && (
+            <button className="logout-button" onClick={handleLogoutClick}>
+              <img
+                loading="lazy"
+                src={Logout}
+                alt={"Mon Compte"}
+                className="icon logIcon"
+              />
+            </button>
+          )}
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={wantToLogin}
+        onRequestClose={() => setWantToLogin(false)}
         overlayClassName="modal-overlay"
         className="authentication-modal"
       >
         <div className="authentication-banner">
-          <h3>{!wantToLogin ? "Connexion" : "Inscription"}</h3>
+          <h3>{!isLoggedIn ? "Connexion" : "Inscription"}</h3>
         </div>
         <div className="authentication-content">
-        {!wantToLogin ? <LoginForm /> : <SignInForm />}
+          {!isLoggedIn ? <LoginForm /> : <SignInForm />}
           <p className="redirection-message">
-            {wantToLogin ? (
+            {isLoggedIn ? (
               <>
                 Vous êtes déjà inscrit ?{" "}
                 <span
-                  onClick={() => {
-                    setWantToLogin((curr) => !curr);
-                  }}
+                  onClick={() => setWantToLogin(false)}
                 >
                   Connectez-vous
                 </span>
@@ -146,9 +183,7 @@ const Header: React.FC = () => {
               <>
                 Vous n'avez pas de compte ?{" "}
                 <span
-                  onClick={() => {
-                    setWantToLogin((curr) => !curr);
-                  }}
+                  onClick={() => setWantToLogin(true)}
                 >
                   Inscrivez-vous
                 </span>

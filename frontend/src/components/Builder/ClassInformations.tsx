@@ -12,6 +12,8 @@ import EditableValue from "./EditableValue";
 import TotalMasteriesCalcul from "./TotalMasteriesCalcul";
 import ImageSelector from "../Others/ImageSelector";
 import { Images } from "../../asset";
+import Guild from "./Guild.tsx";
+import World from "./World.tsx";
 
 const ClassInformations: React.FC = () => {
   const dispatch = useDispatch();
@@ -44,6 +46,10 @@ const ClassInformations: React.FC = () => {
               max="230"
             />
           </form>
+          <div>
+            <Guild />
+            <World />
+          </div>
         </section>
       </div>
       <section className="sect3">

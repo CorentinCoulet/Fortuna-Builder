@@ -38,3 +38,10 @@
     }
   }
 }
+
+@mixin imgBonus($width, $height, $padding, $borderRadius) {
+  width: $width;
+  height: $height;
+  padding: $padding;
+  border-radius: $borderRadius;
+}

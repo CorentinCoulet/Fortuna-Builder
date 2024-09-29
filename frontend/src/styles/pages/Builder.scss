@@ -6,6 +6,7 @@
                 width: 100%;
                 display: flex;
                 font-size: 14px;
+                justify-content: space-evenly;
                 background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
                 border-radius: 8px;
                 box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -17,7 +18,11 @@
                     padding: 10px 0;
 
                     &:first-child {
-                        margin-left: 8px;
+                        margin-left: 1%;
+                    }
+
+                    &:last-child {
+                        margin-right: 1%;
                     }
 
                     &:hover {

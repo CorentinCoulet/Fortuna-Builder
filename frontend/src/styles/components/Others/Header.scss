@@ -30,27 +30,33 @@
   }
 
   .burger-menu {
-    display: none;
+    display: flex;
+    margin-right: 10px;
 
     .burger-icon {
-      font-size: 24px;
+      font-size: 30px;
       background: none;
       border: none;
       cursor: pointer;
     }
 
     .menu-content {
+      display: none;
+    }
+
+    &.open .menu-content {
       display: flex;
       flex-direction: column;
       position: absolute;
-      top: 60px;
-      right: 10px;
+      top: 50%;
+      right: 50%;
       background-color: white;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
       padding: 10px;
       border-radius: 8px;
+      z-index: 999;
 
-      .menu-button {
+      .menu-button, .login-button, .logout-button {
         padding: 10px;
         border: none;
         background: none;
@@ -58,33 +64,22 @@
         cursor: pointer;
         font-size: 16px;
         margin-bottom: 8px;
+        transition: background-color 0.2s ease;
+
+        img {
+          height: 32px;
+          width: 32px;
+        }
+
+        &:hover {
+          background-color: #f0f0f0;
+        }
       }
     }
   }
 
   .button-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    button {
-      background: none;
-      border: none;
-      cursor: pointer;
-
-      .icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        object-fit: cover;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-
-        &:hover {
-          transform: scale(1.1);
-        }
-      }
-    }
+    display: none;
   }
 }
 
@@ -99,7 +94,7 @@
   transition: 0.3s ease;
   box-shadow: 0px 0px 20px rgba(59, 130, 246, 0.3);
   overflow: hidden;
-  margin-top: -150px;
+  margin: -150px 25px 0 15px;
 
   .authentication-banner {
     background-color: #3b82f6;
@@ -127,21 +122,10 @@
 
       span {
         font-weight: 800;
-
         color: #3b82f6;
         cursor: pointer;
       }
     }
-  }
-}
-
-@media (max-width: 767px) {
-  .button-group {
-    display: none;
-  }
-
-  .burger-menu {
-    display: block;
   }
 }
 
@@ -152,6 +136,27 @@
 
   .button-group {
     display: flex;
+    align-items: center;
+    gap: 10px;
+
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      .icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
   }
 }
 

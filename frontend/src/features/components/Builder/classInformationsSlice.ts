@@ -122,6 +122,12 @@ const guildBonus = {
   dodge: 10,
 };
 
+const worldBonus = {
+  hp: 10,
+  prospectiong: 10,
+  wisdom: 10,
+}
+
 const classInformationsSlice = createSlice({
   name: 'classInformations',
   initialState,
@@ -169,6 +175,16 @@ const classInformationsSlice = createSlice({
       state.lock -= guildBonus.lock;
       state.dodge -= guildBonus.dodge;
     },
+    applyWorldBonus(state) {
+      state.baseHp += worldBonus.hp;
+      state.prospecting += worldBonus.prospectiong;
+      state.wisdom += worldBonus.wisdom;
+    },
+    removeWorldBonus(state) {
+      state.baseHp -= worldBonus.hp;
+      state.prospecting -= worldBonus.prospectiong;
+      state.wisdom -= worldBonus.wisdom;
+    },
   },
 });
 
@@ -179,6 +195,8 @@ export const {
   updateCharacterStats,
   applyGuildBonus,
   removeGuildBonus,
+  applyWorldBonus,
+  removeWorldBonus,
 } = classInformationsSlice.actions;
 
 // Aptitudes

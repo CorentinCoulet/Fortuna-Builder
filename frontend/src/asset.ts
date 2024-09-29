@@ -552,7 +552,9 @@ export const rarityEquipment = {
 };
 
 import Guild from './assets/guild.webp';
+import Sidoa from './assets/sidoa.webp';
 
 export const guildBonus = {
-    1: { src: Guild, alt: "Guild bonus"}
+    1: { src: Guild, alt: "Guilde"},
+    2: { src: Sidoa, alt: "Havre Monde"}
 }
