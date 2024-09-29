@@ -133,8 +133,6 @@ const SpellsClasses: React.FC<SpellsClassesProps> = ({
           {Object.keys(spells)
             .filter((key) => key !== "active" && key !== "passive")
             .map((key) => renderSpellsSection(key, spells[key], "active"))}
-        </div>
-        <div className="spells-active">
           {renderCombinedSpellsSection("active", "active")}
         </div>
         <div className="spells-passive">

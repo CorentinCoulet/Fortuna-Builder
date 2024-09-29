@@ -48,10 +48,17 @@
             section {
                 display: flex;
                 flex-direction: row;
+                
+                &:last-child {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0;
+                    width: 80%;
+                    justify-content: center;
+                }
             }
         }
 
-        .spells-active,
         .spells-passive {
             display: flex;
             justify-content: center;
@@ -63,10 +70,6 @@
                 width: 80%;
                 justify-content: center;
             }
-        }
-
-        .spells-active {
-            margin: 10px 0;
         }
 
         img {

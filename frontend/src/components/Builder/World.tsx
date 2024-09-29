@@ -4,9 +4,16 @@ import { applyWorldBonus, removeWorldBonus } from "../../features/components/Bui
 import '../../styles/components/Builder/World.scss';
 import { guildBonus } from "../../asset";
 
+const labelsWorld = {
+  1: '10 PdV',
+  2: '10 Prospection',
+  3: '10 Sagesse',
+};
+
 const World: React.FC = () => {
     const dispatch = useDispatch();
     const [isSelected, setIsSelected] = useState(false);
+    const [hoveredWorld, setHoveredWorld] = useState(false);
   
     const handleButtonClick = () => {
       if (isSelected) {
@@ -18,7 +25,11 @@ const World: React.FC = () => {
     };
 
     return (
-        <div className="world">
+        <div 
+          className="world"
+          onMouseEnter={() => setHoveredWorld(true)}
+          onMouseLeave={() => setHoveredWorld(false)}  
+        >
           <button className={`world-button ${isSelected ? 'selected' : ''}`} onClick={handleButtonClick}>
             <img 
                 loading="lazy" 
@@ -26,6 +37,13 @@ const World: React.FC = () => {
                 alt={guildBonus[2].alt} 
             />
           </button>
+          {hoveredWorld && (
+            <span className="world-labels">
+              {Object.values(labelsWorld).map((label, index) => (
+                <div key={index}>{label}</div>
+              ))}
+            </span>
+          )}
         </div>
       );
 };

@@ -3,6 +3,8 @@
   flex-direction: column;
   width: 95%;
   max-width: 1200px;
+  max-height: 75vh;
+  overflow-y: auto;
   margin: 0 auto;
   margin-top: 20px;
   border: 1px solid #ccc;
