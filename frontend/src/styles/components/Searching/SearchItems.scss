@@ -49,7 +49,7 @@
     margin: 15px 0;
 
     .track {
-      background-color: #ff4081;
+      background-color: #3b82f6;
       height: 8px;
       border-radius: 5px;
     }
@@ -61,11 +61,11 @@
       background-color: #444;
       border-radius: 50%;
       cursor: pointer;
-      border: 2px solid #ff4081;
+      border: 2px solid #93c5fd;
       transition: background-color 0.1s, transform 0.1s;
 
       &:hover {
-        background-color: #ff4081;
+        background-color: #93c5fd;
         transform: scale(1.2);
       }
     }
@@ -132,7 +132,7 @@
       }
 
       &.search-button {
-        background-color: #ff4081;
+        background-color: #3b82f6;
         color: #fff;
       }
 
@@ -141,7 +141,7 @@
       }
 
       &.search-button:hover {
-        background-color: #d75a7b;
+        background-color: rgb(16, 103, 202);
       }
     }
   }
