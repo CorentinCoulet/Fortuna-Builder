@@ -6,10 +6,11 @@ import { DataService } from './data/data.service';
 import { VersionService } from './version/version.service';
 import { AppController } from './app.controller';
 import { DataController } from './data/data.controller';
+import { EquipmentService } from './equipment/equipment.service';
 
 @Module({
   imports: [HttpModule, ScheduleModule.forRoot()],
   controllers: [AppController, DataController],
-  providers: [DataService, PrismaService, VersionService],
+  providers: [DataService, PrismaService, VersionService, EquipmentService],
 })
 export class AppModule {}

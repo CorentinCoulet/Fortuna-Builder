@@ -5,58 +5,130 @@ import { VersionService } from '../version/version.service';
 
 @Controller('api')
 export class DataController {
+  private readonly tables = ['actions', 'equipmentItemTypes', 'itemTypes', 'itemProperties', 'items', 'states'];
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly versionService: VersionService
   ) {}
 
   @Get('/')
-  async getIndex(@Res() res: Response) {
-    const tables = ['actions', 'equipmentItemTypes', 'itemTypes', 'items', 'jobsItems', 'states'];
+  async getIndex() {
     const version = this.versionService.getLatestVersion();
 
     if (!version) {
-      return res.send('Version non disponible');
+      return 'Version non disponible';
     }
 
-    const pathsList = tables.map(table => `<li><a href="/api/${table}">${version}/${table}</a></li>`).join('');
+    const pathsList = this.tables.map(table => `<li><a href="/api/${table}">${version}/${table}</a></li>`).join('');
     
-    res.send(`
+    return `
       <h1>Bienvenue à l'API</h1>
       <p>Version actuelle : ${version}</p>
       <ul>
         ${pathsList}
       </ul>
-    `);
+    `;
   }
 
   @Get('/version')
-  async getVersion(@Res() res: Response) {
+  async getVersion(): Promise<{ version: string }> {
     const version = this.versionService.getLatestVersion();
-    res.json({ version });
+    return { version };
   }
 
   @Get('/:table')
   async getTableData(@Param('table') table: string, @Res() res: Response) {
-    const tables: { [key: string]: any } = {
-      actions: this.prisma.actions.findMany(),
-      equipmentItemTypes: this.prisma.equipmentItemTypes.findMany(),
-      itemTypes: this.prisma.itemTypes.findMany(),
-      items: this.prisma.items.findMany(),
-      jobItems: this.prisma.jobItems.findMany(),
-      states: this.prisma.states.findMany(),
-    };
-
-    if (!tables[table]) {
-      return res.status(HttpStatus.NOT_FOUND).json({ error: 'Table non trouvée' });
+    if (!this.tables.includes(table)) {
+      return res.status(HttpStatus.NOT_FOUND).json({
+        statusCode: HttpStatus.NOT_FOUND,
+        error: 'Table non trouvée',
+      });
     }
 
     try {
-      const data = await tables[table];
-      res.json(data);
+      let data: Array<any> = [];
+      // Mappage spécifique pour chaque table selon le schéma fourni
+      switch (table) {
+        case 'actions':
+          data = await this.prisma.actions.findMany({
+            select: {
+              actionId: true,
+              effect: true,
+              description: true,
+            },
+          });
+          break;
+
+        case 'equipmentItemTypes':
+          data = await this.prisma.equipmentItemTypes.findMany({
+            select: {
+              equipmentItemTypeId: true,
+              parentId: true,
+              title: true,
+              definition: true,
+            },
+          });
+          break;
+
+        case 'itemTypes':
+          data = await this.prisma.itemTypes.findMany({
+            select: {
+              itemTypeId: true,
+              parentId: true,
+              title: true,
+              definition: true,
+            },
+          });
+          break;
+
+        case 'itemProperties':
+          data = await this.prisma.itemProperties.findMany({
+            select: {
+              itemPropertieId: true,
+              name: true,
+              description: true,
+            },
+          });
+          break;
+
+        case 'items':
+          data = await this.prisma.items.findMany({
+            select: {
+              itemId: true,
+              title: true,
+              item: true,
+              useEffects: true,
+              equipEffects: true,
+              useCriticalEffects: true,
+              description: true,
+            },
+          });
+          break;
+
+        case 'states':
+          data = await this.prisma.states.findMany({
+            select: {
+              stateId: true,
+              title: true,
+            },
+          });
+          break;
+
+        default:
+          return res.status(HttpStatus.NOT_FOUND).json({
+            statusCode: HttpStatus.NOT_FOUND,
+            error: 'Table non trouvée',
+          });
+      }
+
+      return res.status(HttpStatus.OK).json(data);
     } catch (error) {
       console.error(`Erreur lors de la récupération des données pour ${table}: `, error);
-      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: 'Erreur lors de la récupération des données' });
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+        error: 'Erreur lors de la récupération des données',
+      });
     }
   }
 }

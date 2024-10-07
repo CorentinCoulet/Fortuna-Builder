@@ -4,51 +4,76 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "windows", "debian-openssl-3.0.x"]
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
-  username  String @unique
-  email     String @unique
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
   password  String
   createdAt DateTime @default(now())
 }
 
 model Actions {
-  id          Int     @id @default(autoincrement())
-  definition  Json
+  id          Int    @id 
+  effect      String
   description Json
 }
 
 model EquipmentItemTypes {
-  id          Int     @id @default(autoincrement())
-  definition  Json
-  title       Json
+  id                  Int  @id 
+  equipmentItemTypeId Int  
+  parentId            Int
+  title               Json
+  definition          Json
 }
 
 model ItemTypes {
-  id          Int     @id @default(autoincrement())
-  definition  Json
-  title       Json
+  id         Int  @id 
+  itemTypeId Int  
+  parentId   Int
+  title      Json
+  definition Json
+}
+
+model ItemProperties {
+  id              Int    @id
+  itemPropertieId Int    
+  name            String
+  description     String
 }
 
 model Items {
-  id          Int     @id @default(autoincrement())
-  definition  Json
-  title       Json
-  description Json
+  id                 Int  @id
+  itemId             Int  
+  title              Json
+  item               Json
+  useEffects         Json
+  equipEffects       Json
+  useCriticalEffects Json
+  description        Json
 }
 
 model JobItems {
-  id          Int     @id @default(autoincrement())
-  definition  Json
-  title       Json
-  description Json
+  id   Int  @id 
+  data Json
 }
 
 model States {
-  id          Int     @id @default(autoincrement())
-  definition  Json
+  id      Int  @id 
+  stateId Int  
+  title   Json
+}
+
+model Equipment {
+  id          Int    @id @default(autoincrement())
   title       Json
+  rarity      String
+  level       Int
+  typeItem    String
+  effects     Json
+  stats       Json
+  description String
 }

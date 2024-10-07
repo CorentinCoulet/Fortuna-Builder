@@ -11,13 +11,21 @@ if [ ! -d "node_modules" ]; then
 fi
 
 # Run Prisma migrations and generate client if needed
-echo "Running Prisma generate..."
-npx prisma generate
-
-# Optionally, run migrations
-echo "Running Prisma migrations..."
-npx prisma migrate dev --name "init"
+if [ "$NODE_ENV" = "production" ]; then
+  echo "Running Prisma migrations in production mode..."
+  npx prisma migrate deploy
+else
+  echo "Running Prisma migrations in development mode..."
+  npx prisma migrate dev --name "init"
+fi
 
 # Start the application in development mode
-echo "Starting the application..."
-npm run start:dev
+if [ "$NODE_ENV" = "production" ]; then
+  echo "Building the application..."
+  npm run build
+  echo "Starting the application in production mode..."
+  npm run start:prod
+else
+  echo "Starting the application in development mode..."
+  npm run start:dev
+fi

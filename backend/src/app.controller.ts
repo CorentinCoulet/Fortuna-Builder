@@ -13,6 +13,7 @@ export class AppController {
             'equipmentItemTypes',
             'itemTypes',
             'items',
+            'itemProperties',
             'jobsItems',
             'states'
         ];
@@ -44,7 +45,7 @@ export class AppController {
 
     @Get('/api/:table')
     async getTableData(@Param('table') table: string): Promise<any> {
-        const validTables = ['actions', 'equipmentItemTypes', 'itemTypes', 'items', 'jobsItems', 'states'];
+        const validTables = ['actions', 'equipmentItemTypes', 'itemProperties', 'itemTypes', 'items', 'jobsItems', 'states'];
 
         if (!validTables.includes(table)) {
             return {error: 'Table non trouvée'};
