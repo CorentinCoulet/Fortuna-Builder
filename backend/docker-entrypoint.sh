@@ -15,8 +15,13 @@ if [ "$NODE_ENV" = "production" ]; then
   echo "Running Prisma migrations in production mode..."
   npx prisma migrate deploy
 else
-  echo "Running Prisma migrations in development mode..."
-  npx prisma migrate dev --name "init"
+   echo "Running Prisma migrations in development mode..."
+  if [ -t 0 ]; then  # Vérifie si l'environnement est interactif
+    npx prisma migrate dev --name "init"
+  else
+    echo "Non-interactive environment detected. Skipping migrate dev."
+    npx prisma migrate deploy
+  fi
 fi
 
 # Start the application in development mode

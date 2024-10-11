@@ -4,24 +4,25 @@ import { z } from "zod";
 export default function useFormValidationError(schema: z.ZodTypeAny) {
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
-
   const [errors, setErrors] = useState<
     z.typeToFlattenedError<any, string>["fieldErrors"]
   >({});
+  const [values, setValues] = useState<Record<string, any>>({});
 
-  const handleSubmit = (e: SyntheticEvent) => {
+  const handleSubmit = (callback: (values: Record<string, any>) => void) => (e: SyntheticEvent) => {
     e.preventDefault();
     if (formRef.current) {
       const formData = new FormData(formRef.current);
-      const safeParse = schema.safeParse(
-        Object.fromEntries(formData.entries())
-      );
+      const parsedData = Object.fromEntries(formData.entries());
+      const safeParse = schema.safeParse(parsedData);      
       setIsSubmit(true);
 
       if (!safeParse.success) {
         setErrors(safeParse.error.flatten().fieldErrors);
       } else {
         setErrors({});
+        setValues(parsedData);
+        callback(parsedData);
       }
     }
   };
@@ -29,9 +30,7 @@ export default function useFormValidationError(schema: z.ZodTypeAny) {
   const handleChange = () => {
     if (formRef.current) {
       const formData = new FormData(formRef.current);
-      const safeParse = schema.safeParse(
-        Object.fromEntries(formData.entries())
-      );
+      const safeParse = schema.safeParse(Object.fromEntries(formData.entries()));
       if (!safeParse.success && isSubmit) {
         setErrors(safeParse.error.flatten().fieldErrors);
       } else {
@@ -44,6 +43,7 @@ export default function useFormValidationError(schema: z.ZodTypeAny) {
     formRef,
     handleSubmit,
     handleChange,
+    values,
     errors,
   };
 }

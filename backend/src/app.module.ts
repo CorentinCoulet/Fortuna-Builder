@@ -7,9 +7,10 @@ import { VersionService } from './version/version.service';
 import { AppController } from './app.controller';
 import { DataController } from './data/data.controller';
 import { EquipmentService } from './equipment/equipment.service';
-
+import { AuthModule } from './auth/auth.module';
+import { BuildsModule } from './builds/builds.module';
 @Module({
-  imports: [HttpModule, ScheduleModule.forRoot()],
+  imports: [AuthModule, BuildsModule, HttpModule, ScheduleModule.forRoot()],
   controllers: [AppController, DataController],
   providers: [DataService, PrismaService, VersionService, EquipmentService],
 })

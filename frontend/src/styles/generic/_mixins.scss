@@ -13,7 +13,7 @@
   backdrop-filter: blur($blur);
 }
 
-@mixin authentication-form() {
+@mixin authentification-form() {
   display: flex;
   flex-direction: column;
   gap: 30px;

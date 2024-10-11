@@ -5,12 +5,12 @@ import { VersionService } from '../version/version.service';
 
 @Controller('api')
 export class DataController {
-  private readonly tables = ['actions', 'equipmentItemTypes', 'itemTypes', 'itemProperties', 'items', 'states'];
+  private readonly tables = ['actions', 'equipmentItemTypes', 'itemTypes', 'itemProperties', 'jobsItems', 'items', 'states'];
 
   constructor(
     private readonly prisma: PrismaService,
     private readonly versionService: VersionService
-  ) {}
+  ) { }
 
   @Get('/')
   async getIndex() {
@@ -21,7 +21,7 @@ export class DataController {
     }
 
     const pathsList = this.tables.map(table => `<li><a href="/api/${table}">${version}/${table}</a></li>`).join('');
-    
+
     return `
       <h1>Bienvenue à l'API</h1>
       <p>Version actuelle : ${version}</p>
@@ -53,7 +53,7 @@ export class DataController {
         case 'actions':
           data = await this.prisma.actions.findMany({
             select: {
-              actionId: true,
+              idActions: true,
               effect: true,
               description: true,
             },
@@ -63,7 +63,7 @@ export class DataController {
         case 'equipmentItemTypes':
           data = await this.prisma.equipmentItemTypes.findMany({
             select: {
-              equipmentItemTypeId: true,
+              idEquipmentItemTypes: true,
               parentId: true,
               title: true,
               definition: true,
@@ -74,7 +74,7 @@ export class DataController {
         case 'itemTypes':
           data = await this.prisma.itemTypes.findMany({
             select: {
-              itemTypeId: true,
+              idItemsTypes: true,
               parentId: true,
               title: true,
               definition: true,
@@ -85,7 +85,7 @@ export class DataController {
         case 'itemProperties':
           data = await this.prisma.itemProperties.findMany({
             select: {
-              itemPropertieId: true,
+              idItemsProperties: true,
               name: true,
               description: true,
             },
@@ -95,13 +95,29 @@ export class DataController {
         case 'items':
           data = await this.prisma.items.findMany({
             select: {
-              itemId: true,
+              idItems: true,
+              level: true,
+              rarity: true,
               title: true,
               item: true,
               useEffects: true,
               equipEffects: true,
               useCriticalEffects: true,
+              sublimationParameters: true,
               description: true,
+            },
+          });
+          break;
+
+        case 'jobsItems':
+          data = await this.prisma.jobsItems.findMany({
+            select: {
+              idJobsItems: true,
+              level: true,
+              rarity: true,
+              itemTypeId: true,
+              graphicParameters: true,
+              title: true,
             },
           });
           break;
@@ -109,7 +125,7 @@ export class DataController {
         case 'states':
           data = await this.prisma.states.findMany({
             select: {
-              stateId: true,
+              idStates: true,
               title: true,
             },
           });

@@ -12,6 +12,7 @@ import aptitudeMajorReducer from './features/components/Aptitudes/aptitudeMajorS
 import sublimationsReducer from './features/components/Sublimations/sublimationsSlice';
 import equipedItemsReducer from './features/components/Builder/equipedItemsSlice';
 import searchFiltersReducer from './features/components/Searching/searchFilterSlice';
+import authReducer from './features/components/Others/authSlice';
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ export const store = configureStore({
     sublimations: sublimationsReducer,
     equippedItem: equipedItemsReducer,
     searchFilters: searchFiltersReducer,
+    auth: authReducer,
   },
 });
 

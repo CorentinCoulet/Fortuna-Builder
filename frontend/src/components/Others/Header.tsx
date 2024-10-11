@@ -13,9 +13,9 @@ import { resetAllPoints as resetPointAgility } from "../../features/components/A
 import { resetAllPoints as resetPointChance } from "../../features/components/Aptitudes/aptitudeChanceSlice";
 import { resetAllPoints as resetPointMajor } from "../../features/components/Aptitudes/aptitudeMajorSlice";
 import { resetAllValues } from "../../features/components/Builder/editableValuesSlice";
-import {} from "../../features/components/Sublimations/sublimationsSlice";
 import { useDispatch } from "react-redux";
 import Modal from "react-modal";
+import ClearNotification from "./ClearNotification";
 
 import {
   setEquippedEpicSublimation,
@@ -30,11 +30,14 @@ const Header: React.FC = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isBurgerModalOpen, setIsBurgerModalOpen] = useState<boolean>(false);
-  const [wantToLogin, setWantToLogin] = useState<boolean>(false); 
+  const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
+  const [authMode, setAuthMode] = useState<number>(0);
+  const [notification, setNotification] = useState<string | null>(null);
 
   const handleLoginClick = () => {
-    setIsBurgerModalOpen(false); 
-    setWantToLogin(true);
+    setIsBurgerModalOpen(false);
+    setAuthMode(0);
+    setAuthModalOpen(true);
   };
 
   const handleLogoutClick = () => {
@@ -55,6 +58,8 @@ const Header: React.FC = () => {
     dispatch(resetAllValues());
 
     setIsBurgerModalOpen(false);
+
+    setNotification("Le builder a été vidé avec succès !");
   };
 
   const handleSettingsClick = () => {
@@ -70,7 +75,7 @@ const Header: React.FC = () => {
       <header className="header">
         <div className="left-side">
           <img src={Logo} alt="Fortuna Logo" className="logo" />
-          <p>Fortuna Builder</p>
+          <span className="site-name">Fortuna Builder</span>
         </div>
 
         <div className="burger-menu">
@@ -81,40 +86,27 @@ const Header: React.FC = () => {
 
         <div className="button-group">
           <button className="reset-button" onClick={handleResetClick}>
-            <img
-              loading="lazy"
-              src={Reset}
-              alt="Reset"
-              className="icon reset"
-            />
+            <img loading="lazy" src={Reset} alt="Reset" className="icon reset" />
           </button>
 
-          <button className="settings-button" onClick={handleSettingsClick}>
-            <img
-              loading="lazy"
-              src={Parameters}
-              alt="Paramètres"
-              className="icon parameters"
-            />
-          </button>
-          {!isLoggedIn && (
-            <button className="login-button" onClick={handleLoginClick}>
+          {isLoggedIn && (
+            <button className="settings-button" onClick={handleSettingsClick}>
               <img
                 loading="lazy"
-                src={Login}
-                alt={"Se Connecter"}
-                className="icon logIcon"
+                src={Parameters}
+                alt="Paramètres"
+                className="icon parameters"
               />
             </button>
           )}
-          {isLoggedIn && (
+
+          {!isLoggedIn ? (
+            <button className="login-button" onClick={handleLoginClick}>
+              <img loading="lazy" src={Login} alt="Se Connecter" className="icon logIcon" />
+            </button>
+          ) : (
             <button className="logout-button" onClick={handleLogoutClick}>
-              <img
-                loading="lazy"
-                src={Logout}
-                alt={"Mon Compte"}
-                className="icon logIcon"
-              />
+              <img loading="lazy" src={Logout} alt="Mon Compte" className="icon logIcon" />
             </button>
           )}
         </div>
@@ -131,26 +123,27 @@ const Header: React.FC = () => {
             Reset
           </button>
 
-          <button className="menu-button" onClick={handleSettingsClick}>
-            Paramètres
-          </button>
+          {isLoggedIn && (
+            <button className="menu-button" onClick={handleSettingsClick}>
+              Paramètres
+            </button>
+          )}
 
-          {!isLoggedIn && (
+          {!isLoggedIn ? (
             <button className="login-button" onClick={handleLoginClick}>
               <img
                 loading="lazy"
                 src={Login}
-                alt={"Se Connecter"}
+                alt="Se Connecter"
                 className="icon logIcon"
               />
             </button>
-          )}
-          {isLoggedIn && (
+          ) : (
             <button className="logout-button" onClick={handleLogoutClick}>
               <img
                 loading="lazy"
                 src={Logout}
-                alt={"Mon Compte"}
+                alt="Mon Compte"
                 className="icon logIcon"
               />
             </button>
@@ -159,39 +152,43 @@ const Header: React.FC = () => {
       </Modal>
 
       <Modal
-        isOpen={wantToLogin}
-        onRequestClose={() => setWantToLogin(false)}
+        isOpen={authModalOpen}
+        onRequestClose={() => setAuthModalOpen(false)}
         overlayClassName="modal-overlay"
-        className="authentication-modal"
+        className="authentification-modal"
       >
-        <div className="authentication-banner">
-          <h3>{!isLoggedIn ? "Connexion" : "Inscription"}</h3>
+        <div className="authentification-banner">
+          <h3>{authMode === 0 ? "Connexion" : "Inscription"}</h3>
         </div>
-        <div className="authentication-content">
-          {!isLoggedIn ? <LoginForm /> : <SignInForm />}
+        <div className="authentification-content">
+          {authMode === 0 ? <LoginForm /> : <SignInForm />}
           <p className="redirection-message">
-            {isLoggedIn ? (
+            {authMode === 0 ? (
               <>
-                Vous êtes déjà inscrit ?{" "}
-                <span
-                  onClick={() => setWantToLogin(false)}
-                >
-                  Connectez-vous
+                Vous n'avez pas de compte ?{" "}
+                <span onClick={() => setAuthMode(1)}>
+                  Inscrivez-vous
                 </span>
               </>
             ) : (
               <>
-                Vous n'avez pas de compte ?{" "}
-                <span
-                  onClick={() => setWantToLogin(true)}
-                >
-                  Inscrivez-vous
+                Vous êtes déjà inscrit ?{" "}
+                <span onClick={() => setAuthMode(0)}>
+                  Connectez-vous
                 </span>
               </>
             )}
           </p>
         </div>
       </Modal>
+
+      {notification && (
+        <ClearNotification
+          message={notification}
+          onClose={() => setNotification(null)}
+          className="clear-notification"
+        />
+      )}
     </>
   );
 };

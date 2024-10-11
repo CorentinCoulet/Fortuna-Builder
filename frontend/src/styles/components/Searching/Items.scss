@@ -11,6 +11,13 @@
   .item-wrapper {
     position: relative;
     display: inline-block;
+    transition: transform 0.3s ease;
+    margin: 0 2px;
+
+    &:hover {
+      transform: scale(1.1);
+      padding: 0 8px;
+    }
   }
 
   .item-image {
@@ -18,18 +25,13 @@
     height: 50px;
     object-fit: cover;
     cursor: pointer;
-    transition: transform 0.3s ease;
-
-    &:hover {
-      transform: scale(1.1);
-    }
   }
 
   .unequip-button {
     position: absolute;
     top: -3px;
     right: -3px;
-    background-color: red;
+    background-color: blue;
     color: white;
     border: none;
     border-radius: 50%;
@@ -43,7 +45,7 @@
     line-height: 1;
 
     &:hover {
-      background-color: darkred;
+      background-color: darkblue;
     }
   }
 }

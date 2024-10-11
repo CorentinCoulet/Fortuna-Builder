@@ -14,6 +14,7 @@ const paths = [
   'itemTypes',
   'itemProperties',
   'items',
+  'jobsItems',
   'states',
 ];
 
@@ -58,39 +59,53 @@ export class DataService implements OnModuleInit {
               continue;
             }
 
+            console.log(`Nombre d'éléments récupérés pour ${pathKey}: ${response.data.length}`);
+
             // Récupérer les données actuelles de la base de données par table
             const existingData = await this.prisma[pathKey].findMany();
 
+            console.log(`Nombre d'éléments existants dans la base pour ${pathKey}: ${existingData.length}`);
+
             // Créer des maps pour les données existantes / nouvelles données
-            const existingDataMap = new Map(existingData.map((item) => [item.id || item.actionId, item]));
-            const newDataMap = new Map(response.data.map((item) => [item.definition?.id || item.id, item]));
+            let existingDataMap = new Map(existingData.map((item) => [item.id || item.actionId, item]));
+            let newDataMap = new Map(response.data.map((item) => [item.definition?.id || item.id, item]));
+            if(pathKey === 'items'){
+              existingDataMap = new Map(existingData.map((item) => [item.idItems, item]));
+              newDataMap = new Map(response.data.map((item) => [item.definition?.item?.id, item]));        
+            }
+            console.log(`Nombre d'éléments dans newDataMap pour ${pathKey}: ${newDataMap.size}`);
 
             // Ajouter ou mettre à jour les nouvelles données
             for (const [id, newItem] of newDataMap.entries()) {
-              const existingItem = existingDataMap.get(id);
+              const existingItem: any = existingDataMap.get(id);
+
+              console.log(`Traitement de l'élément ID: ${id} pour ${pathKey}`);
 
               if (existingItem) {
                 // Mettre à jour si les données ont changé
                 if (JSON.stringify(existingItem) !== JSON.stringify(newItem)) {
                   await this.prisma[pathKey].update({
-                    where: { id },
+                    where: { id: existingItem.id },
                     data: this.formatDataForUpsert(newItem, pathKey),
                   });
+                  console.log(`Mise à jour de l'élément ID: ${id} dans ${pathKey}`);
                 }
               } else {
                 // Ajouter si l'élément n'existe pas
                 await this.prisma[pathKey].create({
                   data: this.formatDataForUpsert(newItem, pathKey),
                 });
+                console.log(`Ajout de l'élément ID: ${id} dans ${pathKey}`);
               }
             }
 
             // Supprimer les éléments qui existent dans la base mais pas dans le JSON
-            for (const [id, existingItem] of existingDataMap.entries()) {
+            for (const [id, existingItem] of existingDataMap.entries() as IterableIterator<[any, any]>) {
               if (!newDataMap.has(id)) {
                 await this.prisma[pathKey].delete({
-                  where: { id },
+                  where: { id: existingItem.id },
                 });
+                console.log(`Suppression de l'élément ID: ${id} de ${pathKey}`);
               }
             }
 
@@ -124,19 +139,19 @@ export class DataService implements OnModuleInit {
     }
   }
 
-  // ajout des données
+  // Formatage des données avec l'auto-incrément des id
   private formatDataForUpsert(item: any, table: string): any {
     switch (table) {
       case 'actions':
         return {
-          actionId: item.definition.id,
+          idActions: item.definition.id,
           effect: item.definition.effect,
           description: item.description,
         };
 
       case 'equipmentItemTypes':
         return {
-          equipmentItemTypeId: item.definition.id,
+          idEquipmentItemTypes: item.definition.id,
           parentId: item.definition.parentId,
           title: item.title,
           definition: item.definition,
@@ -144,7 +159,7 @@ export class DataService implements OnModuleInit {
 
       case 'itemTypes':
         return {
-          itemTypeId: item.definition.id,
+          idItemsTypes: item.definition.id,
           parentId: item.definition.parentId,
           title: item.title,
           definition: item.definition,
@@ -152,25 +167,38 @@ export class DataService implements OnModuleInit {
 
       case 'itemProperties':
         return {
-          itemPropertieId: item.id,
+          idItemsProperties: item.id,
           name: item.name,
           description: item.description,
         };
 
       case 'items':
         return {
-          itemId: item.definition.item.id,
+          idItems: item.definition.item.id,
+          level: item.definition.item.level,
+          rarity: item.definition.item.baseParameters.rarity,
           title: item.title,
           item: item.definition.item,
           useEffects: item.definition.useEffects,
           equipEffects: item.definition.equipEffects,
           useCriticalEffects: item.definition.useCriticalEffects,
+          sublimationParameters: item.definition.item.sublimationParameters,
           description: item.description,
+        };
+
+      case 'jobsItems':
+        return {
+          idJobsItems: item.definition.id,
+          level: item.definition.level,
+          rarity: item.definition.rarity,
+          itemTypeId: item.definition.itemTypeId,
+          graphicParameters: item.definition.graphicParameters,
+          title: item.title,
         };
 
       case 'states':
         return {
-          stateId: item.definition.id,
+          idStates: item.definition.id,
           title: item.title,
         };
 

@@ -8,72 +8,100 @@ generator client {
   binaryTargets = ["native", "windows", "debian-openssl-3.0.x"]
 }
 
-model User {
+model Users {
   id        Int      @id @default(autoincrement())
-  username  String   @unique
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+  Builds Builds[]
+}
+
+model Builds {
+  id     Int  @id @default(autoincrement())
+  idUser Int  
+  build  Json
+  user    Users   @relation(fields: [idUser], references: [id])
 }
 
 model Actions {
-  id          Int    @id 
-  effect      String
-  description Json
+  id          Int     @id @default(autoincrement())
+  idActions   Int?
+  effect      String?
+  description Json?
 }
 
 model EquipmentItemTypes {
-  id                  Int  @id 
-  equipmentItemTypeId Int  
-  parentId            Int
-  title               Json
-  definition          Json
+  id                   Int   @id @default(autoincrement())
+  idEquipmentItemTypes Int?
+  parentId             Int?
+  title                Json?
+  definition           Json?
 }
 
 model ItemTypes {
-  id         Int  @id 
-  itemTypeId Int  
-  parentId   Int
-  title      Json
-  definition Json
+  id           Int   @id @default(autoincrement())
+  idItemsTypes Int?
+  parentId     Int?
+  title        Json?
+  definition   Json?
 }
 
 model ItemProperties {
-  id              Int    @id
-  itemPropertieId Int    
-  name            String
-  description     String
+  id                Int     @id @default(autoincrement())
+  idItemsProperties Int?
+  name              String?
+  description       String?
 }
 
 model Items {
-  id                 Int  @id
-  itemId             Int  
-  title              Json
-  item               Json
-  useEffects         Json
-  equipEffects       Json
-  useCriticalEffects Json
-  description        Json
+  id                    Int   @id @default(autoincrement())
+  idItems               Int?
+  level                 Int?
+  rarity                Int?
+  title                 Json?
+  item                  Json?
+  useEffects            Json?
+  equipEffects          Json?
+  useCriticalEffects    Json?
+  sublimationParameters Json?
+  description           Json?
 }
 
-model JobItems {
-  id   Int  @id 
-  data Json
+model JobsItems {
+  id                Int   @id @default(autoincrement())
+  idJobsItems       Int?
+  level             Int?
+  rarity            Int?
+  itemTypeId        Int?
+  graphicParameters Json?
+  title             Json?
 }
 
 model States {
-  id      Int  @id 
-  stateId Int  
-  title   Json
+  id       Int   @id @default(autoincrement())
+  idStates Int?
+  title    Json?
 }
 
 model Equipment {
-  id          Int    @id @default(autoincrement())
-  title       Json
-  rarity      String
-  level       Int
-  typeItem    String
-  effects     Json
-  stats       Json
-  description String
+  id            Int     @id @default(autoincrement())
+  idItems       Int?
+  title         Json?
+  rarity        String?
+  level         Int?
+  typeItem      String?
+  useParameters Json?
+  effects       Json?
+  stats         Json?
+  description   String?
+}
+
+model Runes {
+  id           Int     @id @default(autoincrement())
+  title        Json?
+  type         String?
+  rarity       Int?
+  picture      Int?
+  equipEffects Json?
+  description  Json?
 }
