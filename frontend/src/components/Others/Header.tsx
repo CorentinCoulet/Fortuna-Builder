@@ -22,6 +22,7 @@ import {
   setEquippedRelicSublimation,
   setEquippedNormalSublimation,
 } from "../../features/components/Sublimations/sublimationsSlice";
+import { clearError } from "../../features/components/Others/authSlice";
 import LoginForm from "./LoginForm";
 import SignInForm from "./SignInForm";
 
@@ -38,6 +39,11 @@ const Header: React.FC = () => {
     setIsBurgerModalOpen(false);
     setAuthMode(0);
     setAuthModalOpen(true);
+  };
+
+  const closeAuthModal = () => {
+    setAuthModalOpen(false);
+    dispatch(clearError());
   };
 
   const handleLogoutClick = () => {
@@ -153,7 +159,7 @@ const Header: React.FC = () => {
 
       <Modal
         isOpen={authModalOpen}
-        onRequestClose={() => setAuthModalOpen(false)}
+        onRequestClose={closeAuthModal}
         overlayClassName="modal-overlay"
         className="authentification-modal"
       >

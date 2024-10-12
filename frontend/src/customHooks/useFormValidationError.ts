@@ -27,15 +27,16 @@ export default function useFormValidationError(schema: z.ZodTypeAny) {
     }
   };
 
-  const handleChange = () => {
-    if (formRef.current) {
-      const formData = new FormData(formRef.current);
-      const safeParse = schema.safeParse(Object.fromEntries(formData.entries()));
-      if (!safeParse.success && isSubmit) {
-        setErrors(safeParse.error.flatten().fieldErrors);
-      } else {
-        setErrors({});
-      }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setValues((prevValues) => ({ ...prevValues, [name]: value }));
+
+    const formData = new FormData(formRef.current as HTMLFormElement);
+    const safeParse = schema.safeParse(Object.fromEntries(formData.entries()));
+    if (!safeParse.success && isSubmit) {
+      setErrors(safeParse.error.flatten().fieldErrors);
+    } else {
+      setErrors({});
     }
   };
 

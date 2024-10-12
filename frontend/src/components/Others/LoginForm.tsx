@@ -22,9 +22,10 @@ function LoginForm() {
   const { formRef, handleSubmit, handleChange, values, errors } =
     useFormValidationError(loginSchema);
 
-  const onSubmit = () => {
+  const onSubmit = (formData: Record<string, any>) => {
+    console.log(formData);
     setShowErrorBubble(false);
-    dispatch(login({ email: values.email, password: values.password }))
+    dispatch(login({ email: formData.email, password: formData.password }))
       .unwrap()
       .then(() => {
         setShowErrorBubble(false);
@@ -36,7 +37,6 @@ function LoginForm() {
 
   useEffect(() => {
     if (authError) {
-      console.log(authError);
       setShowErrorBubble(true);
       const timer = setTimeout(() => {
         setShowErrorBubble(false);
