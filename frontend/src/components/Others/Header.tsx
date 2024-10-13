@@ -37,8 +37,14 @@ const Header: React.FC = () => {
 
   const handleLoginClick = () => {
     setIsBurgerModalOpen(false);
-    setAuthMode(0);
+    handleAuthModeSwitch(0);
     setAuthModalOpen(true);
+    dispatch(clearError());
+  };
+
+  const handleAuthModeSwitch = (mode: number) => {
+    setAuthMode(mode);
+    dispatch(clearError());
   };
 
   const closeAuthModal = () => {
@@ -92,7 +98,12 @@ const Header: React.FC = () => {
 
         <div className="button-group">
           <button className="reset-button" onClick={handleResetClick}>
-            <img loading="lazy" src={Reset} alt="Reset" className="icon reset" />
+            <img
+              loading="lazy"
+              src={Reset}
+              alt="Reset"
+              className="icon reset"
+            />
           </button>
 
           {isLoggedIn && (
@@ -108,11 +119,21 @@ const Header: React.FC = () => {
 
           {!isLoggedIn ? (
             <button className="login-button" onClick={handleLoginClick}>
-              <img loading="lazy" src={Login} alt="Se Connecter" className="icon logIcon" />
+              <img
+                loading="lazy"
+                src={Login}
+                alt="Se Connecter"
+                className="icon logIcon"
+              />
             </button>
           ) : (
             <button className="logout-button" onClick={handleLogoutClick}>
-              <img loading="lazy" src={Logout} alt="Mon Compte" className="icon logIcon" />
+              <img
+                loading="lazy"
+                src={Logout}
+                alt="Mon Compte"
+                className="icon logIcon"
+              />
             </button>
           )}
         </div>
@@ -167,19 +188,33 @@ const Header: React.FC = () => {
           <h3>{authMode === 0 ? "Connexion" : "Inscription"}</h3>
         </div>
         <div className="authentification-content">
-          {authMode === 0 ? <LoginForm /> : <SignInForm />}
+          {authMode === 0 ? (
+            <LoginForm
+              onSuccess={() => {
+                setIsLoggedIn(true);
+                closeAuthModal();
+              }}
+            />
+          ) : (
+            <SignInForm
+              onSuccess={() => {
+                setIsLoggedIn(true);
+                closeAuthModal();
+              }}
+            />
+          )}
           <p className="redirection-message">
             {authMode === 0 ? (
               <>
                 Vous n'avez pas de compte ?{" "}
-                <span onClick={() => setAuthMode(1)}>
+                <span onClick={() => handleAuthModeSwitch(1)}>
                   Inscrivez-vous
                 </span>
               </>
             ) : (
               <>
                 Vous êtes déjà inscrit ?{" "}
-                <span onClick={() => setAuthMode(0)}>
+                <span onClick={() => handleAuthModeSwitch(0)}>
                   Connectez-vous
                 </span>
               </>

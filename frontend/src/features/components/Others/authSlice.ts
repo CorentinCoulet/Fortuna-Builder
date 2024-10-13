@@ -66,7 +66,11 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(register.rejected, (state, action) => {
-        state.error = action.error.message || "Échec de l'inscription";
+        if (action.error.message?.includes("Cet email est déjà utilisé") || action.error.message?.includes('409')) {
+          state.error = "Cette adresse email est déjà enregistrée.";
+        } else {
+          state.error = action.error.message || "Échec de l'inscription";
+        }
         state.status = 'failed';
       });
   }

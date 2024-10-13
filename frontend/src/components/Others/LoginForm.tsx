@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/components/Others/authSlice";
 import { AppDispatch, RootState } from "../../store";
 
-function LoginForm() {
+function LoginForm({ onSuccess }: { onSuccess: () => void }) {
   const dispatch = useDispatch<AppDispatch>();
   const authError = useSelector((state: RootState) => state.auth.error);
   const [showErrorBubble, setShowErrorBubble] = useState(false);
@@ -27,6 +27,7 @@ function LoginForm() {
     dispatch(login({ email: formData.email, password: formData.password }))
       .unwrap()
       .then(() => {
+        onSuccess();
         setShowErrorBubble(false);
       })
       .catch(() => {

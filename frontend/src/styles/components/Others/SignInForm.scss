@@ -1,5 +1,55 @@
 @import "../../generic/mixins";
 
-.signin-form {
-  @include authentification-form();
+.signin-container {
+  .signin-form {
+    @include authentification-form();
+  }
+
+  .error-bubble {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 0, 0, 0.9);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    animation: fadeInOut 2s forwards;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+
+    p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    @keyframes fadeInOut {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      10%,
+      90% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+    }
+  }
 }

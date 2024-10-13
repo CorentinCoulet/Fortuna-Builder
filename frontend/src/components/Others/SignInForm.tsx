@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import * as z from "zod";
 import useFormValidationError from "../../customHooks/useFormValidationError";
 import Input from "./Input";
-import "../../styles/components/Others/SigninForm.scss";
+import "../../styles/components/Others/SignInForm.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../features/components/Others/authSlice";
 import { AppDispatch, RootState } from "../../store";
 
-function SignInForm() {
+function SignInForm({ onSuccess }: { onSuccess: () => void }) {
   const dispatch = useDispatch<AppDispatch>();
-  const authError = useSelector((state: RootState) => state.auth.error); // Récupérer les erreurs du slice
+  const authError = useSelector((state: RootState) => state.auth.error);
   const [showErrorBubble, setShowErrorBubble] = useState(false);
 
   const signInSchema = z
@@ -35,7 +35,9 @@ function SignInForm() {
     setShowErrorBubble(false);
     dispatch(register({ email: formData.email, password: formData.password }))
       .unwrap()
-      .then(() => {
+      .then((response) => {
+        localStorage.setItem('token', response.token);
+        onSuccess();
         setShowErrorBubble(false);
       })
       .catch(() => {
