@@ -23,7 +23,6 @@ function LoginForm() {
     useFormValidationError(loginSchema);
 
   const onSubmit = (formData: Record<string, any>) => {
-    console.log(formData);
     setShowErrorBubble(false);
     dispatch(login({ email: formData.email, password: formData.password }))
       .unwrap()
