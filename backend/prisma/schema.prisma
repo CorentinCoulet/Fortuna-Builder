@@ -58,6 +58,7 @@ model Items {
   idItems               Int?
   level                 Int?
   rarity                Int?
+  picture               Int?
   title                 Json?
   item                  Json?
   useEffects            Json?
@@ -83,7 +84,7 @@ model States {
   title    Json?
 }
 
-model Equipment {
+model Equipments {
   id            Int     @id @default(autoincrement())
   idItems       Int?
   title         Json?
@@ -96,7 +97,7 @@ model Equipment {
   description   String?
 }
 
-model Runes {
+model Sublimations {
   id           Int     @id @default(autoincrement())
   title        Json?
   type         String?

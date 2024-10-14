@@ -2,10 +2,58 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { chunk, isEqual } from 'lodash';
 import pLimit from 'p-limit';
+import axios from 'axios';
+import * as path from 'path';
+import * as fs from 'fs';
 
 @Injectable()
 export class EquipmentService {
-  constructor(private readonly prisma: PrismaService) { }
+  private readonly IMAGE_DIR: string;
+
+  constructor(private readonly prisma: PrismaService) { 
+    this.IMAGE_DIR = path.resolve(__dirname, '../../public/items');
+  }
+  
+  async downloadAllImages(): Promise<void> {
+    try {
+      const items = await this.prisma.items.findMany({
+        select: {
+          picture: true,
+        },
+      });
+
+      const pictures = items.map(item => item.picture).filter(picture => picture !== null);
+
+      for (const picture of pictures) {
+        await this.downloadImage(picture);
+      }
+    } catch (error) {
+      console.error('Erreur lors du téléchargement des images:', error.message);
+      throw error;
+    }
+  }
+
+  private async downloadImage(picture: number): Promise<void> {
+    try {
+      const imageUrl = `https://static.ankama.com/wakfu/portal/game/item/115/${picture}.png`;
+      const response = await axios({
+        url: imageUrl,
+        method: 'GET',
+        responseType: 'arraybuffer',
+      });
+
+      const filePath = path.join(this.IMAGE_DIR, `${picture}.png`);
+
+      if (!fs.existsSync(this.IMAGE_DIR)) {
+        fs.mkdirSync(this.IMAGE_DIR, { recursive: true });
+      }
+
+      fs.writeFileSync(filePath, response.data);
+      console.log(`Image ${picture}.png téléchargée et enregistrée.`);
+    } catch (error) {
+      console.error(`Erreur lors du téléchargement de l'image ${picture}:`, error.message);
+    }
+  }
 
   async importEquipmentData() {
     try {
@@ -272,6 +320,7 @@ export class EquipmentService {
           idItems: true,
           level: true,
           rarity: true,
+          picture: true,
           title: true,
           item: true,
           useEffects: true,

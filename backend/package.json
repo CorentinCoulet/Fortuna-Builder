@@ -27,14 +27,19 @@
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/platform-express": "^10.4.4",
     "@nestjs/schedule": "^4.1.1",
+    "@nestjs/serve-static": "^4.0.2",
     "@prisma/adapter-pg": "^5.20.0",
     "@prisma/client": "^5.20.0",
+    "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
     "lodash": "^4.17.21",
+    "mongoose": "^8.7.1",
     "p-limit": "^2.3.0",
     "pg": "^8.13.0",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.4.5",

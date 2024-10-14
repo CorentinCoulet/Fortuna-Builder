@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import { HttpModule } from '@nestjs/axios';
 import { ScheduleModule } from '@nestjs/schedule';
 import { PrismaService } from '../prisma/prisma.service';
@@ -9,9 +11,13 @@ import { DataController } from './data/data.controller';
 import { EquipmentService } from './equipment/equipment.service';
 import { AuthModule } from './auth/auth.module';
 import { BuildsModule } from './builds/builds.module';
+import { EquipmentController } from './equipment/equipment.controller';
 @Module({
-  imports: [AuthModule, BuildsModule, HttpModule, ScheduleModule.forRoot()],
-  controllers: [AppController, DataController],
+  imports: [AuthModule, BuildsModule, HttpModule, ScheduleModule.forRoot(), ServeStaticModule.forRoot({
+    rootPath: join(__dirname, '..', 'public'),
+    serveRoot: '/images',
+  }),],
+  controllers: [AppController, DataController, EquipmentController],
   providers: [DataService, PrismaService, VersionService, EquipmentService],
 })
 export class AppModule {}

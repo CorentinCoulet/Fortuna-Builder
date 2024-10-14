@@ -177,6 +177,7 @@ export class DataService implements OnModuleInit {
           idItems: item.definition.item.id,
           level: item.definition.item.level,
           rarity: item.definition.item.baseParameters.rarity,
+          picture: item.definition.item.graphicParameters.gfxId,
           title: item.title,
           item: item.definition.item,
           useEffects: item.definition.useEffects,

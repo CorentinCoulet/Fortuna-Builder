@@ -98,6 +98,7 @@ export class DataController {
               idItems: true,
               level: true,
               rarity: true,
+              picture: true,
               title: true,
               item: true,
               useEffects: true,
