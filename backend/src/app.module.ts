@@ -14,7 +14,7 @@ import { BuildsModule } from './builds/builds.module';
 import { EquipmentController } from './equipment/equipment.controller';
 @Module({
   imports: [AuthModule, BuildsModule, HttpModule, ScheduleModule.forRoot(), ServeStaticModule.forRoot({
-    rootPath: join(__dirname, '..', 'public'),
+    rootPath: join(__dirname, '..', 'itemsWebp'),
     serveRoot: '/images',
   }),],
   controllers: [AppController, DataController, EquipmentController],

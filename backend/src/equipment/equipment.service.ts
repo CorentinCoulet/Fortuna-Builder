@@ -10,10 +10,12 @@ import * as fs from 'fs';
 export class EquipmentService {
   private readonly IMAGE_DIR: string;
 
-  constructor(private readonly prisma: PrismaService) { 
-    this.IMAGE_DIR = path.resolve(__dirname, '../../public/items');
+  constructor(private readonly prisma: PrismaService) {
+    this.IMAGE_DIR = path.resolve(process.cwd(), './items');
   }
-  
+
+  private readonly limitPicture = pLimit(10);
+
   async downloadAllImages(): Promise<void> {
     try {
       const items = await this.prisma.items.findMany({
@@ -24,34 +26,54 @@ export class EquipmentService {
 
       const pictures = items.map(item => item.picture).filter(picture => picture !== null);
 
-      for (const picture of pictures) {
-        await this.downloadImage(picture);
-      }
+      let processedCount = 0;
+
+      const tasks = pictures.map(picture => this.limitPicture(async () => {
+        const filePath = path.join(this.IMAGE_DIR, `${picture}.png`);
+
+        if (fs.existsSync(filePath)) {
+          console.log(`L'image ${picture}.png existe déjà, téléchargement ignoré.`);
+          return;
+        }
+
+        try {
+          const imageUrl = `https://static.ankama.com/wakfu/portal/game/item/115/${picture}.png`;
+          const response = await axios({
+            url: imageUrl,
+            method: 'GET',
+            responseType: 'arraybuffer',
+            timeout: 10000,
+          });
+
+          if (!fs.existsSync(this.IMAGE_DIR)) {
+            fs.mkdirSync(this.IMAGE_DIR, { recursive: true });
+          }
+
+          fs.writeFileSync(filePath, response.data);
+          console.log(`Image ${picture}.png téléchargée et enregistrée.`);
+        } catch (error) {
+          if (error.response) {
+            console.error(`Erreur ${error.response.status} lors du téléchargement de l'image ${picture}.png : ${error.response.statusText}`);
+          } else if (error.code === 'ECONNABORTED') {
+            console.error(`Timeout lors du téléchargement de l'image ${picture}.png`);
+          } else {
+            console.error(`Erreur lors du téléchargement de l'image ${picture}.png :`, error.message);
+          }
+          return;
+        }
+
+        processedCount++;
+        if (processedCount % 5 === 0 || processedCount === pictures.length) {
+          console.log(`${processedCount} images téléchargées.`);
+        }
+      }));
+
+      await Promise.all(tasks);
+      console.log("Téléchargement complet");
+
     } catch (error) {
       console.error('Erreur lors du téléchargement des images:', error.message);
       throw error;
-    }
-  }
-
-  private async downloadImage(picture: number): Promise<void> {
-    try {
-      const imageUrl = `https://static.ankama.com/wakfu/portal/game/item/115/${picture}.png`;
-      const response = await axios({
-        url: imageUrl,
-        method: 'GET',
-        responseType: 'arraybuffer',
-      });
-
-      const filePath = path.join(this.IMAGE_DIR, `${picture}.png`);
-
-      if (!fs.existsSync(this.IMAGE_DIR)) {
-        fs.mkdirSync(this.IMAGE_DIR, { recursive: true });
-      }
-
-      fs.writeFileSync(filePath, response.data);
-      console.log(`Image ${picture}.png téléchargée et enregistrée.`);
-    } catch (error) {
-      console.error(`Erreur lors du téléchargement de l'image ${picture}:`, error.message);
     }
   }
 
