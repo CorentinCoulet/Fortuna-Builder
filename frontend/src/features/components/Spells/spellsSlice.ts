@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Spell {
+  id?: string;
   src: string;
   alt: string;
   key?: string;
@@ -27,6 +28,10 @@ const initialState: SpellsState = {
   usedSpells: [],
 };
 
+function generateSpellId(spell: Spell): string {
+  return `${spell.src}-${spell.alt}`;
+}
+
 const spellsSlice = createSlice({
   name: 'spells',
   initialState,
@@ -37,37 +42,49 @@ const spellsSlice = createSlice({
       state.passiveSpells = Array(6).fill(null);
       state.usedSpells = [];
     },
-    addActiveSpell(state, action: PayloadAction<{ spell: Spell, index: number }>) {
+    addActiveSpell(state, action: PayloadAction<{ spell: Spell; index: number }>) {
       const { spell, index } = action.payload;
+      if (!spell.id) {
+        spell.id = generateSpellId(spell);
+      }
       state.activeSpells[index] = {
         ...spell,
-        key: `${state.selectedClass}-active-${spell.src}-${Date.now()}`,
+        key: `${state.selectedClass}-active-${spell.id}-${Date.now()}`,
       };
-      if (!state.usedSpells.includes(spell.src)) {
-        state.usedSpells.push(spell.src);
+      if (!state.usedSpells.includes(spell.id)) {
+        state.usedSpells.push(spell.id);
       }
     },
     removeActiveSpell(state, action: PayloadAction<Spell>) {
-      state.activeSpells = state.activeSpells.map(spell =>
-        spell?.src === action.payload.src && spell?.alt === action.payload.alt ? null : spell
+      if (!action.payload.id) {
+        action.payload.id = generateSpellId(action.payload);
+      }
+      state.activeSpells = state.activeSpells.map((spell) =>
+          spell?.id === action.payload.id ? null : spell
       );
-      state.usedSpells = state.usedSpells.filter(src => src !== action.payload.src);
+      state.usedSpells = state.usedSpells.filter((id) => id !== action.payload.id);
     },
-    addPassiveSpell(state, action: PayloadAction<{ spell: Spell, index: number }>) {
+    addPassiveSpell(state, action: PayloadAction<{ spell: Spell; index: number }>) {
       const { spell, index } = action.payload;
+      if (!spell.id) {
+        spell.id = generateSpellId(spell);
+      }
       state.passiveSpells[index] = {
         ...spell,
-        key: `${state.selectedClass}-passive-${spell.src}-${Date.now()}`,
+        key: `${state.selectedClass}-passive-${spell.id}-${Date.now()}`,
       };
-      if (!state.usedSpells.includes(spell.src)) {
-        state.usedSpells.push(spell.src);
+      if (!state.usedSpells.includes(spell.id)) {
+        state.usedSpells.push(spell.id);
       }
     },
     removePassiveSpell(state, action: PayloadAction<Spell>) {
-      state.passiveSpells = state.passiveSpells.map(spell =>
-        spell?.src === action.payload.src && spell?.alt === action.payload.alt ? null : spell
+      if (!action.payload.id) {
+        action.payload.id = generateSpellId(action.payload);
+      }
+      state.passiveSpells = state.passiveSpells.map((spell) =>
+          spell?.id === action.payload.id ? null : spell
       );
-      state.usedSpells = state.usedSpells.filter(src => src !== action.payload.src);
+      state.usedSpells = state.usedSpells.filter((id) => id !== action.payload.id);
     },
     clearAllSpells(state) {
       state.activeSpells = Array(12).fill(null);
@@ -76,10 +93,30 @@ const spellsSlice = createSlice({
     },
     loadSpellsFromStorage(state, action: PayloadAction<SpellsState>) {
       state.selectedClass = action.payload.selectedClass;
-      state.activeSpells = action.payload.activeSpells;
-      state.passiveSpells = action.payload.passiveSpells;
+      state.activeSpells = action.payload.activeSpells.map((spell) => {
+        if (spell) {
+          if (!spell.id) {
+            spell.id = generateSpellId(spell);
+          }
+          return spell;
+        }
+        return null;
+      });
+      state.passiveSpells = action.payload.passiveSpells.map((spell) => {
+        if (spell) {
+          if (!spell.id) {
+            spell.id = generateSpellId(spell);
+          }
+          return spell;
+        }
+        return null;
+      });
       state.selectedSpell = action.payload.selectedSpell;
       state.draggedSpell = action.payload.draggedSpell;
+      state.usedSpells = [
+        ...state.activeSpells.filter((spell): spell is Spell => spell !== null).map((spell) => spell.id!),
+        ...state.passiveSpells.filter((spell): spell is Spell => spell !== null).map((spell) => spell.id!),
+      ];
     },
     setSelectedSpell(state, action: PayloadAction<Spell | null>) {
       state.selectedSpell = action.payload;

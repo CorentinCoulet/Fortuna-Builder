@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../styles/components/Spells/SpellsClasses.scss";
 import { setSelectedClass } from "../../features/components/Spells/spellsSlice.ts";
@@ -6,6 +6,7 @@ import { RootState } from "../../store.ts";
 // import SpellsClassesInformations from "./SpellsClassesInformations.tsx";
 
 interface Spell {
+  id: string;
   src: string;
   alt: string;
   key?: string;
@@ -40,7 +41,7 @@ const SpellsClasses: React.FC<SpellsClassesProps> = ({
   const dispatch = useDispatch();
   const usedSpells = useSelector((state: RootState) => state.spells.usedSpells);
   // const [selectedSpell, setSelectedSpell] = useState<Spell | null>(null);
-  const [hoveredSpell, setHoveredSpell] = useState<Spell | null>(null);
+  const [hoveredSpell, setHoveredSpell] = useState<string | null>(null);
 
   React.useEffect(() => {
     const imageElement = document.querySelector(".imgClasses");
@@ -55,7 +56,7 @@ const SpellsClasses: React.FC<SpellsClassesProps> = ({
   // };
 
   const handleSpellDoubleClick = (spell: Spell) => {
-    if (!usedSpells.includes(spell.src)) {
+    if (!usedSpells.includes(spell.id)) {
       onSpellClick(spell);
     }
   };
@@ -65,7 +66,7 @@ const SpellsClasses: React.FC<SpellsClassesProps> = ({
     spell: Spell,
     type: "active" | "passive"
   ) => {
-    if (!usedSpells.includes(spell.src)) {
+    if (!usedSpells.includes(spell.id)) {
       const spellData = JSON.stringify({ spell, type });
       event.dataTransfer.setData("spellData", spellData);
       onSpellDrag(spell);
@@ -82,21 +83,21 @@ const SpellsClasses: React.FC<SpellsClassesProps> = ({
     return (
       <section>
         {Object.entries(spellsSection).map(([key, spell], index) => {
-          const isUsed = usedSpells.includes(spell.src);
+          const isUsed = usedSpells.includes(spell.id);
           return (
             <div
-              key={spell.key || `${sectionKey}-${key}-${spell.src}-${index}`}
+              key={`${sectionKey}-${spell.id}`}
               draggable={!isUsed}
               onDragStart={(e) => handleSpellDragStart(e, spell, type)}
               // onClick={() => handleSpellClick(spell)}
-              onMouseEnter={() => setHoveredSpell(spell)}
+              onMouseEnter={() => setHoveredSpell(spell.id)}
               onMouseLeave={() => setHoveredSpell(null)}
               onDoubleClickCapture={() => handleSpellDoubleClick(spell)}
               onDoubleClick={() => !isUsed && onSpellSelect(spell, type, index)}
               className={isUsed ? "spell grayed-out" : "spell"}
             >
               <img loading="lazy" src={spell.src} alt={spell.alt} />
-              {hoveredSpell === spell && (
+              {hoveredSpell === spell.id && (
                 <div className="popup">
                   {spell.alt}
                 </div>
@@ -117,7 +118,7 @@ const SpellsClasses: React.FC<SpellsClassesProps> = ({
 
     return (
       <section>
-        {renderSpellsSection(key, classSpellsSection, type)}
+        {renderSpellsSection(`class-${key}`, classSpellsSection, type)}
         {renderSpellsSection(`common-${key}`, commonSpellsSection, type)}
       </section>
     );
