@@ -23,7 +23,7 @@ const InternalNavbar: React.FC<InternalNavbarProps> = ({ setActiveSection }) => 
   return (
     <nav className="internal-navbar">
       <ul>
-        <li onClick={() => setActiveSection('recherche')}>Recherches</li>
+        <li onClick={() => setActiveSection('recherche')}>Recherche</li>
         <li onClick={() => setActiveSection('aptitudes')}>{isSmallScreen ? 'Apti.' : 'Aptitudes'}</li>
         <li onClick={() => setActiveSection('sorts')}>Sorts</li>
         <li onClick={() => setActiveSection('enchantement')}>{isSmallScreen ? 'Enchant.' : 'Enchantement'}</li>

@@ -408,7 +408,7 @@ const EnchantmentPerEquipment: React.FC = () => {
 
   return (
     <div className="enchantment-container">
-      <h2>ENCHANTEMENTS</h2>
+      <h2>ENCHANTEMENT</h2>
       <div className="slider-container">
         <input
           type="range"
