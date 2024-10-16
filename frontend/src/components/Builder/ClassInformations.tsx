@@ -3,8 +3,9 @@ import "../../styles/components/Builder/ClassInformations.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateProperty,
-  updateResistances,
-  updateMasteries,
+  updateManualProperty,
+  updateManualResistances,
+  updateManualMasteries,
   selectCalculatedStats
 } from "../../features/components/Builder/classInformationsSlice";
 import { RootState } from "../../store";
@@ -58,31 +59,31 @@ const ClassInformations: React.FC = () => {
             id={1}
             label="Pdv"
             value={calculatedStats.hp}
-            onChange={(value) => dispatch(updateProperty({ key: 'baseHp', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'baseHp', value }))}
           />
           <EditableValue
             id={2}
             label="Armure"
             value={calculatedStats.armor}
-            onChange={(value) => dispatch(updateProperty({ key: 'baseArmor', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'baseArmor', value }))}
           />
           <EditableValue
             id={3}
             label="PA"
             value={calculatedStats.ap}
-            onChange={(value) => dispatch(updateProperty({ key: 'ap', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'ap', value }))}
           />
           <EditableValue
             id={4}
             label="PM"
             value={calculatedStats.mp}
-            onChange={(value) => dispatch(updateProperty({ key: 'mp', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'mp', value }))}
           />
           <EditableValue
             id={5}
             label="PW"
             value={calculatedStats.wp}
-            onChange={(value) => dispatch(updateProperty({ key: 'wp', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'wp', value }))}
           />
           <TotalMasteriesCalcul
             selectedMasteries={selectedMasteries}
@@ -96,25 +97,25 @@ const ClassInformations: React.FC = () => {
                 id={6}
                 label=""
                 value={calculatedStats.elems.waterMastery}
-                onChange={(value) => dispatch(updateMasteries({ waterMastery: value }))}
+                onChange={(value) => dispatch(updateManualMasteries({ waterMastery: value }))}
               />
               <EditableValue
                 id={7}
                 label=""
                 value={calculatedStats.resists.waterResist}
-                onChange={(value) => dispatch(updateResistances({ waterResist: value }))}
+                onChange={(value) => dispatch(updateManualResistances({ waterResist: value }))}
               />
               <EditableValue
                 id={8}
                 label=""
                 value={calculatedStats.elems.earthMastery}
-                onChange={(value) => dispatch(updateMasteries({ earthMastery: value }))}
+                onChange={(value) => dispatch(updateManualMasteries({ earthMastery: value }))}
               />
               <EditableValue
                 id={9}
                 label=""
                 value={calculatedStats.resists.earthResist}
-                onChange={(value) => dispatch(updateResistances({ earthResist: value }))}
+                onChange={(value) => dispatch(updateManualResistances({ earthResist: value }))}
               />
             </div>
             <div className="element-row">
@@ -122,25 +123,25 @@ const ClassInformations: React.FC = () => {
                 id={10}
                 label=""
                 value={calculatedStats.elems.airMastery}
-                onChange={(value) => dispatch(updateMasteries({ airMastery: value }))}
+                onChange={(value) => dispatch(updateManualMasteries({ airMastery: value }))}
               />
               <EditableValue
                 id={11}
                 label=""
                 value={calculatedStats.resists.airResist}
-                onChange={(value) => dispatch(updateResistances({ airResist: value }))}
+                onChange={(value) => dispatch(updateManualResistances({ airResist: value }))}
               />
               <EditableValue
                 id={12}
                 label=""
                 value={calculatedStats.elems.fireMastery}
-                onChange={(value) => dispatch(updateMasteries({ fireMastery: value }))}
+                onChange={(value) => dispatch(updateManualMasteries({ fireMastery: value }))}
               />
               <EditableValue
                 id={13}
                 label=""
                 value={calculatedStats.resists.fireResist}
-                onChange={(value) => dispatch(updateResistances({ fireResist: value }))}
+                onChange={(value) => dispatch(updateManualResistances({ fireResist: value }))}
               />
             </div>
           </div>
@@ -150,13 +151,13 @@ const ClassInformations: React.FC = () => {
               id={14}
               label="Armure Reçue"
               value={classInfo.armorReceived}
-              onChange={(value) => dispatch(updateProperty({ key: 'armorReceived', value }))}
+              onChange={(value) => dispatch(updateManualProperty({ key: 'armorReceived', value }))}
             />
             <EditableValue
               id={15}
               label="Armure Donnée"
               value={classInfo.armorGiven}
-              onChange={(value) => dispatch(updateProperty({ key: 'armorGiven', value }))}
+              onChange={(value) => dispatch(updateManualProperty({ key: 'armorGiven', value }))}
             />
           </div>
         </div>
@@ -165,31 +166,31 @@ const ClassInformations: React.FC = () => {
             id={16}
             label="Domm. Infligés"
             value={calculatedStats.damageDealt}
-            onChange={(value) => dispatch(updateProperty({ key: 'damageDealt', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'damageDealt', value }))}
           />
           <EditableValue
             id={17}
             label="Soins Réalisés"
             value={calculatedStats.healMastery}
-            onChange={(value) => dispatch(updateProperty({ key: 'heals', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'heals', value }))}
           />
           <EditableValue
             id={18}
             label="Coup Crit."
             value={calculatedStats.critical}
-            onChange={(value) => dispatch(updateProperty({ key: 'critical', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'critical', value }))}
           />
           <EditableValue
             id={19}
             label="Parade"
             value={calculatedStats.block}
-            onChange={(value) => dispatch(updateProperty({ key: 'block', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'block', value }))}
           />
           <EditableValue
             id={20}
             label="Initiative"
             value={calculatedStats.initiative}
-            onChange={(value) => dispatch(updateProperty({ key: 'initiative', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'initiative', value }))}
           />
           <EditableValue
             id={21}
@@ -201,37 +202,37 @@ const ClassInformations: React.FC = () => {
             id={22}
             label="Esquive"
             value={calculatedStats.dodge}
-            onChange={(value) => dispatch(updateProperty({ key: 'dodge', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'dodge', value }))}
           />
           <EditableValue
             id={23}
             label="Tacle"
             value={calculatedStats.lock}
-            onChange={(value) => dispatch(updateProperty({ key: 'lock', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'lock', value }))}
           />
           <EditableValue
             id={24}
             label="Sagesse"
             value={classInfo.wisdom}
-            onChange={(value) => dispatch(updateProperty({ key: 'wisdom', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'wisdom', value }))}
           />
           <EditableValue
             id={25}
             label="Prospection"
             value={classInfo.prospecting}
-            onChange={(value) => dispatch(updateProperty({ key: 'prospecting', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'prospecting', value }))}
           />
           <EditableValue
             id={26}
             label="Contrôle"
             value={calculatedStats.control}
-            onChange={(value) => dispatch(updateProperty({ key: 'control', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'control', value }))}
           />
           <EditableValue
             id={27}
             label="Volonté"
             value={calculatedStats.will}
-            onChange={(value) => dispatch(updateProperty({ key: 'will', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'will', value }))}
           />
         </div>
         <div className="masteries">
@@ -239,49 +240,49 @@ const ClassInformations: React.FC = () => {
             id={28}
             label="Maîtrise Critique"
             value={calculatedStats.critMastery}
-            onChange={(value) => dispatch(updateProperty({ key: 'critMastery', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'critMastery', value }))}
           />
           <EditableValue
             id={29}
             label="Résistance Critique"
             value={calculatedStats.critResist}
-            onChange={(value) => dispatch(updateProperty({ key: 'critResist', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'critResist', value }))}
           />
           <EditableValue
             id={30}
             label="Maîtrise Dos"
             value={calculatedStats.rearMastery}
-            onChange={(value) => dispatch(updateProperty({ key: 'rearMastery', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'rearMastery', value }))}
           />
           <EditableValue
             id={31}
             label="Résistance Dos"
             value={calculatedStats.rearResist}
-            onChange={(value) => dispatch(updateProperty({ key: 'rearResist', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'rearResist', value }))}
           />
           <EditableValue
             id={32}
             label="Maîtrise Mêlée"
             value={calculatedStats.meleeMastery}
-            onChange={(value) => dispatch(updateProperty({ key: 'meleeMastery', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'meleeMastery', value }))}
           />
           <EditableValue
             id={33}
             label="Maîtrise Distance"
             value={calculatedStats.distanceMastery}
-            onChange={(value) => dispatch(updateProperty({ key: 'distanceMastery', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'distanceMastery', value }))}
           />
           <EditableValue
             id={34}
             label="Maîtrise Soin"
             value={calculatedStats.healMastery}
-            onChange={(value) => dispatch(updateProperty({ key: 'healMastery', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'healMastery', value }))}
           />
           <EditableValue
             id={35}
             label="Maîtrise Berserk"
             value={calculatedStats.berserkMastery}
-            onChange={(value) => dispatch(updateProperty({ key: 'berserkMastery', value }))}
+            onChange={(value) => dispatch(updateManualProperty({ key: 'berserkMastery', value }))}
           />
         </div>
       </section>

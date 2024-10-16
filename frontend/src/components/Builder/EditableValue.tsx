@@ -36,14 +36,14 @@ const EditableValue: React.FC<EditableValueProps> = ({ id, label, value, onChang
   const handleInputBlur = () => {
     const trimmedValue = inputValue.trim();
     const numberValue = parseFloat(trimmedValue);
-    if (trimmedValue === "" || isNaN(numberValue)) {
+    if (trimmedValue === "" || isNaN(numberValue) || (numberValue == 0)) {
       setInputValue("0");
-      onChange(value);
+      onChange(0);
       setHasValidated(false);
-    } else if (numberValue !== 0) {
+    } else {
       onChange(numberValue);
       setHasValidated(true);
-    }    
+    }
     setIsEditing(false);
   };
 
