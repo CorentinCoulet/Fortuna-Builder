@@ -99,9 +99,12 @@ model Equipments {
 
 model Sublimations {
   id           Int     @id @default(autoincrement())
+  idSubli      Int?
   title        Json?
+  lvl          Int?
   type         String?
   rarity       Int?
+  patern       Json?
   picture      Int?
   equipEffects Json?
   description  Json?
