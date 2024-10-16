@@ -57,6 +57,41 @@ export interface ClassInformationsState {
   healMastery: number;
   berserkMastery: number;
 
+  sublimationValues: {
+    baseHp: number;
+    baseArmor: number;
+    ap: number;
+    wp: number;
+    mp: number;
+  
+    resistances: Resistances;
+    masteries: Masteries;
+    armorReceived: number;
+    armorGiven: number;
+  
+    damageDealt: number;
+    critical: number;
+    initiative: number;
+    dodge: number;
+    wisdom: number;
+    control: number;
+    heals: number;
+    block: number;
+    range: number;
+    lock: number;
+    prospecting: number;
+    will: number;
+  
+    critMastery: number;
+    critResist: number;
+    rearMastery: number;
+    rearResist: number;
+    meleeMastery: number;
+    distanceMastery: number;
+    healMastery: number;
+    berserkMastery: number;
+  };
+
   manualValues: {
     baseHp: number;
     baseArmor: number;
@@ -141,6 +176,51 @@ const initialState: ClassInformationsState = {
   distanceMastery: 0,
   healMastery: 0,
   berserkMastery: 0,
+
+  sublimationValues: {
+    baseHp: 0,
+    baseArmor: 0,
+    ap: 0,
+    wp: 0,
+    mp: 0,
+  
+    resistances: {
+      waterResist: 0,
+      earthResist: 0,
+      airResist: 0,
+      fireResist: 0,
+    },
+    masteries: {
+      waterMastery: 0,
+      earthMastery: 0,
+      airMastery: 0,
+      fireMastery: 0,
+    },
+    armorReceived: 0,
+    armorGiven: 0,
+  
+    damageDealt: 0,
+    critical: 0,
+    initiative: 0,
+    dodge: 0,
+    wisdom: 0,
+    control: 0,
+    heals: 0,
+    block: 0,
+    range: 0,
+    lock: 0,
+    prospecting: 0,
+    will: 0,
+  
+    critMastery: 0,
+    critResist: 0,
+    rearMastery: 0,
+    rearResist: 0,
+    meleeMastery: 0,
+    distanceMastery: 0,
+    healMastery: 0,
+    berserkMastery: 0,
+  },
 
   // valeurs ajoutées manuellement
   manualValues: {
@@ -282,6 +362,7 @@ const classInformationsSlice = createSlice({
       state.prospecting -= worldBonus.prospectiong;
       state.wisdom -= worldBonus.wisdom;
     },
+    
   },
 });
 

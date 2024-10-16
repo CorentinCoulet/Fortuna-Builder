@@ -23,9 +23,12 @@ const runesSlice = createSlice({
     setSelectedShard: (state, action: PayloadAction<Shard | null>) => {
       state.selectedShard = action.payload;
     },
+    clearSelectedShard: (state) => {
+      state.selectedShard = null;
+    },
   },
 });
 
-export const { setSelectedShard } = runesSlice.actions;
+export const { setSelectedShard, clearSelectedShard } = runesSlice.actions;
 
 export default runesSlice.reducer;

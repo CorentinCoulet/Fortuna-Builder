@@ -17,11 +17,8 @@ import { useDispatch } from "react-redux";
 import Modal from "react-modal";
 import ClearNotification from "./ClearNotification";
 
-import {
-  setEquippedEpicSublimation,
-  setEquippedRelicSublimation,
-  setEquippedNormalSublimation,
-} from "../../features/components/Sublimations/sublimationsSlice";
+import { clearSublimations } from "../../features/components/Sublimations/sublimationsSlice";
+import { clearSelectedShard } from "../../features/components/Sublimations/runesSlice";
 import { clearError } from "../../features/components/Others/authSlice";
 import LoginForm from "./LoginForm";
 import SignInForm from "./SignInForm";
@@ -57,11 +54,16 @@ const Header: React.FC = () => {
   };
 
   const handleResetClick = () => {
-    dispatch(setEquippedEpicSublimation(null));
-    dispatch(setEquippedRelicSublimation(null));
-    dispatch(setEquippedNormalSublimation(null));
+    // retrait des sublimations
+    dispatch(clearSublimations());
 
+    // rettrait des runes
+    dispatch(clearSelectedShard());
+
+    // retrait des sorts
     dispatch(clearAllSpells());
+
+    // remise à 0 des aptitudes
     dispatch(resetPointIntel());
     dispatch(resetPointStrength());
     dispatch(resetPointAgility());

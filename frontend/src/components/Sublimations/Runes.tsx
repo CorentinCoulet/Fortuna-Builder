@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "../../styles/components/Sublimations/Runes.scss";
 import { runesEquipment, parchments, shards } from "../../asset.ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -64,7 +64,6 @@ const checkSublimationCondition = (
 
   return false;
 };
-
 
 const bonusLabels: { [key: string]: string } = {
   waterResist: "Résistance Eau",
@@ -157,14 +156,14 @@ const getActionsForLabel = (
     "résistance terre": "resistances:earthResist",
     "maîtrise critique": "critMastery",
     "maîtrise dos": "rearMastery",
-    "esquive": "dodge",
-    "initiative": "initiative",
+    esquive: "dodge",
+    initiative: "initiative",
     "résistance feu": "resistances:fireResist",
     "maîtrise elémentaire": "masteries",
-    "tacle": "lock",
+    tacle: "lock",
     "résistance eau": "resistances:waterResist",
     "résistance air": "resistances:airResist",
-    "vie": "baseHp",
+    vie: "baseHp",
     "maîtrise soin": "healMastery",
   };
 
@@ -329,11 +328,12 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
     saveShardsToLocalStorage(appliedShards);
   }, [appliedShards]);
 
-  
   const checkAllSublimationValidity = useCallback(() => {
-    const newValidity = appliedShards.map((shardRow, index) => isSublimationValid(shardRow, index));
+    const newValidity = appliedShards.map((shardRow, index) =>
+      isSublimationValid(shardRow, index)
+    );
     setIsNormalSublimationValid(newValidity);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appliedShards, appliedNormalSublimations]);
 
   useEffect(() => {
@@ -349,6 +349,121 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
     return true;
   };
 
+  // anciens bonus de sublimation épique
+  const previousEpicSublimation = useRef<Sublimation | null>(equippedEpicSublimation);
+
+  useEffect(() => {
+    if (!equippedEpicSublimation && previousEpicSublimation.current) {
+      Object.entries(previousEpicSublimation.current.bonus || {}).forEach(
+        ([key, value]) => {
+          if (key in bonusLabels) {
+            if (key.includes("Resist")) {
+              const currentResist =
+                classInformations.resistances[key as keyof Resistances] || 0;
+              dispatch(updateResistances({ [key]: currentResist - value }));
+            } else if (key.includes("Mastery")) {
+              const currentMastery =
+                classInformations.masteries[key as keyof Masteries] || 0;
+              dispatch(updateMasteries({ [key]: currentMastery - value }));
+            } else {
+              const currentValue = classInformations[
+                key as keyof ClassInformationsState
+              ] as number;
+              dispatch(
+                updateProperty({
+                  key: key as keyof ClassInformationsState,
+                  value: currentValue - value,
+                })
+              );
+            }
+          }
+        }
+      );
+    }
+
+    previousEpicSublimation.current = equippedEpicSublimation;
+  }, [equippedEpicSublimation, classInformations, dispatch]);
+
+  // anciens bonus de sublimation relique
+  const previousRelicSublimation = useRef<Sublimation | null>(equippedRelicSublimation);
+  
+  useEffect(() => {
+    if (!equippedRelicSublimation && previousRelicSublimation.current) {
+      Object.entries(previousRelicSublimation.current.bonus || {}).forEach(
+        ([key, value]) => {
+          if (key in bonusLabels) {
+            if (key.includes("Resist")) {
+              const currentResist =
+                classInformations.resistances[key as keyof Resistances] || 0;
+              dispatch(updateResistances({ [key]: currentResist - value }));
+            } else if (key.includes("Mastery")) {
+              const currentMastery =
+                classInformations.masteries[key as keyof Masteries] || 0;
+              dispatch(updateMasteries({ [key]: currentMastery - value }));
+            } else {
+              const currentValue = classInformations[
+                key as keyof ClassInformationsState
+              ] as number;
+              dispatch(
+                updateProperty({
+                  key: key as keyof ClassInformationsState,
+                  value: currentValue - value,
+                })
+              );
+            }
+          }
+        }
+      );
+    }
+
+    previousRelicSublimation.current = equippedRelicSublimation;
+  }, [equippedRelicSublimation, classInformations, dispatch]);
+
+  // anciens bonus de sublimations normales
+  const previousNormalSublimations = useRef<Array<Sublimation | null>>(appliedNormalSublimations);
+
+  useEffect(() => {
+    appliedNormalSublimations.forEach((equippedNormalSublimation, index) => {
+      if (!equippedNormalSublimation && previousNormalSublimations.current[index]) {
+        const previousSublimation = previousNormalSublimations.current[index];
+        if (previousSublimation?.bonus) {
+          Object.entries(previousSublimation.bonus).forEach(([key, value]) => {
+            if (key in bonusLabels) {
+              if (key.includes("Resist")) {
+                const currentResist = classInformations.resistances[key as keyof Resistances] || 0;
+                dispatch(updateResistances({ [key]: currentResist - value }));
+              } else if (key.includes("Mastery")) {
+                const currentMastery = classInformations.masteries[key as keyof Masteries] || 0;
+                dispatch(updateMasteries({ [key]: currentMastery - value }));
+              } else {
+                const currentValue = classInformations[key as keyof ClassInformationsState] as number;
+                dispatch(updateProperty({ key: key as keyof ClassInformationsState, value: currentValue - value }));
+              }
+            }
+          });
+        }
+      }
+    });
+  
+    previousNormalSublimations.current = appliedNormalSublimations;
+  }, [appliedNormalSublimations, classInformations, dispatch]);
+
+  useEffect(() => {
+    if (!selectedShard) {
+      setAppliedShards((prev) => {
+        prev.forEach((shardRow) => {
+          shardRow.forEach((shard) => {
+            if (shard && shard.label !== "Default") {
+              removeBonus(shard, classInformations, dispatch);
+            }
+          });
+        });
+        return prev.map((shardRow) =>
+          shardRow.map(() => whiteParchment.whiteShard)
+        );
+      });
+    }
+  }, [selectedShard]);
 
   const handleEpicSublimationClick = () => {
     if (isReadOnly) return;
@@ -610,9 +725,9 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
 
     const isAllowedColor =
       currentShard.alt === shards[1].alt ||
-      currentShard.alt === shards[2].alt || 
+      currentShard.alt === shards[2].alt ||
       currentShard.alt === shards[3].alt ||
-      currentShard.alt === shards[4].alt; 
+      currentShard.alt === shards[4].alt;
 
     if (!isAllowedColor) return;
 
@@ -854,7 +969,7 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   };
 
   const renderList = () => {
-    return Array.from({ length: 10 }, (_, index) => index).map((index) => {      
+    return Array.from({ length: 10 }, (_, index) => index).map((index) => {
       const equipment = runesEquipment[index];
       if (!equipment) {
         console.error(`Equipment at index ${index} is undefined or null.`);
@@ -880,9 +995,7 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
                           ? appliedShardRow[i]!.alt
                           : whiteParchment.whiteShard.alt
                       }
-                      onContextMenu={(e) =>
-                        handleShardRightClick(e, index, i)
-                      }
+                      onContextMenu={(e) => handleShardRightClick(e, index, i)}
                       className={`shard-image ${isReadOnly ? "read-only" : ""}`}
                     />
                     {appliedShardRow[i] && appliedShardRow[i]!.runeLevel && (

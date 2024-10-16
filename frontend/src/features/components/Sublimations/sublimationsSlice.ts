@@ -51,6 +51,14 @@ const sublimationsSlice = createSlice({
         setEquippedNormalSublimation: (state, action: PayloadAction<Sublimation | null>) => {
             state.equippedNormalSublimation = action.payload;
         },
+        clearSublimations: (state) => {
+            state.selectedEpicSublimation = null;
+            state.selectedRelicSublimation = null;
+            state.selectedNormalSublimation = null;
+            state.equippedEpicSublimation = null;
+            state.equippedRelicSublimation = null;
+            state.equippedNormalSublimation = null;
+        },
     },
 });
 
@@ -61,6 +69,7 @@ export const {
     setEquippedEpicSublimation,
     setEquippedRelicSublimation,
     setEquippedNormalSublimation,
+    clearSublimations,
 } = sublimationsSlice.actions;
 
 export default sublimationsSlice.reducer;
