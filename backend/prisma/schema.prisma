@@ -87,14 +87,13 @@ model States {
 model Equipments {
   id            Int     @id @default(autoincrement())
   idItems       Int?
-  title         Json?
-  rarity        String?
   level         Int?
+  rarity        String?
+  picture       Int?
+  title         Json?
   typeItem      String?
-  useParameters Json?
   effects       Json?
-  stats         Json?
-  description   String?
+  description   Json?
 }
 
 model Sublimations {

@@ -12,12 +12,15 @@ import { EquipmentService } from './equipment/equipment.service';
 import { AuthModule } from './auth/auth.module';
 import { BuildsModule } from './builds/builds.module';
 import { EquipmentController } from './equipment/equipment.controller';
+import { ItemsProcessingService } from './items-processing/items-processing.service';
+import { ItemsProcessingController } from './items-processing/items-processing.controller';
 @Module({
   imports: [AuthModule, BuildsModule, HttpModule, ScheduleModule.forRoot(), ServeStaticModule.forRoot({
     rootPath: join(__dirname, '..', 'itemsWebp'),
     serveRoot: '/images',
   }),],
-  controllers: [AppController, DataController, EquipmentController],
-  providers: [DataService, PrismaService, VersionService, EquipmentService],
+  controllers: [AppController, DataController, EquipmentController, ItemsProcessingController],
+  providers: [DataService, PrismaService, VersionService, EquipmentService, ItemsProcessingService],
+  exports: [ItemsProcessingService],
 })
 export class AppModule {}
