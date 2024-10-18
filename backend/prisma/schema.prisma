@@ -13,14 +13,14 @@ model Users {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
-  Builds Builds[]
+  Builds    Builds[]
 }
 
 model Builds {
-  id     Int  @id @default(autoincrement())
-  idUser Int  
+  id     Int   @id @default(autoincrement())
+  idUser Int
   build  Json
-  user    Users   @relation(fields: [idUser], references: [id])
+  user   Users @relation(fields: [idUser], references: [id])
 }
 
 model Actions {
@@ -85,15 +85,15 @@ model States {
 }
 
 model Equipments {
-  id            Int     @id @default(autoincrement())
-  idItems       Int?
-  level         Int?
-  rarity        String?
-  picture       Int?
-  title         Json?
-  typeItem      String?
-  effects       Json?
-  description   Json?
+  id          Int     @id @default(autoincrement())
+  idItems     Int?
+  level       Int?
+  rarity      String?
+  picture     Int?
+  title       Json?
+  typeItem    String?
+  effects     Json?
+  description Json?
 }
 
 model Sublimations {

@@ -26,6 +26,15 @@ function replaceParamsInDescription(description, params, lvlItem) {
     return description;
 }
 
+function isValidJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
 async function processActionDescriptions(actionId, actionDescriptions, lvlItem) {
     let calculatedDescriptions = {};
 
@@ -74,9 +83,9 @@ export class ItemsProcessingService {
                 console.log(`Traitement du lot ${Math.floor(offset / batchSize) + 1} (${items.length} éléments)`);
 
                 for (const item of items) {
-                    if (item.sublimationParameters == null) {
+                    if (item['sublimationParameters'] == null) {
                         // récupération du type d'équipement (casque, ceinture etc)
-                        const baseParameters = item.item?.['baseParameters'];
+                        const baseParameters = item['item']['baseParameters'];
                         let typeItemId = null;
 
                         if (baseParameters && baseParameters['itemTypeId']) {
@@ -95,19 +104,16 @@ export class ItemsProcessingService {
                                 }
                             });
 
-                            console.log(equipmentType);
-                            console.log(equipmentType.definition);
-                            if (equipmentType && equipmentType.definition) {
-                                equipmentPositionLabel = equipmentType.definition['equipmentPositions'];
-                                // console.log(`l'équipement ${item.title} est de type : ${equipmentPositionLabel}`);
+                            if (equipmentType && equipmentType['definition']) {
+                                equipmentPositionLabel = equipmentType['definition']['equipmentPositions'];
                             }
                         }
 
                         // récupération des actions avec leurs paramètres de stats
                         let actionId = {};
 
-                        if (typeof item.equipEffects === 'object' && item.equipEffects !== null) {
-                            Object.values(item.equipEffects).forEach(effect => {
+                        if (typeof item['equipEffects'] === 'object' && item['equipEffects'] !== null) {
+                            Object.values(item['equipEffects']).forEach(effect => {
                                 const actionIdValue = effect['effect']['definition']['actionId'];
                                 const params = effect['effect']['definition']['params'];
 
@@ -146,31 +152,92 @@ export class ItemsProcessingService {
                         }
 
                         // calcul des éléments à remplacer dans la description de l'élément
-                        const calculatedDescriptions = await processActionDescriptions(actionId, actionDescriptions, item.level);
+                        const calculatedDescriptions = await processActionDescriptions(actionId, actionDescriptions, item['level']);
 
-                        test = calculatedDescriptions;
+                        const existingEquipment = await this.prisma.equipments.findFirst({
+                            where: {
+                                idItems: item['idItems'],
+                                level: item['level'],
+                                rarity: rarity[item['rarity']],
+                            },
+                            select: {
+                                id: true,
+                                idItems: true,
+                                level: true,
+                                rarity: true,
+                                picture: true,
+                                title: true,
+                                typeItem: true,
+                                effects: true,
+                                description: true,
+                            }
+                        });
 
-                        // await this.prisma.equipments.create({
-                        //     data: {
-                        //         idItems: item.idItems,
-                        //         level: item.level,
-                        //         rarity: rarity[item.rarity],
-                        //         picture: item.picture,
-                        //         title: item.title,
-                        //         typeItem: equipmentPositionLabel,
-                        //         effects: calculatedDescriptions,
-                        //         description: item.description,
-                        //     },
-                        // });
+                        if(existingEquipment){
+                            const differences = [
+                                existingEquipment['level'] !== item['level'],
+                                existingEquipment['rarity'] !== rarity[item['rarity']],
+                                existingEquipment['picture'] !== item['picture'],
+                                JSON.stringify(existingEquipment['title']) !== JSON.stringify(item['title']),
+                                (typeof existingEquipment['typeItem'] === 'string' && isValidJson(existingEquipment['typeItem'])
+                                    ? JSON.stringify(JSON.parse(existingEquipment['typeItem']))
+                                    : JSON.stringify(existingEquipment['typeItem']))
+                                !==
+                                (typeof equipmentPositionLabel === 'string' && isValidJson(equipmentPositionLabel)
+                                    ? JSON.stringify(JSON.parse(equipmentPositionLabel))
+                                    : JSON.stringify(equipmentPositionLabel)),
 
-                        break;
+                                JSON.stringify(existingEquipment['effects']) !== JSON.stringify(calculatedDescriptions),
+                                JSON.stringify(existingEquipment['description']) !== JSON.stringify(item['description']),
+                            ];
+
+                            // test = equipmentPositionLabel;
+                            // break;
+                            if (differences.includes(true)) {
+                                console.log(`Mise à jour de l'équipement : ${item['title']['fr']} (idItems: ${item['idItems']}})`);
+
+                                await this.prisma.equipments.update({
+                                    where: {
+                                      id: existingEquipment['id'],
+                                    },
+                                    data: {
+                                        level: item['level'],
+                                        rarity: rarity[item['rarity']],
+                                        picture: item['picture'],
+                                        title: item['title'],
+                                        typeItem: JSON.stringify(equipmentPositionLabel),
+                                        effects: calculatedDescriptions,
+                                        description: item['description'],
+                                    }
+                                });
+
+
+                            } else {
+                                console.log(`L'équipement ${item['title']['fr']} est déjà à jour.`);
+                            }
+                        } else {
+                            console.log(`Création d'un nouvel équipement : ${item['title']['fr']} (idItems: ${item['idItems']})`);
+                            await this.prisma.equipments.create({
+                                data: {
+                                    idItems: item['idItems'],
+                                    level: item['level'],
+                                    rarity: rarity[item['rarity']],
+                                    picture: item['picture'],
+                                    title: item['titre'],
+                                    typeItem: JSON.stringify(equipmentPositionLabel),
+                                    effects: calculatedDescriptions,
+                                    description: item['description'],
+                                },
+                            });
+                        }
+
                     } else {
                         // console.log(item.sublimationParameters);
                     }
                 }
-               if(test !== null){
-                   break;
-               }
+                // if(test !== null){
+                //     break;
+                // }
                 offset += batchSize;
             }
             console.log('Tous les items ont été traités.');

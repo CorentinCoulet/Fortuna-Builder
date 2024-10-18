@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Equipments" ALTER COLUMN "typeItem" DROP NOT NULL,
+ALTER COLUMN "typeItem" SET DATA TYPE TEXT;
