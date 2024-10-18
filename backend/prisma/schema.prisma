@@ -100,11 +100,10 @@ model Sublimations {
   id           Int     @id @default(autoincrement())
   idSubli      Int?
   title        Json?
-  lvl          Int?
   type         String?
   rarity       Int?
-  patern       Json?
+  pattern      Json?
   picture      Int?
-  equipEffects Json?
+  effects      Json?
   description  Json?
 }

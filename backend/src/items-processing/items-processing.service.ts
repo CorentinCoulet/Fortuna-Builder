@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-import {forEach} from "lodash";
+import { forEach } from "lodash";
 
 const rarity = {
     0: 'Commun',
@@ -13,17 +13,29 @@ const rarity = {
     7: 'Epique',
 };
 
-function replaceParamsInDescription(description, params, lvlItem) {
-    description = description.replace(/\[#(\d+)\]/g, (match, paramIndex) => {
-        const index = (parseInt(paramIndex, 10) - 1) * 2;
-        if (params[index] !== undefined && params[index + 1] !== undefined) {
-            const calculatedValue = params[index + 1] * lvlItem + params[index];
-            return calculatedValue.toString();
-        }
-        return match;
-    });
+function replaceParamsInDescription(description, params, actionId) {
+    const actionPatterns = {
+        20: "[#1] PV",
+        150: "[#1]% Coup critique",
+        120: "[#1] Maîtrise Élémentaire",
+        31: "[#1] PA",
+        184: "[#1] Contrôle",
+        1083: "[#1] Dégâts",
+        175: "[#1] Parade",
+        80: "[#1]% Résistance",
+    };
 
-    return description;
+    const pattern = actionPatterns[actionId];
+    
+    if (!pattern) {
+        console.error(`ActionId ${actionId} non pris en charge.`);
+        return description;
+    }
+
+    return pattern.replace(/\[#(\d+)\]/g, (match, index) => {
+        const paramIndex = parseInt(index) - 1;
+        return params[paramIndex] !== undefined ? params[paramIndex] : match;
+    });
 }
 
 function isValidJson(str) {
@@ -46,6 +58,7 @@ async function processActionDescriptions(actionId, actionDescriptions, lvlItem) 
             for (const [lang, description] of Object.entries(descriptionSet)) {
                 if (typeof description === 'string') {
                     const calculatedDescription = replaceParamsInDescription(description, params, lvlItem);
+                    console.log(calculatedDescription);
                     if (!calculatedDescriptions[id]) {
                         calculatedDescriptions[id] = {};
                     }
@@ -72,9 +85,7 @@ export class ItemsProcessingService {
 
             let offset = 0;
 
-            let test = null;
             while (offset < totalItems) {
-                // Récupérer un lot d'items
                 const items = await this.prisma.items.findMany({
                     skip: offset,
                     take: batchSize,
@@ -84,7 +95,7 @@ export class ItemsProcessingService {
 
                 for (const item of items) {
                     if (item['sublimationParameters'] == null) {
-                        // récupération du type d'équipement (casque, ceinture etc)
+                        // Traitement des équipements
                         const baseParameters = item['item']['baseParameters'];
                         let typeItemId = null;
 
@@ -109,7 +120,6 @@ export class ItemsProcessingService {
                             }
                         }
 
-                        // récupération des actions avec leurs paramètres de stats
                         let actionId = {};
 
                         if (typeof item['equipEffects'] === 'object' && item['equipEffects'] !== null) {
@@ -117,16 +127,15 @@ export class ItemsProcessingService {
                                 const actionIdValue = effect['effect']['definition']['actionId'];
                                 const params = effect['effect']['definition']['params'];
 
-                                if(actionIdValue && params){
+                                if (actionIdValue && params) {
                                     actionId[actionIdValue] = params;
                                 }
                             });
                         }
 
-                        // récupération des éléments à calculer avec les paramètres de stats
                         let actionDescriptions = {};
 
-                        if(Object.keys(actionId).length > 0){
+                        if (Object.keys(actionId).length > 0) {
                             for (const id of Object.keys(actionId)) {
                                 try {
                                     const action = await this.prisma.actions.findFirst({
@@ -142,7 +151,7 @@ export class ItemsProcessingService {
                                     const actionIdValue = action['idActions'];
                                     const actionCalculDescription = action['description'];
 
-                                    if(actionIdValue && actionCalculDescription){
+                                    if (actionIdValue && actionCalculDescription) {
                                         actionDescriptions[actionIdValue] = actionCalculDescription;
                                     }
                                 } catch (error) {
@@ -151,7 +160,6 @@ export class ItemsProcessingService {
                             }
                         }
 
-                        // calcul des éléments à remplacer dans la description de l'élément
                         const calculatedDescriptions = await processActionDescriptions(actionId, actionDescriptions, item['level']);
 
                         const existingEquipment = await this.prisma.equipments.findFirst({
@@ -173,7 +181,7 @@ export class ItemsProcessingService {
                             }
                         });
 
-                        if(existingEquipment){
+                        if (existingEquipment) {
                             const differences = [
                                 existingEquipment['level'] !== item['level'],
                                 existingEquipment['rarity'] !== rarity[item['rarity']],
@@ -191,14 +199,12 @@ export class ItemsProcessingService {
                                 JSON.stringify(existingEquipment['description']) !== JSON.stringify(item['description']),
                             ];
 
-                            // test = equipmentPositionLabel;
-                            // break;
                             if (differences.includes(true)) {
                                 console.log(`Mise à jour de l'équipement : ${item['title']['fr']} (idItems: ${item['idItems']}})`);
 
                                 await this.prisma.equipments.update({
                                     where: {
-                                      id: existingEquipment['id'],
+                                        id: existingEquipment['id'],
                                     },
                                     data: {
                                         level: item['level'],
@@ -211,7 +217,6 @@ export class ItemsProcessingService {
                                     }
                                 });
 
-
                             } else {
                                 console.log(`L'équipement ${item['title']['fr']} est déjà à jour.`);
                             }
@@ -223,21 +228,132 @@ export class ItemsProcessingService {
                                     level: item['level'],
                                     rarity: rarity[item['rarity']],
                                     picture: item['picture'],
-                                    title: item['titre'],
+                                    title: item['title'],
                                     typeItem: JSON.stringify(equipmentPositionLabel),
                                     effects: calculatedDescriptions,
                                     description: item['description'],
                                 },
                             });
                         }
-
                     } else {
-                        // console.log(item.sublimationParameters);
+                        // Traitement des sublimations
+                        console.log(`Création d'une nouvelle sublimation : ${item['title']['fr']} (idSubli: ${item['idItems']})`);
+
+                        let sublimationType = 'common';
+
+                        if (item['sublimationParameters']['isEpic'] == true) {
+                            sublimationType = 'epic';
+                        }
+                        if (item['sublimationParameters']['isRelic'] == true) {
+                            sublimationType = 'relic';
+                        }
+
+                        let actionId = {};
+
+                        if (typeof item['equipEffects'] === 'object' && item['equipEffects'] !== null) {
+                            Object.values(item['equipEffects']).forEach(effect => {
+                                if (effect['effect'] && effect['effect']['definition']) {
+                                    const actionIdValue = effect['effect']['definition']['actionId'];
+                                    const params = effect['effect']['definition']['params'];
+                
+                                    if (actionIdValue && params) {
+                                        actionId[actionIdValue] = params;
+                                    }
+                                }
+                            });
+                        }
+
+                        let actionDescriptions = {};
+                        if (Object.keys(actionId).length > 0) {
+                            for (const id of Object.keys(actionId)) {
+                                try {
+                                    const action = await this.prisma.actions.findFirst({
+                                        where: {
+                                            idActions: parseInt(id),
+                                        },
+                                        select: {
+                                            idActions: true,
+                                            description: true,
+                                        },
+                                    });
+
+                                    if (action && action['description']) {
+                                        actionDescriptions[action['idActions']] = action['description'];
+                                    }
+                                } catch (error) {
+                                    console.error(`Erreur lors de la récupération de l'action avec idActions: ${id}`, error);
+                                }
+                            }
+                        }
+
+                        const calculatedDescriptions = await processActionDescriptions(actionId, actionDescriptions, item['level']);
+
+                        const existingSublimation = await this.prisma.sublimations.findFirst({
+                            where: {
+                                idSubli: item['idItems'],
+                                rarity: item['rarity'],
+                            },
+                            select: {
+                                id: true,
+                                idSubli: true,
+                                title: true,
+                                type: true,
+                                rarity: true,
+                                pattern: true,
+                                picture: true,
+                                effects: true,
+                                description: true, 
+                            }
+                        });
+
+                        if (existingSublimation) {
+                            const differences = [
+                                existingSublimation['rarity'] !== item['rarity'],
+                                existingSublimation['picture'] !== item['picture'],
+                                JSON.stringify(existingSublimation['title']) !== JSON.stringify(item['title']),
+                                JSON.stringify(existingSublimation['effects']) !== JSON.stringify(calculatedDescriptions),
+                                JSON.stringify(existingSublimation['description']) !== JSON.stringify(item['description']),
+                                JSON.stringify(existingSublimation['pattern']) !== JSON.stringify(item['sublimationParameters']['slotColorPattern']),
+                                existingSublimation['type'] !== sublimationType,
+                            ];
+
+                            if (differences.includes(true)) {
+                                console.log(`Mise à jour de la sublimation : ${item['title']['fr']} (idSubli: ${item['idItems']})`);
+
+                                await this.prisma.sublimations.update({
+                                    where: {
+                                        id: existingSublimation['id'],
+                                    },
+                                    data: {
+                                        title: item['title'],
+                                        type: sublimationType,
+                                        rarity: item['rarity'],
+                                        pattern: item['sublimationParameters']['slotColorPattern'],
+                                        picture: item['picture'],
+                                        effects: calculatedDescriptions,
+                                        description: item['description'],  
+                                    },
+                                });
+                            } else {
+                                console.log(`La sublimation ${item['title']['fr']} est déjà à jour.`);
+                            }
+                        } else {
+                            console.log(`Création d'une nouvelle sublimation : ${item['title']['fr']} (idSubli: ${item['idItems']})`);
+                            await this.prisma.sublimations.create({
+                                data: {
+                                    idSubli: item['idItems'],
+                                    title: item['title'],
+                                    type: sublimationType,
+                                    rarity: item['rarity'],
+                                    pattern: item['sublimationParameters']['slotColorPattern'],
+                                    picture: item['picture'],
+                                    effects: calculatedDescriptions,
+                                    description: item['description'],
+                                },
+                            });
+                        }
                     }
                 }
-                // if(test !== null){
-                //     break;
-                // }
                 offset += batchSize;
             }
             console.log('Tous les items ont été traités.');
@@ -246,4 +362,4 @@ export class ItemsProcessingService {
             console.error('Erreur lors du traitement des items :', error);
         }
     }
-} 
+}
