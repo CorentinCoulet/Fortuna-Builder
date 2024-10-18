@@ -7,6 +7,7 @@ export class EquipmentController {
 
   @Post('download-images')
   async downloadImages() {
+
     try {
       await this.equipmentService.downloadAllImages();
       return { message: 'Téléchargement des images réussi' };

@@ -5,6 +5,7 @@ import pLimit from 'p-limit';
 import axios from 'axios';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as process from "process";
 
 @Injectable()
 export class EquipmentService {
@@ -78,6 +79,11 @@ export class EquipmentService {
   }
 
   async importEquipmentData() {
+    if (process.env.DEBUG_MODE) {
+      console.log('DEBUG_MODE activé : L\'importation des équipements est désactivée.');
+      return;
+    }
+
     try {
       const batchSize = 100;
       const concurrencyLimit = 10;
