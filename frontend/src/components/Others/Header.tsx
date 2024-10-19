@@ -119,7 +119,7 @@ const Header: React.FC = () => {
             </button>
           )} */}
 
-          {/* {!isLoggedIn ? (
+          {!isLoggedIn ? (
             <button className="login-button" onClick={handleLoginClick}>
               <img
                 loading="lazy"
@@ -137,7 +137,7 @@ const Header: React.FC = () => {
                 className="icon logIcon"
               />
             </button>
-          )} */}
+          )}
         </div>
       </header>
 
