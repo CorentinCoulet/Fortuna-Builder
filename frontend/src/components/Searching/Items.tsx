@@ -4,8 +4,8 @@ import { RootState } from "../../store";
 import { replaceAllTagsWithClicked, setInstantSearch } from "../../features/components/Searching/searchFilterSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { unequipItem } from "../../features/components/Builder/equipedItemsSlice";
+import { resetEquipmentValues } from "../../features/components/Builder/classInformationsSlice";
 import React from "react";
-
 
 const Items: React.FC = () => {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ const Items: React.FC = () => {
 
   const handleUnequip = (tag: string) => {
     dispatch(unequipItem({ tag }));  
+    dispatch(resetEquipmentValues());
   };
 
   const handleClick = (tag: string) => {
