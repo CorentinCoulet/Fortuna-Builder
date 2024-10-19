@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-import { forEach } from "lodash";
 
 const rarity = {
     0: 'Commun',
@@ -13,29 +12,17 @@ const rarity = {
     7: 'Epique',
 };
 
-function replaceParamsInDescription(description, params, actionId) {
-    const actionPatterns = {
-        20: "[#1] PV",
-        150: "[#1]% Coup critique",
-        120: "[#1] Maîtrise Élémentaire",
-        31: "[#1] PA",
-        184: "[#1] Contrôle",
-        1083: "[#1] Dégâts",
-        175: "[#1] Parade",
-        80: "[#1]% Résistance",
-    };
-
-    const pattern = actionPatterns[actionId];
-    
-    if (!pattern) {
-        console.error(`ActionId ${actionId} non pris en charge.`);
-        return description;
-    }
-
-    return pattern.replace(/\[#(\d+)\]/g, (match, index) => {
-        const paramIndex = parseInt(index) - 1;
-        return params[paramIndex] !== undefined ? params[paramIndex] : match;
+function replaceParamsInDescription(description, params, lvlItem) {
+    description = description.replace(/\[#(\d+)\]/g, (match, paramIndex) => {
+        const index = (parseInt(paramIndex, 10) - 1) * 2;
+        if (params[index] !== undefined && params[index + 1] !== undefined) {
+            const calculatedValue = params[index + 1] * lvlItem + params[index];
+            return calculatedValue.toString();
+        }
+        return match;
     });
+
+    return description;
 }
 
 function isValidJson(str) {

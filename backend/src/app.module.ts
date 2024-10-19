@@ -14,11 +14,12 @@ import { BuildsModule } from './builds/builds.module';
 import { EquipmentController } from './equipment/equipment.controller';
 import { ItemsProcessingService } from './items-processing/items-processing.service';
 import { ItemsProcessingController } from './items-processing/items-processing.controller';
+import { ItemsModule } from './itemsTable/items.module';
 @Module({
   imports: [AuthModule, BuildsModule, HttpModule, ScheduleModule.forRoot(), ServeStaticModule.forRoot({
     rootPath: join(__dirname, '..', 'itemsWebp'),
     serveRoot: '/images',
-  }),],
+  }), ItemsModule,],
   controllers: [AppController, DataController, EquipmentController, ItemsProcessingController],
   providers: [DataService, PrismaService, VersionService, EquipmentService, ItemsProcessingService],
   exports: [ItemsProcessingService],
