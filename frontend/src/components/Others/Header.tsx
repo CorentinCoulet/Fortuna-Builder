@@ -91,12 +91,12 @@ const Header: React.FC = () => {
           <img src={Logo} alt="Fortuna Logo" className="logo" />
           <span className="site-name">Fortuna Builder</span>
         </div>
-
+{/* 
         <div className="burger-menu">
           <button className="burger-icon" onClick={toggleBurgerModal}>
             ☰
           </button>
-        </div>
+        </div> */}
 
         <div className="button-group">
           <button className="reset-button" onClick={handleResetClick}>
@@ -108,7 +108,7 @@ const Header: React.FC = () => {
             />
           </button>
 
-          {isLoggedIn && (
+          {/* {isLoggedIn && (
             <button className="settings-button" onClick={handleSettingsClick}>
               <img
                 loading="lazy"
@@ -117,9 +117,9 @@ const Header: React.FC = () => {
                 className="icon parameters"
               />
             </button>
-          )}
+          )} */}
 
-          {!isLoggedIn ? (
+          {/* {!isLoggedIn ? (
             <button className="login-button" onClick={handleLoginClick}>
               <img
                 loading="lazy"
@@ -137,7 +137,7 @@ const Header: React.FC = () => {
                 className="icon logIcon"
               />
             </button>
-          )}
+          )} */}
         </div>
       </header>
 

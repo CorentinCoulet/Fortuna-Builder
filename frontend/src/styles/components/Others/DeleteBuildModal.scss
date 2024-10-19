@@ -1,0 +1,62 @@
+.delete-build-modal {
+  background-color: #fff;
+  border-radius: 12px;
+  margin-top: -200px;
+  display: flex;
+  overflow: hidden;
+
+  .build-image {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  div {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    p {
+      flex: 1;
+    }
+
+    button {
+      background-color: rgb(199, 61, 61);
+      color: #fff;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      &:hover {
+        background-color: rgb(238, 94, 94);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .delete-build-modal {
+    flex-direction: column;
+    width: 80%;
+
+    .build-image {
+      width: 100%;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    div {
+      align-items: center;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

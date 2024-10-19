@@ -1,0 +1,27 @@
+.delete-account-modal {
+  background-color: #fff;
+  border-radius: 12px;
+  margin-top: -200px;
+  padding: 40px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    button {
+      background-color: rgb(199, 61, 61);
+      color: #fff;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      &:hover {
+        background-color: rgb(238, 94, 94);
+      }
+    }
+  }
+}
