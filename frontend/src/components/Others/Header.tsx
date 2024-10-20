@@ -107,7 +107,6 @@ const Header: React.FC = () => {
               className="icon reset"
             />
           </button>
-
           {notification && (
             <ClearNotification
               message={notification}

@@ -5,19 +5,26 @@ export interface Sublimation {
     alt?: string;
     label?: string;
     type?: 'epic' | 'relic' | 'rare' | 'mythique' | 'legendaire' | null;
-    descriptif? : string;
+    descriptif?: string;
     bonus?: Record<string, number> | null;
     order?: { src: string; alt: string }[],
     max?: number;
 }
 
+interface ApplyBonusPayload {
+    bonus: Record<string, number>;
+}
+
+interface RemoveBonusPayload {
+    bonus: Record<string, number>;
+}
 interface SublimationsState {
     selectedEpicSublimation: Sublimation | null;
     selectedRelicSublimation: Sublimation | null;
-    selectedNormalSublimation: Sublimation | null; 
+    selectedNormalSublimation: Sublimation | null;
     equippedEpicSublimation: Sublimation | null;
     equippedRelicSublimation: Sublimation | null;
-    equippedNormalSublimation: Sublimation | null;
+    equippedNormalSublimation: (Sublimation | null)[];
 }
 
 const initialState: SublimationsState = {
@@ -26,7 +33,7 @@ const initialState: SublimationsState = {
     selectedNormalSublimation: null,
     equippedEpicSublimation: null,
     equippedRelicSublimation: null,
-    equippedNormalSublimation: null,
+    equippedNormalSublimation: [],
 };
 
 const sublimationsSlice = createSlice({
@@ -48,16 +55,17 @@ const sublimationsSlice = createSlice({
         setEquippedRelicSublimation: (state, action: PayloadAction<Sublimation | null>) => {
             state.equippedRelicSublimation = action.payload;
         },
-        setEquippedNormalSublimation: (state, action: PayloadAction<Sublimation | null>) => {
-            state.equippedNormalSublimation = action.payload;
-        },
+        setEquippedNormalSublimation: (state, action: PayloadAction<{ index: number, sublimation: Sublimation | null }>) => {
+            const { index, sublimation } = action.payload;
+            state.equippedNormalSublimation[index] = sublimation;
+          },
         clearSublimations: (state) => {
             state.selectedEpicSublimation = null;
             state.selectedRelicSublimation = null;
             state.selectedNormalSublimation = null;
             state.equippedEpicSublimation = null;
             state.equippedRelicSublimation = null;
-            state.equippedNormalSublimation = null;
+            state.equippedNormalSublimation = [];
         },
     },
 });

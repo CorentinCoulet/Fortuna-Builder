@@ -10,10 +10,12 @@ interface Shard {
 
 interface RunesState {
   selectedShard: Shard | null;
+  equippedShards: Array<Shard | null>;
 }
 
 const initialState: RunesState = {
   selectedShard: null,
+  equippedShards: Array(10).fill(null),
 };
 
 const runesSlice = createSlice({
@@ -26,9 +28,26 @@ const runesSlice = createSlice({
     clearSelectedShard: (state) => {
       state.selectedShard = null;
     },
+    equipShard: (state, action: PayloadAction<{ shard: Shard; index: number }>) => {
+      const { shard, index } = action.payload;
+      if (state.equippedShards[index]) {
+        state.equippedShards[index] = null;
+      }
+      state.equippedShards[index] = shard; 
+      state.selectedShard = null; 
+    },
+    unequipShard: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      state.equippedShards[index] = null;
+    },
   },
 });
 
-export const { setSelectedShard, clearSelectedShard } = runesSlice.actions;
+export const { 
+  setSelectedShard, 
+  clearSelectedShard,
+  equipShard,
+  unequipShard,
+} = runesSlice.actions;
 
 export default runesSlice.reducer;

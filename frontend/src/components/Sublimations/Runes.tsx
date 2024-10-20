@@ -156,14 +156,14 @@ const getActionsForLabel = (
     "résistance terre": "resistances:earthResist",
     "maîtrise critique": "critMastery",
     "maîtrise dos": "rearMastery",
-    esquive: "dodge",
-    initiative: "initiative",
+    "esquive": "dodge",
+    "initiative": "initiative",
     "résistance feu": "resistances:fireResist",
     "maîtrise elémentaire": "masteries",
-    tacle: "lock",
+    "tacle": "lock",
     "résistance eau": "resistances:waterResist",
     "résistance air": "resistances:airResist",
-    vie: "baseHp",
+    "vie": "baseHp",
     "maîtrise soin": "healMastery",
   };
 
@@ -267,9 +267,9 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
     (state: RootState) => state.classInformations
   );
 
-  const selectedShard = useSelector(
-    (state: RootState) => state.runes.selectedShard
-  );
+  const selectedShard = useSelector((state: RootState) => state.runes.selectedShard);
+  const equippedShards = useSelector((state: RootState) => state.runes.equippedShards);
+
   const selectedEpicSublimation = useSelector(
     (state: RootState) => state.sublimations.selectedEpicSublimation
   );
@@ -526,24 +526,33 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
   const handleSublimationClick = (index: number) => {
     if (!selectedSublimation) return;
 
-    if (selectedSublimation.bonus) {
-      Object.entries(selectedSublimation.bonus).forEach(([key, value]) => {
+    const existingSublimation = appliedNormalSublimations[index];
+    if (existingSublimation && existingSublimation.bonus) {
+      Object.entries(existingSublimation.bonus).forEach(([key, value]) => {
         if (key in bonusLabels) {
           if (key.includes("Resist")) {
-            dispatch(updateResistances({ [key]: value }));
+            const currentResist =
+              classInformations.resistances[key as keyof Resistances] || 0;
+            dispatch(updateResistances({ [key]: currentResist - value }));
           } else if (key.includes("Mastery")) {
-            dispatch(updateMasteries({ [key]: value }));
+            const currentMastery =
+              classInformations.masteries[key as keyof Masteries] || 0;
+            dispatch(updateMasteries({ [key]: currentMastery - value }));
           } else {
+            const currentValue =
+              classInformations[key as keyof ClassInformationsState] as number;
             dispatch(
               updateProperty({
                 key: key as keyof ClassInformationsState,
-                value,
+                value: currentValue - value,
               })
             );
           }
         }
       });
     }
+
+    
 
     setAppliedNormalSublimations((prev) => {
       const newSublimations = [...prev];
@@ -686,9 +695,8 @@ const Runes: React.FC<RunesProps> = ({ isReadOnly = false }) => {
                 classInformations.masteries[key as keyof Masteries] || 0;
               dispatch(updateMasteries({ [key]: currentMastery - value }));
             } else {
-              const currentValue = classInformations[
-                key as keyof ClassInformationsState
-              ] as number;
+              const currentValue =
+                classInformations[key as keyof ClassInformationsState] as number;
               dispatch(
                 updateProperty({
                   key: key as keyof ClassInformationsState,
