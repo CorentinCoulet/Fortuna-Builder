@@ -91,7 +91,7 @@ const Header: React.FC = () => {
           <img src={Logo} alt="Fortuna Logo" className="logo" />
           <span className="site-name">Fortuna Builder</span>
         </div>
-{/* 
+        {/* 
         <div className="burger-menu">
           <button className="burger-icon" onClick={toggleBurgerModal}>
             ☰
@@ -107,6 +107,14 @@ const Header: React.FC = () => {
               className="icon reset"
             />
           </button>
+
+          {notification && (
+            <ClearNotification
+              message={notification}
+              onClose={() => setNotification(null)}
+              className="clear-notification"
+            />
+          )}
 
           {/* {isLoggedIn && (
             <button className="settings-button" onClick={handleSettingsClick}>
@@ -224,14 +232,6 @@ const Header: React.FC = () => {
           </p>
         </div>
       </Modal>
-
-      {notification && (
-        <ClearNotification
-          message={notification}
-          onClose={() => setNotification(null)}
-          className="clear-notification"
-        />
-      )}
     </>
   );
 };

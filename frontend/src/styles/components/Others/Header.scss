@@ -2,6 +2,7 @@
 @import "../../generic/variables";
 
 .header {
+  position: relative;
   width: 95%;
   display: flex;
   justify-content: space-between;
@@ -178,7 +179,7 @@
 }
 
 .clear-notification {
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 20px;
   padding: 10px 15px;

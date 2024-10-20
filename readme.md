@@ -15,3 +15,5 @@ Fortuna est un outil web réalisé par un fan qui n'a aucun lien avec la sociét
 ## Notes
 
 Suite à un enchaînement de problèmes plus ou moins important avec des éléments du builder, Le profil et le menu burger ont été momentanément retirés. De plus, à cause de problèmes avec les données récupérées auprès de l'api Wakfu, il me faudrait un temps que je n'ai pas pour analyser chaque donnée et en déduire un algorithme pour certains paramètres qu'il me faut récupérer pour afficher en front. A cause de ça, les équipements et sublimations sont des fausses données rentrées à la main pour permettre tout de même de tester l'application malgré le dysfonctionnement actuel. 
+
+ps: Deployer le projet en l'état serait une perte de temps et je préfère passer le temps qu'il me reste à debug ce que j'ai déjà sous la main plutôt que de me rajouter du taff en plus.

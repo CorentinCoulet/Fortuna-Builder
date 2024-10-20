@@ -16,7 +16,7 @@ const ClearNotification: React.FC<ClearNotificationProps> = ({ message, onClose,
   }, [onClose]);
 
   return (
-    <div className={`clear-notification ${className}`}>
+    <div className={`${className}`}>
       <p>{message}</p>
       <button className="close-button" onClick={onClose}>✕</button>
     </div>
