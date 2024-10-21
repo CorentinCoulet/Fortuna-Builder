@@ -8,9 +8,7 @@ import {
   setTempRingItem,
   clearTempRingItem,
 } from "../../features/components/Builder/equipedItemsSlice.ts";
-import {
-  applyEquipmentBonus,
-} from "../../features/components/Builder/classInformationsSlice.ts";
+import { applyEquipmentBonus } from "../../features/components/Builder/classInformationsSlice.ts";
 import RingModal from "./RingModal.tsx";
 import { RootState } from "../../store.ts";
 
@@ -337,11 +335,24 @@ const ItemsListSearch: React.FC<ItemsListSearchProps> = ({
 
   const handleEquipClick = (item) => {
     if (item.tag === "ring") {
-      dispatch(setTempRingItem({ src: item.image, alt: item.name }));
+      dispatch(
+        setTempRingItem({
+          src: item.image,
+          alt: item.name,
+          equipmentValues: item.bonus,
+        })
+      );
       setShowModal(true);
     } else {
       dispatch(
-        equipItem({ tag: item.tag, item: { src: item.image, alt: item.name } })
+        equipItem({
+          tag: item.tag,
+          item: {
+            src: item.image,
+            alt: item.name,
+            equipmentValues: item.bonus,
+          },
+        })
       );
       dispatch(applyEquipmentBonus(item.bonus));
     }

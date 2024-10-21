@@ -1,8 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ClassBonusValues } from "./classInformationsSlice";
 
-interface EquippedItem {
+export interface EquippedItem {
   src: string;
   alt: string;
+  equipmentValues: ClassBonusValues;
 }
 
 interface EquippedItemsState {
@@ -15,10 +17,13 @@ const initialState: EquippedItemsState = {
 };
 
 const equippedItemsSlice = createSlice({
-  name: 'equippedItem',
+  name: "equippedItem",
   initialState,
   reducers: {
-    equipItem: (state, action: PayloadAction<{ tag: string; item: EquippedItem }>) => {
+    equipItem: (
+      state,
+      action: PayloadAction<{ tag: string; item: EquippedItem }>
+    ) => {
       state[action.payload.tag] = action.payload.item;
     },
     unequipItem: (state, action: PayloadAction<{ tag: string }>) => {
@@ -28,7 +33,7 @@ const equippedItemsSlice = createSlice({
       state.tempRingItem = action.payload;
     },
     clearTempRingItem: (state) => {
-      state.tempRingItem = null; 
+      state.tempRingItem = null;
     },
   },
 });

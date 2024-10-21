@@ -39,18 +39,18 @@ const selectCalculatedStats = createSelector(
   (state: RootState) => state.classInformations,
   (classInformations) => {
     const highestElementalMastery = Math.max(
-      classInformations.masteries.waterMastery,
-      classInformations.masteries.earthMastery,
-      classInformations.masteries.airMastery,
-      classInformations.masteries.fireMastery,
+      classInformations.waterMastery,
+      classInformations.earthMastery,
+      classInformations.airMastery,
+      classInformations.fireMastery,
     );
 
     return {
       elems: {
-        waterMastery: classInformations.masteries.waterMastery,
-        earthMastery: classInformations.masteries.earthMastery,
-        airMastery: classInformations.masteries.airMastery,
-        fireMastery: classInformations.masteries.fireMastery,
+        waterMastery: classInformations.waterMastery,
+        earthMastery: classInformations.earthMastery,
+        airMastery: classInformations.airMastery,
+        fireMastery: classInformations.fireMastery,
       },
       highestElementalMastery,
       meleeMastery: classInformations.meleeMastery,

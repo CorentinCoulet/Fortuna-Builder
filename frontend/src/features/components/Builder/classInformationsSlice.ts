@@ -1,24 +1,10 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../../store';
-import { selectIntelPoints } from '../Aptitudes/aptitudeIntelSlice';
-import { selectStrengthPoints } from '../Aptitudes/aptitudeStrengthSlice';
-import { selectAgilityPoints } from '../Aptitudes/aptitudeAgilitySlice';
-import { selectChancePoints } from '../Aptitudes/aptitudeChanceSlice';
-import { selectMajorPoints } from '../Aptitudes/aptitudeMajorSlice';
-
-export interface Resistances {
-  waterResist: number;
-  earthResist: number;
-  airResist: number;
-  fireResist: number;
-}
-
-export interface Masteries {
-  waterMastery: number;
-  earthMastery: number;
-  airMastery: number;
-  fireMastery: number;
-}
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../../store";
+import { selectIntelPoints } from "../Aptitudes/aptitudeIntelSlice";
+import { selectStrengthPoints } from "../Aptitudes/aptitudeStrengthSlice";
+import { selectAgilityPoints } from "../Aptitudes/aptitudeAgilitySlice";
+import { selectChancePoints } from "../Aptitudes/aptitudeChanceSlice";
+import { selectMajorPoints } from "../Aptitudes/aptitudeMajorSlice";
 
 export interface ClassBonusValues {
   baseHp: number;
@@ -27,8 +13,14 @@ export interface ClassBonusValues {
   wp: number;
   mp: number;
 
-  resistances: Resistances;
-  masteries: Masteries;
+  waterResist: number;
+  earthResist: number;
+  airResist: number;
+  fireResist: number;
+  waterMastery: number;
+  earthMastery: number;
+  airMastery: number;
+  fireMastery: number;
   armorReceived: number;
   armorGiven: number;
 
@@ -65,8 +57,14 @@ export interface ClassInformationsState {
   wp: number;
   mp: number;
 
-  resistances: Resistances;
-  masteries: Masteries;
+  waterResist: number;
+  earthResist: number;
+  airResist: number;
+  fireResist: number;
+  waterMastery: number;
+  earthMastery: number;
+  airMastery: number;
+  fireMastery: number;
   armorReceived: number;
   armorGiven: number;
 
@@ -98,7 +96,7 @@ export interface ClassInformationsState {
 }
 
 const initialState: ClassInformationsState = {
-  buildName: 'Build 230',
+  buildName: "Build 230",
   level: 230,
 
   // Valeurs de base
@@ -108,18 +106,14 @@ const initialState: ClassInformationsState = {
   wp: 6,
   mp: 3,
 
-  resistances: {
-    waterResist: 0,
-    earthResist: 0,
-    airResist: 0,
-    fireResist: 0,
-  },
-  masteries: {
-    waterMastery: 0,
-    earthMastery: 0,
-    airMastery: 0,
-    fireMastery: 0,
-  },
+  waterResist: 0,
+  earthResist: 0,
+  airResist: 0,
+  fireResist: 0,
+  waterMastery: 0,
+  earthMastery: 0,
+  airMastery: 0,
+  fireMastery: 0,
   armorReceived: 0,
   armorGiven: 0,
 
@@ -152,18 +146,14 @@ const initialState: ClassInformationsState = {
     ap: 0,
     wp: 0,
     mp: 0,
-    resistances: {
-      waterResist: 0,
-      earthResist: 0,
-      airResist: 0,
-      fireResist: 0,
-    },
-    masteries: {
-      waterMastery: 0,
-      earthMastery: 0,
-      airMastery: 0,
-      fireMastery: 0,
-    },
+    waterResist: 0,
+    earthResist: 0,
+    airResist: 0,
+    fireResist: 0,
+    waterMastery: 0,
+    earthMastery: 0,
+    airMastery: 0,
+    fireMastery: 0,
     armorReceived: 0,
     armorGiven: 0,
     damageDealt: 0,
@@ -195,18 +185,14 @@ const initialState: ClassInformationsState = {
     ap: 0,
     wp: 0,
     mp: 0,
-    resistances: {
-      waterResist: 0,
-      earthResist: 0,
-      airResist: 0,
-      fireResist: 0,
-    },
-    masteries: {
-      waterMastery: 0,
-      earthMastery: 0,
-      airMastery: 0,
-      fireMastery: 0,
-    },
+    waterResist: 0,
+    earthResist: 0,
+    airResist: 0,
+    fireResist: 0,
+    waterMastery: 0,
+    earthMastery: 0,
+    airMastery: 0,
+    fireMastery: 0,
     armorReceived: 0,
     armorGiven: 0,
     damageDealt: 0,
@@ -238,18 +224,14 @@ const initialState: ClassInformationsState = {
     ap: 0,
     wp: 0,
     mp: 0,
-    resistances: {
-      waterResist: 0,
-      earthResist: 0,
-      airResist: 0,
-      fireResist: 0,
-    },
-    masteries: {
-      waterMastery: 0,
-      earthMastery: 0,
-      airMastery: 0,
-      fireMastery: 0,
-    },
+    waterResist: 0,
+    earthResist: 0,
+    airResist: 0,
+    fireResist: 0,
+    waterMastery: 0,
+    earthMastery: 0,
+    airMastery: 0,
+    fireMastery: 0,
     armorReceived: 0,
     armorGiven: 0,
     damageDealt: 0,
@@ -272,11 +254,11 @@ const initialState: ClassInformationsState = {
     distanceMastery: 0,
     healMastery: 0,
     berserkMastery: 0,
-  }
+  },
 };
 
 const classInformationsSlice = createSlice({
-  name: 'classInformations',
+  name: "classInformations",
   initialState,
   reducers: {
     applyEquipmentBonus(
@@ -292,28 +274,50 @@ const classInformationsSlice = createSlice({
       state.damageDealt += action.payload.damageDealt ?? 0;
 
       // Ajout des bonus pour les résistances
-      if (action.payload.resistances) {
-        state.resistances.waterResist += action.payload.resistances.waterResist ?? 0;
-        state.resistances.earthResist += action.payload.resistances.earthResist ?? 0;
-        state.resistances.airResist += action.payload.resistances.airResist ?? 0;
-        state.resistances.fireResist += action.payload.resistances.fireResist ?? 0;
-      }
+      state.waterResist += action.payload.waterResist ?? 0;
+      state.earthResist += action.payload.earthResist ?? 0;
+      state.airResist += action.payload.airResist ?? 0;
+      state.fireResist += action.payload.fireResist ?? 0;
 
       // Ajout des bonus pour les maîtrises
-      if (action.payload.masteries) {
-        state.masteries.waterMastery += action.payload.masteries.waterMastery ?? 0;
-        state.masteries.earthMastery += action.payload.masteries.earthMastery ?? 0;
-        state.masteries.airMastery += action.payload.masteries.airMastery ?? 0;
-        state.masteries.fireMastery += action.payload.masteries.fireMastery ?? 0;
-      }
+      state.waterMastery += action.payload.waterMastery ?? 0;
+      state.earthMastery += action.payload.earthMastery ?? 0;
+      state.airMastery += action.payload.airMastery ?? 0;
+      state.fireMastery += action.payload.fireMastery ?? 0;
 
+      state.armorReceived += action.payload.armorReceived ?? 0;
+      state.armorGiven += action.payload.armorGiven ?? 0;
+      state.damageDealt += action.payload.damageDealt ?? 0;
+      state.critical += action.payload.critical ?? 0;
+
+      state.initiative += action.payload.initiative ?? 0;
+      state.dodge += action.payload.dodge ?? 0;
+      state.wisdom += action.payload.wisdom ?? 0;
+      state.control += action.payload.control ?? 0;
+
+      state.heals += action.payload.heals ?? 0;
+      state.block += action.payload.block ?? 0;
+      state.range += action.payload.range ?? 0;
+
+      state.lock += action.payload.lock ?? 0;
+      state.prospecting += action.payload.prospecting ?? 0;
+      state.will += action.payload.will ?? 0;
+
+      state.critMastery += action.payload.critMastery ?? 0;
+      state.critResist += action.payload.critResist ?? 0;
+      state.rearMastery += action.payload.rearMastery ?? 0;
+
+      state.rearResist += action.payload.rearResist ?? 0;
+      state.meleeMastery += action.payload.meleeMastery ?? 0;
+      state.distanceMastery += action.payload.distanceMastery ?? 0;
+      state.healMastery += action.payload.healMastery ?? 0;
+      state.berserkMastery += action.payload.berserkMastery ?? 0;
     },
 
     removeEquipmentBonus(
       state: ClassInformationsState,
       action: PayloadAction<Partial<ClassBonusValues>>
     ) {
-      // Retrait des bonus pour les statistiques simples
       state.baseHp -= action.payload.baseHp ?? 0;
       state.baseArmor -= action.payload.baseArmor ?? 0;
       state.ap -= action.payload.ap ?? 0;
@@ -321,21 +325,43 @@ const classInformationsSlice = createSlice({
       state.mp -= action.payload.mp ?? 0;
       state.damageDealt -= action.payload.damageDealt ?? 0;
 
-      // Retrait des bonus pour les résistances
-      if (action.payload.resistances) {
-        state.resistances.waterResist -= action.payload.resistances.waterResist ?? 0;
-        state.resistances.earthResist -= action.payload.resistances.earthResist ?? 0;
-        state.resistances.airResist -= action.payload.resistances.airResist ?? 0;
-        state.resistances.fireResist -= action.payload.resistances.fireResist ?? 0;
-      }
+      state.waterResist -= action.payload.waterResist ?? 0;
+      state.earthResist -= action.payload.earthResist ?? 0;
+      state.airResist -= action.payload.airResist ?? 0;
+      state.fireResist -= action.payload.fireResist ?? 0;
 
-      // Retrait des bonus pour les maîtrises
-      if (action.payload.masteries) {
-        state.masteries.waterMastery -= action.payload.masteries.waterMastery ?? 0;
-        state.masteries.earthMastery -= action.payload.masteries.earthMastery ?? 0;
-        state.masteries.airMastery -= action.payload.masteries.airMastery ?? 0;
-        state.masteries.fireMastery -= action.payload.masteries.fireMastery ?? 0;
-      }
+      state.waterMastery -= action.payload.waterMastery ?? 0;
+      state.earthMastery -= action.payload.earthMastery ?? 0;
+      state.airMastery -= action.payload.airMastery ?? 0;
+      state.fireMastery -= action.payload.fireMastery ?? 0;
+
+      state.armorReceived -= action.payload.armorReceived ?? 0;
+      state.armorGiven -= action.payload.armorGiven ?? 0;
+      state.damageDealt -= action.payload.damageDealt ?? 0;
+      state.critical -= action.payload.critical ?? 0;
+
+      state.initiative -= action.payload.initiative ?? 0;
+      state.dodge -= action.payload.dodge ?? 0;
+      state.wisdom -= action.payload.wisdom ?? 0;
+      state.control -= action.payload.control ?? 0;
+
+      state.heals -= action.payload.heals ?? 0;
+      state.block -= action.payload.block ?? 0;
+      state.range -= action.payload.range ?? 0;
+
+      state.lock -= action.payload.lock ?? 0;
+      state.prospecting -= action.payload.prospecting ?? 0;
+      state.will -= action.payload.will ?? 0;
+
+      state.critMastery -= action.payload.critMastery ?? 0;
+      state.critResist -= action.payload.critResist ?? 0;
+      state.rearMastery -= action.payload.rearMastery ?? 0;
+
+      state.rearResist -= action.payload.rearResist ?? 0;
+      state.meleeMastery -= action.payload.meleeMastery ?? 0;
+      state.distanceMastery -= action.payload.distanceMastery ?? 0;
+      state.healMastery -= action.payload.healMastery ?? 0;
+      state.berserkMastery -= action.payload.berserkMastery ?? 0;
     },
     resetEquipmentValues(state) {
       state.equipmentValues = initialState.equipmentValues;
@@ -347,51 +373,61 @@ const classInformationsSlice = createSlice({
     ) {
       state[action.payload.key] = action.payload.value;
     },
-    updateMasteries(
+    // updateMasteries<T extends keyof ClassInformationsState>(
+    //   state: ClassInformationsState,
+    //   action: PayloadAction<{ key: T; value: ClassInformationsState[T] }>
+    // ) {
+    //   state = {
+    //     ...state,
+    //     ...action.payload,
+    //   };
+    // },
+    // updateResistances<T extends keyof ClassInformationsState>(
+    //   state: ClassInformationsState,
+    //   action: PayloadAction<{ key: T; value: ClassInformationsState[T] }>
+    // ) {
+    //   state = {
+    //     ...state,
+    //     ...action.payload,
+    //   };
+    // },
+    updateManualMasteries<T extends keyof ClassInformationsState>(
       state: ClassInformationsState,
-      action: PayloadAction<Partial<Masteries>>
+      action: PayloadAction<{ key: T; value: ClassInformationsState[T] }>
     ) {
-      state.masteries = { 
-        ...state.masteries, 
-        ...action.payload 
-      };
-    },
-    updateResistances(
-      state: ClassInformationsState,
-      action: PayloadAction<Partial<Resistances>>
-    ) {
-      state.resistances = {
-        ...state.resistances,
+      state.manualValues = {
+        ...state.manualValues,
         ...action.payload,
       };
     },
-    updateManualMasteries(
+    updateManualResistances<T extends keyof ClassInformationsState>(
       state: ClassInformationsState,
-      action: PayloadAction<Partial<Masteries>>
+      action: PayloadAction<{ key: T; value: ClassInformationsState[T] }>
     ) {
-      state.manualValues.masteries = {
-        ...state.manualValues.masteries,
+      state.manualValues = {
+        ...state.manualValues,
         ...action.payload,
       };
     },
-    updateManualResistances(
+    updateManualProperty<
+      T extends keyof ClassInformationsState["manualValues"]
+    >(
       state: ClassInformationsState,
-      action: PayloadAction<Partial<Resistances>>
-    ) {
-      state.manualValues.resistances = {
-        ...state.manualValues.resistances,
-        ...action.payload,
-      };
-    },
-    updateManualProperty<T extends keyof ClassInformationsState['manualValues']>(
-      state: ClassInformationsState,
-      action: PayloadAction<{ key: T; value: ClassInformationsState['manualValues'][T] }>
+      action: PayloadAction<{
+        key: T;
+        value: ClassInformationsState["manualValues"][T];
+      }>
     ) {
       state.manualValues[action.payload.key] = action.payload.value;
     },
-    updateEquipmentProperty<T extends keyof ClassInformationsState['equipmentValues']>(
+    updateEquipmentProperty<
+      T extends keyof ClassInformationsState["equipmentValues"]
+    >(
       state: ClassInformationsState,
-      action: PayloadAction<{ key: T; value: ClassInformationsState['equipmentValues'][T] }>
+      action: PayloadAction<{
+        key: T;
+        value: ClassInformationsState["equipmentValues"][T];
+      }>
     ) {
       state.equipmentValues[action.payload.key] = action.payload.value;
     },
@@ -405,10 +441,10 @@ const classInformationsSlice = createSlice({
 
     applyGuildBonus(state) {
       state.baseHp += 55;
-      state.resistances.fireResist += 20;
-      state.resistances.waterResist += 20;
-      state.resistances.earthResist += 20;
-      state.resistances.airResist += 20;
+      state.fireResist += 20;
+      state.waterResist += 20;
+      state.earthResist += 20;
+      state.airResist += 20;
       state.damageDealt += 8;
       state.heals += 8;
       state.prospecting += 10;
@@ -419,10 +455,10 @@ const classInformationsSlice = createSlice({
     },
     removeGuildBonus(state) {
       state.baseHp -= 55;
-      state.resistances.fireResist -= 20;
-      state.resistances.waterResist -= 20;
-      state.resistances.earthResist -= 20;
-      state.resistances.airResist -= 20;
+      state.fireResist -= 20;
+      state.waterResist -= 20;
+      state.earthResist -= 20;
+      state.airResist -= 20;
       state.damageDealt -= 8;
       state.heals -= 8;
       state.prospecting -= 10;
@@ -450,8 +486,8 @@ export const {
   removeEquipmentBonus,
   resetEquipmentValues,
   updateProperty,
-  updateMasteries,
-  updateResistances,
+  // updateMasteries,
+  // updateResistances,
   updateManualProperty,
   updateManualMasteries,
   updateManualResistances,
@@ -500,27 +536,27 @@ export const selectCalculatedStats = createSelector(
     const resistBonusMajor = majorPoints[6] * 50;
     const resists = {
       waterResist:
-        classInfo.resistances.waterResist +
-        classInfo.manualValues.resistances.waterResist +
-        classInfo.equipmentValues.resistances.waterResist +
+        classInfo.waterResist +
+        classInfo.manualValues.waterResist +
+        classInfo.equipmentValues.waterResist +
         resistBonusIntel +
         resistBonusMajor,
       earthResist:
-        classInfo.resistances.earthResist +
-        classInfo.manualValues.resistances.earthResist +
-        classInfo.equipmentValues.resistances.earthResist +
+        classInfo.earthResist +
+        classInfo.manualValues.earthResist +
+        classInfo.equipmentValues.earthResist +
         resistBonusIntel +
         resistBonusMajor,
       airResist:
-        classInfo.resistances.airResist +
-        classInfo.manualValues.resistances.airResist +
-        classInfo.equipmentValues.resistances.airResist +
+        classInfo.airResist +
+        classInfo.manualValues.airResist +
+        classInfo.equipmentValues.airResist +
         resistBonusIntel +
         resistBonusMajor,
       fireResist:
-        classInfo.resistances.fireResist +
-        classInfo.manualValues.resistances.fireResist +
-        classInfo.equipmentValues.resistances.fireResist +
+        classInfo.fireResist +
+        classInfo.manualValues.fireResist +
+        classInfo.equipmentValues.fireResist +
         resistBonusIntel +
         resistBonusMajor,
     };
@@ -537,24 +573,24 @@ export const selectCalculatedStats = createSelector(
     const bonusStrength = strengthPoints[0] * 5;
     const elems = {
       waterMastery:
-        classInfo.masteries.waterMastery +
-        classInfo.manualValues.masteries.waterMastery +
-        classInfo.equipmentValues.masteries.waterMastery +
+        classInfo.waterMastery +
+        classInfo.manualValues.waterMastery +
+        classInfo.equipmentValues.waterMastery +
         bonusStrength,
       earthMastery:
-        classInfo.masteries.earthMastery +
-        classInfo.manualValues.masteries.earthMastery +
-        classInfo.equipmentValues.masteries.earthMastery +
+        classInfo.earthMastery +
+        classInfo.manualValues.earthMastery +
+        classInfo.equipmentValues.earthMastery +
         bonusStrength,
       airMastery:
-        classInfo.masteries.airMastery +
-        classInfo.manualValues.masteries.airMastery +
-        classInfo.equipmentValues.masteries.airMastery +
+        classInfo.airMastery +
+        classInfo.manualValues.airMastery +
+        classInfo.equipmentValues.airMastery +
         bonusStrength,
       fireMastery:
-        classInfo.masteries.fireMastery +
-        classInfo.manualValues.masteries.fireMastery +
-        classInfo.equipmentValues.masteries.fireMastery +
+        classInfo.fireMastery +
+        classInfo.manualValues.fireMastery +
+        classInfo.equipmentValues.fireMastery +
         bonusStrength,
     };
 

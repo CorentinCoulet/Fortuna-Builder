@@ -1,10 +1,13 @@
 import "../../styles/components/Searching/Items.scss";
 import { Equipments } from "../../asset";
 import { RootState } from "../../store";
-import { replaceAllTagsWithClicked, setInstantSearch } from "../../features/components/Searching/searchFilterSlice";
+import {
+  replaceAllTagsWithClicked,
+  setInstantSearch,
+} from "../../features/components/Searching/searchFilterSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { unequipItem } from "../../features/components/Builder/equipedItemsSlice";
-import { resetEquipmentValues } from "../../features/components/Builder/classInformationsSlice";
+import { EquippedItem, unequipItem } from "../../features/components/Builder/equipedItemsSlice";
+import { removeEquipmentBonus } from "../../features/components/Builder/classInformationsSlice";
 import React from "react";
 
 const Items: React.FC = () => {
@@ -12,9 +15,13 @@ const Items: React.FC = () => {
   const equippedItems = useSelector((state: RootState) => state.equippedItem);
   const currentFilters = useSelector((state: RootState) => state.searchFilters);
 
-  const handleUnequip = (tag: string) => {
-    dispatch(unequipItem({ tag }));  
-    dispatch(resetEquipmentValues());
+  const handleUnequip = (item: EquippedItem, tag: string) => {
+    dispatch(unequipItem({
+      tag
+    }));
+    dispatch(
+      removeEquipmentBonus(item.equipmentValues)
+    );
   };
 
   const handleClick = (tag: string) => {
@@ -28,6 +35,7 @@ const Items: React.FC = () => {
     <div className="items-container">
       {Equipments.map((item, index) => {
         const equippedItem = equippedItems[item.tag];
+        console.log(item);
         return (
           <div key={index} className="item-wrapper">
             <img
@@ -40,7 +48,7 @@ const Items: React.FC = () => {
             {equippedItem && (
               <button
                 className="unequip-button"
-                onClick={() => handleUnequip(item.tag)}
+                onClick={() => handleUnequip(equippedItem, item.tag)}
               >
                 &times;
               </button>
@@ -53,4 +61,3 @@ const Items: React.FC = () => {
 };
 
 export default Items;
-

@@ -5,21 +5,21 @@ import "../../styles/components/Sublimations/EnchantmentPerEquipment.scss";
 import { setSelectedShard } from "../../features/components/Sublimations/runesSlice";
 
 const masteryEnchantmentLabels = {
-  1: { label: "Maîtrise Mêlée", actions: ['meleeMastery'] },
-  2: { label: "Maîtrise Distance", actions: ['distanceMastery'] },
-  3: { label: "Maîtrise Berserk", actions: ['berserkMastery'] },
-  4: { label: "Résistance Terre", actions: ['resistances:earthResist'] },
-  5: { label: "Maîtrise Critique", actions: ['critMastery'] },
-  6: { label: "Maîtrise Dos", actions: ['rearMastery'] },
-  7: { label: "Esquive", actions: ['dodge'] },
-  8: { label: "Initiative", actions: ['initiative'] },
-  9: { label: "Résistance Feu", actions: ['resistances:fireResist'] },
-  10: { label: "Maîtrise Elémentaire", actions: ['masteries'] },
-  11: { label: "Tacle", actions: ['lock'] },
-  12: { label: "Résistance Eau", actions: ['resistances:waterResist'] },
-  13: { label: "Résistance Air", actions: ['resistances:airResist'] },
-  14: { label: "Vie", actions: ['baseHp'] },
-  15: { label: "Maîtrise Soin", actions: ['healMastery'] },
+  1: { label: "Maîtrise Mêlée", actions: ["meleeMastery"] },
+  2: { label: "Maîtrise Distance", actions: ["distanceMastery"] },
+  3: { label: "Maîtrise Berserk", actions: ["berserkMastery"] },
+  4: { label: "Résistance Terre", actions: ["resistances:earthResist"] },
+  5: { label: "Maîtrise Critique", actions: ["critMastery"] },
+  6: { label: "Maîtrise Dos", actions: ["rearMastery"] },
+  7: { label: "Esquive", actions: ["dodge"] },
+  8: { label: "Initiative", actions: ["initiative"] },
+  9: { label: "Résistance Feu", actions: ["resistances:fireResist"] },
+  10: { label: "Maîtrise Elémentaire", actions: ["masteries"] },
+  11: { label: "Tacle", actions: ["lock"] },
+  12: { label: "Résistance Eau", actions: ["resistances:waterResist"] },
+  13: { label: "Résistance Air", actions: ["resistances:airResist"] },
+  14: { label: "Vie", actions: ["baseHp"] },
+  15: { label: "Maîtrise Soin", actions: ["healMastery"] },
 };
 
 // On ne garde que les images Bleues, Vertes et Rouges
@@ -232,7 +232,7 @@ const EnchantmentPerEquipment: React.FC = () => {
   const [lvl, setLvl] = useState(200);
   const [sliderValue, setSliderValue] = useState(1);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
-  const [selectedItem, setSelectedItem] = useState<number | null>(null); 
+  const [selectedItem, setSelectedItem] = useState<number | null>(null);
 
   // Récupère le niveau du personnage
   useEffect(() => {
@@ -321,7 +321,10 @@ const EnchantmentPerEquipment: React.FC = () => {
     }
   }, [sliderValue, selectedItem, calculateStat, dispatch]);
 
-  const handleItemClick = (idx: number, shardImage: { src: string; alt: string }) => {
+  const handleItemClick = (
+    idx: number,
+    shardImage: { src: string; alt: string }
+  ) => {
     const statValue = calculateStat(idx) || 0;
     const label = masteryEnchantmentLabels[idx].label;
     const runeLevel = sliderValue;
@@ -361,7 +364,9 @@ const EnchantmentPerEquipment: React.FC = () => {
       return (
         <div
           key={index}
-          className={`enchantment-item ${selectedItem === idx ? "selected" : ""}`} 
+          className={`enchantment-item ${
+            selectedItem === idx ? "selected" : ""
+          }`}
           onMouseEnter={() => setHoveredItem(idx)}
           onMouseLeave={() => setHoveredItem(null)}
           onClick={() => handleItemClick(idx, shardImage)}

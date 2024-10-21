@@ -99,7 +99,7 @@ const Header: React.FC = () => {
         </div> */}
 
         <div className="button-group">
-          <button className="reset-button" onClick={handleResetClick}>
+          {/* <button className="reset-button" onClick={handleResetClick}>
             <img
               loading="lazy"
               src={Reset}
@@ -113,7 +113,7 @@ const Header: React.FC = () => {
               onClose={() => setNotification(null)}
               className="clear-notification"
             />
-          )}
+          )} */}
 
           {/* {isLoggedIn && (
             <button className="settings-button" onClick={handleSettingsClick}>
