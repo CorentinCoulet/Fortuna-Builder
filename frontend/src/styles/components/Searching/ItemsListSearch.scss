@@ -47,7 +47,6 @@
       max-width: 180px;
       max-height: 150px;
       cursor: pointer;
-      position: relative;
       overflow: visible;
   
       &:hover {
@@ -101,7 +100,7 @@
       }
   
       .item-hover-box {
-        position: fixed;
+        position: absolute;
         top: 100%;
         left: 50%;
         transform: translateX(-50%);
@@ -110,7 +109,6 @@
         border-radius: 8px;
         padding: 15px;
         width: 250px;
-        z-index: 200;
         margin-top: 10px;
         pointer-events: none;
         white-space: nowrap;
